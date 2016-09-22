@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical"
+  android:background="@drawable/bg_main">
+  <include android:id="@+id/titlebar" layout="@layout/titlebar" />
+  <ScrollView android:layout_height="fill_parent" 
+	android:layout_width="fill_parent"
+	android:layout_margin="10dip"
+	android:background="@drawable/bg_transparent">
+	<LinearLayout
+  	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"
+  	android:orientation="vertical">
+		<ImageView android:id="@+id/image"  
+		android:layout_height="wrap_content" 
+		android:layout_width="wrap_content"
+		android:scaleType="centerCrop" 
+		android:contentDescription="@drawable/defalut_img_big"
+		android:layout_gravity="center_horizontal" 
+		android:gravity="center_horizontal" />
+		
+		<LinearLayout 
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_marginTop="10dip"
+  		android:orientation="vertical"
+  		android:background="@drawable/bg_lightgray">
+			<TextView  
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:gravity="center_vertical"
+			android:text="                 概况"
+			android:textColor="@color/black"
+			android:textStyle="bold"
+			android:background="@drawable/section_bg"/>
+			<TextView android:id="@+id/text_overview"
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:layout_marginTop="10dip"
+			android:layout_marginLeft="10dip"
+			android:layout_marginBottom="10dip"
+			android:textColor="@color/black"
+			android:textSize="16sp"
+			android:text="中国花卉博览会（简称“花博会”）创始于1987年，每四年举办一次，是我国规模最大、影响最广的国家级 花事盛会，被誉为中国花卉界的“奥林匹克”，至今已在北京、上海、广州、成都等地成功举办七届，规模 、影响不断加深，正朝着国际化的方向发展。第八届中国花卉博览会将于2013年9月，在素有“国际花园城市”、“花都水城”美誉的江苏省常州市武进区精彩绽放。
+			时 间：2013年9月28日—10月27日
+			主 题：幸福像花儿一样 
+			会 花：月季花
+			主办单位：中国花卉协会，江苏省人民政府
+			承办单位：江苏省花木协会，江苏省常州市人民政府
+			实施单位：江苏省常州市武进区人民政府" />
+		</LinearLayout>
+		
+		<LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="fill_parent"
+  		android:layout_marginTop="10dip"
+  		android:orientation="vertical"
+  		android:background="@drawable/bg_lightgray">
+			<TextView 
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:gravity="center_vertical"
+			android:text="                 会徽"
+			android:textColor="@color/black"
+			android:textStyle="bold"
+			android:background="@drawable/section_bg"/>
+			<TextView android:id="@+id/text_logo_1"
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:layout_marginTop="10dip"
+			android:layout_marginLeft="10dip"
+			android:textColor="@color/black"
+			android:textSize="16sp"
+			android:drawableLeft="@drawable/white_logo"
+			android:text="会徽造型中，花蕊部分是数字“8”的变形，整体元素融合了常州市花——月季、武进春秋淹"  />
+			<TextView android:id="@+id/text_logo_2"
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:layout_marginLeft="10dip"
+			android:textColor="@color/black"
+			android:textSize="16sp"
+			android:text="城“三城三河”、花博会蝶形主展馆等地方元素，有强烈的常州地域特色"  />
+			
+			<TextView 
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:gravity="center_vertical"
+			android:text="                 吉祥物"
+			android:textColor="@color/black"
+			android:textStyle="bold"
+			android:background="@drawable/section_bg"/>
+			<TextView android:id="@+id/text_emblem_1"
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:layout_marginTop="10dip"
+			android:layout_marginLeft="10dip"
+			android:textColor="@color/black"
+			android:textSize="16sp"
+			android:drawableLeft="@drawable/emblem"
+			android:text="吉祥物取名“和和”、“美美”。“和和”代表和谐社会、和睦关系，“美美”代表" />
+			<TextView android:id="@+id/text_emblem_2"
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:layout_marginLeft="10dip"
+			android:textColor="@color/black"
+			android:textSize="16sp"
+			android:text="美好生活、美满人生。紧扣主题理念。" />
+		</LinearLayout>
+		
+		<LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_marginTop="10dip"
+  		android:orientation="vertical"
+  		android:background="@drawable/bg_lightgray">
+			<TextView 
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:gravity="center_vertical"
+			android:text="                 展会内容"
+			android:textColor="@color/black"
+			android:textStyle="bold"
+			android:background="@drawable/section_bg"/>
+			<TextView android:id="@+id/text_zhnr_1"
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:layout_marginTop="10dip"
+			android:layout_marginLeft="10dip"
+			android:textColor="@color/black"
+			android:textSize="16sp"
+			android:drawableLeft="@drawable/zhanhuineirong"
+			android:text="集中展示鲜切花、切叶、盆花等各类花卉；观叶植物、盆景；种子、" />
+			<TextView android:id="@+id/text_zhnr_2"
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:layout_marginLeft="10dip"
+			android:layout_marginRight="10dip"
+			android:textColor="@color/black"
+			android:textSize="16sp"
+			android:text="苗木、种球；干花、仿生花、装饰植物；花肥、基质；盆钵、几架、器皿；园艺工具、设施等相关产品；
+			观赏石材；观赏鸟、鱼、虫；园林景观设计等。" />
+			
+			<TextView 
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:gravity="center_vertical"
+			android:text="                 展会形式"
+			android:textColor="@color/black"
+			android:textStyle="bold"
+			android:background="@drawable/section_bg"/>
+			<TextView android:id="@+id/text_zhxs_1"
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:layout_marginTop="10dip"
+			android:layout_marginLeft="10dip"
+			android:textColor="@color/black"
+			android:textSize="16sp"
+			android:drawableLeft="@drawable/zhanhuixingshi"
+			android:text="展会由室内展区、室外展区、相关活动三部分组成。其中室内展区分" />
+			
+			<TextView android:id="@+id/text_zhxs_2"
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:layout_marginLeft="10dip"
+			android:layout_marginRight="10dip"
+			android:textColor="@color/black"
+			android:textSize="16sp"
+			android:text="综合馆和专题馆，室外展区以植物造景为主，相关活动包括开幕式、闭幕式、颁奖仪式等。主展区规划建设总占地面积3000亩，分室内展区和室外展区两大部分。" />
+		</LinearLayout>
+		
+		<LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_marginTop="10dip"
+  		android:orientation="vertical"
+  		android:background="@drawable/bg_lightgray">
+			<TextView 
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:gravity="center_vertical"
+			android:text="                 主展区"
+			android:textColor="@color/black"
+			android:textStyle="bold"
+			android:background="@drawable/section_bg"/>
+			<TextView android:id="@+id/text_zzx_1"
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:layout_marginTop="10dip"
+			android:layout_marginLeft="10dip"
+			android:textColor="@color/black"
+			android:textSize="16sp"
+			android:drawableLeft="@drawable/zhuzhanqu"
+			android:text="规划建设总占地面积3000亩，分室内展区和室外展区两大部分。" />
+			
+			<TextView android:id="@+id/text_zzx_2"
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:layout_marginLeft="10dip"
+			android:textColor="@color/black"
+			android:textSize="16sp"
+			android:text="【室内展区】综合馆：建筑面积约7万平方米，是第八届中国花卉博览会各展团室内布展的主展馆，分为省区市展区、港澳台展区、企业展区、专题花卉与科技展区。省区市展区原则上以省、自治区、直辖市和深圳市花卉协会为单位统一组织参展，港澳台展区和企业展区由参展单位设计师布展。 
+			主题馆：由自然馆、科技馆、艺术馆组成。
+			【室外展区】
+			原则上以植物造景为主，由各省市室外展区、国际展区、专题花卉展区和企业展区组成。" />
+			
+			<TextView 
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:gravity="center_vertical"
+			android:text="                 辅展区"
+			android:textColor="@color/black"
+			android:textStyle="bold"
+			android:background="@drawable/section_bg"/>
+			<TextView android:id="@+id/text_fzx_1"
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:layout_marginTop="10dip"
+			android:layout_marginLeft="10dip"
+			android:textColor="@color/black"
+			android:textSize="16sp"
+			android:drawableLeft="@drawable/fuzhanqu"
+			android:text="主要为“一场五园”，“一场”即第六届中国花卉交易会场——夏溪花木市场，" />
+			
+			<TextView android:id="@+id/text_fzx_2"
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content"
+			android:layout_marginLeft="10dip"
+			android:textColor="@color/black"
+			android:textSize="16sp"
+			android:text="市场规划扩建至800亩规模，将建成全国最大的花卉及相关资材营销物流中心；“五园”指江南花都产业园、紫薇园、玫瑰园、艺林园、盆景园。" />
+		</LinearLayout>
+    </LinearLayout> 
+  </ScrollView>
+</LinearLayout>
+

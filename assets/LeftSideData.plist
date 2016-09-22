@@ -1,0 +1,1057 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Objects</key>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>主展区</string>
+			<key>level</key>
+			<integer>0</integer>
+			<key>Objects</key>
+			<array>
+			  <dict>
+			<key>title</key>
+			<string>太湖湾广场</string>
+			<key>subtitle</key>
+			<string>太湖湾</string>
+			<key>level</key>
+			<integer>1</integer>
+			<key>detail</key>
+			<string>位于武进太湖湾旅游度假区北入口，是太湖湾旅游风景区的第一个标志性建筑。它占地8.7公顷，门楼由8个22米至46米高度不等的钢架及网状结构钢架组成，坐落在水池中。其中，8个钢架成帆型，寓意人们的事业和生活一帆风顺。网状结构寓意渔网，水池寓意湖水。停车场设在广场两侧，分大巴车停车区、小车停车区、摩托车停车区。共有车位160个。</string>
+			<key>point</key>
+			<string>{1012, 479}</string>
+			<key>images</key>
+			<array>
+				<string>太湖湾广场1.jpg</string>
+				<string>太湖湾广场2.jpg</string>
+				<string>太湖湾广场3.jpg</string>
+			</array>
+		</dict>
+        <dict>
+			<key>title</key>
+			<string>太湖香树湾花园</string>
+			<key>subtitle</key>
+			<string>太湖湾</string>
+				<key>level</key>
+			<integer>1</integer>
+			<key>detail</key>
+			<string>太湖香树湾花园利用地块的地理优势，充分展示“可居、可赏、可玩”的度假型住宅。营造出布局合理、功能齐备、环境优美、景观卓著，同时兼具生态、人文理念的现代居住区。建筑采用欧式风格，将为常州及其周边区域社会成功人士提供设施齐全、居住舒适的高品质景观休闲住宅。</string>
+			<key>point</key>
+			<string>{684, 1514}</string>
+			<key>images</key>
+			<array>
+				<string>太湖香树湾花园1.jpg</string>
+				<string>太湖香树湾花园2.jpg</string>
+				<string>太湖香树湾花园3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>嬉戏谷</string>
+			<key>subtitle</key>
+			<string>太湖湾</string>
+				<key>level</key>
+			<integer>1</integer>
+			<key>detail</key>
+			<string>全球首座动漫游戏主题公园，位于太湖湾城湾山北部山谷地带，将超前的数字娱乐和互动技术完美融合，并创先将风靡全球的动漫游戏虚拟世界震撼实景化，打造出一个超乎想象的奇幻世界，自2011年5月1日盛大开园以来，已吸引百余万游客入园体验，刷新了国内主题公园的多项纪录。</string>
+			<key>point</key>
+			<string>{713, 1131}</string>
+			<key>images</key>
+			<array>
+				<string>嬉戏谷1.jpg</string>
+				<string>嬉戏谷2.jpg</string>
+				<string>嬉戏谷3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>嬉戏谷开元度假村</string>
+			<key>icon</key>
+			<string>开元度假村.jpg</string>
+				<key>level</key>
+			<integer>1</integer>
+			<key>detail</key>
+			<string>常州嬉戏谷开元度假村坐落于太湖湾青山碧水间，是一家按国际五星级标准设计建造的度假会议酒店。她背倚青山绿水，俯瞰太湖浩瀚，集养生环境之大成，得太湖山水之灵韵，于喧嚣城市外营造出悠然离尘之意境。  嬉戏谷开元度假村拥有各式豪华客房195间/套、5个不同风格的中西餐厅、21个格调典雅的湖景山景包厢，10个不同规格的会议设施，最大多功能宴会厅450平方米，拥有室内外游泳池、网球场、停车场、足浴、健身房、KTV、棋牌室等配套齐全的一流设施。</string>
+			<key>point</key>
+			<string>{948, 1706}</string>
+			<key>images</key>
+			<array>
+				<string>开元度假村1.jpg</string>
+				<string>开元度假村2.jpg</string>
+				<string>开元度假村3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>竺山湖小镇</string>
+			<key>icon</key>
+			<string>竺山湖小镇.jpg</string>
+			<key>subtitle</key>
+			<string>太湖湾</string>
+				<key>level</key>
+			<integer>1</integer>
+			<key>detail</key>
+			<string>常州竺山湖小镇度假酒店位于太湖湾旅游度假区内，距环球动漫嬉戏谷5分钟车程，距无锡灵山大佛10分钟车程，距春秋淹城、中华恐龙园40分钟车程。酒店座落于800亩湖面的国际龙舟竞赛基地上，背靠秦皇山，面朝太湖水，是三星级的旅游饭店，她拥有标准客房84间，豪华单间3间，大小会议室6间，以及可容纳400人的多功能厅；酒店中餐厅有豪华包厢16间，宴会大厅2个，可同时接待800人用餐。另外酒店西翼还有建于湖面之上的50间小木屋，那一排排规划整齐却又各自独立的水上小木屋，，户户临水，间间朝阳，可坐在房内直接垂钓，也可躺在床上观赏波光粼粼的湖面上泛起的小舟，氤氲的水气混合着原木的清香，是那么的自然、舒适、安静；酒店同时还经营着地方口味较浓的船菜，被常州旅游局评为特色餐馆的“竺山湖渔村”临太湖而建，曲径通幽，清水楼台，颇具江南园林风韵，原汁原味的湖鲜特色及久负盛名的“太湖三白”让您回味无穷。水上乐园的游乐项目有龙舟竞渡、奥运皮划艇、各类游船、小岛摸鱼、丛林探险，是您休闲、度假、旅游的好去处。</string>
+			<key>point</key>
+			<string>{1000, 1751}</string>
+			<key>images</key>
+			<array>
+				<string>竺山湖1.jpg</string>
+				<string>竺山湖2.jpg</string>
+				<string>竺山湖3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>中华孝道园</string>
+			<key>icon</key>
+			<string>中华孝道园.jpg</string>
+			<key>subtitle</key>
+			<string>太湖湾</string>
+				<key>level</key>
+			<integer>1</integer>
+			<key>detail</key>
+			<string>中华孝道园坐落于全国十大旅游名片之一的武进太湖湾旅游度假区，占地860亩
+，面朝太湖，背依蓼莪山脉，位于太湖七湾中最美丽的一湾，空气质量等级为一级，是江南一带的“世外桃源”。
+园区以距今1600多年历史的古迹——蓼莪禅寺为依托，以弘扬孝道精神为主旨，是融寻根祭祖、朝山礼佛、旅游观
+光和觉悟教育于一体的综合景区。其主要景点和服务设施为蓼莪禅寺、正法明大殿、石窟观音、妙音宝塔、先祖庙
+堂、中华孝道博物馆、思恩广场、净心池、普光山庄等。</string>
+			<key>point</key>
+			<string>{1333, 1838}</string>
+			<key>images</key>
+			<array>
+				<string>中华孝道园1.jpg</string>
+				<string>中华孝道园2.jpg</string>
+				<string>中华孝道园3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>采摘园林</string>
+			<key>icon</key>
+			<string>采摘园林.jpg</string>
+			<key>subtitle</key>
+			<string>太湖湾</string>
+				<key>level</key>
+			<integer>1</integer>
+			<key>detail</key>
+			<string>春天的茶、夏天的桃子和杨梅、秋天的葡萄和梨⋯⋯采摘园林一年四季都能有新
+鲜的蔬果，太湖湾采摘园林依山傍水，土质肥沃，环境优美，得天独厚的自然气候也让采摘园林常年硕果累累，游
+客也可以到这儿来体验一番自己采摘的乐趣。</string>
+			<key>point</key>
+			<string>{772, 705}</string>
+			<key>images</key>
+			<array>
+				<string>采摘园林1.jpg</string>
+				<string>采摘园林2.jpg</string>
+				<string>采摘园林3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>太湖庄园</string>
+			<key>icon</key>
+			<string>太湖庄园.jpg</string>
+			<key>subtitle</key>
+			<string>太湖湾</string>
+				<key>level</key>
+			<integer>1</integer>
+			<key>detail</key>
+			<string>项目规划占地3840亩，总开发面积约64万平米，是环太湖地区超大规模一线湖
+景高档社区，总投资约16亿元。整个项目以绅士运动为主题，内部配套有绅士运动体验馆、时尚球类运动中心，18
+洞标准高尔夫球场、游艇俱乐部、白金五星级酒店、湿地马场、主题商业街及其他高端配套设施。公建区和A岛组团
+别墅目前已经开工建设，预计2009年9月份封顶，11月份正式开盘销售。建筑采用的摩洛哥风格给人以轻松、休闲的
+氛围，新亚洲主义风格则注重于东方人对意境的崇尚，体现“天人合一”的审美需求与精神满足。</string>
+			<key>point</key>
+			<string>{1661, 2408}</string>
+			<key>images</key>
+			<array>
+				<string>太湖庄园1.jpg</string>
+				<string>太湖庄园2.jpg</string>
+				<string>太湖庄园1.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>国家龙舟竞赛基地</string>
+			<key>icon</key>
+			<string>国家龙舟竞赛基地.jpg</string>
+			<key>subtitle</key>
+			<string>太湖湾</string>
+				<key>level</key>
+			<integer>1</integer>
+			<key>detail</key>
+			<string> 国家龙舟竞赛基地位于太湖湾内湖，建有标准龙舟赛道和永久性生态看台。标
+准龙舟赛道深约2.8米、长500米，其中主航道4道，裁判用副航道1道。
+　　2008年4月，基地被国家体育总局社会体育指导中心授予“国家龙舟竞赛基地”称号，先后承办了2007“万泽杯
+”全国龙舟精英赛、2008“万泽杯”中国（武进）国际龙舟邀请赛、2009“万泽杯”第二届中国（武进）国际龙舟
+邀请赛。2010年这里还将举办第九届亚洲龙舟锦标赛。</string>
+			<key>point</key>
+			<string>{866, 1752}</string>
+			<key>images</key>
+			<array>
+				<string>国家龙舟训练基地1.jpg</string>
+				<string>国家龙舟训练基地2.jpg</string>
+				<string>国家龙舟训练基地1.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>渔港码头</string>
+			<key>icon</key>
+			<string>渔港码头.jpg</string>
+			<key>subtitle</key>
+			<string>太湖湾</string>
+				<key>level</key>
+			<integer>1</integer>
+			<key>detail</key>
+			<string>渔港码头在太湖湾旅游度假区的东南方向，主要是满足周围渔船的靠泊、避风
+及供给，渔港码头还拥有一个水产品交易市场，可供渔民、商户进行水产品交易。</string>
+			<key>point</key>
+			<string>{1873, 2087}</string>
+			<key>images</key>
+			<array>
+				<string>渔港码头1.jpg</string>
+				<string>渔港码头1.jpg</string>
+				<string>渔港码头1.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>太滆村</string>
+			<key>icon</key>
+			<string>太滆码头.jpg</string>
+			<key>subtitle</key>
+			<string>太湖湾</string>
+				<key>level</key>
+			<integer>1</integer>
+			<key>detail</key>
+			<string>太滆村是坐落在太湖边上的村落，占地仅1.2平方公里，共有渔民2766人，渔船
+500条。长期以来村民以渔为生，以农致富，依托丰富的渔业资源，村内建有渔家乐一条街，均为徽式风格建筑，餐
+饮业发展良好。
+</string>
+			<key>point</key>
+			<string>{1586, 2191}</string>
+			<key>images</key>
+			<array>
+				<string>太滆村1.jpg</string>
+				<string>太滆村2.jpg</string>
+				<string>太滆村3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>大小椒山</string>
+			<key>icon</key>
+			<string>大小椒山.jpg</string>
+			<key>subtitle</key>
+			<string>太湖湾</string>
+				<key>level</key>
+			<integer>1</integer>
+			<key>detail</key>
+			<string>大、小椒山：湖风习习、碧波粼粼，簇拥着大、小椒山两座岛屿，它们身处太
+湖，距度假区湖岸线18公里。大椒山面积290亩，小椒山面积25.7亩，拟建设游船码头、度假别墅、酒店、商务中心
+。健身俱乐部、水上运动及服务设施。白天，极目远望，湖岛相依，心旷神怡；夜晚，水天月色，别样风情，如诗
+如画。</string>
+			<key>point</key>
+			<string>{561, 2561}</string>
+			<key>images</key>
+			<array>
+				<string>大小椒山1.jpg</string>
+				<string>大小椒山2.jpg</string>
+				<string>大小椒山3.jpg</string>
+			</array>
+		</dict>
+
+	
+		<dict>
+			<key>title</key>
+			<string>嬉戏谷商务会所</string>
+			<key>subtitle</key>
+			<string>嬉戏谷</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			
+			<string>嬉戏谷商务会所是一家集餐饮、客房、会务、娱乐于一体的综合性度假娱乐会
+所，会所坐落于常州环球动漫嬉戏谷旁，周围三面环山，环境优雅，环球动漫嬉戏谷更近在咫尺。
+会所设施齐全，装修简约时尚，拥有多种类型的客房、宴会厅、餐饮包厢及大小会议室等。会所以“宾客至上，服
+务第一”为经营宗旨，采用了科学的经营机制和管理方法，不断追求卓越，无论商务、宴会、休闲、娱乐，都是您
+的理想之选。</string>
+			<key>images</key>
+			<array>
+				<string>常州嬉戏谷商务会所1.jpg</string>
+				<string>常州嬉戏谷商务会所2.jpg</string>
+				<string>常州嬉戏谷商务会所3.jpg</string>
+			</array>
+			<key>point</key>
+			<string>{871, 1152}</string>
+		</dict>
+		 
+		<dict>
+			<key>title</key>
+			<string>湖畔亭酒店</string>
+			<key>subtitle</key>
+			<string>竺山湖小镇</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>竺山湖小镇湖畔亭酒店位于太湖湾旅游度假区内，距环球动漫嘻戏谷5分钟车程
+，距无锡灵山大佛10分钟车程，距春秋淹城、中华恐龙园40分钟车程。湖畔亭酒店是竺山湖小镇酒店管理公司精心
+打造的“精品休闲度假天堂”，她依山傍水，置身于山麓、绿林之中，独占山水精华。她拥有26间豪华标准间，4间
+豪华单间，3间豪华套房，有可容纳80-100人的水上自助餐厅、及600人可同时就餐的湖畔多功能厅，可承办大、中
+型会议及喜宴，也配有各类装修豪华的包厢及棋牌休闲娱乐设施。湖畔亭宛如蒙纱的少女矗立在小镇湖畔的东首，
+每天清晨等待朝霞为她揭开朦胧的晨雾，用灿烂的微笑迎接八方宾客。</string>
+			<key>images</key>
+			<array>
+				<string>湖畔亭酒店1.jpg</string>
+				<string>湖畔亭酒店2.jpg</string>
+				<string>湖畔亭酒店3.jpg</string>
+			</array>
+			<key>point</key>
+			<string>{1106, 1807}</string>
+		</dict>
+		
+		<dict>
+			<key>title</key>
+			<string>小镇度假酒店</string>
+			<key>subtitle</key>
+			<string> 竺山湖小镇</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string> 竺山湖小镇度假酒店位于小镇的中心，共有客房百余间，可满足众多游客的不
+同需要。舒适典雅的酒店大堂，温磬整洁的标准客房，身居其中犹如闲居家中；中西餐饮，多功能活动中心，桑拿
+SPA，商务中心，小型购物中心，一应俱全了却了你一切的生活琐碎。竺山湖小镇度假酒店拥有一流的会议设施，不
+但有容纳200多人的豪华多动能宴会厅，更有三四十人的中型会场，还有徜徉湖面的精致画舫，可容纳十人进行会务
+休闲。设施齐备，技术先进，格调典雅，豪华气派，充分满足企业各种会务需求。是企业年会，中高级宴会的首选
+。</string>
+			<key>images</key>
+			<array>
+				<string>度假酒店1.jpg</string>
+				<string>度假酒店2.jpg</string>
+				<string>度假酒店3.jpg</string>
+			</array>
+			<key>point</key>
+			<string>{1094, 1796}</string>
+		</dict>
+		
+		<dict>
+			<key>title</key>
+			<string>金海岸西餐厅</string>
+			<key>subtitle</key>
+			<string>开元度假村</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>金海岸西餐厅位于太湖湾旅游度假区开元度假村内，推开窗，太湖就在眼前，
+阳光照射下来，湖面波光粼粼，看着太湖美景，吃着美味的餐食，餐厅提供三餐和下午茶，可谓是一应俱全，入住
+开元度假村的话，来这里就餐是个不错的选择。
+
+地址：武进区太湖湾旅游度假区太湖湾开元度假村内
+电话：0519-83599999</string>
+			<key>images</key>
+			<array>
+				<string>金海岸西餐厅1.jpg</string>
+				<string>金海岸西餐厅2.jpg</string>
+				<string>金海岸西餐厅3.jpg</string>
+			</array>
+			<key>point</key>
+			<string>{828, 1671}</string>
+		</dict>
+		
+		<dict>
+			<key>title</key>
+			<string>中华孝道园小吃街</string>
+			<key>subtitle</key>
+			<string>中华孝道园</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>园区有3处可以吃的地方，一是正法明大殿山门前有处小吃，提供烤肉串、炒河
+粉、酸辣粉、拌凉皮等等即可口又美味；二是先祖庙堂下面的素香园，是可供游客朋友们吃素面的地方，非常的爽
+口；三是出口处的聚缘楼主题餐厅，供应各类套饭、面条及其它种类的小吃，选择性丰富，绝对满足您的胃口。
+</string>
+			<key>point</key>
+			<string>{1356, 1846}</string>
+			<key>images</key>
+			<array>
+				<string>小吃街1.jpg</string>
+				<string>小吃街2.jpg</string>
+				<string>小吃街3.jpg</string>
+			</array>
+		</dict>
+		
+		<dict>
+			<key>title</key>
+			<string>太湖山地人家</string>
+			<key>subtitle</key>
+			<string>太湖湾</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>太湖山地人家每个季节都有不同的彩色，以农家乐为主题，打造独有风情的乐
+园，让人宾至如归，流连忘返。
+清幽的四合小院环绕而成，品尝美味的同时，更可欣赏不错的风景
+
+
+
+公交：雪堰仁庄（72-2路，72路）
+直线距离480.9米，步行5分钟</string>
+			<key>point</key>
+			<string>{1904, 2108}</string>
+			<key>images</key>
+			<array>
+				<string>太湖山地人家1.jpg</string>
+				<string>太湖山地人家2.jpg</string>
+				<string>太湖山地人家3.jpg</string>
+			</array>
+		</dict>
+		
+		<dict>
+			<key>title</key>
+			<string>烧烤屋</string>
+			<key>subtitle</key>
+			<string>竺山湖小镇</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>很多第一次来竺山湖玩的游客就爱上了竺山湖的烧烤，竺山湖的野外烧烤为大
+家创造了一个亲近大自然，但是环境又比较卫生干净的地方。竺山湖的野外烧烤是设立在太湖边上的竹屋内的，不
+仅可以避免日晒，而且也可避免引发火灾或下雨等意外情况，环境清幽，风景宜人。而所有的食材，尤其是蔬菜都
+是取自附近农家，新鲜、健康、绿色。而且竺山湖最大的特色就是烤鱼，您可以先参加小岛摸鱼活动，把摸到的鱼
+直接烤来吃，这些鱼都是取自太湖里的野生鱼，味道十分的鲜美。</string>
+			<key>point</key>
+			<string>{954, 1806}</string>
+			<key>images</key>
+			<array>
+				<string>烧烤1.jpg</string>
+				<string>烧烤2.jpg</string>
+				<string>烧烤3.jpg</string>
+				<string>烧烤4.jpg</string>
+			</array>
+			
+		</dict>
+		
+		<dict>
+			<key>title</key>
+			<string>海鲜烧烤啤酒节</string>
+			<key>subtitle</key>
+			<string>嬉戏谷开元度假村</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>啤酒节源于德国，已有100多年的历史。每年夏天，在啤酒销售的旺季，嬉戏谷
+开元度假村都会举办太湖海鲜烧烤啤酒节，在欣赏精彩的舞蹈之余，市民一边畅饮啤酒，一边畅想未来生活美好的
+蓝图，热闹的人潮、动感的音乐，加上醇香的啤酒，注定是一个难忘的盛会。</string>
+			<key>images</key>
+			<array>
+				<string>海鲜烧烤啤酒节1.jpg</string>
+				<string>海鲜烧烤啤酒节2.jpg</string>
+				<string>海鲜烧烤啤酒节3.jpg</string>
+			</array>
+			<key>point</key>
+			<string>{889, 1661}</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>开元度假村酒店</string>
+			<key>subtitle</key>
+			<string>嬉戏谷开元度假村</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>嬉戏谷开元度假村拥有各式豪华客房195间/套、5个不同风格的中西餐厅、21个
+格调典雅的湖景山景包厢，远离城市喧嚣，回归淳朴自然。</string>
+			<key>point</key>
+			<string>{864, 1639}</string>
+			<key>images</key>
+			<array>
+				<string>度假村酒店餐厅1.jpg</string>
+				<string>度假村酒店餐厅2.jpg</string>
+				<string>度假村酒店餐厅3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>WOH主题餐厅</string>
+			<key>subtitle</key>
+			<string>嬉戏谷</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>WOH主题餐厅是魔兽世界的洞穴，网游《魔兽世界》元素无处不在：“精灵族古
+树”、“魔兽地图桌面”、“魔兽士兵服务生”、“英雄帖帐单”⋯⋯品尝从布景到菜品的点滴细节。此外，这里还
+有各种魔兽世界视频连接播放，主题背景音乐环绕，及随时段交替转换的灯光，让游客在品味美食的同事，获得听
+觉享受。</string>
+			<key>point</key>
+			<string>{692, 1088}</string>
+			<key>images</key>
+			<array>
+				<string>WOH主题餐厅1.jpg</string>
+				<string>WOH主题餐厅2.jpg</string>
+				<string>WOH主题餐厅3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>摩尔开心大厨</string>
+			<key>subtitle</key>
+			<string>嬉戏谷</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>摩尔开心大厨是孩子们的最爱。庄园特有的拉姆食谱、七彩绵花糖等各种精致
+的美食小点，既能填饱孩子们的小肚皮，也能开发儿童的智力，培养未来“美食家”；此外，庄园还有特别设置的
+益智互动游乐区，小摩尔们只有吃完餐点，获得家长的通行证，才可以进去欢乐游玩。</string>
+			<key>point</key>
+			<string>{697, 1084}</string>
+			<key>images</key>
+			<array>
+				<string>摩尔开心大厨1.jpg</string>
+				<string>摩尔开心大厨2.jpg</string>
+				<string>摩尔开心大厨3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>西西里意餐</string>
+			<key>subtitle</key>
+			<string>嬉戏谷</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>西西里意大利风味餐厅园区内独具意大利气息的餐厅，餐厅里提拉米苏、披萨
+⋯⋯美食带游客领略纯正浓郁的意大利风情，餐厅还提供下午茶的服务，在惬意放送中，还可以看到街上随处穿行的
+“动漫卡通人物”。</string>
+			<key>point</key>
+			<string>{744, 1097}</string>
+			<key>images</key>
+			<array>
+				<string>西西里1.jpg</string>
+				<string>西西里2.jpg</string>
+				<string>西西里3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>达人尚座团队餐厅</string>
+			<key>subtitle</key>
+			<string>嬉戏谷</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>达人尚座是园区内唯一接待团队预定的就餐点，同时为散客提供花样迭出的自
+助餐，天气凉爽时还可去二楼阳台露餐赏景，别具风雅情调。
+</string>
+			<key>point</key>
+			<string>{735, 1092}</string>
+			<key>images</key>
+			<array>
+				<string>达人尚座1.jpg</string>
+				<string>达人尚座2.jpg</string>
+				<string>达人尚座3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>银河能量</string>
+			<key>subtitle</key>
+			<string>嬉戏谷</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>银河能量是以“星际”为主题的“太空补给站“。游客可以在“太空舱”享用
+火星烧烤，或品尝星际果冰纷等”未来食品“，另有一个10*2米的机器生物水族箱，为游客展示稀奇的、特有的水
+下机器生物幻景。</string>
+			<key>point</key>
+			<string>{723, 1171}</string>
+			<key>images</key>
+			<array>
+				<string>银河能量1.jpg</string>
+				<string>银河能量2.jpg</string>
+				<string>银河能量3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>面面俱到主题餐厅</string>
+			<key>subtitle</key>
+			<string>嬉戏谷</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>面面俱到是一个以面具为主题的特色主题餐厅，展示千余种面具，体现各国的
+面具文化，集聚哥特式面具风华，将游客带入中世纪的假面舞会。</string>
+			<key>point</key>
+			<string>{657, 1172}</string>
+			<key>images</key>
+			<array>
+				<string>面面俱到1.jpg</string>
+				<string>面面俱到2.jpg</string>
+				<string>面面俱到3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>九州宾馆</string>
+			<key>subtitle</key>
+			<string>嬉戏谷</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>九州宾馆位于人杰地灵、得天独厚的雪堰镇。南濒万顷碧波的太湖，毗邻著名
+的灵山大佛、灵山元一丽星温泉、龙头渚公园。紧接武进太湖湾旅游度假区，还有常州市唯一的太湖岛屿资源—椒
+山以及动漫嬉戏谷游乐中心，西临陶都宜兴，是旅游歇息，朝赴灵山进香的极佳选择。也是自驾游灵山大佛、动漫
+嬉戏谷的最好歇息地。
+电话: (0519)86157777
+地址: 雪堰镇雪新街80号（顺塘路与雪新街交汇处）</string>
+			<key>images</key>
+			<array>
+				<string>九州宾馆1.jpg</string>
+				<string>九州宾馆2.jpg</string>
+			</array>
+		</dict>
+		
+		<dict>
+			<key>title</key>
+			<string>喜洋洋大酒店</string>
+			<key>subtitle</key>
+			<string>嬉戏谷</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>常州喜洋洋大酒店是一家综合型酒店，位于常州太湖湾环球动漫嬉戏谷北面，
+地理位置优越，交通便利。酒店设施齐全，装修融古典风格和现代设计为一体，典雅别致，温馨怡人。经营项目包
+括餐饮、桑拿浴场、客房和棋牌室，餐厅包括中高档包厢和宴会厅。内部设有有华夏旅行社，可以为去环球动漫嬉
+戏谷的游客，提供更便捷、温暖的服务。酒店秉承“以人为本，让顾客省心、省事、省钱”的经营理念，人性化的
+管理、热情周到的服务、舒服干净的环境，定会让你有宾至如归的享受！无论是商务洽谈、休憩娱乐，喜洋洋大酒
+店都将是您的最优选择。
+
+电话: (0519)86549779
+
+地址: 常州武进区潘家永新路1号( 环球动漫嬉戏谷景区近342省道)</string>
+			<key>images</key>
+			<array>
+				<string>喜洋洋大酒店1.jpg</string>
+				<string>喜洋洋大酒店2.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>龙城金都假日大饭店</string>
+			<key>subtitle</key>
+			<string>龙城金都假日大饭店</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>常州龙城金都假日大酒店是一家综合型酒店，位于常州太湖湾环球动漫嬉戏谷
+北面，车程距离仅0.5公里，地理位置优越，交通便利。酒店设施齐全，装修豪华典雅。融中式古典风格与现代设计
+风格为一体，别具一格。经营项目包括客房，餐饮，桑拿浴室和棋牌室，餐厅包括大型宴会厅，餐饮包厢及多功能
+厅、大小会议室等等。酒店以“宾客至上，服务第一”为经营宗旨，采用了科学的经营机制和管理方法，不断追求
+卓越。无论商务、宴会、休闲、娱乐，都是您的理想之选。 </string>
+			<key>images</key>
+			<array>
+				<string>龙城金都假日大饭店1.jpg</string>
+				<string>龙城金都假日大饭店2.jpg</string>
+				<string>龙城金都假日大饭店3.jpg</string>
+			</array>
+		</dict>
+	 
+		<dict>
+			<key>title</key>
+			<string>皇冠大酒店(在建中)</string>
+			<key>subtitle</key>
+			<string>嬉戏谷</string>
+				<key>level</key>
+			<integer>2</integer>
+			<key>detail</key>
+			<string>嬉戏谷皇冠大酒店：集商务会议、餐饮美食、康体娱乐、度假休闲于一体的四
+星级酒店。酒店采用西欧古典城堡建筑风格，全新诠释古典浪漫主义，呈现出气势磅礴、美轮美奂的外观形象，建
+成以后将成为太湖湾又一地标性建筑。</string>
+			<key>point</key>
+			<string>{723, 968}</string>
+			<key>images</key>
+			<array>
+				<string>皇冠大酒店.jpg</string>
+				<string>皇冠大酒店.jpg</string>
+				<string>皇冠大酒店.jpg</string>
+			</array>
+		</dict>
+
+
+		<dict>
+			<key>title</key>
+			<string>嬉戏谷商务会所</string>
+			<key>subtitle</key>
+			<string>嬉戏谷</string>
+				<key>level</key>
+			<integer>3</integer>
+			<key>detail</key>
+			<string>常州嬉戏谷商务会所是一家集餐饮、客房、会务、娱乐于一体的综合性度假娱
+乐会所，会所坐落于常州环球动漫嬉戏谷旁，周围三面环山，环境优雅，环球动漫嬉戏谷更近在咫尺。
+会所设施齐全，装修简约时尚，拥有多种类型的客房、宴会厅、餐饮包厢及大小会议室等。会所以“宾客至上，服
+务第一”为经营宗旨，采用了科学的经营机制和管理方法，不断追求卓越，无论商务、宴会、休闲、娱乐，都是您
+的理想之选。</string>
+			<key>images</key>
+			<array>
+				<string>常州嬉戏谷商务会所1.jpg</string>
+				<string>常州嬉戏谷商务会所2.jpg</string>
+				<string>常州嬉戏谷商务会所3.jpg</string>
+			</array>
+			<key>point</key>
+			<string>{871, 1152}</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>湖畔亭酒店</string>
+			<key>subtitle</key>
+			<string>竺山湖小镇</string>
+				<key>level</key>
+			<integer>3</integer>
+			<key>detail</key>
+			<string>竺山湖小镇湖畔亭酒店位于太湖湾旅游度假区内，距环球动漫嘻戏谷5分钟车程
+，距无锡灵山大佛10分钟车程，距春秋淹城、中华恐龙园40分钟车程。湖畔亭酒店是竺山湖小镇酒店管理公司精心
+打造的“精品休闲度假天堂”，她依山傍水，置身于山麓、绿林之中，独占山水精华。她拥有26间豪华标准间，4间
+豪华单间，3间豪华套房，有可容纳80-100人的水上自助餐厅、及600人可同时就餐的湖畔多功能厅，可承办大、中
+型会议及喜宴，也配有各类装修豪华的包厢及棋牌休闲娱乐设施。湖畔亭宛如蒙纱的少女矗立在小镇湖畔的东首，
+每天清晨等待朝霞为她揭开朦胧的晨雾，用灿烂的微笑迎接八方宾客。</string>
+			<key>images</key>
+			<array>
+				<string>湖畔亭酒店1.jpg</string>
+				<string>湖畔亭酒店2.jpg</string>
+				<string>湖畔亭酒店3.jpg</string>
+			</array>
+			<key>point</key>
+			<string>{1106, 1807}</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>开元度假村酒店</string>
+			<key>subtitle</key>
+			<string>嬉戏谷开元度假村</string>
+				<key>level</key>
+			<integer>3</integer>
+			<key>detail</key>
+			<string>嬉戏谷开元度假村拥有各式豪华客房195间/套、5个不同风格的中西餐厅、21个
+格调典雅的湖景山景包厢，远离城市喧嚣，回归淳朴自然。</string>
+			<key>point</key>
+			<string>{835, 1635}</string>
+			<key>images</key>
+			<array>
+				<string>度假村酒店客房1.jpg</string>
+				<string>度假村酒店客房2.jpg</string>
+				<string>度假村酒店客房3.jpg</string>
+			</array>
+		</dict>
+		 
+		<dict>
+			<key>title</key>
+			<string>九州宾馆</string>
+			<key>subtitle</key>
+			<string>九州宾馆</string>
+				<key>level</key>
+			<integer>3</integer>
+			<key>detail</key>
+			<string>九州宾馆位于人杰地灵、得天独厚的雪堰镇。南濒万顷碧波的太湖，毗邻著名
+的灵山大佛、灵山元一丽星温泉、龙头渚公园。紧接武进太湖湾旅游度假区，还有常州市唯一的太湖岛屿资源—椒
+山以及动漫嬉戏谷游乐中心，西临陶都宜兴，是旅游歇息，朝赴灵山进香的极佳选择。也是自驾游灵山大佛、动漫
+嬉戏谷的最好歇息地。
+电话: (0519)86157777
+地址: 雪堰镇雪新街80号（顺塘路与雪新街交汇处）</string>
+			<key>images</key>
+			<array>
+				<string>九州宾馆1.jpg</string>
+				<string>九州宾馆2.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>喜洋洋大酒店</string>
+			<key>subtitle</key>
+			<string>喜洋洋大酒店</string>
+				<key>level</key>
+			<integer>3</integer>
+			<key>detail</key>
+			<string>常州喜洋洋大酒店是一家综合型酒店，位于常州太湖湾环球动漫嬉戏谷北面，
+地理位置优越，交通便利。酒店设施齐全，装修融古典风格和现代设计为一体，典雅别致，温馨怡人。经营项目包
+括餐饮、桑拿浴场、客房和棋牌室，餐厅包括中高档包厢和宴会厅。内部设有有华夏旅行社，可以为去环球动漫嬉
+戏谷的游客，提供更便捷、温暖的服务。酒店秉承“以人为本，让顾客省心、省事、省钱”的经营理念，人性化的
+管理、热情周到的服务、舒服干净的环境，定会让你有宾至如归的享受！无论是商务洽谈、休憩娱乐，喜洋洋大酒
+店都将是您的最优选择。
+
+电话: (0519)86549779
+
+地址: 常州武进区潘家永新路1号( 环球动漫嬉戏谷景区近342省道)</string>
+			<key>images</key>
+			<array>
+				<string>喜洋洋大酒店1.jpg</string>
+				<string>喜洋洋大酒店2.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>龙城金都假日大饭店</string>
+			<key>subtitle</key>
+			<string>龙城金都假日大饭店</string>
+				<key>level</key>
+			<integer>3</integer>
+			<key>detail</key>
+			<string>常州龙城金都假日大酒店是一家综合型酒店，位于常州太湖湾环球动漫嬉戏谷
+北面，车程距离仅0.5公里，地理位置优越，交通便利。酒店设施齐全，装修豪华典雅。融中式古典风格与现代设计
+风格为一体，别具一格。经营项目包括客房，餐饮，桑拿浴室和棋牌室，餐厅包括大型宴会厅，餐饮包厢及多功能
+厅、大小会议室等等。酒店以“宾客至上，服务第一”为经营宗旨，采用了科学的经营机制和管理方法，不断追求
+卓越。无论商务、宴会、休闲、娱乐，都是您的理想之选。 </string>
+			<key>images</key>
+			<array>
+				<string>龙城金都假日大饭店1.jpg</string>
+				<string>龙城金都假日大饭店2.jpg</string>
+				<string>龙城金都假日大饭店3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>新良茂大酒店</string>
+			<key>subtitle</key>
+			<string>新良茂大酒店</string>
+				<key>level</key>
+			<integer>3</integer>
+			<key>detail</key>
+			<string>常州新良茂大酒店是一家集餐饮、住宿、桑拿休闲、娱乐于一体的综合性酒店
+。地处太湖湾环球动漫嬉戏谷商业区，位于老南街与永新路交汇处，地理位置优越，闹中取静，环境舒适，邻近动
+漫嬉戏谷，旅游交通十分便利。酒店装修简约时尚，舒适温馨。
+　　常州新良茂大酒店主楼高5层，拥有客房64间，有大床房、标准间、三人间、电脑房、豪华房和套房等多种房型
+供客人选择，房间设施齐全，并且还为客人提供送餐服务、叫醒服务、旅游服务、擦鞋服务、免费停车等服务设施
+，以满足不同客人的需求，是商务旅行、家庭度假的理想选择。
+
+电话: (0519)86541588
+
+地址: 常州市武进区雪堰镇潘家永兴路82号（动漫嬉戏谷）</string>
+			<key>images</key>
+			<array>
+				<string>新良茂大酒店1.jpg</string>
+				<string>新良茂大酒店2.jpg</string>
+				<string>新良茂大酒店3.jpg</string>
+			</array>
+		</dict>
+		 
+		<dict>
+			<key>title</key>
+			<string>水上小木屋</string>
+			<key>subtitle</key>
+			<string>竺山湖小镇</string>
+				<key>level</key>
+			<integer>3</integer>
+			<key>detail</key>
+			<string>小木屋：水上人家小木屋，是竺山湖较具特色的一个住宿地方。所有的房间都
+是按照标准间的建造的，每一间都独立而居的，建立在竺山湖泄湖湖面上，户户都是水景房。是情侣度假、老年人
+养老的绝佳地方。住在这里您是伴随着白鹭清脆的叫声，和湖浪声的声音迎来美好的一天。</string>
+			<key>point</key>
+			<string>{812, 1702}</string>
+			<key>images</key>
+			<array>
+				<string>水上小木屋1.jpg</string>
+				<string>水上小木屋2.jpg</string>
+				<string>水上小木屋3.jpg</string>
+			</array>
+			
+		</dict>
+		
+		<dict>
+			<key>title</key>
+			<string>“云中部落”森林度假村</string>
+			<key>subtitle</key>
+			<string>嬉戏谷</string>
+				<key>level</key>
+			<integer>3</integer>
+			<key>detail</key>
+			<string>云中部落：嬉戏谷云中部落森林度假村是一家集餐饮、客房、会务、娱乐于一
+体的综合性度假娱乐会所，会所坐落于常州环球动漫嬉戏谷旁，周围三面环山，环境优雅，环球动漫嬉戏谷更近在
+咫尺。会所设施齐全，装修简约时尚，拥有多种类型的客房65套，宴会厅，餐饮包厢及大小会议室等。</string>
+			<key>images</key>
+			<array>
+				<string>“云中部落”森林度假村.jpg</string>
+				<string>“云中部落”森林度假村.jpg</string>
+			</array>
+		</dict>
+	
+		<dict>
+			<key>title</key>
+			<string>皇冠大酒店(在建中)</string>
+			<key>subtitle</key>
+			<string>嬉戏谷</string>
+				<key>level</key>
+			<integer>3</integer>
+			<key>detail</key>
+			<string>嬉戏谷皇冠大酒店：集商务会议、餐饮美食、康体娱乐、度假休闲于一体的四
+星级酒店。酒店采用西欧古典城堡建筑风格，全新诠释古典浪漫主义，呈现出气势磅礴、美轮美奂的外观形象，建
+成以后将成为太湖湾又一地标性建筑。</string>
+			<key>point</key>
+			<string>{723, 968}</string>
+			<key>images</key>
+			<array>
+				<string>皇冠大酒店.jpg</string>
+				<string>皇冠大酒店.jpg</string>
+				<string>皇冠大酒店.jpg</string>
+			</array>
+		</dict>
+
+
+		<dict>
+			<key>title</key>
+			<string>水产品市场</string>
+			<key>subtitle</key>
+			<string>在渔港码头有个水产品交易市场，位于武进区雪堰镇雅浦港枢纽西侧三角地带
+，西靠冲山港浜，东临雅浦港，南距雅浦港入湖口约2.5km。市场内有船泊位、停车场、管理用房及道路等公建配套
+设施，市场内渔产丰富，交通便利，有助于水产品的出口。</string>
+				<key>level</key>
+			<integer>4</integer>
+			<key>detail</key>
+			<string>在渔港码头有个水产品交易市场，位于武进区雪堰镇雅浦港枢纽西侧三角地带
+，西靠冲山港浜，东临雅浦港，南距雅浦港入湖口约2.5km。市场内有船泊位、停车场、管理用房及道路等公建配套
+设施，市场内渔产丰富，交通便利，有助于水产品的出口。</string>
+			<key>point</key>
+			<string>{1893, 2088}</string>
+			<key>images</key>
+			<array>
+				<string>水产品市场1.jpg</string>
+				<string>水产品市场2.jpg</string>
+				<string>水产品市场3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>奇石馆</string>
+			<key>subtitle</key>
+			<string>竺山湖水街</string>
+				<key>level</key>
+			<integer>4</integer>
+			<key>detail</key>
+			<string>太湖湾奇石馆位于竺山湖水街的中心地段，主要经营灵壁石，青黑磐石，皖螺
+石，纹石，五彩图纹石、条纹石、白灵壁石等稀有奇石。灵壁石有着较广泛的观赏存放环境，大可高广数丈，可置
+于园林，庭院，既可立石为山又能独自成景。中者，可装饰于厅堂，宾馆或陈列室中，可装点池塘坡岸或衬托花木
+草坪。小者可放于居室内，盆景中，案头上。常言道：园无石不雅，居无石不宁。</string>
+			<key>images</key>
+			<array>
+				<string>奇石馆1.jpg</string>
+				<string>奇石馆2.jpg</string>
+				<string>奇石馆3.jpg</string>
+			</array>
+			<key>point</key>
+			<string>{1019, 1755}</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>阳湖新月绿茶</string>
+			<key>subtitle</key>
+			<string>阳湖新月绿茶</string>
+				<key>level</key>
+			<integer>4</integer>
+			<key>detail</key>
+			<string>地处太湖北岸的太湖湾种茶历史悠久，优越的生态环境形成了城湾绿茶“纯绿
+色、全天然、无污染、富锌硒”的独特品质。“阳湖新月”牌绿茶经过精湛工艺制作而成，外形扁而细秀、状如新
+月，色泽绿而隐翠，白毫显露，内质醇香高雅，汤色绿明，滋味鲜爽，叶底嫩绿匀齐，是我国绿茶种类中品质极佳
+的特种绿茶。此外，“城湾”牌碧螺春茶、特珍茶、炒青茶制作工艺规范，等级优次分明，连续多次被评为江苏省
+优质食品、常州市最佳食品等荣誉。</string>
+			<key>point</key>
+			<string>{762, 749}</string>
+			<key>images</key>
+			<array>
+				<string>阳湖新月绿茶1.jpg</string>
+				<string>阳湖新月绿茶2.jpg</string>
+				<string>阳湖新月绿茶3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>太湖雪梨</string>
+			<key>subtitle</key>
+			<string>太湖雪梨</string>
+				<key>level</key>
+			<integer>4</integer>
+			<key>detail</key>
+			<string>很多第一次来竺山湖玩的游客就爱上了竺山湖的烧烤，竺山湖的野外烧烤为大
+家创造了一个亲近大自然，但是环境又比较卫生干净的地方。竺山湖的野外烧烤是设立在太湖边上的竹屋内的，不
+仅可以避免日晒，而且也可避免引发火灾或下雨等意外情况，环境清幽，风景宜人。而所有的食材，尤其是蔬菜都
+是取自附近农家，新鲜、健康、绿色。而且竺山湖最大的特色就是烤鱼，您可以先参加小岛摸鱼活动，把摸到的鱼
+直接烤来吃，这些鱼都是取自太湖里的野生鱼，味道十分的鲜美。</string>
+			<key>point</key>
+			<string>{698, 705}</string>
+			<key>images</key>
+			<array>
+				<string>梨1.jpg</string>
+				<string>梨2.jpg</string>
+				<string>梨3.jpg</string>
+			</array>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>雪堰水蜜桃</string>
+			<key>subtitle</key>
+			<string>雪堰水蜜桃</string>
+				<key>level</key>
+			<integer>4</integer>
+			<key>detail</key>
+			<string>太湖湾水蜜桃的栽培历史可追溯到南宋，已有八百年之久。“雪堰”牌水蜜桃
+又称“阳湖”水蜜桃，品种有数十种，其果形美观，皮薄肉厚，汁多味甜，香气怡人，有补脾润肺、养颜益色之功
+效，蛋白质及铁含量丰富。连续几年被评为常州市名优农产品、江苏省无公害农产品、中国绿色食品A级产品。目前
+雪堰水蜜桃的销售网络已经扩大到京浙粤等地并已出口国外，种植量也已发展到3500多亩，并在苏南形成了一块总
+面积超过6万亩的水蜜桃产业经济带。</string>
+			<key>point</key>
+			<string>{810, 795}</string>
+			<key>images</key>
+			<array>
+				<string>雪堰水蜜桃1.jpg</string>
+				<string>雪堰水蜜桃2.jpg</string>
+				<string>雪堰水蜜桃3.jpg</string>
+			</array>
+		</dict>
+		
+		<dict>
+			<key>title</key>
+			<string>购物街</string>
+			<key>subtitle</key>
+			<string>购物街</string>
+				<key>level</key>
+			<integer>4</integer>
+			<key>detail</key>
+			<string>园区购物主要集中在出口处的普光山庄东区内，是景区游客出园后必经之道，
+以江南水乡风格打造的一条商业街。主要用于经营各类旅游纪念品、江南各式特产及特色工艺品等，同时商铺对外
+开放，不仅限于景区游客消费，乃武进太湖湾旅游度假区特色古典商业街。</string>
+			<key>images</key>
+			<array>
+				<string>购物街1.jpg</string>
+				<string>购物街2.jpg</string>
+				<string>购物街3.jpg</string>
+			</array>
+		</dict>
+		
+		<dict>
+			<key>title</key>
+			<string>淘宝大街</string>
+			<key>subtitle</key>
+			<string>嬉戏谷</string>
+				<key>level</key>
+			<integer>4</integer>
+			<key>detail</key>
+			<string>淘宝大街：嬉戏谷在每个区还设有别具一格的特色餐厅，数条商业街区更将国
+际一线动漫游戏衍生品悉数搜罗，其一的淘宝大街，就是全球一站式动漫游戏衍生品消费目的地，4栋风格迥异的建
+筑，囊括“Hello Kitty”、“迪士尼”、“哆啦A梦”、“泰迪熊”、“喜羊羊”等等，为游客呈现盛大的线下淘
+宝盛会。</string>
+			<key>point</key>
+			<string>{749, 1081}</string>
+			<key>images</key>
+			<array>
+				<string>淘宝大街1.jpg</string>
+				<string>淘宝大街2.jpg</string>
+				<string>淘宝大街3.jpg</string>
+			</array>
+		</dict>
+		-->
+		</array>
+      </dict>
+	</array>
+</dict>
+</plist>

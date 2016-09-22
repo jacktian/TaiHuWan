@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    <string name="app_name">太湖湾</string>
+    <string name="hello_world">太湖湾</string>
+    <string name="menu_settings">设置</string>
+    <string name="title_activity_main">太湖湾</string>
+    <string name="hint_Msg">提示信息</string>
+    <string name="hint_VersionUpdate">检查版本更新</string>
+    <string name="hint_NoNetwork">无可用网络连接，请设置好网路后刷新！</string>
+    <string name="hint_NoRoot">本板块只有特定用户可以访问，请先登录！</string>
+    <string name="hint_NetworkException">网络异常或无权限!</string>
+    <string name="hint_NoData">无数据!</string>
+    <string name="hint_Account">请输入帐号</string>
+    <string name="hint_Password">不少于6位</string>
+    <string name="hint_ConfirmPassword">重复密码</string>
+    <string name="hint_Email">请输入注册邮箱</string>
+    <string name="hint_register_password">密码不少于6位,不大于16位</string>
+    <string name="hint_Password_NotSame">两次密码不相同，请重新输入!</string>
+    <string name="hint_Account_cannotnull">帐号不能为空！</string>
+    <string name="hint_Password_cannotnull">密码不能为空！</string>
+    <string name="hint_AutoLogin_cannot">记住密码未选择，不能自动登录！</string>
+    <string name="hint_Nickname_cannotnull">昵称不能为空！</string>
+    <string name="hint_Login_Success">登录成功！</string>
+    <string name="hint_Login_Fail">登录失败！请检查帐号或密码！</string>
+    <string name="hint_Register_Success">注册成功！</string>
+    <string name="hint_Register_Fail">注册失败！</string>
+    <string name="hint_toregister">还没有账号？立即</string>
+    <string name="hint_logByOther">其他方式登录！</string>
+    <string name="hint_wating">请稍等！</string>
+    <string name="hint_nikename">昵称：4-30位，包含英文，数字和中文</string>
+    <string name="hint_receiver">请输入收件人</string>
+    <string name="hint_msgcontent">请输入消息内容</string>
+    <string name="hint_searchcontent">请输入搜索内容</string>
+    <string name="hint_enterpage">请输入页码</string>
+    <string name="hint_enterlou">请输入楼层</string>
+    <string name="hint_enterreply">请输入回复内容</string>
+    <string name="hint_selectposttype">请选择子版块类型：</string>
+    <string name="isRestoreDefaultSettings"> 是否恢复默认设置？</string>
+    <string name="isClearcache">是否清除缓存?</string>
+    <string name="isExitAPP">是否退出系统?</string>
+    <string name="cannotEnterPost">你无法进入帖子！</string>
+    <string name="msg_isSetNetwork">是否设置网络连接</string>
+    <string name="msg_isUpdateVersion">是否更新版本</string>
+    <string name="navigation">导航</string>
+    <string name="Account">帐号：</string>
+    <string name="Password">密码：</string>
+    <string name="ConfirmPassword">确认密码：</string>
+    <string name="Email">邮箱：</string>
+    <string name="login">登      录</string>
+    <string name="register">注      册</string>
+    <string name="registerDSL">注册大搜罗帐号</string>
+    <string name="logBySina">新浪</string>
+    <string name="logByQQ">腾讯</string>
+    <string name="bindAccount">绑  定  帐  号</string>
+    <string name="selfInfo">我的资料</string>
+    
+    <string name="home">首页</string>
+    <string name="more">更多</string>
+    
+    <string name="favorite">收藏</string>
+    <string name="address">地址：</string>
+    <string name="loginName">登录名：</string>
+    <string name="addattention">加关注</string>
+    <string name="unattention">  取消关注</string>
+    <string name="bothattention">相互关注</string>
+    <string name="attentioned"> 已关注 </string>
+    
+    <string name="topic">话题</string>
+    <string name="hot">人气</string>
+    <string name="setting">设置</string>
+    <string name="accountManage">帐号管理</string>
+    <string name="readMode">浏览模式</string>
+    <string name="official">官方微博</string>
+    <string name="feedback">意见反馈</string>
+    <string name="version">检测新版本</string>
+    <string name="privateLetter">私信</string>
+    <string name="edit">编辑</string>
+    <string name="complete">完成</string>
+    <string name="send">发送</string>
+    <string name="saySth">说点儿什么吧...</string>
+    <string name="note">注意</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="clean">清除文字？</string>
+    <string name="camera">相机拍摄</string>
+    <string name="phoneGallery">手机相册</string>
+    <string name="weiboBody">微博正文</string>
+    <string name="refresh">刷新</string>
+    
+    <string name="info">资料</string>
+    <string name="intro">介绍：</string>
+    <string name="atelse">\@他</string>
+    <string name="sendMsg">发私信</string>
+    
+    <string name="checkUserInfo">查看个人资料</string>
+    <string name="gender">性别：</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="updateIcon">上传头像</string>
+    <string name="nickName">昵称：</string>
+    <string name="editInfo">编辑资料</string>
+    <string name="from">来自:</string>
+    <string name="back">返回</string>
+    <string name="save">保存</string>
+    
+    <string name="viewProfile">查看个人资料</string>
+    
+    <string name="delete">删除</string>
+    <string name="share">分享</string>
+    
+    <string name="main_tab_1">首页</string>
+    <string name="main_tab_2">大搜罗</string>
+    <string name="main_tab_3">拍照</string>
+    <string name="main_tab_4">微活动</string>
+    <string name="main_tab_5">我的</string>
+    <string name="nikename">昵称：</string>
+    
+    <string name="shareToSina">分享到新浪：</string>
+    <string name="uploadPortrait">上传头像</string>
+    <string name="signature">个性签名：</string>
+    <string name="birthday">生日：</string>
+    <string name="multiface_crop_help">"轻点一张脸开始裁剪。"</string>
+    <string name="running_face_detection">请稍等</string>
+    <string name="crop">裁剪</string>
+    <string name="saving_image">"正在保存照片..."</string>
+    <string name="choose_img">请选择图片</string>
+    <string name="load_failure">图片加载失败</string>
+    <string name="handling">处理中，请稍候...</string>
+    <string name="save_bitmap">正在保存图片...</string>
+    <string name="submit">提交</string>
+    <string name="qq">Q   Q    :</string>
+    <string name="email">邮箱：</string>
+    <string name="rememberpwd">记住密码</string>
+    <string name="autologin">自动登录</string>
+    <string name="systemSetting">系统设置</string>
+    <string name="accountExit">退出当前帐号</string>
+    <string name="getScore">给我评分</string>
+    <string name="checkVersion">新版本检测</string>
+    <string name="about">关于</string>
+    <string name="aboutas">关于我们</string>
+    
+    <string name="more_systemsetting_showall">查看所有内容</string>
+    <string name="more_systemsetting_onlyauthor">只看楼主</string>
+    <string name="more_systemsetting_textSize">字号大小</string>
+    <string name="more_systemsetting_pageCount">每页加载条数</string>
+    <string name="more_systemsetting_isShowPic">2G/3G下不显示图片</string>
+    <string name="more_systemsetting_ShowPicSummary">非WIFI下帮您节省流量</string>
+    <string name="more_systemsetting_sinaShare">新浪分享</string>
+    <string name="more_systemsetting_qqShare">QQ分享</string>
+    <string name="saveFlowWithoutWIFI">非WIFI下帮您节省流量</string>
+    <string name="more_systemsetting_clearCache">清除缓存中的临时文件，当前缓存大小为：</string>
+    <string name="more_systemsetting_default">恢复默认设置</string>
+    <string name="more_receive_notify">是否接受通知</string>
+    <string name="theCacheHasClear">缓存已清除！</string>
+    <string name="theLastestVersion">当前已是最新版本！</string>
+    <string name="Authorize">授权</string>
+    <string name="Authorized">已授权</string>
+    
+    <string name="mymsg">私信 </string>
+    <string name="sysmsg">系统消息</string>
+    
+    <string name="theLastestPage">无更多数据！</string>
+    <string name="theFirstPage">已是首页！</string>
+    <string name="close">关闭</string>
+    <string name="please_login">请登录！</string>
+    <string name="send_sucess">分享成功！</string>
+    <string name="send_failed">分享失败！</string>
+    <string name="del_pic">是否删除图片？</string>
+    <string name="crash_toast_text">应用异常崩溃退出！</string>
+    
+    <string name="addaccount">添加新帐号</string>
+    <string name="exit">退出</string>
+    <string name="msg_loading">加载中，请稍后！</string>
+    
+    <string name="default_all">默认全部</string>
+    <string name="landlord_only">只看楼主</string>
+    <string name="recent_replied">最新回复</string>
+    
+    <string name="postlist_default">默认</string>
+    <string name="postlist_top">置顶</string>
+    <string name="postlist_digest">精华</string>
+    <string name="postlist_search">搜索</string>
+    
+    <string name="textsize_set">字号设置</string>
+    <string name="pagecount_set">每页加载条数设置</string>
+    <string name="themeskin_set">皮肤设置</string>
+    <string name="changethemeskin">换肤</string>
+    
+    <string name="replypost">回帖</string>
+    <string name="sendpost">发帖</string>
+    <string name="brokenews">爆料</string>
+    
+    <string name="download">下载</string>
+    <string name="guide">新手引导</string>
+    <string name="atlas">图集</string>
+    <string name="search">搜索</string>
+    
+    <string name="PeopleReporter">市民记者</string>
+    
+    <string name="sinaweibo">新浪微博</string>
+	<string name="tencentweibo">腾讯微博</string>
+	<string name="wechat">微信好友</string>
+	<string name="wechatmoments">微信朋友圈</string>
+    
+    <string name="sharing">分享操作正在后台进行…</string>
+    <string name="share_to">分享到：</string>
+	<string name="multi_share">图文分享</string>
+	<string name="share_completed">分享成功</string>
+	<string name="share_canceled">分享已取消</string>
+	<string name="select_one_plat_at_least">请选择一个目标平台</string>
+	<string name="weibo_upload_content">分享图片</string>
+    <string name="wechat_client_inavailable">目前您的微信版本过低或未安装微信，需要安装微信才能使用</string>
+    <string name="google_plus_client_inavailable">Google+ 版本过低或者没有安装，需要升级或安装Google+才能使用！</string>
+    <string name="share_failed">分享失败</string>
+	
+    <string name="empty"></string>
+</resources>

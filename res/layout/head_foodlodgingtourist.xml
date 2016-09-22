@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="fill_parent"
+	android:layout_height="wrap_content" android:gravity="center"
+	android:background="@drawable/top_img"  android:id="@+id/radio">
+	<RadioButton android:id="@+id/btn_food" android:layout_width="0dip" android:layout_weight="1.0"
+		android:layout_height="wrap_content" android:background="@drawable/btnbg_food"
+		android:textColor="@color/titlebtn_gray" android:textSize="16sp" style="@style/tab_button"
+		android:checked="true"/>
+  	<RadioButton android:id="@+id/btn_lodging" android:layout_width="0dip" android:layout_weight="1.0"
+		android:layout_height="wrap_content" android:background="@drawable/btnbg_lodging"
+		android:textColor="@color/titlebtn_gray" android:textSize="16sp" style="@style/tab_button"
+		android:checked="false"/>
+	<RadioButton android:id="@+id/btn_tourist" android:layout_width="0dip" android:layout_weight="1.0"
+		android:layout_height="wrap_content" android:background="@drawable/btnbg_tourist" 
+		android:textColor="@color/titlebtn_gray"  android:textSize="16sp" style="@style/tab_button"
+		android:checked="false"/>
+</RadioGroup>

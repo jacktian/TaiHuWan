@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="rightmenu">
+        <item>热点咨讯</item>
+        <item>地图导览</item>
+        <item>吃住游</item>
+        <item>水印游记</item>
+        <item>关于我们</item>
+        <item>更新检测</item>
+    </string-array>
+    
+   <string-array name="default_weather_texts">
+      <item>晴</item>
+      <item>多云</item>
+      <item>阴</item> 
+      <item>雨</item>
+      <item>雪</item>  
+    </string-array>
+    
+    <string-array name="picFrom">
+        <item>@string/camera</item>
+        <item>@string/phoneGallery</item>
+    </string-array>
+    <string-array name="genderlist">
+        <item>@string/male</item>
+        <item>@string/female</item>
+    </string-array>
+    
+    <string-array name="default_smiley_texts">
+      <item>[s:129]</item>
+      <item>[s:130]</item>
+      <item>[s:131]</item> 
+      <item>[s:132]</item>
+      <item>[s:133]</item> 
+      <item>[s:134]</item> 
+      <item>[s:135]</item>  
+      <item>[s:136]</item>  
+      <item>[s:137]</item>   
+      <item>[s:138]</item> 
+      <item>[s:139]</item>  
+      <item>[s:140]</item> 
+      <item>[s:141]</item>  
+      <item>[s:142]</item> 
+      <item>[s:143]</item>  
+      <item>[s:144]</item>  
+      <item>[s:145]</item>  
+      <item>[s:146]</item> 
+      <item>[s:147]</item>  
+      <item>[s:148]</item> 
+      <item>[s:149]</item>
+      <item>[s:150]</item>  
+      <item>[s:151]</item> 
+      <item>[s:152]</item> 
+      <item>[s:153]</item>  
+      <item>[s:154]</item> 
+      <item>[s:155]</item> 
+      <item>[s:156]</item>  
+      <item>[s:157]</item> 
+      <item>[s:158]</item> 
+      <item>[s:159]</item>  
+      <item>[s:160]</item> 
+      <item>[s:161]</item> 
+      <item>[s:162]</item>  
+      <item>[s:163]</item> 
+      <item>[s:164]</item> 
+      <item>[s:165]</item>  
+      <item>[s:166]</item> 
+      <item>[s:167]</item>
+      <item>[s:168]</item>  
+      <item>[s:169]</item> 
+      <item>[s:170]</item> 
+      <item>[s:171]</item>  
+      <item>[s:172]</item> 
+      <item>[s:173]</item> 
+      <item>[s:174]</item>  
+      <item>[s:175]</item> 
+      <item>[s:176]</item> 
+      <item>[s:177]</item>  
+      <item>[s:178]</item> 
+      <item>[s:179]</item> 
+      <item>[s:180]</item> 
+      <item>[s:181]</item>
+      <item>[s:182]</item>
+      <item>[s:183]</item>
+      <item>[s:184]</item>
+      <item>[s:185]</item>
+      <item>[s:186]</item>
+      <item>[s:187]</item>
+    </string-array>
+</resources>

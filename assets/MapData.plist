@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ticket</key>
+	<array>
+		<dict>
+			<key>point</key>
+			<string>{1012, 479}</string>
+		</dict>
+		<dict>
+				<key>point</key>
+			<string>{684, 1514}</string>
+		</dict>
+		<dict>
+				<key>point</key>
+			<string>{713, 1131}</string>
+		</dict>
+        <dict>
+<key>point</key>
+			<string>{948, 1706}</string>
+		</dict>
+		 <dict>
+<key>point</key>
+			<string>{1000, 1751}</string>
+			</dict>
+		<dict>
+<key>point</key>
+			<string>{1333, 1838}</string>
+		</dict>
+		 <dict>
+	<key>point</key>
+			<string>{772, 705}</string>
+		</dict>
+
+		<dict>
+	<key>point</key>
+			<string>{1661, 2408}</string>
+		</dict>
+		 <dict>
+<key>point</key>
+			<string>{866, 1752}</string>
+		</dict>
+ <dict>
+	<key>point</key>
+			<string>{1873, 2087}</string>
+		</dict>
+		 <dict>
+<key>point</key>
+			<string>{1586, 2191}</string>
+		</dict>
+
+		<dict>
+	<key>point</key>
+			<string>{561, 2561}</string>
+		</dict>
+		
+	</array>
+	
+	<key>store</key>
+	<array>
+		 <dict>
+<key>point</key>
+			<string>{871, 1152}</string>
+		</dict>
+
+		<dict>
+<key>point</key>
+			<string>{1106, 1807}</string>
+		</dict>
+		 <dict>
+<key>point</key>
+			<string>{1094, 1796}</string>
+		</dict>
+
+		<dict>
+<key>point</key>
+			<string>{828, 1671}</string>
+		</dict>
+		 <dict>
+<key>point</key>
+			<string>{1356, 1846}</string>
+		</dict>
+
+		<dict>
+<key>point</key>
+			<string>{1904, 2108}</string>
+		</dict>
+		 <dict>
+<key>point</key>
+			<string>{954, 1806}</string>
+		</dict>
+
+		<dict>
+<key>point</key>
+			<string>{889, 1661}</string>
+		</dict>
+		 <dict>
+<key>point</key>
+			<string>{864, 1639}</string>
+		</dict>
+
+		<dict>
+<key>point</key>
+			<string>{692, 1088}</string>
+		</dict>
+		 <dict>
+	<key>point</key>
+			<string>{697, 1084}</string>
+		</dict>
+
+		<dict>
+<key>point</key>
+			<string>{7434, 1097}</string>
+		</dict>
+<dict>
+<key>point</key>
+			<string>{735, 1092}</string>
+</dict>
+<dict>
+	<key>point</key>
+			<string>{723, 1171}</string>
+</dict>
+<dict>
+<key>point</key>
+			<string>{657, 1172}</string>
+</dict>
+<dict>
+	<key>point</key>
+			<string>{723, 968}</string>
+</dict>
+ </array>
+	
+	<key>park</key>
+	<array>
+		<dict>
+<key>point</key>
+			<string>{871, 1152}</string>
+</dict>
+<dict>
+<key>point</key>
+			<string>{1106, 1807}</string>
+</dict>
+<dict>
+<key>point</key>
+			<string>{835, 1635}</string>
+</dict>
+<dict>
+	<key>point</key>
+			<string>{812, 1702}</string>
+</dict>
+<dict>
+<key>point</key>
+			<string>{723, 968}</string>
+</dict>
+
+	</array>
+	 <key>clinic</key>
+	<array>
+		<dict>
+	<key>point</key>
+			<string>{1893, 2088}</string>
+</dict>
+<dict>
+<key>point</key>
+			<string>{1019, 1755}</string>
+</dict>
+<dict>
+<key>point</key>
+			<string>{762, 749}</string>
+</dict>
+<dict>
+<key>point</key>
+			<string>{698, 705}</string>
+</dict>
+<dict>
+<key>point</key>
+			<string>{810, 795}</string>
+</dict>
+<dict>
+<key>point</key>
+			<string>{749, 1081}</string>
+</dict>
+ 
+	</array>
+</dict>
+</plist>

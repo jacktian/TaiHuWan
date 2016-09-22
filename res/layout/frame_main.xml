@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:id="@+id/parent"
+    android:orientation="vertical" >
+
+	<FrameLayout
+    	android:id="@+id/content_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:layout_above="@+id/main_radio" />
+   <RadioGroup
+		android:id="@+id/main_radio"
+    	android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <RadioButton android:checked="true"  android:id="@+id/tab_radiobtn_1"  android:layout_weight="1.0"
+			android:background="@drawable/tab_info"   style="@style/tab_button"  />
+        <RadioButton android:id="@+id/tab_radiobtn_2"  android:layout_weight="1.0"
+			android:background="@drawable/tab_activity"   style="@style/tab_button"  />
+        <RadioButton android:id="@+id/tab_radiobtn_3"   android:layout_weight="1.0"
+			android:background="@drawable/tab_mall"   style="@style/tab_button"  />
+        <RadioButton android:id="@+id/tab_radiobtn_4"  android:layout_weight="1.0"
+			android:background="@drawable/tab_ticket"   style="@style/tab_button"  />
+        <RadioButton android:id="@+id/tab_radiobtn_5" android:layout_weight="1.0"
+			android:background="@drawable/tab_traffic"   style="@style/tab_button"  />
+        </RadioGroup>
+</RelativeLayout>

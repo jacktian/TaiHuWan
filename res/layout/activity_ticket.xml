@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical"
+  android:background="@drawable/bg_main">
+  <include android:id="@+id/titlebar" layout="@layout/titlebar" />
+  <ScrollView android:layout_height="fill_parent" 
+	android:layout_width="fill_parent"
+	android:scrollbars="none">
+	<LinearLayout
+  	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"
+  	android:orientation="vertical"
+  	android:layout_gravity="center_horizontal"
+  	android:gravity="center_horizontal">
+  	
+	    <LinearLayout 
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_margin="10dip"
+  		android:orientation="vertical"
+  		android:background="@drawable/bg_lightgray">
+			<ImageView 
+			android:layout_height="fill_parent" 
+			android:layout_width="fill_parent"
+			android:paddingTop="5dip"
+			android:src="@drawable/ticket_logo"
+			android:scaleType="fitCenter"/>
+			<TextView 
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:paddingTop="5dip"
+			android:paddingBottom="5dip"
+			android:textSize="18sp"
+			android:text="  嬉戏谷门票"
+			android:textColor="@color/black"
+			android:textStyle="bold"/>
+		</LinearLayout>
+	    
+	    <LinearLayout 
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_margin="10dip"
+  		android:paddingLeft="5dip"
+  		android:paddingRight="5dip"
+  		android:orientation="vertical"
+  		android:background="@drawable/bg_lightgray">
+			<ImageView 
+			android:layout_height="fill_parent" 
+			android:layout_width="fill_parent"
+			android:src="@drawable/ticket_price"
+			android:scaleType="fitCenter"/>
+		</LinearLayout>
+<!-- 
+	   	<TextView 
+		android:layout_height="fill_parent" 
+		android:layout_width="wrap_content"
+		android:layout_marginTop="10dip"
+		android:layout_marginBottom="10dip"
+		android:textSize="18sp"
+		android:textStyle="bold"
+		android:text="            花博会官方票务中心热线"
+		android:textColor="@color/black"
+		android:background="@drawable/section_bg"/>
+	    
+	   <LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_margin="10dip"
+  		android:padding="10dip"
+  		android:orientation="horizontal"
+  		android:background="@drawable/bg_lightgray">
+  			<ImageView android:id="@+id/image"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/icon_emblem"
+			android:contentDescription="@drawable/icon_emblem"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  			<LinearLayout
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1.0"
+  			android:layout_marginLeft="10dip"
+  			android:orientation="vertical">
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/black"
+				android:textSize="18sp"
+				android:text="官方订票热线" />
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/text_gray"
+				android:textSize="14sp"
+				android:singleLine="true"
+				android:text="订票电话：0519-86313216" />
+  	   		</LinearLayout>
+  	   		<ImageView android:id="@+id/OfficialBooking"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/icon_dialog_new"
+			android:contentDescription="@drawable/icon_dialog_new"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  	   </LinearLayout>
+  	   
+	   <LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_margin="10dip"
+  		android:padding="10dip"
+  		android:orientation="horizontal"
+  		android:background="@drawable/bg_lightgray">
+  			<ImageView android:id="@+id/image"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/icon_emblem"
+			android:contentDescription="@drawable/icon_emblem"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  			<LinearLayout
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1.0"
+  			android:layout_marginLeft="10dip"
+  			android:orientation="vertical">
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/black"
+				android:textSize="18sp"
+				android:text="官方咨询热线" />
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/text_gray"
+				android:textSize="14sp"
+				android:singleLine="true"
+				android:text="咨询电话：0519-86050588" />
+  	   		</LinearLayout>
+  	   		<ImageView android:id="@+id/OfficialAdvice"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/icon_dialog_new"
+			android:contentDescription="@drawable/icon_dialog_new"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  	   </LinearLayout>
+  	   
+	   <TextView 
+		android:layout_height="fill_parent" 
+		android:layout_width="wrap_content"
+		android:layout_marginTop="10dip"
+		android:layout_marginBottom="10dip"
+		android:textSize="18sp"
+		android:textStyle="bold"
+		android:text="            门票销售代理商"
+		android:textColor="@color/black"
+		android:background="@drawable/section_bg"/>
+	   
+	   <LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_margin="10dip"
+  		android:padding="10dip"
+  		android:orientation="horizontal"
+  		android:background="@drawable/bg_lightgray">
+  			<ImageView android:id="@+id/image"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/china_post"
+			android:contentDescription="@drawable/china_post"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  			<LinearLayout
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1.0"
+  			android:layout_marginLeft="10dip"
+  			android:orientation="vertical">
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/black"
+				android:textSize="18sp"
+				android:text="中国邮政" />
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/text_gray"
+				android:textSize="14sp"
+				android:singleLine="true"
+				android:text="咨询电话：0519-88128185" />
+  	   		</LinearLayout>
+  	   		<ImageView android:id="@+id/ChinaPost"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/icon_dialog_new"
+			android:contentDescription="@drawable/icon_dialog_new"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  	   </LinearLayout>
+	   
+	   <LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_margin="10dip"
+  		android:padding="10dip"
+  		android:orientation="horizontal"
+  		android:background="@drawable/bg_lightgray">
+  			<ImageView android:id="@+id/image"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/china_bank"
+			android:contentDescription="@drawable/china_bank"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  			<LinearLayout
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1.0"
+  			android:layout_marginLeft="10dip"
+  			android:orientation="vertical">
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/black"
+				android:textSize="18sp"
+				android:text="中国银行" />
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/text_gray"
+				android:textSize="14sp"
+				android:singleLine="true"
+				android:text="咨询电话：0519-88118905" />
+  	   		</LinearLayout>
+  	   		<ImageView android:id="@+id/ChinaBank"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/icon_dialog_new"
+			android:contentDescription="@drawable/icon_dialog_new"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  	   </LinearLayout>
+  	   
+	   
+	   <TextView 
+		android:layout_height="fill_parent" 
+		android:layout_width="wrap_content"
+		android:layout_marginTop="10dip"
+		android:layout_marginBottom="10dip"
+		android:textSize="18sp"
+		android:textStyle="bold"
+		android:text="            通信运营商官方售票点"
+		android:textColor="@color/black"
+		android:background="@drawable/section_bg"/>
+	   
+	   <LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_margin="10dip"
+  		android:padding="10dip"
+  		android:orientation="horizontal"
+  		android:background="@drawable/bg_lightgray">
+  			<ImageView android:id="@+id/image"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/china_mobile"
+			android:contentDescription="@drawable/china_mobile"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  			<LinearLayout
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1.0"
+  			android:layout_marginLeft="10dip"
+  			android:orientation="vertical">
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/black"
+				android:textSize="18sp"
+				android:text="中国移动" />
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/text_gray"
+				android:textSize="14sp"
+				android:singleLine="true"
+				android:text="新北区万达广场移动营业厅" />
+  	   		</LinearLayout>
+  	   </LinearLayout>
+  	   
+	   <LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_margin="10dip"
+  		android:padding="10dip"
+  		android:orientation="horizontal"
+  		android:background="@drawable/bg_lightgray">
+  			<ImageView android:id="@+id/image"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/china_mobile"
+			android:contentDescription="@drawable/china_mobile"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  			<LinearLayout
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1.0"
+  			android:layout_marginLeft="10dip"
+  			android:orientation="vertical">
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/black"
+				android:textSize="18sp"
+				android:text="中国移动" />
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/text_gray"
+				android:textSize="14sp"
+				android:singleLine="true"
+				android:text="常州市区晋陵路移动营业厅" />
+  	   		</LinearLayout>
+  	   </LinearLayout>
+  	   
+	   <LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_margin="10dip"
+  		android:padding="10dip"
+  		android:orientation="horizontal"
+  		android:background="@drawable/bg_lightgray">
+  			<ImageView android:id="@+id/image"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/china_mobile"
+			android:contentDescription="@drawable/china_mobile"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  			<LinearLayout
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1.0"
+  			android:layout_marginLeft="10dip"
+  			android:orientation="vertical">
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/black"
+				android:textSize="18sp"
+				android:text="中国移动" />
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/text_gray"
+				android:textSize="14sp"
+				android:singleLine="true"
+				android:text="武进湖塘乐购移动营业厅" />
+  	   		</LinearLayout>
+  	   </LinearLayout>
+  	   
+	   <TextView 
+		android:layout_height="fill_parent" 
+		android:layout_width="wrap_content"
+		android:layout_marginTop="10dip"
+		android:layout_marginBottom="10dip"
+		android:textSize="18sp"
+		android:textStyle="bold"
+		android:text="            指定旅行社"
+		android:textColor="@color/black"
+		android:background="@drawable/section_bg"/>
+	   
+	   <LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_margin="10dip"
+  		android:padding="10dip"
+  		android:orientation="horizontal"
+  		android:background="@drawable/bg_lightgray">
+  			<ImageView android:id="@+id/image"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/changzhou_guolv"
+			android:contentDescription="@drawable/changzhou_guolv"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  			<LinearLayout
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1.0"
+  			android:layout_marginLeft="10dip"
+  			android:orientation="vertical">
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/black"
+				android:textSize="18sp"
+				android:text="常州国旅" />
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/text_gray"
+				android:textSize="14sp"
+				android:singleLine="true"
+				android:text="咨询电话：0519-88881618" />
+  	   		</LinearLayout>
+  	   		<ImageView android:id="@+id/ChangZhouGuoLv"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/icon_dialog_new"
+			android:contentDescription="@drawable/icon_dialog_new"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  	   </LinearLayout>
+	   
+	   <LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_margin="10dip"
+  		android:padding="10dip"
+  		android:orientation="horizontal"
+  		android:background="@drawable/bg_lightgray">
+  			<ImageView android:id="@+id/image"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/changzhou_chunqiu"
+			android:contentDescription="@drawable/changzhou_chunqiu"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  			<LinearLayout
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1.0"
+  			android:layout_marginLeft="10dip"
+  			android:orientation="vertical">
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/black"
+				android:textSize="18sp"
+				android:text="常州春秋国旅" />
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/text_gray"
+				android:textSize="14sp"
+				android:singleLine="true"
+				android:text="咨询电话：0519-88888114" />
+  	   		</LinearLayout>
+  	   		<ImageView android:id="@+id/ChangZhouChunQiu"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/icon_dialog_new"
+			android:contentDescription="@drawable/icon_dialog_new"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  	   </LinearLayout>
+  	   
+	   <LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_margin="10dip"
+  		android:padding="10dip"
+  		android:orientation="horizontal"
+  		android:background="@drawable/bg_lightgray">
+  			<ImageView android:id="@+id/image"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/guangda_guolv"
+			android:contentDescription="@drawable/guangda_guolv"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  			<LinearLayout
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1.0"
+  			android:layout_marginLeft="10dip"
+  			android:orientation="vertical">
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/black"
+				android:textSize="18sp"
+				android:text="光大国旅" />
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/text_gray"
+				android:textSize="14sp"
+				android:singleLine="true"
+				android:text="咨询电话：0519-88888100" />
+  	   		</LinearLayout>
+  	   		<ImageView android:id="@+id/GuangDaGuoLv"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/icon_dialog_new"
+			android:contentDescription="@drawable/icon_dialog_new"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  	   </LinearLayout>
+  	   
+	   <LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_margin="10dip"
+  		android:padding="10dip"
+  		android:orientation="horizontal"
+  		android:background="@drawable/bg_lightgray">
+  			<ImageView android:id="@+id/image"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/mingdu_guolv"
+			android:contentDescription="@drawable/mingdu_guolv"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  			<LinearLayout
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1.0"
+  			android:layout_marginLeft="10dip"
+  			android:orientation="vertical">
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/black"
+				android:textSize="18sp"
+				android:text="明都国旅" />
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/text_gray"
+				android:textSize="14sp"
+				android:singleLine="true"
+				android:text="咨询电话：0519-86561(2)9980519-86561998,0519-86562998" />
+  	   		</LinearLayout>
+  	   		<ImageView android:id="@+id/MingDuGuolv"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/icon_dialog_new"
+			android:contentDescription="@drawable/icon_dialog_new"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  	   </LinearLayout>
+	   
+	   <LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_margin="10dip"
+  		android:padding="10dip"
+  		android:orientation="horizontal"
+  		android:background="@drawable/bg_lightgray">
+  			<ImageView android:id="@+id/image"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/changzhou_fenghuang"
+			android:contentDescription="@drawable/changzhou_fenghuang"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  			<LinearLayout
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1.0"
+  			android:layout_marginLeft="10dip"
+  			android:orientation="vertical">
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/black"
+				android:textSize="18sp"
+				android:text="凤凰国旅" />
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/text_gray"
+				android:textSize="14sp"
+				android:singleLine="true"
+				android:text="咨询电话：0519-86318556" />
+  	   		</LinearLayout>
+  	   		<ImageView android:id="@+id/ChangZhouFengHuang"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/icon_dialog_new"
+			android:contentDescription="@drawable/icon_dialog_new"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  	   </LinearLayout>
+  	   
+	   <LinearLayout
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:layout_margin="10dip"
+  		android:padding="10dip"
+  		android:orientation="horizontal"
+  		android:background="@drawable/bg_lightgray">
+  			<ImageView android:id="@+id/image"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/guangdian_guolv"
+			android:contentDescription="@drawable/guangdian_guolv"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  			<LinearLayout
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1.0"
+  			android:layout_marginLeft="10dip"
+  			android:orientation="vertical">
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/black"
+				android:textSize="18sp"
+				android:text="广电国旅" />
+  				<TextView android:id="@+id/content"
+				android:layout_height="fill_parent" 
+				android:layout_width="wrap_content"
+				android:textColor="@color/text_gray"
+				android:textSize="14sp"
+				android:singleLine="true"
+				android:text="咨询电话：0519-86559191" />
+  	   		</LinearLayout>
+  	   		<ImageView android:id="@+id/GuangDianGuoLv"
+			android:layout_height="wrap_content" 
+			android:layout_width="wrap_content"
+			android:scaleType="centerCrop"
+			android:background="@drawable/icon_dialog_new"
+			android:contentDescription="@drawable/icon_dialog_new"
+			android:layout_gravity="center_horizontal" 
+			android:gravity="center_horizontal" />
+  	   </LinearLayout>
+  	    -->
+    </LinearLayout> 
+    
+  </ScrollView>
+</LinearLayout>
