@@ -42,7 +42,7 @@ import com.lidroid.xutils.http.client.HttpRequest;
 
 public class InformationFragment extends BaseFragment implements IXListViewListener
 {
-    String text="咨讯";
+    String text="鍜ㄨ";
     Activity_Main mMain=null;
     private FrameLayout mFrameLayout=null;
     TextView head_text1,head_text2;
@@ -130,7 +130,7 @@ public class InformationFragment extends BaseFragment implements IXListViewListe
         titlebar_menu.setVisibility(View.VISIBLE);
         titlebar_name.setVisibility(View.VISIBLE);
         titlebar.setBackgroundResource(R.drawable.top_img);
-        titlebar_name.setText("热点资讯");
+        titlebar_name.setText("鐑偣璧勮");
         titlebar_name.setTextColor(Color.BLACK);
         pulllistview=(PullListView)view.findViewById(R.id.listView);
     }
@@ -172,7 +172,7 @@ public class InformationFragment extends BaseFragment implements IXListViewListe
         if(isOpenNetWork())
         {
             HttpUtils httpUtils=new HttpUtils();
-            httpUtils.send(HttpRequest.HttpMethod.GET,"http://api.map.baidu.com/telematics/v3/weather?location=常州&output=json&ak=Pd4BIcwYA8Q5p4jgYK2smGrmYqXpd7IG&mcode=49:8A:3C:48:11:C8:89:B8:3E:61:BA:1B:03:C2:54:92:3E:FF:A0:D4;com.gloria.hbh.main",new RequestCallBack<String>(){
+            httpUtils.send(HttpRequest.HttpMethod.GET,"http://api.map.baidu.com/telematics/v3/weather?location=甯稿窞&output=json&ak=iiv9xSGkZ9D200VGGroh2r0thH5AeGYG&mcode=4F:12:1E:3E:64:B1:99:AB:9B:F1:87:53:0E:DC:6F:A5:7A:11:36:15;com.gloria.hbh.main",new RequestCallBack<String>(){
                 public void onSuccess(ResponseInfo<String> responseInfo)
                 {
                     try
@@ -186,7 +186,7 @@ public class InformationFragment extends BaseFragment implements IXListViewListe
                             newsadapter=new NewNewsAdapter(instance,arrayList);
                             pulllistview.setAdapter(newsadapter);
                         }else{
-                            Toast.makeText(instance,"获取天气失败",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(instance,"鑾峰彇澶╂皵澶辫触",Toast.LENGTH_SHORT).show();
                         }
                     }
                     catch(JSONException e)
@@ -238,14 +238,14 @@ public class InformationFragment extends BaseFragment implements IXListViewListe
                 public void onFailure(HttpException error,String msg)
                 {
                     stoplistview();
-                    Toast.makeText(instance,"获取列表失败",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(instance,"鑾峰彇鍒楄〃澶辫触",Toast.LENGTH_SHORT).show();
                 }
             });
         }
         else
         {
             stoplistview();
-            Toast.makeText(instance,"网络异常",Toast.LENGTH_SHORT).show();
+            Toast.makeText(instance,"缃戠粶寮傚父",Toast.LENGTH_SHORT).show();
         }
     }
     public void onLoadMore()
