@@ -6,135 +6,152 @@ import java.util.HashMap;
 import com.gloria.hbh.main.R;
 
 /**
- * ¶¥²¿¶ş¼¶·ÖÀ¸Ãû³Æ£¬°üº¬¶ş¼¶·ÖÀ¸Êı×é
- * @author gejian
- * 2013-1-23
+ * é¡¶éƒ¨äºŒçº§åˆ†æ åç§°ï¼ŒåŒ…å«äºŒçº§åˆ†æ æ•°ç»„
+ * 
+ * @author gejian 2013-1-23
  */
 public class SubTabInfo {
-	
+
 	public static final String TAG = SubTabInfo.class.getName();
-	
+
 	public class SubTabInfoTypeConstants {
 		public static final int SUBCATE_RECENT_VIEWED_TOPICS = 0;
-		public static final int SUBCATE_HEADLINE_IMAGE = 1; //Í·ÌõĞ¡Í¼
-		public static final int SUBCATE_ACTIVITY = 2; //»î¶¯
-		public static final int SUBCATE_COMMON = 3; //»î¶¯
-		public static final int SUBCATE_TOURIST = 4; //³Ô×¡ÓÎ µÄ¾°µã
+		public static final int SUBCATE_HEADLINE_IMAGE = 1; // å¤´æ¡å°å›¾
+		public static final int SUBCATE_ACTIVITY = 2; // æ´»åŠ¨
+		public static final int SUBCATE_COMMON = 3; // æ´»åŠ¨
+		public static final int SUBCATE_TOURIST = 4; // åƒä½æ¸¸ çš„æ™¯ç‚¹
 	}
-	
-//	public class GroupKeyConstants {
-//		//¸ü¶àµÄÉèÖÃÀàĞÍµÄÀà±ğ
-//		public static final String GROUPKEY_NAVIGATION = "µ¼º½"; 
-//		public static final String GROUPKEY_MORE = "¸ü¶à";  
-//	}
-	
-	String id = ""; //±íÊ¾ÀàĞÍ¶ÔÓ¦µÄ°å¿éidºÅ£¬´Ë´¦¸ñÊ½±È½ÏÁé»î£¬Èç¹ûÊÇ¶à¸öidºÅ£¬ÖĞ¼äÓÃ¶ººÅ¸ô¿ª£¬Ò²¿ÉÒÔÎª¾­¹ırul encode±àÂëºóµÄÖĞÎÄ×Ö·û
-	String bid = ""; //±íÊ¾¶¥²¿´óÍ¼µÄidºÅ£¬Èôbid²»Îª¿Õ£¬±íÃ÷´ËÒ³ÃæĞèÒªÏÔÊ¾´óÍ¼
-	int type = SubTabInfoTypeConstants.SUBCATE_HEADLINE_IMAGE; //±íÊ¾¶ÔÓ¦¶ş¼¶·ÖÀ¸µÄÀàĞÍ
-	String name = ""; //±íÊ¾¶ÔÓ¦¶ş¼¶·ÖÀ¸µÄÃû³Æ
-	
-	String value = ""; //ÔÚ¸ü¶àÊ±£¬ÉèÖÃ¶ÔÓ¦µÄÄ¬ÈÏ³õÊ¼Öµ
-	ArrayList<SettingInfo> setting; //ÉèÖÃÑ¡ÏîµÄÁĞ±í
-	
-	String subtab_id = ""; //¸ÃTab¶ÔÓ¦µÄFid
-	int subtab_res_backgroud = R.drawable.tabsub_btnbg_default; //tabµÄ±³¾°×ÊÔ´
-	int subtab_view_ID = -1; //¸ÃTab¶ÔÓ¦µÄView µÄ×ÊÔ´
-	
+
+	// public class GroupKeyConstants {
+	// //æ›´å¤šçš„è®¾ç½®ç±»å‹çš„ç±»åˆ«
+	// public static final String GROUPKEY_NAVIGATION = "å¯¼èˆª";
+	// public static final String GROUPKEY_MORE = "æ›´å¤š";
+	// }
+
+	String id = ""; // è¡¨ç¤ºç±»å‹å¯¹åº”çš„æ¿å—idå·ï¼Œæ­¤å¤„æ ¼å¼æ¯”è¾ƒçµæ´»ï¼Œå¦‚æœæ˜¯å¤šä¸ªidå·ï¼Œä¸­é—´ç”¨é€—å·éš”å¼€ï¼Œä¹Ÿå¯ä»¥ä¸ºç»è¿‡rul
+					// encodeç¼–ç åçš„ä¸­æ–‡å­—ç¬¦
+	String bid = ""; // è¡¨ç¤ºé¡¶éƒ¨å¤§å›¾çš„idå·ï¼Œè‹¥bidä¸ä¸ºç©ºï¼Œè¡¨æ˜æ­¤é¡µé¢éœ€è¦æ˜¾ç¤ºå¤§å›¾
+	int type = SubTabInfoTypeConstants.SUBCATE_HEADLINE_IMAGE; // è¡¨ç¤ºå¯¹åº”äºŒçº§åˆ†æ çš„ç±»å‹
+	String name = ""; // è¡¨ç¤ºå¯¹åº”äºŒçº§åˆ†æ çš„åç§°
+
+	String value = ""; // åœ¨æ›´å¤šæ—¶ï¼Œè®¾ç½®å¯¹åº”çš„é»˜è®¤åˆå§‹å€¼
+	ArrayList<SettingInfo> setting; // è®¾ç½®é€‰é¡¹çš„åˆ—è¡¨
+
+	String subtab_id = ""; // è¯¥Tabå¯¹åº”çš„Fid
+	int subtab_res_backgroud = R.drawable.tabsub_btnbg_default; // tabçš„èƒŒæ™¯èµ„æº
+	int subtab_view_ID = -1; // è¯¥Tabå¯¹åº”çš„View çš„èµ„æº
+
 	public String getId() {
 		return id;
 	}
+
 	public String getValue() {
 		return value;
 	}
+
 	public void setValue(String value) {
-		if(value == null){
+		if (value == null) {
 			return;
 		}
 		this.value = value;
 	}
+
 	public void setId(String id) {
-		if(id == null){
+		if (id == null) {
 			return;
 		}
 		this.id = id;
 	}
+
 	public String getBid() {
 		return bid;
 	}
+
 	public void setBid(String bid) {
-		if(bid == null){
+		if (bid == null) {
 			return;
 		}
 		this.bid = bid;
 	}
+
 	public int getType() {
 		return type;
 	}
+
 	public void setType(int type) {
 		this.type = type;
 	}
+
 	public void setType(String type) {
-		if(type == null){
+		if (type == null) {
 			return;
-		}else if(type.equals("subcate_recent_viewed_topic")){
+		} else if (type.equals("subcate_recent_viewed_topic")) {
 			this.type = SubTabInfoTypeConstants.SUBCATE_RECENT_VIEWED_TOPICS;
-		}else if(type.equals("subcate_headline_image")){
+		} else if (type.equals("subcate_headline_image")) {
 			this.type = SubTabInfoTypeConstants.SUBCATE_HEADLINE_IMAGE;
-		}else if(type.equals("subcate_activity")){
+		} else if (type.equals("subcate_activity")) {
 			this.type = SubTabInfoTypeConstants.SUBCATE_ACTIVITY;
-		}else if(type.equals("subcate_common")){
+		} else if (type.equals("subcate_common")) {
 			this.type = SubTabInfoTypeConstants.SUBCATE_COMMON;
 		}
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
-		if(name == null){
+		if (name == null) {
 			return;
 		}
 		this.name = name;
 	}
+
 	public String getSubTabId() {
 		return subtab_id;
 	}
+
 	public void setSubTabId(String subtab_id) {
 		this.subtab_id = subtab_id;
 	}
+
 	public int getSubTabResBackgroud() {
 		return subtab_res_backgroud;
 	}
+
 	public void setSubTabResBackgroud(int subtab_res_backgroud) {
 		this.subtab_res_backgroud = subtab_res_backgroud;
 	}
+
 	public int getSubTabViewID() {
 		return subtab_view_ID;
 	}
+
 	public void setSubTabViewID(int subtab_view_ID) {
 		this.subtab_view_ID = subtab_view_ID;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static SubTabInfo getSubTabInfo(HashMap<String, Object> root) {
-		if(root == null){
+		if (root == null) {
 			return null;
 		}
 		SubTabInfo subTabInfo = new SubTabInfo();
-		subTabInfo.setType((String)root.get("type"));
-		subTabInfo.setName((String)root.get("name"));
-		subTabInfo.setId((String)root.get("id"));
-		subTabInfo.setBid((String)root.get("bid"));
+		subTabInfo.setType((String) root.get("type"));
+		subTabInfo.setName((String) root.get("name"));
+		subTabInfo.setId((String) root.get("id"));
+		subTabInfo.setBid((String) root.get("bid"));
 		return subTabInfo;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static ArrayList<SubTabInfo> getSubTabInfos(ArrayList<Object> root) {
 		// TODO Auto-generated method stub
-		if(root == null){
+		if (root == null) {
 			return null;
 		}
 		ArrayList<SubTabInfo> subTabInfos = new ArrayList<SubTabInfo>();
-		for(int i = 0; i < root.size(); i++){
+		for (int i = 0; i < root.size(); i++) {
 			HashMap<String, Object> subtab = (HashMap<String, Object>) root.get(i);
 			subTabInfos.add(SubTabInfo.getSubTabInfo(subtab));
 		}

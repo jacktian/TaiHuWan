@@ -1,30 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- gallery  图片显示View -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="fill_parent">
-	<ImageView  
-     android:id="@+id/item_img" 
-	 android:layout_width="fill_parent"
-	 android:layout_height="fill_parent"
-	 android:scaleType="fitXY" />
-	<LinearLayout android:id="@+id/layout_bottom"  android:layout_width="fill_parent"  android:layout_height="wrap_content"
-        android:orientation="vertical"  android:layout_alignParentBottom="true"  android:background="@color/lightgray"
-        android:visibility="gone" android:paddingBottom="20dip" >
-	 <TextView android:id="@+id/item_text" 
-	   android:layout_width="fill_parent"
-	   android:layout_height="wrap_content"
-	   android:textColor="@color/white"
-	   android:textSize="14sp"
-	   android:gravity="center"
-	   android:layout_margin="5dip"
-	   android:maxLines="4"/>  
-<!--	   <com.gejian.dasouluo.myview.EllipsizingTextView 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/item_img"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY" />
+
+    <LinearLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lightgray"
+        android:orientation="vertical"
+        android:paddingBottom="20dip"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/item_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:gravity="center"
+            android:maxLines="4"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+        <!--
+    	   <com.gejian.dasouluo.myview.EllipsizingTextView 
 	   android:id="@+id/item_text" 
 	   android:layout_width="fill_parent"
 	   android:layout_height="wrap_content"
 	   android:textColor="@color/white"
 	   android:textSize="14sp"
-	   android:layout_margin="5dip"/>  -->
+	   android:layout_margin="5dip"/>
+        -->
     </LinearLayout>
+
 </RelativeLayout>

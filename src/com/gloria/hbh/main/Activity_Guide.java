@@ -2,7 +2,6 @@ package com.gloria.hbh.main;
 
 import com.gloria.hbh.util.ScreenUtils;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,75 +13,79 @@ import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class Activity_Guide  extends Activity_Base {
+public class Activity_Guide extends Activity_Base {
 
-	private LinearLayout startView;  
-    private TranslateAnimation animation; 
-    
-    TextView text_enter;
-    @Override  
-    public void onCreate(Bundle savedInstanceState) {  
-        super.onCreate(savedInstanceState);  
-        setContentView(R.layout.activity_guide);
-      //  goToInfoFrame();
-        text_enter = (TextView) findViewById(R.id.text_enter);
-        text_enter.setOnClickListener(new OnClickListener() {
+	private LinearLayout startView;
+	private TranslateAnimation animation;
+
+	TextView text_enter;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_guide);
+		// goToInfoFrame();
+		text_enter = (TextView) findViewById(R.id.text_enter);
+		text_enter.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-//				new AlertDialog.Builder(Activity_Guide.this)
-//						.setMessage("µØÍ¼µ¼ÀÀ£¬ÎŞÓÇ³©ÓÎ£¡")
-//						.setPositiveButton("Ì«ºş×ÉÑ¯",infoListener)
-//						.setNegativeButton("µØÍ¼µ¼ÀÀ", mapListener).create().show();
-				 goToInfoFrame();
+				// new AlertDialog.Builder(Activity_Guide.this)
+				// .setMessage("åœ°å›¾å¯¼è§ˆï¼Œæ— å¿§ç•…æ¸¸ï¼")
+				// .setPositiveButton("å¤ªæ¹–å’¨è¯¢",infoListener)
+				// .setNegativeButton("åœ°å›¾å¯¼è§ˆ", mapListener).create().show();
+				goToInfoFrame();
 			}
 		});
-        
-        startView=(LinearLayout)findViewById(R.id.startView);  
-//        animation=new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0, 
-//        		Animation.RELATIVE_TO_PARENT, -1.0f,   Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0);  
-        float xScale = (float)4881/ScreenUtils.getInstance().getWidth()-1;
-        animation=new TranslateAnimation(0, 0, 
-        		Animation.RELATIVE_TO_PARENT, -xScale,   Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0);  
-        
-        animation.setDuration(15*1000);  
-        animation.setRepeatCount(3);//ÉèÖÃÖØ¸´´ÎÊı 
-        animation.setRepeatMode(Animation.REVERSE);//ÉèÖÃ·´·½ÏòÖ´ĞĞ
-        animation.setAnimationListener(new AnimationListener() {
-        	public void onAnimationStart(Animation animation) {
-        	}
-        	public void onAnimationRepeat(Animation animation) {
-        	}
-        	public void onAnimationEnd(Animation animation) {
-        		startView.startAnimation(animation); 
-        	}
-        });
-        startView.startAnimation(animation); 
-    }  
-    
-    //¶Ô»°¿ò¼àÌıÊÂ¼ş
-   	DialogInterface.OnClickListener infoListener = new DialogInterface.OnClickListener() {
-   		public void onClick(DialogInterface dialog, int which) {
-   			goToInfoFrame();
-   		}
-   	};
-   	
-    //¶Ô»°¿ò¼àÌıÊÂ¼ş
-   	DialogInterface.OnClickListener mapListener = new DialogInterface.OnClickListener() {
-   		public void onClick(DialogInterface dialog, int which) {
-   			goToMapFrame();
-   		}
-   	};
-   	
+
+		startView = (LinearLayout) findViewById(R.id.startView);
+		// animation=new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0,
+		// Animation.RELATIVE_TO_PARENT, -1.0f, Animation.RELATIVE_TO_SELF, 0,
+		// Animation.RELATIVE_TO_SELF, 0);
+		float xScale = (float) 4881 / ScreenUtils.getInstance().getWidth() - 1;
+		animation = new TranslateAnimation(0, 0, Animation.RELATIVE_TO_PARENT, -xScale, Animation.RELATIVE_TO_SELF, 0,
+				Animation.RELATIVE_TO_SELF, 0);
+
+		animation.setDuration(15 * 1000);
+		animation.setRepeatCount(3);// è®¾ç½®é‡å¤æ¬¡æ•°
+		animation.setRepeatMode(Animation.REVERSE);// è®¾ç½®åæ–¹å‘æ‰§è¡Œ
+		animation.setAnimationListener(new AnimationListener() {
+			public void onAnimationStart(Animation animation) {
+			}
+
+			public void onAnimationRepeat(Animation animation) {
+			}
+
+			public void onAnimationEnd(Animation animation) {
+				startView.startAnimation(animation);
+			}
+		});
+		startView.startAnimation(animation);
+	}
+
+	// å¯¹è¯æ¡†ç›‘å¬äº‹ä»¶
+	DialogInterface.OnClickListener infoListener = new DialogInterface.OnClickListener() {
+		public void onClick(DialogInterface dialog, int which) {
+			goToInfoFrame();
+		}
+	};
+
+	// å¯¹è¯æ¡†ç›‘å¬äº‹ä»¶
+	DialogInterface.OnClickListener mapListener = new DialogInterface.OnClickListener() {
+		public void onClick(DialogInterface dialog, int which) {
+			goToMapFrame();
+		}
+	};
+
 	protected void goToInfoFrame() {
 		Intent intent = new Intent();
 		intent.setClass(Activity_Guide.this, Activity_Main.class);
 		intent.putExtra("type", Activity_Main.TYPE_INFO);
 		startActivity(intent);
 	}
-	
+
 	protected void goToMapFrame() {
 		Intent intent = new Intent();
 		intent.setClass(Activity_Guide.this, Activity_Main.class);
 		intent.putExtra("type", Activity_Main.TYPE_MAP);
 		startActivity(intent);
 	}
-}  
+}

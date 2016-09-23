@@ -1,43 +1,44 @@
 package com.gloria.hbh.adapter;
 
 import java.util.List;
-import android.net.Uri;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+
 import com.gloria.hbh.main.R;
 import com.gloria.hbh.util.ScreenUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.parse.ParseImageView;
 import com.parse.ParseObject;
 
+import android.net.Uri;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-public class NewsAdapter extends Adapter_Base{
-	
+public class NewsAdapter extends Adapter_Base {
+
 	List<ParseObject> listParseObject;
-	
-	public NewsAdapter(List<ParseObject> listParseObject,ImageLoader imageLoader){
+
+	public NewsAdapter(List<ParseObject> listParseObject, ImageLoader imageLoader) {
 		this.listParseObject = listParseObject;
-		this.imageLoader = imageLoader; 
+		this.imageLoader = imageLoader;
 	}
 
-	public int getCount(){
+	public int getCount() {
 		return listParseObject.size();
 	}
-	
-	public ParseObject getItem(int position){
+
+	public ParseObject getItem(int position) {
 		return listParseObject.get(position);
 	}
-	
-	public long getItemId(int position){
+
+	public long getItemId(int position) {
 		return position;
 	}
-	
-	public View getView(int position, View convertView, ViewGroup parent){
+
+	public View getView(int position, View convertView, ViewGroup parent) {
 		final ViewItem item;
 		if (convertView != null) {
-			item =(ViewItem) convertView.getTag();  
+			item = (ViewItem) convertView.getTag();
 		} else {
 			item = new ViewItem();
 			convertView = LayoutInflater.from(this._context).inflate(R.layout.listview_news, null);
@@ -57,24 +58,24 @@ public class NewsAdapter extends Adapter_Base{
 			default:
 				break;
 			}
-			convertView.setTag(item); 
+			convertView.setTag(item);
 		}
-		
+
 		ParseObject parseObject = getItem(position);
-		
+
 		item.imageView.setPlaceholder(_context.getResources().getDrawable(R.drawable.ic_launcher));
 		item.imageView.setVisibility(View.GONE);
-		if(parseObject.getParseFile("imageFile") != null){
+		if (parseObject.getParseFile("imageFile") != null) {
 			item.imageView.setVisibility(View.VISIBLE);
 			item.imageView.setImageURI(Uri.parse(parseObject.getParseFile("imageFile").getUrl()));
 			imageLoader.displayImage(parseObject.getParseFile("imageFile").getUrl(), item.imageView, options);
 		}
-		  
+
 		item.title.setText(parseObject.getString("title"));
 		item.subtitle.setText(parseObject.getString("description"));
 		return convertView;
 	}
-	
+
 	public class ViewItem {
 		ParseImageView imageView;
 		TextView title;

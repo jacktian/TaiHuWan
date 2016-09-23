@@ -15,11 +15,11 @@
  *******************************************************************************/
 package com.gloria.pulltorefresh.extras.listfragment;
 
+import com.gloria.pulltorefresh.library.PullToRefreshExpandableListView;
+
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
-
-import com.gloria.pulltorefresh.library.PullToRefreshExpandableListView;
 
 /**
  * A sample implementation of how to use {@link PullToRefreshExpandableListView}
@@ -36,7 +36,8 @@ import com.gloria.pulltorefresh.library.PullToRefreshExpandableListView;
  * @author Chris Banes
  * 
  */
-public class PullToRefreshExpandableListFragment extends PullToRefreshBaseListFragment<PullToRefreshExpandableListView> {
+public class PullToRefreshExpandableListFragment
+		extends PullToRefreshBaseListFragment<PullToRefreshExpandableListView> {
 
 	protected PullToRefreshExpandableListView onCreatePullToRefreshListView(LayoutInflater inflater,
 			Bundle savedInstanceState) {

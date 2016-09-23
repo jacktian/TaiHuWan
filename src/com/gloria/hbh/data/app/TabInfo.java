@@ -4,37 +4,37 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * µ×²¿TabButton¹¦ÄÜ  £¨Ò»¼¶²Ëµ¥£©
- * @author gejian
- * 2013-1-23
+ * åº•éƒ¨TabButtonåŠŸèƒ½ ï¼ˆä¸€çº§èœå•ï¼‰
+ * 
+ * @author gejian 2013-1-23
  */
 public class TabInfo {
-	
+
 	public class TabInfoTypeConstants {
-		public static final int TAB_SUBCATE_BELOW_NAVI = 0;//µ¼º½ÏÂÃæÓĞ¶ş¼¶·ÖÀ¸
-		public static final int TAB_SUBCATE_ON_NAVI = 1;      //µ¼º½¶¥²¿µã»÷ÏÂÀ­¶ş¼¶·ÖÀ¸
-		public static final int TAB_SUBCATE_NONE = 2;            //Ã»ÓĞ¶ş¼¶·ÖÀ¸
-		public static final int TAB_MORE = 3;            	//¸ü¶à·ÖÀ¸
-		public static final int TAB_MYINFO = 4;    			//ÎÒµÄ×ÊÁÏ·ÖÀ¸
+		public static final int TAB_SUBCATE_BELOW_NAVI = 0;// å¯¼èˆªä¸‹é¢æœ‰äºŒçº§åˆ†æ 
+		public static final int TAB_SUBCATE_ON_NAVI = 1; // å¯¼èˆªé¡¶éƒ¨ç‚¹å‡»ä¸‹æ‹‰äºŒçº§åˆ†æ 
+		public static final int TAB_SUBCATE_NONE = 2; // æ²¡æœ‰äºŒçº§åˆ†æ 
+		public static final int TAB_MORE = 3; // æ›´å¤šåˆ†æ 
+		public static final int TAB_MYINFO = 4; // æˆ‘çš„èµ„æ–™åˆ†æ 
 	}
 
 	public static final String TAG = TabInfo.class.getName();
-	
-	int tab_type = TabInfoTypeConstants.TAB_SUBCATE_BELOW_NAVI;//µ×²¿Ò»¼¶·ÖÀàµÄÀàĞÍ
-	String tab_name = "";//µ×²¿Ò»¼¶·ÖÀàµÄÃû³Æ
-	String navi_name = "";//Ò»¼¶·ÖÀà¶ÔÓ¦¶¥²¿Ãû³Æ
-	ArrayList<SubTabInfo> subTabInfos = null; //¶¥²¿¶ş¼¶·ÖÀ¸Ãû³Æ£¬°üº¬¶ş¼¶·ÖÀ¸Êı×é
-	
-	private String tab_id = ""; //¸ÃTab¶ÔÓ¦µÄFid
-//	private int tab_res_backgroud = R.drawable.tab_btnbg_default; //tabµÄ±³¾°×ÊÔ´
+
+	int tab_type = TabInfoTypeConstants.TAB_SUBCATE_BELOW_NAVI;// åº•éƒ¨ä¸€çº§åˆ†ç±»çš„ç±»å‹
+	String tab_name = "";// åº•éƒ¨ä¸€çº§åˆ†ç±»çš„åç§°
+	String navi_name = "";// ä¸€çº§åˆ†ç±»å¯¹åº”é¡¶éƒ¨åç§°
+	ArrayList<SubTabInfo> subTabInfos = null; // é¡¶éƒ¨äºŒçº§åˆ†æ åç§°ï¼ŒåŒ…å«äºŒçº§åˆ†æ æ•°ç»„
+
+	private String tab_id = ""; // è¯¥Tabå¯¹åº”çš„Fid
+	// private int tab_res_backgroud = R.drawable.tab_btnbg_default; //tabçš„èƒŒæ™¯èµ„æº
 	private String tab_icon = "";
-	private int tab_view_ID = -1; //¸ÃTab¶ÔÓ¦µÄView µÄ×ÊÔ´
-	private int index = 0; //¸ÃTab¶ÔÓ¦µÄListµÄË÷Òı
-	
-	public TabInfo(){
+	private int tab_view_ID = -1; // è¯¥Tabå¯¹åº”çš„View çš„èµ„æº
+	private int index = 0; // è¯¥Tabå¯¹åº”çš„Listçš„ç´¢å¼•
+
+	public TabInfo() {
 		subTabInfos = new ArrayList<SubTabInfo>(1);
 	}
-	
+
 	public int getIndex() {
 		return index;
 	}
@@ -42,14 +42,14 @@ public class TabInfo {
 	public void setIndex(int index) {
 		this.index = index;
 	}
-	
+
 	public String getTab_icon() {
-		if(tab_icon.equals("")){
-			tab_icon = "tab_icon"+"_"+(getIndex()+1);
+		if (tab_icon.equals("")) {
+			tab_icon = "tab_icon" + "_" + (getIndex() + 1);
 		}
 		return tab_icon;
 	}
-	
+
 	public String getTabId() {
 		return tab_id;
 	}
@@ -58,17 +58,17 @@ public class TabInfo {
 		this.tab_id = tab_id;
 	}
 
-//	public int getTabResBackgroud() {
-//		return tab_res_backgroud;
-//	}
-//	
-//	public int getTabResBackgroud(int i) {
-//		return tab_res_backgroud;
-//	}
-//
-//	public void setTabResBackgroud(int tab_res_backgroud) {
-//		this.tab_res_backgroud = tab_res_backgroud;
-//	}
+	// public int getTabResBackgroud() {
+	// return tab_res_backgroud;
+	// }
+	//
+	// public int getTabResBackgroud(int i) {
+	// return tab_res_backgroud;
+	// }
+	//
+	// public void setTabResBackgroud(int tab_res_backgroud) {
+	// this.tab_res_backgroud = tab_res_backgroud;
+	// }
 
 	public int getTabViewID() {
 		return tab_view_ID;
@@ -91,19 +91,19 @@ public class TabInfo {
 	}
 
 	public void setTabType(String tab_type) {
-		if(tab_type.equals("tab_subcate_below_navi")){
+		if (tab_type.equals("tab_subcate_below_navi")) {
 			this.tab_type = TabInfoTypeConstants.TAB_SUBCATE_BELOW_NAVI;
-		}else if(tab_type.equals("tab_subcate_on_navi")){
+		} else if (tab_type.equals("tab_subcate_on_navi")) {
 			this.tab_type = TabInfoTypeConstants.TAB_SUBCATE_ON_NAVI;
-		}else if(tab_type.equals("tab_subcate_none")){
+		} else if (tab_type.equals("tab_subcate_none")) {
 			this.tab_type = TabInfoTypeConstants.TAB_SUBCATE_NONE;
-		}else if(tab_type.equals("tab_more")){
+		} else if (tab_type.equals("tab_more")) {
 			this.tab_type = TabInfoTypeConstants.TAB_MORE;
-		}else if(tab_type.equals("tab_myinfo")){
+		} else if (tab_type.equals("tab_myinfo")) {
 			this.tab_type = TabInfoTypeConstants.TAB_MYINFO;
 		}
 	}
-	
+
 	public void setTabType(int tab_type) {
 		this.tab_type = tab_type;
 	}
@@ -117,35 +117,35 @@ public class TabInfo {
 	}
 
 	public ArrayList<SubTabInfo> getSubTabInfos() {
-		if(subTabInfos == null){
+		if (subTabInfos == null) {
 			subTabInfos = new ArrayList<SubTabInfo>(1);
 		}
 		return subTabInfos;
 	}
 
 	public void setSubTabInfos(ArrayList<SubTabInfo> subTabInfos) {
-		if(subTabInfos == null){
+		if (subTabInfos == null) {
 			return;
 		}
 		this.subTabInfos = subTabInfos;
 	}
 
 	@SuppressWarnings("unchecked")
-	public static TabInfo getTabInfo(HashMap<String, Object> root,int index) {
-		if(root == null){
+	public static TabInfo getTabInfo(HashMap<String, Object> root, int index) {
+		if (root == null) {
 			return null;
 		}
 		TabInfo tabInfo = new TabInfo();
-		tabInfo.setTabName((String)root.get("tab_name"));
-		tabInfo.setTabType((String)root.get("tab_type"));
-		tabInfo.setNaviName((String)root.get("navi_name"));
+		tabInfo.setTabName((String) root.get("tab_name"));
+		tabInfo.setTabType((String) root.get("tab_type"));
+		tabInfo.setNaviName((String) root.get("navi_name"));
 		tabInfo.setIndex(index);
 		switch (tabInfo.getTabType()) {
 		case TabInfoTypeConstants.TAB_MORE:
-			tabInfo.setSubTabInfos(SubTabInfo.getSubTabInfos((ArrayList<Object>)root.get("more_list")));
+			tabInfo.setSubTabInfos(SubTabInfo.getSubTabInfos((ArrayList<Object>) root.get("more_list")));
 			break;
 		default:
-			tabInfo.setSubTabInfos(SubTabInfo.getSubTabInfos((ArrayList<Object>)root.get("subcategory")));
+			tabInfo.setSubTabInfos(SubTabInfo.getSubTabInfos((ArrayList<Object>) root.get("subcategory")));
 			break;
 		}
 		return tabInfo;

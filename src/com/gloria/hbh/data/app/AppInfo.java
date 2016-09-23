@@ -9,15 +9,15 @@ import com.gloria.hbh.util.PreferencesUtils;
 import com.google.gson.JsonObject;
 
 /**
- * app»ù±¾ĞÅÏ¢
- * @author gejian
- * 2013-1-23
+ * appåŸºæœ¬ä¿¡æ¯
+ * 
+ * @author gejian 2013-1-23
  */
 public class AppInfo {
 
-	// Ó¦ÓÃ³ÌĞòµÄ³£Á¿
-	String version_check_url = "";  //°æ±¾¼ì²âurlµØÖ·
-	ImageInfo launch_image = null; // Æô¶¯Í¼Æ¬£¿£¿£¿£¨»òÊı×é£©
+	// åº”ç”¨ç¨‹åºçš„å¸¸é‡
+	String version_check_url = ""; // ç‰ˆæœ¬æ£€æµ‹urlåœ°å€
+	ImageInfo launch_image = null; // å¯åŠ¨å›¾ç‰‡ï¼Ÿï¼Ÿï¼Ÿï¼ˆæˆ–æ•°ç»„ï¼‰
 
 	AppInfo() {
 		launch_image = new ImageInfo();
@@ -28,7 +28,7 @@ public class AppInfo {
 	}
 
 	public void setVersionCheckUrl(String version_check_url) {
-		if(version_check_url == null){
+		if (version_check_url == null) {
 			return;
 		}
 		this.version_check_url = version_check_url;
@@ -43,20 +43,20 @@ public class AppInfo {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static AppInfo getAppInfo(HashMap<String, Object> root){
-		if(root == null){
+	public static AppInfo getAppInfo(HashMap<String, Object> root) {
+		if (root == null) {
 			return null;
 		}
-    	AppInfo appInfo = new AppInfo();
-    	appInfo.setVersionCheckUrl((String)root.get("version_check_url"));
-    	//ÅĞ¶Ï±¾µØÊÇ·ñÓĞÅäÖÃÎÄ¼ş£¬ÓĞÔò¶ÁÈ¡±¾µØ
+		AppInfo appInfo = new AppInfo();
+		appInfo.setVersionCheckUrl((String) root.get("version_check_url"));
+		// åˆ¤æ–­æœ¬åœ°æ˜¯å¦æœ‰é…ç½®æ–‡ä»¶ï¼Œæœ‰åˆ™è¯»å–æœ¬åœ°
 		String jsonString_startPic = "";
-		jsonString_startPic =  PreferencesUtils.getStringPreferences(
-	  			BaseConstants.Settings_NAME, BaseConstants.SharedPreferences_StartPic, null);
-		if(jsonString_startPic == null || jsonString_startPic.equals("")){
-			appInfo.setLaunchImage(ImageInfo.getImageInfo((HashMap<String, Object>)root.get("launch_image")));
-		}else{
-			JsonObject jsonObject= JsonMethed.getJsonObject(JsonMethed.getJsonElement(jsonString_startPic));
+		jsonString_startPic = PreferencesUtils.getStringPreferences(BaseConstants.Settings_NAME,
+				BaseConstants.SharedPreferences_StartPic, null);
+		if (jsonString_startPic == null || jsonString_startPic.equals("")) {
+			appInfo.setLaunchImage(ImageInfo.getImageInfo((HashMap<String, Object>) root.get("launch_image")));
+		} else {
+			JsonObject jsonObject = JsonMethed.getJsonObject(JsonMethed.getJsonElement(jsonString_startPic));
 			appInfo.setLaunchImage(ImageInfo.getImageInfoFromJson(jsonObject));
 		}
 		return appInfo;

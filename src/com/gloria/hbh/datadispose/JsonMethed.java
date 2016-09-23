@@ -7,84 +7,75 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 
 /**
-* Œƒ º˛ √˚ : JsonMethed
-* ¥¥ Ω® »À£∫ gejian
-* »’     ∆⁄£∫2012-8-7
-* –ﬁ ∏ƒ »À£∫gejian
-* »’    ∆⁄£∫2012-8-7
-* √Ë     ˆ£∫Json ˝æ›¥¶¿Ì¿‡
-*/
+ * Êñá ‰ª∂ Âêç : JsonMethed Âàõ Âª∫ ‰∫∫Ôºö gejian Êó• ÊúüÔºö2012-8-7 ‰øÆ Êîπ ‰∫∫Ôºögejian Êó• ÊúüÔºö2012-8-7 Êèè
+ * Ëø∞ÔºöJsonÊï∞ÊçÆÂ§ÑÁêÜÁ±ª
+ */
 public class JsonMethed {
-	
-	public static JsonElement getJsonElement(String jsonString)
-	{
-		try{
+
+	public static JsonElement getJsonElement(String jsonString) {
+		try {
 			JsonElement jsonElement = new JsonParser().parse(jsonString);
-			if(jsonElement != null && !jsonElement.isJsonNull()){
+			if (jsonElement != null && !jsonElement.isJsonNull()) {
 				return jsonElement;
 			}
-		}catch (JsonParseException e) {
+		} catch (JsonParseException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	public static JsonArray getJsonArray(JsonElement jsonElement)
-	{
-		if(jsonElement != null &&!jsonElement.isJsonNull()&&jsonElement.isJsonArray()&& jsonElement.getAsJsonArray().size()!=0){
+
+	public static JsonArray getJsonArray(JsonElement jsonElement) {
+		if (jsonElement != null && !jsonElement.isJsonNull() && jsonElement.isJsonArray()
+				&& jsonElement.getAsJsonArray().size() != 0) {
 			return jsonElement.getAsJsonArray();
 		}
 		return null;
 	}
-	
-	public static JsonObject getJsonObject(JsonElement jsonElement)
-	{
-		if(jsonElement != null && !jsonElement.isJsonNull()&&jsonElement.isJsonObject()){
+
+	public static JsonObject getJsonObject(JsonElement jsonElement) {
+		if (jsonElement != null && !jsonElement.isJsonNull() && jsonElement.isJsonObject()) {
 			return jsonElement.getAsJsonObject();
 		}
 		return null;
 	}
-	
-	public static String getJsonString(JsonElement jsonElement)
-	{
-		if(jsonElement != null && !jsonElement.isJsonNull()&&jsonElement.isJsonPrimitive()){
+
+	public static String getJsonString(JsonElement jsonElement) {
+		if (jsonElement != null && !jsonElement.isJsonNull() && jsonElement.isJsonPrimitive()) {
 			return jsonElement.getAsString();
 		}
-		return ""; //ƒ¨»œ""
+		return ""; // ÈªòËÆ§""
 	}
-	
+
 	@SuppressWarnings("null")
-	public static Integer getJsonInt(JsonElement jsonElement)
-	{
-		if(jsonElement != null && !jsonElement.isJsonNull()&&jsonElement.isJsonPrimitive()){
+	public static Integer getJsonInt(JsonElement jsonElement) {
+		if (jsonElement != null && !jsonElement.isJsonNull() && jsonElement.isJsonPrimitive()) {
 			boolean isInt = true;
-			try{
+			try {
 				int num = jsonElement.getAsInt();
 				return num;
-			}catch (JsonParseException e) {
+			} catch (JsonParseException e) {
 				isInt = false;
-				
-			}catch (Exception e) {
+
+			} catch (Exception e) {
 			}
-			if(!isInt){
-				try{
+			if (!isInt) {
+				try {
 					String str = jsonElement.getAsString();
-					if(str != null || !str.equals("null") || !str.equals("") ){
+					if (str != null || !str.equals("null") || !str.equals("")) {
 						return Integer.valueOf(str);
 					}
-				}catch (JsonParseException e) {
-				}catch (Exception e) {
+				} catch (JsonParseException e) {
+				} catch (Exception e) {
 				}
 			}
 		}
-		return 0; //ƒ¨»œ==0
+		return 0; // ÈªòËÆ§==0
 	}
-	
-	public static Boolean getJsonBoolean(JsonElement jsonElement)
-	{
-		if(jsonElement != null && !jsonElement.isJsonNull()&&jsonElement.isJsonPrimitive()){
+
+	public static Boolean getJsonBoolean(JsonElement jsonElement) {
+		if (jsonElement != null && !jsonElement.isJsonNull() && jsonElement.isJsonPrimitive()) {
 			return jsonElement.getAsBoolean();
 		}
-		return false;  //ƒ¨»œfalse
+		return false; // ÈªòËÆ§false
 	}
 }

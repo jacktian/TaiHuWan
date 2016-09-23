@@ -5,50 +5,40 @@ import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.protocol.BasicHttpContext;
 
 /**
-* ÎÄ ¼ş Ãû : ShareCookie
-* ´´ ½¨ ÈË£º gejian
-* ÈÕ     ÆÚ£º2012-8-7
-* ĞŞ ¸Ä ÈË£ºgejian
-* ÈÕ    ÆÚ£º2012-8-7
-* Ãè    Êö£ºCookie´¦ÀíÀà
-*/
-public class ShareCookie
-{
+ * æ–‡ ä»¶ å : ShareCookie åˆ› å»º äººï¼š gejian æ—¥ æœŸï¼š2012-8-7 ä¿® æ”¹ äººï¼šgejian æ—¥ æœŸï¼š2012-8-7 æ
+ * è¿°ï¼šCookieå¤„ç†ç±»
+ */
+public class ShareCookie {
 	private static CookieStore _cookie = null;
 	private static BasicHttpContext _httpContext;
-	
-//	public static CookieStore addCookie(Cookie cookie)
-//	{
-//		
-//		_cookie.addCookie(cookie);
-//		return _cookie;
-//	}
-	
-	public static CookieStore getCookie(){
+
+	// public static CookieStore addCookie(Cookie cookie)
+	// {
+	//
+	// _cookie.addCookie(cookie);
+	// return _cookie;
+	// }
+
+	public static CookieStore getCookie() {
 		return _cookie;
 	}
-	
-	public static void setCookie(CookieStore cookieStore)
-	{
+
+	public static void setCookie(CookieStore cookieStore) {
 		_cookie = cookieStore;
 	}
-	
-	
-	public static BasicHttpContext getHttpContext()
-	{
-		if(_httpContext==null)
-		{
+
+	public static BasicHttpContext getHttpContext() {
+		if (_httpContext == null) {
 			_httpContext = new BasicHttpContext();
 			_httpContext.setAttribute(ClientContext.COOKIE_STORE, _cookie);
-		}else{
+		} else {
 			_httpContext.removeAttribute(ClientContext.COOKIE_STORE);
 			_httpContext.setAttribute(ClientContext.COOKIE_STORE, _cookie);
 		}
 		return _httpContext;
 	}
-	
-	public static void clearCookie()
-	{
+
+	public static void clearCookie() {
 		_cookie = null;
 	}
 }

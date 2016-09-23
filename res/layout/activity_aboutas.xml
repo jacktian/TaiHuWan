@@ -4,19 +4,22 @@
     android:layout_height="fill_parent"
     android:background="@drawable/bg_main"
     android:orientation="vertical" >
+
     <include
         android:id="@+id/titlebar"
-        android:layout_alignParentTop="true"
         layout="@layout/titlebar" />
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_margin="10dip"
         android:scrollbars="none" >
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
+
             <TextView
                 android:id="@+id/item_version"
                 android:layout_width="fill_parent"
@@ -27,6 +30,7 @@
                 android:text="当前版本:1.0"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
+
             <TextView
                 android:id="@+id/item_info"
                 android:layout_width="fill_parent"
@@ -39,4 +43,5 @@
                 android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

@@ -1,9 +1,9 @@
 package com.gloria.hbh.camera;
 
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.SpannableString;
@@ -16,10 +16,10 @@ public class MessageBox {
 	
 	/**
 	 * CODE=0001
-	 * ÌáÊ¾¿ò </br>
-	 * title£ºÌáÊ¾¿ò±êÌâ </br>
-	 * msg £ºÌáÊ¾ĞÅÏ¢ </br>
-	 * conntext £ºActivity </br>
+	 * æç¤ºæ¡† </br>
+	 * titleï¼šæç¤ºæ¡†æ ‡é¢˜ </br>
+	 * msg ï¼šæç¤ºä¿¡æ¯ </br>
+	 * conntext ï¼šActivity </br>
 	 * */
 	public static Dialog CreateAlertDialog1(String title, String msg,Context context )
 	{
@@ -38,10 +38,10 @@ public class MessageBox {
 	
 	/**
 	 * CODE=0002
-	 * ÌáÊ¾¿ò </br>
-	 * title£ºÌáÊ¾¿ò±êÌâ </br>
-	 * msg £ºÌáÊ¾ĞÅÏ¢ </br>
-	 * conntext £ºActivity </br>
+	 * æç¤ºæ¡† </br>
+	 * titleï¼šæç¤ºæ¡†æ ‡é¢˜ </br>
+	 * msg ï¼šæç¤ºä¿¡æ¯ </br>
+	 * conntext ï¼šActivity </br>
 	 * */
 	public static AlertDialog.Builder createAlertDialogBuilder(String title,String leftBuff, String msg,Context context )
 	{
@@ -62,11 +62,11 @@ public class MessageBox {
 	
 	/**
 	 * CODE=0003
-	 * ÌáÊ¾¿ò </br>
-	 * title£ºÌáÊ¾¿ò±êÌâ </br>
-	 * msg £ºÌáÊ¾ĞÅÏ¢ </br>
-	 * btnname : Button°´Å¥</br>
-	 * conntext £ºActivity </br>
+	 * æç¤ºæ¡† </br>
+	 * titleï¼šæç¤ºæ¡†æ ‡é¢˜ </br>
+	 * msg ï¼šæç¤ºä¿¡æ¯ </br>
+	 * btnname : ButtonæŒ‰é’®</br>
+	 * conntext ï¼šActivity </br>
 	 * */
 	public static Dialog createAlertDialog(String title, String msg, String btnname,Context context )
 	{
@@ -84,10 +84,10 @@ public class MessageBox {
 	}
 	/**
 	 * CODE=0004
-	 * ÌáÊ¾¿ò </br>
-	 * title£ºÌáÊ¾¿ò±êÌâ </br>
-	 * msg £ºÌáÊ¾ĞÅÏ¢ </br>
-	 * conntext £ºActivity </br>
+	 * æç¤ºæ¡† </br>
+	 * titleï¼šæç¤ºæ¡†æ ‡é¢˜ </br>
+	 * msg ï¼šæç¤ºä¿¡æ¯ </br>
+	 * conntext ï¼šActivity </br>
 	 * */
 	public static AlertDialog.Builder createAlertDialogBuilder(String title,String leftBuff,Context context )
 	{
@@ -106,10 +106,10 @@ public class MessageBox {
 	
 	
 	/**
-	 * ÌáÊ¾¿ò</br>
-	 * title £ºÌáÊ¾¿ò±êÌâ</br>
-	 * msg : ÌáÊ¾ĞÅÏ¢</br>
-	 * conntext £ºActivity</br>
+	 * æç¤ºæ¡†</br>
+	 * title ï¼šæç¤ºæ¡†æ ‡é¢˜</br>
+	 * msg : æç¤ºä¿¡æ¯</br>
+	 * conntext ï¼šActivity</br>
 	 * */
 	public static void CreateAlertDialog(String title, String msg,Context context )
 	{
@@ -117,7 +117,7 @@ public class MessageBox {
 		builder.setMessage(msg)
 		.setTitle(title)
 		       .setCancelable(false)
-		       .setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+		       .setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
 		        	   dialog.dismiss();
 		           }
@@ -135,7 +135,7 @@ public class MessageBox {
 		builder.setMessage(ss)
 		.setTitle(title)
 		       .setCancelable(false)
-		       .setPositiveButton("È·¶¨", new DialogInterface.OnClickListener() {
+		       .setPositiveButton("ç¡®å®š", new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
 		        	   dialog.dismiss();
 		           }
@@ -145,9 +145,9 @@ public class MessageBox {
 	}
 	//---------------------------------------------------------------------
 	/**
-	 * Ô²ĞÎ¼ÓÔØ½ø¶ÈÌáÊ¾¿ò </br>
+	 * åœ†å½¢åŠ è½½è¿›åº¦æç¤ºæ¡† </br>
 	 * Cancelable:canceable</br>
-	 * Msg:ÌáÊ¾ÄÚÈİ</br>
+	 * Msg:æç¤ºå†…å®¹</br>
 	 * Context context</br>
 	 * */
 	public static ProgressDialog createProgressDialog(boolean canceable,String msg,Context context)
@@ -163,10 +163,10 @@ public class MessageBox {
 	}
 	
 	/**
-	 * Ô²ĞÎ¼ÓÔØ½ø¶ÈÌáÊ¾¿ò </br>
+	 * åœ†å½¢åŠ è½½è¿›åº¦æç¤ºæ¡† </br>
 	 * Cancelable:canceable</br>
-	 * Title:±êÌâ </br>
-	 * Msg:ÌáÊ¾ÄÚÈİ</br>
+	 * Title:æ ‡é¢˜ </br>
+	 * Msg:æç¤ºå†…å®¹</br>
 	 * Context context</br>
 	 * */
 	public static ProgressDialog createProgressDialog(boolean canceable,String title,String msg,Context context){
@@ -183,16 +183,16 @@ public class MessageBox {
 	//-----------------------------------------------------------------------------------
 	
 	/**
-	 * ÌáÊ¾¿òAlertDialog.Builder</br>
-	 * title:±êÌâ</br>
-	 * msg:ĞÅÏ¢ÄÚÈİ</br>
-	 * leftButton£º×ó±ß°´Å¥Ãû×Ö</br>
-	 * rightButton£ºÓÒ±ß°´Å¥Ãû×Ö</br>
+	 * æç¤ºæ¡†AlertDialog.Builder</br>
+	 * title:æ ‡é¢˜</br>
+	 * msg:ä¿¡æ¯å†…å®¹</br>
+	 * leftButtonï¼šå·¦è¾¹æŒ‰é’®åå­—</br>
+	 * rightButtonï¼šå³è¾¹æŒ‰é’®åå­—</br>
 	 * Context context </br>
-	 * ·¶Àı
-	 * MessageBox.CreateAlertDialog("ÏµÍ³ÌáÊ¾", "Õâ¸öÊÇ¸öÌáÊ¾¿ò",this).show();</br>
+	 * èŒƒä¾‹
+	 * MessageBox.CreateAlertDialog("ç³»ç»Ÿæç¤º", "è¿™ä¸ªæ˜¯ä¸ªæç¤ºæ¡†",this).show();</br>
 	
-	 * ×¢ÒâÊÂÏî:ÕâAlertDialogÌáÊ¾¿òĞèÒª¶îÍâÔö¼Ó°´Å¥ºÍ°´Å¥´¦ÀíÊÂ¼ş/br>
+	 * æ³¨æ„äº‹é¡¹:è¿™AlertDialogæç¤ºæ¡†éœ€è¦é¢å¤–å¢åŠ æŒ‰é’®å’ŒæŒ‰é’®å¤„ç†äº‹ä»¶/br>
 	 * */
 	public static AlertDialog CreateAlertDialog2(String title,String msg,Context context){
 		AlertDialog.Builder dialog=  new AlertDialog.Builder(context);
@@ -207,15 +207,15 @@ public class MessageBox {
 	
 	
 	/**
-	 * ÌáÊ¾¿òAlertDialog.Builder</br>
-	 * title:±êÌâ</br>
-	 * msg:ĞÅÏ¢ÄÚÈİ</br>
-	 * leftButton£º×ó±ß°´Å¥Ãû×Ö</br>
-	 * rightButton£ºÓÒ±ß°´Å¥Ãû×Ö</br>
+	 * æç¤ºæ¡†AlertDialog.Builder</br>
+	 * title:æ ‡é¢˜</br>
+	 * msg:ä¿¡æ¯å†…å®¹</br>
+	 * leftButtonï¼šå·¦è¾¹æŒ‰é’®åå­—</br>
+	 * rightButtonï¼šå³è¾¹æŒ‰é’®åå­—</br>
 	 * Context context </br>
-	 * ·¶Àı
-	 * MessageBox.CreateAlertDialog("ÏµÍ³ÌáÊ¾", "Õâ¸öÊÇ¸öÌáÊ¾¿ò", "È·¶¨","·µ»Ø", this).show();</br>
-	 * ×¢ÒâÊÂÏî:±¾·½·¨°´¼ü´¦Àí²¢Îª´¦Àí</br>
+	 * èŒƒä¾‹
+	 * MessageBox.CreateAlertDialog("ç³»ç»Ÿæç¤º", "è¿™ä¸ªæ˜¯ä¸ªæç¤ºæ¡†", "ç¡®å®š","è¿”å›", this).show();</br>
+	 * æ³¨æ„äº‹é¡¹:æœ¬æ–¹æ³•æŒ‰é”®å¤„ç†å¹¶ä¸ºå¤„ç†</br>
 	 * */
 	public static AlertDialog CreateAlertDialog2(String title,String msg,String leftButton,String rightButton,Context context){
 		AlertDialog.Builder dialog=  new AlertDialog.Builder(context);
@@ -251,11 +251,11 @@ public class MessageBox {
 	//----------------------------------------------------------------------------------
 	/**
 	 * 
-	 * ChoiceClickÑ¡Ôñ¿ò,¶à¸öChickµÄListÁĞ±í
-	 * ±¾·½·¨ĞèÒªÔÚÍâ²¿Ìí¼Ó°´Å¥×é¼şºÍ°ó¶¨°´Å¥´¥·¢ÊÂ¼ş<br>
-	 * Title£º±êÌâ<br>
-	 * items £ºClickµÄ±êÇ©ÄÚÈİ<br>
-	 * states£ºClickµÄ×´Ì¬£¬×´Ì¬Îª ture»òÕßfalse<br>
+	 * ChoiceClické€‰æ‹©æ¡†,å¤šä¸ªChickçš„Liståˆ—è¡¨
+	 * æœ¬æ–¹æ³•éœ€è¦åœ¨å¤–éƒ¨æ·»åŠ æŒ‰é’®ç»„ä»¶å’Œç»‘å®šæŒ‰é’®è§¦å‘äº‹ä»¶<br>
+	 * Titleï¼šæ ‡é¢˜<br>
+	 * items ï¼šClickçš„æ ‡ç­¾å†…å®¹<br>
+	 * statesï¼šClickçš„çŠ¶æ€ï¼ŒçŠ¶æ€ä¸º tureæˆ–è€…false<br>
 	 * 
 	 *  
 	 * */
@@ -293,16 +293,16 @@ public class MessageBox {
 	
 	//==================================================================================
 	/**
-	 * ToastÀàĞÍÌáÊ¾¿ò
+	 * Toastç±»å‹æç¤ºæ¡†
 	 * */
 	public static Toast CreateToast(Context context, String msg)
 	{
 		Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
 		return toast;
 	}
-//	ToastÖ÷ÒªÓÃÀ´ÌáÊ¾ÓÃ»§£¬ÒÔÊµÏÖÓÑºÃµÄÓÃ»§ÌåÑé£¬ÕâÀï¸ø³öÁ½¸öToastµÄÀı×Ó£º
+//	Toastä¸»è¦ç”¨æ¥æç¤ºç”¨æˆ·ï¼Œä»¥å®ç°å‹å¥½çš„ç”¨æˆ·ä½“éªŒï¼Œè¿™é‡Œç»™å‡ºä¸¤ä¸ªToastçš„ä¾‹å­ï¼š
 //
-//	1¡¢Ê¹ÓÃÍ¼Æ¬
+//	1ã€ä½¿ç”¨å›¾ç‰‡
 //	Toast toast = new Toast(this); 
 //
 //	ImageView view = new ImageView(this); 
@@ -314,7 +314,7 @@ public class MessageBox {
 //	toast.show(); 
 //
 //
-//	2¡¢Ê¹ÓÃÎÄ×Ö¶Ô»°¿ò
+//	2ã€ä½¿ç”¨æ–‡å­—å¯¹è¯æ¡†
 //	Toast toast = Toast.makeText(this, "lalalal", Toast.LENGTH_LONG); 
 //
 //	View textView = toast.getView(); 

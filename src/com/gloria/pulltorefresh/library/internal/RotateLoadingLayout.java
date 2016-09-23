@@ -15,6 +15,10 @@
  *******************************************************************************/
 package com.gloria.pulltorefresh.library.internal;
 
+import com.gloria.hbh.main.R;
+import com.gloria.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.gloria.pulltorefresh.library.PullToRefreshBase.Orientation;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Matrix;
@@ -22,10 +26,6 @@ import android.graphics.drawable.Drawable;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView.ScaleType;
-
-import com.gloria.hbh.main.R;
-import com.gloria.pulltorefresh.library.PullToRefreshBase.Mode;
-import com.gloria.pulltorefresh.library.PullToRefreshBase.Orientation;
 
 public class RotateLoadingLayout extends LoadingLayout {
 

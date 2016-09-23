@@ -12,16 +12,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.os.Message;
-import android.text.Html;
-import android.text.Html.ImageGetter;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.gloria.hbh.application.BaseApplication;
 import com.gloria.hbh.constant.BaseConfig;
 import com.gloria.hbh.constant.BaseConstants;
@@ -32,239 +22,248 @@ import com.gloria.hbh.util.ImageUtils;
 import com.gloria.hbh.util.ScreenUtils;
 import com.gloria.hbh.util.SystemMemoryUtil;
 
-public class ImageDispose{
-	public static  ThreadPoolExecutor threadPool = new ThreadPoolExecutor(2, 10, 6,TimeUnit.SECONDS,new LinkedBlockingQueue<Runnable>()); 	
-	public static HashMap<String, Object> requestingImgUrl = new HashMap<String, Object>();  //±£´æÇëÇó¹ýµÄµØÖ·
-	
-	public static boolean  isImgExisted(String urlString){
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Message;
+import android.text.Html;
+import android.text.Html.ImageGetter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class ImageDispose {
+	public static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(2, 10, 6, TimeUnit.SECONDS,
+			new LinkedBlockingQueue<Runnable>());
+	public static HashMap<String, Object> requestingImgUrl = new HashMap<String, Object>(); // ä¿å­˜è¯·æ±‚è¿‡çš„åœ°å€
+
+	public static boolean isImgExisted(String urlString) {
 		boolean isExist = false;
-		String fileDir = ""; 		// Â·¾¶Ãû
-		String fileName="";    	//ÎÄ¼þÃû
-		final String filePath;		//ÎÄ¼þ¾ø¶ÔÂ·¾¶
+		String fileDir = ""; // è·¯å¾„å
+		String fileName = ""; // æ–‡ä»¶å
+		final String filePath; // æ–‡ä»¶ç»å¯¹è·¯å¾„
 		fileName = urlString.substring(urlString.lastIndexOf('/') + 1);
-		
-		fileDir = BaseConstants.CACHE_IMG_PATH;		
-		filePath=fileDir+fileName;
-		if(FileUtils.isHasSDCard()){
+
+		fileDir = BaseConstants.CACHE_IMG_PATH;
+		filePath = fileDir + fileName;
+		if (FileUtils.isHasSDCard()) {
 			File file = new File(filePath);
-			if (file.exists()){ //ÎÄ¼þ´æÔÚ
+			if (file.exists()) { // æ–‡ä»¶å­˜åœ¨
 				isExist = true;
 			}
 		}
 		return isExist;
 	}
-	
-	public static boolean  saveImgToPhoto(String urlString){
+
+	public static boolean saveImgToPhoto(String urlString) {
 		boolean isCopyed = false;
-		String fileName="";    	//ÎÄ¼þÃû
-		String fileDir = ""; 		// Ô´Â·¾¶Ãû
-		String filePath;		//Ô´ÎÄ¼þ¾ø¶ÔÂ·¾¶
-		
-		String newfileDir = ""; 		// Ä¿µÄÂ·¾¶Ãû
-		String newfilePath;		//Ä¿µÄÎÄ¼þ¾ø¶ÔÂ·¾¶
+		String fileName = ""; // æ–‡ä»¶å
+		String fileDir = ""; // æºè·¯å¾„å
+		String filePath; // æºæ–‡ä»¶ç»å¯¹è·¯å¾„
+
+		String newfileDir = ""; // ç›®çš„è·¯å¾„å
+		String newfilePath; // ç›®çš„æ–‡ä»¶ç»å¯¹è·¯å¾„
 		fileName = urlString.substring(urlString.lastIndexOf('/') + 1);
-		
-		fileDir = BaseConstants.CACHE_IMG_PATH;	
-		if(FileUtils.isHasSDCard()){
-			filePath=fileDir+fileName;
+
+		fileDir = BaseConstants.CACHE_IMG_PATH;
+		if (FileUtils.isHasSDCard()) {
+			filePath = fileDir + fileName;
 			File file = new File(filePath);
-			if (file.exists())							//ÎÄ¼þ´æÔÚ
+			if (file.exists()) // æ–‡ä»¶å­˜åœ¨
 			{
 				newfileDir = BaseConstants.CACHE_SAVE_IMG_PATH;
-				newfilePath= newfileDir+fileName;
+				newfilePath = newfileDir + fileName;
 				File newfile = new File(newfilePath);
-				if(!newfile.getParentFile().exists()){
+				if (!newfile.getParentFile().exists()) {
 					newfile.getParentFile().mkdirs();
 				}
-				isCopyed = FileUtils.copyfile(file, newfile,true);
+				isCopyed = FileUtils.copyfile(file, newfile, true);
 			}
 		}
 		return isCopyed;
 	}
-		
-	public static Drawable getTextImg(final String urlString, final TextView textView, final String contentString){
-		String fileDir = ""; 		// Â·¾¶Ãû
-		String fileName_old ="";    	//ÎÄ¼þÃû
-		String fileName_new ="";    	//ÎÄ¼þÃû
-		String filePath;		//ÎÄ¼þ¾ø¶ÔÂ·¾¶
-		final String filePath_;		//ÎÄ¼þ¾ø¶ÔÂ·¾¶
+
+	public static Drawable getTextImg(final String urlString, final TextView textView, final String contentString) {
+		String fileDir = ""; // è·¯å¾„å
+		String fileName_old = ""; // æ–‡ä»¶å
+		String fileName_new = ""; // æ–‡ä»¶å
+		String filePath; // æ–‡ä»¶ç»å¯¹è·¯å¾„
+		final String filePath_; // æ–‡ä»¶ç»å¯¹è·¯å¾„
 		Drawable drawable;
 		String newurlString = "";
-		
+
 		fileName_old = urlString.substring(urlString.lastIndexOf('/') + 1);
 		newurlString = BaseConfig.requestImageUrl(BaseConstants.DEFAULT_FACE_WIDTH, BaseConstants.DEFAULT_FACE_WIDTH,
-				urlString,ImgScaleTypeConstants.IMGTYPE_NORMAL);
-		fileName_new+=newurlString.replaceAll("[/|&|?|:|%]+", "_");
-			
-		drawable = BaseApplication.getInstance().getApplicationContext().getResources().getDrawable(R.drawable.defaulticon);
-			
-		// ±íÇé´¦Àí·½·¨
-		if (urlString.toLowerCase().contains(BaseConstants.FACE_IMG_CONTAIN_PATH)){
-			String rexString = "/\\w*/\\w*\\.GIF|/\\w*/\\w*\\.gif"; // ÕýÔòÆ¥ÅäÃû
+				urlString, ImgScaleTypeConstants.IMGTYPE_NORMAL);
+		fileName_new += newurlString.replaceAll("[/|&|?|:|%]+", "_");
+
+		drawable = BaseApplication.getInstance().getApplicationContext().getResources()
+				.getDrawable(R.drawable.defaulticon);
+
+		// è¡¨æƒ…å¤„ç†æ–¹æ³•
+		if (urlString.toLowerCase().contains(BaseConstants.FACE_IMG_CONTAIN_PATH)) {
+			String rexString = "/\\w*/\\w*\\.GIF|/\\w*/\\w*\\.gif"; // æ­£åˆ™åŒ¹é…å
 			Pattern pattern = Pattern.compile(rexString);
 			Matcher matcher = pattern.matcher(urlString);
-			if (matcher.find()){
-				fileDir = matcher.group(); // »ñµÃÂ·¾¶Ãû,fileDir´Ë´¦×öÁÙÊ±±äÁ¿
+			if (matcher.find()) {
+				fileDir = matcher.group(); // èŽ·å¾—è·¯å¾„å,fileDiræ­¤å¤„åšä¸´æ—¶å˜é‡
 			}
-			if(fileDir.startsWith("/")){
-				fileDir = fileDir.substring(1,fileDir.length());
+			if (fileDir.startsWith("/")) {
+				fileDir = fileDir.substring(1, fileDir.length());
 			}
-			filePath= BaseConstants.CACHE_FACE_IMG_PATH + fileDir;
+			filePath = BaseConstants.CACHE_FACE_IMG_PATH + fileDir;
 			fileDir = filePath.replace(fileName_old, "");
 			filePath = filePath.replace(fileName_old, fileName_new);
 			filePath_ = filePath;
-			if(FileUtils.isHasSDCard()){
+			if (FileUtils.isHasSDCard()) {
 				File file = new File(filePath_);
-				//ÎÄ¼þ´æÔÚ
-				if (file.exists()&&FileUtils.isImage(filePath_)){
-					if(SystemMemoryUtil.getAvailMemory(BaseApplication.getInstance().getApplicationContext()) > file.length()){
-//						drawable = Drawable.createFromPath(filePath);
+				// æ–‡ä»¶å­˜åœ¨
+				if (file.exists() && FileUtils.isImage(filePath_)) {
+					if (SystemMemoryUtil.getAvailMemory(BaseApplication.getInstance().getApplicationContext()) > file
+							.length()) {
+						// drawable = Drawable.createFromPath(filePath);
 						drawable = ImageUtils.getDrawableByPath(filePath_);
-						if(drawable != null){
-							 drawable.setBounds(0, 0, (int) (ScreenUtils.getInstance().getScaledDensity()*drawable.getIntrinsicWidth()), (int) (ScreenUtils.getInstance().getScaledDensity()*drawable.getIntrinsicHeight())); 
+						if (drawable != null) {
+							drawable.setBounds(0, 0,
+									(int) (ScreenUtils.getInstance().getScaledDensity() * drawable.getIntrinsicWidth()),
+									(int) (ScreenUtils.getInstance().getScaledDensity()
+											* drawable.getIntrinsicHeight()));
 						}
 					}
 					return drawable;
-				}	
-				
-				final Handler handler = new Handler(){
-					public void handleMessage(Message message){
-						Boolean state = (Boolean) message.obj;
-							if(state && textView != null && contentString != null){
-								textView.setText(Html.fromHtml(contentString,new ImageGetter(){
-									public Drawable getDrawable(String source){
-										Drawable drawable = null;
-										drawable=ImageDispose.getTextImg(source, textView, contentString);
-										return drawable;
-									}
-								},null));
-							}				
-						}
-					};
-					
-					threadPool.execute(new Runnable(){						
-						public void run(){
-							Message message = handler.obtainMessage(0, false);
-							if(ImgGetSave(urlString,filePath_,BaseConstants.DEFAULT_FACE_WIDTH, 
-									BaseConstants.DEFAULT_FACE_WIDTH,ImgScaleTypeConstants.IMGTYPE_NORMAL)){										
-								message = handler.obtainMessage(0, true);
-							}
-							handler.sendMessage(message);		
-						}
-					});
 				}
+
+				final Handler handler = new Handler() {
+					public void handleMessage(Message message) {
+						Boolean state = (Boolean) message.obj;
+						if (state && textView != null && contentString != null) {
+							textView.setText(Html.fromHtml(contentString, new ImageGetter() {
+								public Drawable getDrawable(String source) {
+									Drawable drawable = null;
+									drawable = ImageDispose.getTextImg(source, textView, contentString);
+									return drawable;
+								}
+							}, null));
+						}
+					}
+				};
+
+				threadPool.execute(new Runnable() {
+					public void run() {
+						Message message = handler.obtainMessage(0, false);
+						if (ImgGetSave(urlString, filePath_, BaseConstants.DEFAULT_FACE_WIDTH,
+								BaseConstants.DEFAULT_FACE_WIDTH, ImgScaleTypeConstants.IMGTYPE_NORMAL)) {
+							message = handler.obtainMessage(0, true);
+						}
+						handler.sendMessage(message);
+					}
+				});
 			}
+		}
 		return drawable;
 	}
-	
-	public static Boolean ImgGetSave(String urlString, String pathString,int width,int height,int type){
+
+	public static Boolean ImgGetSave(String urlString, String pathString, int width, int height, int type) {
 		URL url_;
-		if(!requestingImgUrl.containsKey(urlString)){
+		if (!requestingImgUrl.containsKey(urlString)) {
 			requestingImgUrl.put(urlString, null);
-			try{
+			try {
 				String newurlString = BaseConfig.requestImageUrl(width, height, urlString, type);
 				url_ = new URL(newurlString);
 				HttpURLConnection conn_ = (HttpURLConnection) url_.openConnection();
-				conn_.setConnectTimeout(BaseConstants.TimeoutConnection); 
-				if (conn_.getResponseCode() == BaseConstants.StatusCode_OK){
-					InputStream inStream = conn_.getInputStream();	
-					if(FileUtils.isHasSDCard()){
-						//²»½øÏµÍ³Ïà²á
-						File file = new File(BaseConstants.NOMEDIA_PATH) ;  
-						if(!file.exists()){
+				conn_.setConnectTimeout(BaseConstants.TimeoutConnection);
+				if (conn_.getResponseCode() == BaseConstants.StatusCode_OK) {
+					InputStream inStream = conn_.getInputStream();
+					if (FileUtils.isHasSDCard()) {
+						// ä¸è¿›ç³»ç»Ÿç›¸å†Œ
+						File file = new File(BaseConstants.NOMEDIA_PATH);
+						if (!file.exists()) {
 							file.mkdirs();
 						}
-						File tmpfile=new File(pathString+".dat");
-						if(!tmpfile.getParentFile().exists()){
+						File tmpfile = new File(pathString + ".dat");
+						if (!tmpfile.getParentFile().exists()) {
 							tmpfile.getParentFile().mkdirs();
 						}
 						FileOutputStream outStream = new FileOutputStream(tmpfile);
 						byte[] buffer = new byte[1024];
 						int len = -1;
-						while ((len = inStream.read(buffer)) != -1){
+						while ((len = inStream.read(buffer)) != -1) {
 							outStream.write(buffer, 0, len);
 						}
 						outStream.flush();
 						outStream.close();
-						inStream.close();	
+						inStream.close();
 						tmpfile.renameTo(new File(pathString));
 						return true;
 					}
 				}
-			}
-			catch (Exception e) {
-				return  false;
+			} catch (Exception e) {
+				return false;
 			}
 		}
-  	  return false;
-    }
-	
-	public static void loadDrawable(final String urlString, final ImageView imageView,final int defaultDrawable,final int width,final int height,final int scale) 
-	{
+		return false;
+	}
+
+	public static void loadDrawable(final String urlString, final ImageView imageView, final int defaultDrawable,
+			final int width, final int height, final int scale) {
 		imageView.setImageResource(defaultDrawable);
-		String fileDir = ""; 		// Â·¾¶Ãû
-		String fileName="";    	//ÎÄ¼þÃû
-		final String filePath;		//ÎÄ¼þ¾ø¶ÔÂ·¾¶
-		String newurlString = "";  
-		
-		if(urlString.equals("")){   //Í¼Æ¬µØÖ·Îª¿ÕÊ±
+		String fileDir = ""; // è·¯å¾„å
+		String fileName = ""; // æ–‡ä»¶å
+		final String filePath; // æ–‡ä»¶ç»å¯¹è·¯å¾„
+		String newurlString = "";
+
+		if (urlString.equals("")) { // å›¾ç‰‡åœ°å€ä¸ºç©ºæ—¶
 			return;
-		}else{      //Í¼Æ¬µØÖ·²»Îª¿ÕÊ±
-			newurlString = BaseConfig.requestImageUrl(width,height,urlString,scale);
-			
-			fileName+=newurlString.replaceAll("[/|&|?|:|%]+", "_");
-			
-			fileDir = BaseConstants.CACHE_IMG_PATH;	
-			filePath = fileDir+fileName;
-			
-			if(FileUtils.isHasSDCard()){
+		} else { // å›¾ç‰‡åœ°å€ä¸ä¸ºç©ºæ—¶
+			newurlString = BaseConfig.requestImageUrl(width, height, urlString, scale);
+
+			fileName += newurlString.replaceAll("[/|&|?|:|%]+", "_");
+
+			fileDir = BaseConstants.CACHE_IMG_PATH;
+			filePath = fileDir + fileName;
+
+			if (FileUtils.isHasSDCard()) {
 				File file = new File(filePath);
-				//ÎÄ¼þ´æÔÚ
-				if (file.exists()){
-//					if(Metheds.isImage(filePath)){
-						//Èç¹ûÄÚ´æ´óÓÚÒªÏÔÊ¾µÄÍ¼Æ¬Ê±£¬²ÅÏÔÊ¾
-						if(SystemMemoryUtil.getAvailMemory(BaseApplication.getInstance().getApplicationContext()) > file.length()){
-							Bitmap bitmap=BitmapFactory.decodeFile(filePath);
-							if(bitmap!= null){
-								imageView.setImageBitmap(bitmap);
-							}
+				// æ–‡ä»¶å­˜åœ¨
+				if (file.exists()) {
+					// if(Metheds.isImage(filePath)){
+					// å¦‚æžœå†…å­˜å¤§äºŽè¦æ˜¾ç¤ºçš„å›¾ç‰‡æ—¶ï¼Œæ‰æ˜¾ç¤º
+					if (SystemMemoryUtil.getAvailMemory(BaseApplication.getInstance().getApplicationContext()) > file
+							.length()) {
+						Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+						if (bitmap != null) {
+							imageView.setImageBitmap(bitmap);
 						}
-//					}
+					}
+					// }
 					return;
 				}
-			
-				final Handler handler = new Handler()
-				{
-					public void handleMessage(Message message)
-					{
+
+				final Handler handler = new Handler() {
+					public void handleMessage(Message message) {
 						Bitmap bitmap = null;
-						Boolean state = (Boolean) message.obj;	
-						if(state)
-						{
+						Boolean state = (Boolean) message.obj;
+						if (state) {
 							try {
-								bitmap=BitmapFactory.decodeFile(filePath);
+								bitmap = BitmapFactory.decodeFile(filePath);
 							} catch (Exception e) {
 							}
-							if(bitmap!=null){
+							if (bitmap != null) {
 								imageView.setImageBitmap(bitmap);
 							}
 						}
 					}
 				};
-				
-				threadPool.execute(new Runnable()
-				{						
-					public void run()
-					{
+
+				threadPool.execute(new Runnable() {
+					public void run() {
 						Message message;
-						if(ImgGetSave(urlString,filePath,width,height,scale))
-						{												
-							message = handler.obtainMessage(0, true);// inStream);	
-						}
-						else {
+						if (ImgGetSave(urlString, filePath, width, height, scale)) {
+							message = handler.obtainMessage(0, true);// inStream);
+						} else {
 							message = handler.obtainMessage(0, false);
 						}
-						handler.sendMessage(message);		
+						handler.sendMessage(message);
 					}
 				});
 			}

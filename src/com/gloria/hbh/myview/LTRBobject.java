@@ -1,10 +1,10 @@
 package com.gloria.hbh.myview;
 
 /*
- * …»–Œ≤Àµ•µƒ∂‘œÛ
+ * ÊâáÂΩ¢ËèúÂçïÁöÑÂØπË±°
  */
 public class LTRBobject {
-	public float left,top,right,bottom;
+	public float left, top, right, bottom;
 
 	public LTRBobject(float left, float top, float right, float bottom) {
 		super();
@@ -22,7 +22,8 @@ public class LTRBobject {
 	}
 
 	/**
-	 * @param left the left to set
+	 * @param left
+	 *            the left to set
 	 */
 	public void setLeft(float left) {
 		this.left = left;
@@ -36,7 +37,8 @@ public class LTRBobject {
 	}
 
 	/**
-	 * @param top the top to set
+	 * @param top
+	 *            the top to set
 	 */
 	public void setTop(float top) {
 		this.top = top;
@@ -50,7 +52,8 @@ public class LTRBobject {
 	}
 
 	/**
-	 * @param right the right to set
+	 * @param right
+	 *            the right to set
 	 */
 	public void setRight(float right) {
 		this.right = right;
@@ -64,10 +67,11 @@ public class LTRBobject {
 	}
 
 	/**
-	 * @param bottom the bottom to set
+	 * @param bottom
+	 *            the bottom to set
 	 */
 	public void setBottom(float bottom) {
 		this.bottom = bottom;
 	}
-	
+
 }

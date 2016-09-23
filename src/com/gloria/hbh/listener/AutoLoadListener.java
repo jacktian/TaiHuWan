@@ -4,52 +4,52 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 
-/** 
-* ¹ö¶¯ÖÁÁĞ±íµ×²¿£¬¶ÁÈ¡ÏÂÒ»Ò³Êı¾İ 
-*/
+/**
+ * æ»šåŠ¨è‡³åˆ—è¡¨åº•éƒ¨ï¼Œè¯»å–ä¸‹ä¸€é¡µæ•°æ®
+ */
 public class AutoLoadListener implements OnScrollListener {
 
-  public interface AutoLoadCallBack {
-    void execute();
-  }
+	public interface AutoLoadCallBack {
+		void execute();
+	}
 
-  private int getLastVisiblePosition = 0, lastVisiblePositionY = 0;
-  private AutoLoadCallBack mCallback;
+	private int getLastVisiblePosition = 0, lastVisiblePositionY = 0;
+	private AutoLoadCallBack mCallback;
 
-  public AutoLoadListener(AutoLoadCallBack callback) {
-    this.mCallback = callback;
-  }
+	public AutoLoadListener(AutoLoadCallBack callback) {
+		this.mCallback = callback;
+	}
 
-  public void onScrollStateChanged(AbsListView view, int scrollState) {
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
 
-    if (scrollState == OnScrollListener.SCROLL_STATE_IDLE) {
-      //¹ö¶¯µ½µ×²¿     
-      if (view.getLastVisiblePosition() == (view.getCount() - 1)) {
-        View v = (View) view.getChildAt(view.getChildCount() - 1);
-        int[] location = new int[2];
-        v.getLocationOnScreen(location);//»ñÈ¡ÔÚÕû¸öÆÁÄ»ÄÚµÄ¾ø¶Ô×ø±ê     
-        int y = location[1];
+		if (scrollState == OnScrollListener.SCROLL_STATE_IDLE) {
+			// æ»šåŠ¨åˆ°åº•éƒ¨
+			if (view.getLastVisiblePosition() == (view.getCount() - 1)) {
+				View v = (View) view.getChildAt(view.getChildCount() - 1);
+				int[] location = new int[2];
+				v.getLocationOnScreen(location);// è·å–åœ¨æ•´ä¸ªå±å¹•å†…çš„ç»å¯¹åæ ‡
+				int y = location[1];
 
-        if (view.getLastVisiblePosition() != getLastVisiblePosition && lastVisiblePositionY != y)//µÚÒ»´ÎÍÏÖÁµ×²¿     
-        {
-//          Toast.makeText(view.getContext(), "ÒÑ¾­ÍÏ¶¯ÖÁµ×²¿£¬ÔÙ´ÎÍÏ¶¯¼´¿É·­Ò³", 500).show();
-          getLastVisiblePosition = view.getLastVisiblePosition();
-          lastVisiblePositionY = y;
-          mCallback.execute();
-          return;
-        }
-        else if (view.getLastVisiblePosition() == getLastVisiblePosition && lastVisiblePositionY == y)//µÚ¶ş´ÎÍÏÖÁµ×²¿     
-        {
-          mCallback.execute();
-        }
-      }
+				if (view.getLastVisiblePosition() != getLastVisiblePosition && lastVisiblePositionY != y)// ç¬¬ä¸€æ¬¡æ‹–è‡³åº•éƒ¨
+				{
+					// Toast.makeText(view.getContext(), "å·²ç»æ‹–åŠ¨è‡³åº•éƒ¨ï¼Œå†æ¬¡æ‹–åŠ¨å³å¯ç¿»é¡µ",
+					// 500).show();
+					getLastVisiblePosition = view.getLastVisiblePosition();
+					lastVisiblePositionY = y;
+					mCallback.execute();
+					return;
+				} else if (view.getLastVisiblePosition() == getLastVisiblePosition && lastVisiblePositionY == y)// ç¬¬äºŒæ¬¡æ‹–è‡³åº•éƒ¨
+				{
+					mCallback.execute();
+				}
+			}
 
-      //Î´¹ö¶¯µ½µ×²¿£¬µÚ¶ş´ÎÍÏÖÁµ×²¿¶¼³õÊ¼»¯     
-      getLastVisiblePosition = 0;
-      lastVisiblePositionY = 0;
-    }
-  }
+			// æœªæ»šåŠ¨åˆ°åº•éƒ¨ï¼Œç¬¬äºŒæ¬¡æ‹–è‡³åº•éƒ¨éƒ½åˆå§‹åŒ–
+			getLastVisiblePosition = 0;
+			lastVisiblePositionY = 0;
+		}
+	}
 
-  public void onScroll(AbsListView arg0, int arg1, int arg2, int arg3) {
-  }
+	public void onScroll(AbsListView arg0, int arg1, int arg2, int arg3) {
+	}
 }

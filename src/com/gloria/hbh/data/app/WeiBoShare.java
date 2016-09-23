@@ -7,43 +7,48 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 /*
- * Î¢²©·ÖÏíµÄÊı¾İ
+ * å¾®åšåˆ†äº«çš„æ•°æ®
  */
 public class WeiBoShare {
-	String key = ""; //oauthÊÚÈ¨µÄKey
-	String secret = ""; ////oauthÊÚÈ¨µÄSecret
+	String key = ""; // oauthæˆæƒçš„Key
+	String secret = ""; //// oauthæˆæƒçš„Secret
+
 	public String getKey() {
 		return key;
 	}
+
 	public void setKey(String key) {
 		this.key = key;
 	}
+
 	public String getSecret() {
 		return secret;
 	}
+
 	public void setSecret(String secret) {
 		this.secret = secret;
 	}
+
 	public static WeiBoShare getWeiBoShare(HashMap<String, Object> root) {
-		if(root == null){
+		if (root == null) {
 			return null;
 		}
 		WeiBoShare weiBoShare = new WeiBoShare();
-		weiBoShare.setKey((String)root.get("key"));
-		weiBoShare.setSecret((String)root.get("secret"));
+		weiBoShare.setKey((String) root.get("key"));
+		weiBoShare.setSecret((String) root.get("secret"));
 		return weiBoShare;
 	}
-	
+
 	public static WeiBoShare getFromJsonObject(JsonObject jsonObject) {
-		if(jsonObject == null){
+		if (jsonObject == null) {
 			return null;
 		}
 		WeiBoShare weiBoShare = new WeiBoShare();
 		try {
 			weiBoShare.setKey(JsonMethed.getJsonString(jsonObject.get("key")));
 			weiBoShare.setSecret(JsonMethed.getJsonString(jsonObject.get("secret")));
-		}catch (JsonParseException e) {
-		}catch (Exception e) {
+		} catch (JsonParseException e) {
+		} catch (Exception e) {
 		}
 		return weiBoShare;
 	}

@@ -15,6 +15,10 @@
  *******************************************************************************/
 package com.gloria.pulltorefresh.library;
 
+import com.gloria.hbh.main.R;
+import com.gloria.pulltorefresh.library.internal.EmptyViewMethodAccessor;
+import com.gloria.pulltorefresh.library.internal.IndicatorLayout;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -32,12 +36,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 
-import com.gloria.hbh.main.R;
-import com.gloria.pulltorefresh.library.internal.EmptyViewMethodAccessor;
-import com.gloria.pulltorefresh.library.internal.IndicatorLayout;
-
-public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extends PullToRefreshBase<T> implements
-		OnScrollListener {
+public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extends PullToRefreshBase<T>
+		implements OnScrollListener {
 
 	private static FrameLayout.LayoutParams convertEmptyViewLayoutParams(ViewGroup.LayoutParams lp) {
 		FrameLayout.LayoutParams newLp = null;
@@ -147,7 +147,8 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 	 * {@link AdapterView#setAdapter(android.widget.Adapter)}
 	 * setAdapter(adapter)}. This is just for convenience!
 	 * 
-	 * @param adapter - Adapter to set
+	 * @param adapter
+	 *            - Adapter to set
 	 */
 	public void setAdapter(ListAdapter adapter) {
 		((AdapterView<ListAdapter>) mRefreshableView).setAdapter(adapter);
@@ -164,7 +165,8 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 	 * this method and set everything up. This includes when the Android
 	 * Framework automatically sets the Empty View based on it's ID.
 	 * 
-	 * @param newEmptyView - Empty View to be used
+	 * @param newEmptyView
+	 *            - Empty View to be used
 	 */
 	public final void setEmptyView(View newEmptyView) {
 		FrameLayout refreshableViewWrapper = getRefreshableViewWrapper();
@@ -208,7 +210,8 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 	 * {@link AdapterView#setOnItemClickListener(OnItemClickListener)
 	 * setOnItemClickListener(listener)}. This is just for convenience!
 	 * 
-	 * @param listener - OnItemClickListener to use
+	 * @param listener
+	 *            - OnItemClickListener to use
 	 */
 	public void setOnItemClickListener(OnItemClickListener listener) {
 		mRefreshableView.setOnItemClickListener(listener);
@@ -232,7 +235,8 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 	 * when the Adapter View is scrolled to the top and the mode is set to
 	 * {@link Mode#PULL_FROM_START}
 	 * 
-	 * @param showIndicator - true if the indicators should be shown.
+	 * @param showIndicator
+	 *            - true if the indicators should be shown.
 	 */
 	public void setShowIndicator(boolean showIndicator) {
 		mShowIndicator = showIndicator;
@@ -254,15 +258,15 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 
 		if (getShowIndicatorInternal()) {
 			switch (getCurrentMode()) {
-				case PULL_FROM_END:
-					mIndicatorIvBottom.pullToRefresh();
-					break;
-				case PULL_FROM_START:
-					mIndicatorIvTop.pullToRefresh();
-					break;
-				default:
-					// NO-OP
-					break;
+			case PULL_FROM_END:
+				mIndicatorIvBottom.pullToRefresh();
+				break;
+			case PULL_FROM_START:
+				mIndicatorIvTop.pullToRefresh();
+				break;
+			default:
+				// NO-OP
+				break;
 			}
 		}
 	}
@@ -281,15 +285,15 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 
 		if (getShowIndicatorInternal()) {
 			switch (getCurrentMode()) {
-				case PULL_FROM_END:
-					mIndicatorIvBottom.releaseToRefresh();
-					break;
-				case PULL_FROM_START:
-					mIndicatorIvTop.releaseToRefresh();
-					break;
-				default:
-					// NO-OP
-					break;
+			case PULL_FROM_END:
+				mIndicatorIvBottom.releaseToRefresh();
+				break;
+			case PULL_FROM_START:
+				mIndicatorIvTop.releaseToRefresh();
+				break;
+			default:
+				// NO-OP
+				break;
 			}
 		}
 	}
@@ -306,8 +310,10 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 	@Override
 	protected void handleStyledAttributes(TypedArray a) {
 		// Set Show Indicator to the XML value, or default value
-//		mShowIndicator = a.getBoolean(R.styleable.PullToRefresh_ptrShowIndicator, !isPullToRefreshOverScrollEnabled());
-		//ÉèÖÃ²»ÏÔÊ¾Ö¸Õë
+		// mShowIndicator =
+		// a.getBoolean(R.styleable.PullToRefresh_ptrShowIndicator,
+		// !isPullToRefreshOverScrollEnabled());
+		// ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½Ê¾Ö¸ï¿½ï¿½
 		mShowIndicator = false;
 	}
 

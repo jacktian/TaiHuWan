@@ -3,54 +3,58 @@ package com.gloria.hbh.handle;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * SQLiteOpenHelperÊÇÒ»¸ö¸¨ÖúÀà£¬ÓÃÀ´¹ÜÀíÊı¾İ¿âµÄ´´½¨ºÍ°æ±¾Ëû£¬ËüÌá¹©Á½¸ö·½ÃæµÄ¹¦ÄÜ
- * µÚÒ»£¬getReadableDatabase()¡¢getWritableDatabase()¿ÉÒÔ»ñµÃSQLiteDatabase¶ÔÏó£¬Í¨¹ı¸Ã¶ÔÏó¿ÉÒÔ¶ÔÊı¾İ¿â½øĞĞ²Ù×÷
- * µÚ¶ş£¬Ìá¹©ÁËonCreate()¡¢onUpgrade()Á½¸ö»Øµ÷º¯Êı£¬ÔÊĞíÎÒÃÇÔÙ´´½¨ºÍÉı¼¶Êı¾İ¿âÊ±£¬½øĞĞ×Ô¼ºµÄ²Ù×÷
+ * SQLiteOpenHelperæ˜¯ä¸€ä¸ªè¾…åŠ©ç±»ï¼Œç”¨æ¥ç®¡ç†æ•°æ®åº“çš„åˆ›å»ºå’Œç‰ˆæœ¬ä»–ï¼Œå®ƒæä¾›ä¸¤ä¸ªæ–¹é¢çš„åŠŸèƒ½
+ * ç¬¬ä¸€ï¼ŒgetReadableDatabase()ã€getWritableDatabase()å¯ä»¥è·å¾—SQLiteDatabaseå¯¹è±¡ï¼Œ
+ * é€šè¿‡è¯¥å¯¹è±¡å¯ä»¥å¯¹æ•°æ®åº“è¿›è¡Œæ“ä½œ ç¬¬äºŒï¼Œæä¾›äº†onCreate()ã€onUpgrade()ä¸¤ä¸ªå›è°ƒå‡½æ•°ï¼Œå…è®¸æˆ‘ä»¬å†åˆ›å»ºå’Œå‡çº§æ•°æ®åº“æ—¶ï¼Œè¿›è¡Œè‡ªå·±çš„æ“ä½œ
  */
 public class DBHelper extends SQLiteOpenHelper {
 	private static final int VERSION = 1;
 
 	/**
-	 * ÔÚSQLiteOpenHelperµÄ×ÓÀàµ±ÖĞ£¬±ØĞëÓĞ¸Ã¹¹Ôìº¯Êı
-	 * @param context	ÉÏÏÂÎÄ¶ÔÏó
-	 * @param name		Êı¾İ¿âÃû³Æ
+	 * åœ¨SQLiteOpenHelperçš„å­ç±»å½“ä¸­ï¼Œå¿…é¡»æœ‰è¯¥æ„é€ å‡½æ•°
+	 * 
+	 * @param context
+	 *            ä¸Šä¸‹æ–‡å¯¹è±¡
+	 * @param name
+	 *            æ•°æ®åº“åç§°
 	 * @param factory
-	 * @param version	µ±Ç°Êı¾İ¿âµÄ°æ±¾£¬Öµ±ØĞëÊÇÕûÊı²¢ÇÒÊÇµİÔöµÄ×´Ì¬
+	 * @param version
+	 *            å½“å‰æ•°æ®åº“çš„ç‰ˆæœ¬ï¼Œå€¼å¿…é¡»æ˜¯æ•´æ•°å¹¶ä¸”æ˜¯é€’å¢çš„çŠ¶æ€
 	 */
-	
+
 	String table_userlist = "userlist";
 	String table_lastviewlist = "table_lastviewlist";
-	String create_table_userlist = "create table if not exists "+table_userlist+" (id int,name varchar(20),pwd varchar(20))";
-	String create_table_lastviewlist = "create table if not exists "+table_lastviewlist
-			+"(tid varchar(10),title varchar(100),author varchar(50),views varchar(10),replies varchar(10)" 
-			+" url varchar(100),date varchar(50))";
-	
-	public DBHelper(Context context, String name, CursorFactory factory,
-			int version) {
-		//±ØĞëÍ¨¹ısuperµ÷ÓÃ¸¸Ààµ±ÖĞµÄ¹¹Ôìº¯Êı
+	String create_table_userlist = "create table if not exists " + table_userlist
+			+ " (id int,name varchar(20),pwd varchar(20))";
+	String create_table_lastviewlist = "create table if not exists " + table_lastviewlist
+			+ "(tid varchar(10),title varchar(100),author varchar(50),views varchar(10),replies varchar(10)"
+			+ " url varchar(100),date varchar(50))";
+
+	public DBHelper(Context context, String name, CursorFactory factory, int version) {
+		// å¿…é¡»é€šè¿‡superè°ƒç”¨çˆ¶ç±»å½“ä¸­çš„æ„é€ å‡½æ•°
 		super(context, name, factory, version);
 	}
-	
-	public DBHelper(Context context, String name, int version){
-		this(context,name,null,version);
+
+	public DBHelper(Context context, String name, int version) {
+		this(context, name, null, version);
 	}
 
-	public DBHelper(Context context, String name){
-		this(context,name,VERSION);
+	public DBHelper(Context context, String name) {
+		this(context, name, VERSION);
 	}
 
-	//¸Ãº¯ÊıÊÇÔÚµÚÒ»´Î´´½¨µÄÊ±ºòÖ´ĞĞ£¬Êµ¼ÊÉÏÊÇµÚÒ»´ÎµÃµ½SQLiteDatabase¶ÔÏóµÄÊ±ºò²Å»áµ÷ÓÃÕâ¸ö·½·¨
+	// è¯¥å‡½æ•°æ˜¯åœ¨ç¬¬ä¸€æ¬¡åˆ›å»ºçš„æ—¶å€™æ‰§è¡Œï¼Œå®é™…ä¸Šæ˜¯ç¬¬ä¸€æ¬¡å¾—åˆ°SQLiteDatabaseå¯¹è±¡çš„æ—¶å€™æ‰ä¼šè°ƒç”¨è¿™ä¸ªæ–¹æ³•
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
 		System.out.println("create a database");
-		//execSQLÓÃÓÚÖ´ĞĞSQLÓï¾ä
-		db.execSQL(table_userlist);  //´´½¨ÓÃ»§ÁĞ±í
-		db.execSQL(create_table_lastviewlist);  //´´½¨×î½üä¯ÀÀÁĞ±í
+		// execSQLç”¨äºæ‰§è¡ŒSQLè¯­å¥
+		db.execSQL(table_userlist); // åˆ›å»ºç”¨æˆ·åˆ—è¡¨
+		db.execSQL(create_table_lastviewlist); // åˆ›å»ºæœ€è¿‘æµè§ˆåˆ—è¡¨
 	}
 
 	@Override
@@ -58,29 +62,29 @@ public class DBHelper extends SQLiteOpenHelper {
 		// TODO Auto-generated method stub
 		System.out.println("upgrade a database");
 	}
-	
-	public void insertToUserList(int id,String name) {
+
+	public void insertToUserList(int id, String name) {
 		// TODO Auto-generated method stub
 		System.out.println("insertToUserList");
-		// ´´½¨ContentValues¶ÔÏó
+		// åˆ›å»ºContentValueså¯¹è±¡
 		ContentValues values = new ContentValues();
-		// Ïò¸Ã¶ÔÏóÖĞ²åÈë¼üÖµ¶Ô£¬ÆäÖĞ¼üÊÇÁĞÃû£¬ÖµÊÇÏ£Íû²åÈëµ½ÕâÒ»ÁĞµÄÖµ£¬Öµ±ØĞëºÍÊı¾İ¿âµ±ÖĞµÄÊı¾İÀàĞÍÒ»ÖÂ
+		// å‘è¯¥å¯¹è±¡ä¸­æ’å…¥é”®å€¼å¯¹ï¼Œå…¶ä¸­é”®æ˜¯åˆ—åï¼Œå€¼æ˜¯å¸Œæœ›æ’å…¥åˆ°è¿™ä¸€åˆ—çš„å€¼ï¼Œå€¼å¿…é¡»å’Œæ•°æ®åº“å½“ä¸­çš„æ•°æ®ç±»å‹ä¸€è‡´
 		values.put("id", id);
 		values.put("name", "name");
-		// µÃµ½Ò»¸ö¿ÉĞ´µÄSQLiteDatabase¶ÔÏó
+		// å¾—åˆ°ä¸€ä¸ªå¯å†™çš„SQLiteDatabaseå¯¹è±¡
 		SQLiteDatabase sqliteDatabase = getWritableDatabase();
-		// µ÷ÓÃinsert·½·¨£¬¾Í¿ÉÒÔ½«Êı¾İ²åÈëµ½Êı¾İ¿âµ±ÖĞ
-		// µÚÒ»¸ö²ÎÊı:±íÃû³Æ
-		// µÚ¶ş¸ö²ÎÊı£ºSQl²»ÔÊĞíÒ»¸ö¿ÕÁĞ£¬Èç¹ûContentValuesÊÇ¿ÕµÄ£¬ÄÇÃ´ÕâÒ»ÁĞ±»Ã÷È·µÄÖ¸Ã÷ÎªNULLÖµ
-		// µÚÈı¸ö²ÎÊı£ºContentValues¶ÔÏó
+		// è°ƒç”¨insertæ–¹æ³•ï¼Œå°±å¯ä»¥å°†æ•°æ®æ’å…¥åˆ°æ•°æ®åº“å½“ä¸­
+		// ç¬¬ä¸€ä¸ªå‚æ•°:è¡¨åç§°
+		// ç¬¬äºŒä¸ªå‚æ•°ï¼šSQlä¸å…è®¸ä¸€ä¸ªç©ºåˆ—ï¼Œå¦‚æœContentValuesæ˜¯ç©ºçš„ï¼Œé‚£ä¹ˆè¿™ä¸€åˆ—è¢«æ˜ç¡®çš„æŒ‡æ˜ä¸ºNULLå€¼
+		// ç¬¬ä¸‰ä¸ªå‚æ•°ï¼šContentValueså¯¹è±¡
 		sqliteDatabase.insert(table_userlist, null, values);
 	}
-	
+
 	/*
-	 * ²åÈë¼ÇÂ¼µ½×î½üä¯ÀÀÁĞ±í
+	 * æ’å…¥è®°å½•åˆ°æœ€è¿‘æµè§ˆåˆ—è¡¨
 	 */
-	public void insertToLastViewList(String tid,String title,String author,
-			 String views,String replies,String url,String date) {
+	public void insertToLastViewList(String tid, String title, String author, String views, String replies, String url,
+			String date) {
 		// TODO Auto-generated method stub
 		System.out.println("insertToUserList");
 		ContentValues values = new ContentValues();
@@ -94,5 +98,5 @@ public class DBHelper extends SQLiteOpenHelper {
 		SQLiteDatabase sqliteDatabase = getWritableDatabase();
 		sqliteDatabase.insert(table_lastviewlist, null, values);
 	}
-	
+
 }

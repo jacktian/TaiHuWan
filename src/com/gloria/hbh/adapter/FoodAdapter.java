@@ -2,19 +2,19 @@ package com.gloria.hbh.adapter;
 
 import java.util.List;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.gloria.hbh.data.forum.HandlinesBasicInfo;
 import com.gloria.hbh.main.R;
 import com.gloria.hbh.myview.ForumToast;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * 
@@ -22,40 +22,36 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  *
  */
 /**
-* ÎÄ ¼ş Ãû : PostListAdapter
-* ´´ ½¨ ÈË£º gejian
-* ÈÕ     ÆÚ£º2012-8-9
-* ĞŞ ¸Ä ÈË£ºgejian
-* ÈÕ    ÆÚ£º2012-8-9
-* Ãè    Êö£º¾ßÌå·ÖÀàÏÂÌû×ÓÁĞ±ílistviewµÄÊÊÅäÆ÷
-*/
-public class FoodAdapter extends Adapter_Base{
-	
+ * æ–‡ ä»¶ å : PostListAdapter åˆ› å»º äººï¼š gejian æ—¥ æœŸï¼š2012-8-9 ä¿® æ”¹ äººï¼šgejian æ—¥ æœŸï¼š2012-8-9
+ * æ è¿°ï¼šå…·ä½“åˆ†ç±»ä¸‹å¸–å­åˆ—è¡¨listviewçš„é€‚é…å™¨
+ */
+public class FoodAdapter extends Adapter_Base {
+
 	List<HandlinesBasicInfo> list;
-	
-	public FoodAdapter(List<HandlinesBasicInfo> list,ImageLoader imageLoader){
+
+	public FoodAdapter(List<HandlinesBasicInfo> list, ImageLoader imageLoader) {
 		this.list = list;
 		this.imageLoader = imageLoader;
-//		lastviewsList = Methods.getLastViewsList();
-//		lastviewsTidList = Methods.getLastViewsTidList(lastviewsList);
+		// lastviewsList = Methods.getLastViewsList();
+		// lastviewsTidList = Methods.getLastViewsTidList(lastviewsList);
 	}
 
-	public int getCount(){
+	public int getCount() {
 		return list.size();
 	}
-	
-	public HandlinesBasicInfo getItem(int position){
+
+	public HandlinesBasicInfo getItem(int position) {
 		return list.get(position);
 	}
-	
-	public long getItemId(int position){
+
+	public long getItemId(int position) {
 		return position;
 	}
-	
-	public View getView(final int position, View convertView, ViewGroup parent){
+
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		final ViewItem item;
 		if (convertView != null) {
-			item =(ViewItem) convertView.getTag();  
+			item = (ViewItem) convertView.getTag();
 		} else {
 			item = new ViewItem();
 			convertView = LayoutInflater.from(this._context).inflate(R.layout.listview_food, null);
@@ -65,21 +61,21 @@ public class FoodAdapter extends Adapter_Base{
 			item.subtitle = (TextView) convertView.findViewById(R.id.subtitle);
 			item.stars = (TextView) convertView.findViewById(R.id.stars);
 			item.distance = (TextView) convertView.findViewById(R.id.distance);
-			convertView.setTag(item); 
+			convertView.setTag(item);
 		}
-		
+
 		HandlinesBasicInfo handlinesBasicInfo = getItem(position);
-		
+
 		item.title.setText(handlinesBasicInfo.getTitle());
 		item.subtitle.setText(handlinesBasicInfo.getDescrip());
-		
+
 		item.stars.setVisibility(View.GONE);
 		item.distance.setVisibility(View.GONE);
-		if(handlinesBasicInfo.getAuthorId() != null && handlinesBasicInfo.getAuthorId().equals("1")){
+		if (handlinesBasicInfo.getAuthorId() != null && handlinesBasicInfo.getAuthorId().equals("1")) {
 			item.recommend.setVisibility(View.VISIBLE);
 			item.stars.setVisibility(View.VISIBLE);
 			item.stars.setBackgroundResource(R.drawable.five_stars);
-		}else{
+		} else {
 			item.recommend.setVisibility(View.GONE);
 			item.distance.setVisibility(View.VISIBLE);
 			item.distance.setText(handlinesBasicInfo.getAuthor());
@@ -87,18 +83,17 @@ public class FoodAdapter extends Adapter_Base{
 		item.dialog.setVisibility(View.VISIBLE);
 		item.dialog.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				if(getItem(position).getUrl() == null 
-						|| getItem(position).getUrl().equals("")){
-					ForumToast.show("ºÅÂëÎª¿Õ£¡");
+				if (getItem(position).getUrl() == null || getItem(position).getUrl().equals("")) {
+					ForumToast.show("å·ç ä¸ºç©ºï¼");
 					return;
 				}
-				String num = "tel:"+getItem(position).getUrl();
+				String num = "tel:" + getItem(position).getUrl();
 				goToDialog(num);
 			}
 		});
 		return convertView;
 	}
-	
+
 	private class ViewItem {
 		TextView title;
 		TextView subtitle;
@@ -107,13 +102,13 @@ public class FoodAdapter extends Adapter_Base{
 		ImageView recommend;
 		ImageView dialog;
 	}
-	
+
 	/*
-	 * ²¦´òµç»°
+	 * æ‹¨æ‰“ç”µè¯
 	 */
 	protected void goToDialog(String text) {
-		Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse(text));  
+		Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse(text));
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        _context.startActivity(intent);
+		_context.startActivity(intent);
 	}
 }

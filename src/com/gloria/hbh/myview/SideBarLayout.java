@@ -1,5 +1,7 @@
 package com.gloria.hbh.myview;
 
+import com.gloria.hbh.main.R;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -9,14 +11,12 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ListView;
 
-import com.gloria.hbh.main.R;
-
-public class SideBarLayout extends ViewGroup{
+public class SideBarLayout extends ViewGroup {
 
 	public static final int SIDEBAR_SIDE_LEFT = 0;
 	public static final int SIDEBAR_SIDE_RIGHT = 1;
 	public static final int SIDEBAR_SIDE_BOTH = 2;
-	
+
 	protected View leftSideBar = null;
 	protected View rightSideBar = null;
 	protected View mainView = null;
@@ -32,47 +32,45 @@ public class SideBarLayout extends ViewGroup{
 	private int mainViewLeft;
 	private int mainViewTop;
 	private int mainViewBottom;
-	
+
 	public SideBarLayout(Context context) {
-        super(context);
-    }
-	
+		super(context);
+	}
+
 	public SideBarLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
-	
+
 	@Override
 	protected void onFinishInflate() {
 		super.onFinishInflate();
-		
+
 		leftSideBar = findViewById(R.id.sidebar_layout_sidebar_left);
-		rightSideBar= findViewById(R.id.sidebar_layout_sidebar_right);
+		rightSideBar = findViewById(R.id.sidebar_layout_sidebar_right);
 		mainView = findViewById(R.id.sidebar_layout_content);
-	
-		if(leftSideBar == null) {
+
+		if (leftSideBar == null) {
 			throw new NullPointerException("View SideBar not initialized.");
 		}
-		
-		if(mainView == null ) {
+
+		if (mainView == null) {
 			throw new NullPointerException("View mainView not initialized");
 		}
-		if(rightSideBar == null ) {
+		if (rightSideBar == null) {
 			throw new NullPointerException("View SideBar not initialized");
 		}
 		openListener = new OnOpenListener();
 		closeListener = new OnCloseListener();
 	}
-	
+
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		super.measureChildren(widthMeasureSpec, heightMeasureSpec);
-		if(sideBarSide==SIDEBAR_SIDE_LEFT)
-		{
+		if (sideBarSide == SIDEBAR_SIDE_LEFT) {
 			sideBarWidth = leftSideBar.getMeasuredWidth();
 		}
-		if(sideBarSide==SIDEBAR_SIDE_RIGHT)
-		{
+		if (sideBarSide == SIDEBAR_SIDE_RIGHT) {
 			sideBarWidth = rightSideBar.getMeasuredWidth();
 		}
 		mainViewLeft = mainView.getLeft();
@@ -82,15 +80,15 @@ public class SideBarLayout extends ViewGroup{
 
 	@Override
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
-		
+
 		int sideBarLeft = l;
-		if(sideBarSide == SIDEBAR_SIDE_RIGHT){
+		if (sideBarSide == SIDEBAR_SIDE_RIGHT) {
 			sideBarLeft = r - sideBarWidth;
 		}
 		leftSideBar.layout(sideBarLeft, t, sideBarLeft + sideBarWidth, leftSideBar.getMeasuredHeight());
-		
-		if(isSideBarOpen) {
-			if(sideBarSide == SIDEBAR_SIDE_LEFT) {
+
+		if (isSideBarOpen) {
+			if (sideBarSide == SIDEBAR_SIDE_LEFT) {
 				mainView.layout(l + sideBarWidth, t, r + sideBarWidth, b);
 			} else {
 				mainView.layout(l - sideBarWidth, t, r - sideBarWidth, b);
@@ -101,95 +99,95 @@ public class SideBarLayout extends ViewGroup{
 	}
 
 	@Override
-	protected void measureChild(View child, int parentWidthMeasureSpec,
-			int parentHeightMeasureSpec) {
-		if(child == leftSideBar) {
+	protected void measureChild(View child, int parentWidthMeasureSpec, int parentHeightMeasureSpec) {
+		if (child == leftSideBar) {
 			int mode = MeasureSpec.getMode(parentWidthMeasureSpec);
-			int width = (int)(parentWidthMeasureSpec * 0.8);
+			int width = (int) (parentWidthMeasureSpec * 0.8);
 			super.measureChild(child, MeasureSpec.makeMeasureSpec(width, mode), parentHeightMeasureSpec);
 		} else {
 			super.measureChild(child, parentWidthMeasureSpec, parentHeightMeasureSpec);
 		}
 	}
 
-//	@Override
-//	public boolean dispatchTouchEvent(MotionEvent ev) {
-//		Toast.makeText(getContext(), "sdf" + mainViewTop + " " + mainViewLeft + " " + mainViewBottom + " " + mainView.getWidth(), Toast.LENGTH_SHORT).show();
-//		if(mainView.getAnimation() != null) {
-//			return false;
-//		}
-//		
-//		Log.e("error", "" + ev.getX() + " " + ev.getY());
-//		int x = (int) ev.getX();
-//		int y = (int) ev.getY();
-//		if(!(mainView.getLeft() < x &&
-//			mainView.getRight() > x &&
-//			mainView.getTop() < y &&
-//			mainView.getBottom() > y)) {
-//			return false;
-//		}
-//		
-//		switch(ev.getAction()) {
-//		case MotionEvent.ACTION_DOWN:
-//			if(sideBarSide == SIDEBAR_SIDE_LEFT)
-//				leftSideBar.setVisibility(View.VISIBLE);
-//			if(sideBarSide == SIDEBAR_SIDE_RIGHT)
-//				rightSideBar.setVisibility(View.VISIBLE);
-//			startX = (int) ev.getX();
-//			isPressed = true;
-//			mainViewLeft = mainView.getLeft();
-//			Log.e("error", "" + ev.getX() + " " + ev.getY() + " down" + mainViewLeft);
-//			break;
-//		case MotionEvent.ACTION_CANCEL:
-//		case MotionEvent.ACTION_UP:
-//			if(isPressed && xOffset != 0) {
-//				isPressed = false;
-//				toggleSideBar();
-//				return true;
-//			} 
-//			break;
-//		case MotionEvent.ACTION_MOVE:
-//			Log.e("error", "" + ev.getX() + " " + ev.getY());
-//			if(isPressed == false)
-//				break;
-//			xOffset = (int) (ev.getX() - startX);
-//			Log.e("error", "" + ev.getX() + " " + ev.getY() + " move" + xOffset);
-//			meansureManiViewLayout();
-//			break;
-//		}
-//		return true;
-//	}
+	// @Override
+	// public boolean dispatchTouchEvent(MotionEvent ev) {
+	// Toast.makeText(getContext(), "sdf" + mainViewTop + " " + mainViewLeft + "
+	// " + mainViewBottom + " " + mainView.getWidth(),
+	// Toast.LENGTH_SHORT).show();
+	// if(mainView.getAnimation() != null) {
+	// return false;
+	// }
+	//
+	// Log.e("error", "" + ev.getX() + " " + ev.getY());
+	// int x = (int) ev.getX();
+	// int y = (int) ev.getY();
+	// if(!(mainView.getLeft() < x &&
+	// mainView.getRight() > x &&
+	// mainView.getTop() < y &&
+	// mainView.getBottom() > y)) {
+	// return false;
+	// }
+	//
+	// switch(ev.getAction()) {
+	// case MotionEvent.ACTION_DOWN:
+	// if(sideBarSide == SIDEBAR_SIDE_LEFT)
+	// leftSideBar.setVisibility(View.VISIBLE);
+	// if(sideBarSide == SIDEBAR_SIDE_RIGHT)
+	// rightSideBar.setVisibility(View.VISIBLE);
+	// startX = (int) ev.getX();
+	// isPressed = true;
+	// mainViewLeft = mainView.getLeft();
+	// Log.e("error", "" + ev.getX() + " " + ev.getY() + " down" +
+	// mainViewLeft);
+	// break;
+	// case MotionEvent.ACTION_CANCEL:
+	// case MotionEvent.ACTION_UP:
+	// if(isPressed && xOffset != 0) {
+	// isPressed = false;
+	// toggleSideBar();
+	// return true;
+	// }
+	// break;
+	// case MotionEvent.ACTION_MOVE:
+	// Log.e("error", "" + ev.getX() + " " + ev.getY());
+	// if(isPressed == false)
+	// break;
+	// xOffset = (int) (ev.getX() - startX);
+	// Log.e("error", "" + ev.getX() + " " + ev.getY() + " move" + xOffset);
+	// meansureManiViewLayout();
+	// break;
+	// }
+	// return true;
+	// }
 
-//	@Override
-//	public boolean onTouchEvent(MotionEvent event) {
-//		// TODO Auto-generated method stub
-//		Log.e("touch", event.getAction() + " ");
-//		Toast.makeText(getContext(), event.getAction() + " ", Toast.LENGTH_SHORT).show();
-//
-//		
-//		return true;
-//	}
+	// @Override
+	// public boolean onTouchEvent(MotionEvent event) {
+	// // TODO Auto-generated method stub
+	// Log.e("touch", event.getAction() + " ");
+	// Toast.makeText(getContext(), event.getAction() + " ",
+	// Toast.LENGTH_SHORT).show();
+	//
+	//
+	// return true;
+	// }
 
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
-		if(mainView.getAnimation() != null) {
+		if (mainView.getAnimation() != null) {
 			return false;
 		}
-		
+
 		int x = (int) ev.getX();
 		int y = (int) ev.getY();
-		if(!(mainView.getLeft() < x &&
-			mainView.getRight() > x &&
-			mainView.getTop() < y &&
-			mainView.getBottom() > y)) {
+		if (!(mainView.getLeft() < x && mainView.getRight() > x && mainView.getTop() < y && mainView.getBottom() > y)) {
 			return false;
 		}
-		
-		switch(ev.getAction()) {
+
+		switch (ev.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			if(sideBarSide == SIDEBAR_SIDE_LEFT)
+			if (sideBarSide == SIDEBAR_SIDE_LEFT)
 				leftSideBar.setVisibility(View.VISIBLE);
-			if(sideBarSide == SIDEBAR_SIDE_RIGHT)
+			if (sideBarSide == SIDEBAR_SIDE_RIGHT)
 				rightSideBar.setVisibility(View.VISIBLE);
 			startX = (int) ev.getX();
 			isPressed = true;
@@ -197,14 +195,14 @@ public class SideBarLayout extends ViewGroup{
 			return true;
 		case MotionEvent.ACTION_CANCEL:
 		case MotionEvent.ACTION_UP:
-			if(isPressed) {
+			if (isPressed) {
 				isPressed = false;
-				if(xOffset != 0)
+				if (xOffset != 0)
 					toggleSideBar(sideBarSide);
-			} 
+			}
 			break;
 		case MotionEvent.ACTION_MOVE:
-			if(isPressed == false)
+			if (isPressed == false)
 				break;
 			xOffset = (int) (ev.getX() - startX);
 
@@ -213,78 +211,78 @@ public class SideBarLayout extends ViewGroup{
 		}
 		return super.onTouchEvent(ev);
 	}
-	
-	public void meansureManiViewLayout(){
+
+	public void meansureManiViewLayout() {
 		int left = mainViewLeft + xOffset;
 
-		if(sideBarSide == SIDEBAR_SIDE_LEFT && left < 0) {
+		if (sideBarSide == SIDEBAR_SIDE_LEFT && left < 0) {
 			sideBarSide = SIDEBAR_SIDE_RIGHT;
 			rightSideBar.setVisibility(View.VISIBLE);
 			leftSideBar.setVisibility(View.INVISIBLE);
-		}else if(sideBarSide == SIDEBAR_SIDE_RIGHT && left > 0){
-			sideBarSide = SIDEBAR_SIDE_LEFT ;
+		} else if (sideBarSide == SIDEBAR_SIDE_RIGHT && left > 0) {
+			sideBarSide = SIDEBAR_SIDE_LEFT;
 			leftSideBar.setVisibility(View.VISIBLE);
 			rightSideBar.setVisibility(View.INVISIBLE);
-		}else if(sideBarSide == SIDEBAR_SIDE_BOTH) {
-			if(left > 0 && leftSideBar.getVisibility() != View.VISIBLE){
+		} else if (sideBarSide == SIDEBAR_SIDE_BOTH) {
+			if (left > 0 && leftSideBar.getVisibility() != View.VISIBLE) {
 				leftSideBar.setVisibility(View.VISIBLE);
 				rightSideBar.setVisibility(View.INVISIBLE);
 			}
-			if(left < 0 && rightSideBar.getVisibility() != View.VISIBLE){
+			if (left < 0 && rightSideBar.getVisibility() != View.VISIBLE) {
 				rightSideBar.setVisibility(View.VISIBLE);
 				leftSideBar.setVisibility(View.INVISIBLE);
 			}
 		}
-		if(sideBarSide == SIDEBAR_SIDE_LEFT && left < 0) {
+		if (sideBarSide == SIDEBAR_SIDE_LEFT && left < 0) {
 			return;
 		}
-		
-		if(left > sideBarWidth){
+
+		if (left > sideBarWidth) {
 			left = sideBarWidth;
 			xOffset = left - mainViewLeft;
-		}else if(left < -sideBarWidth) {
-			left = - sideBarWidth;
+		} else if (left < -sideBarWidth) {
+			left = -sideBarWidth;
 			xOffset = left - mainViewLeft;
 		}
 
-		mainView.layout(left, mainViewTop, 
-				left + mainView.getWidth(), mainViewBottom);
+		mainView.layout(left, mainViewTop, left + mainView.getWidth(), mainViewBottom);
 	}
 
 	public boolean isSideBarOpen() {
 		return isSideBarOpen;
 	}
-	public void openSideBar(){
-		if(!isSideBarOpen) {
+
+	public void openSideBar() {
+		if (!isSideBarOpen) {
 			toggleSideBar(sideBarSide);
 		}
 	}
-	
+
 	public void closeSideBar() {
-		if(isSideBarOpen) {
+		if (isSideBarOpen) {
 			toggleSideBar(sideBarSide);
 		}
 	}
-	
+
 	public void toggleSideBar(int i) {
-		if(mainView.getAnimation() != null) {
+		if (mainView.getAnimation() != null) {
 			return;
 		}
-		sideBarSide=i;
+		sideBarSide = i;
 		int time;
 		Animation anim = null;
-		if(isSideBarOpen) {
-			anim = new TranslateAnimation(0, - mainView.getLeft(), 0, 0);
-			time = 500 * Math.abs(mainView.getLeft())/sideBarWidth;
+		if (isSideBarOpen) {
+			anim = new TranslateAnimation(0, -mainView.getLeft(), 0, 0);
+			time = 500 * Math.abs(mainView.getLeft()) / sideBarWidth;
 			anim.setAnimationListener(closeListener);
-			//sideBarSide=SIDEBAR_SIDE_BOTH;
+			// sideBarSide=SIDEBAR_SIDE_BOTH;
 		} else {
-			if(sideBarSide == SIDEBAR_SIDE_LEFT || mainView.getLeft() > 0) {
+			if (sideBarSide == SIDEBAR_SIDE_LEFT || mainView.getLeft() > 0) {
 				anim = new TranslateAnimation(0, sideBarWidth - mainView.getLeft(), 0, 0);
 			} else {
-				anim = new TranslateAnimation(0, - sideBarWidth - mainView.getLeft(), 0, 0);
+				anim = new TranslateAnimation(0, -sideBarWidth - mainView.getLeft(), 0, 0);
 			}
-			time = 500 * ( sideBarWidth - Math.abs(mainView.getLeft()))/sideBarWidth;
+			time = 500 * (sideBarWidth - Math.abs(mainView.getLeft())) / sideBarWidth;
 			anim.setAnimationListener(openListener);
 		}
 		anim.setDuration(time);
@@ -292,50 +290,54 @@ public class SideBarLayout extends ViewGroup{
 		anim.setFillEnabled(true);
 		mainView.startAnimation(anim);
 	}
-	
+
 	public void setSideBarSide(int b) {
 		this.sideBarSide = b;
 	}
-	
+
 	private class OnOpenListener implements Animation.AnimationListener {
-		public void onAnimationStart(Animation animation){
+		public void onAnimationStart(Animation animation) {
 			View sideBar = null;
-			if(sideBarSide == SIDEBAR_SIDE_LEFT)
+			if (sideBarSide == SIDEBAR_SIDE_LEFT)
 				sideBar = leftSideBar;
-			else if(sideBarSide == SIDEBAR_SIDE_RIGHT)
+			else if (sideBarSide == SIDEBAR_SIDE_RIGHT)
 				sideBar = rightSideBar;
 			else {
-				if(mainView.getLeft() < 0)
+				if (mainView.getLeft() < 0)
 					sideBar = leftSideBar;
-				else 
+				else
 					sideBar = rightSideBar;
 			}
-				
-			if(sideBar.getVisibility() != View.VISIBLE)
+
+			if (sideBar.getVisibility() != View.VISIBLE)
 				sideBar.setVisibility(View.VISIBLE);
-			
+
 		}
+
 		public void onAnimationEnd(Animation animation) {
 			isSideBarOpen = true;
 			mainView.clearAnimation();
 			requestLayout();
 		}
+
 		public void onAnimationRepeat(Animation animation) {
 		}
 	}
-	
+
 	private class OnCloseListener implements Animation.AnimationListener {
 		public void onAnimationStart(Animation animation) {
 		}
+
 		public void onAnimationEnd(Animation animation) {
 			isSideBarOpen = false;
 			mainView.clearAnimation();
-			if(leftSideBar != null && leftSideBar.getVisibility() == View.VISIBLE)
+			if (leftSideBar != null && leftSideBar.getVisibility() == View.VISIBLE)
 				leftSideBar.setVisibility(View.GONE);
-			if(rightSideBar != null && rightSideBar.getVisibility() == View.VISIBLE)
+			if (rightSideBar != null && rightSideBar.getVisibility() == View.VISIBLE)
 				rightSideBar.setVisibility(View.GONE);
 			requestLayout();
 		}
+
 		public void onAnimationRepeat(Animation animation) {
 		}
 	}

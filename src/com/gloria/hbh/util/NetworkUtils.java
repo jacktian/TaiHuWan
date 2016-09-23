@@ -1,76 +1,71 @@
 package com.gloria.hbh.util;
 
+import com.gloria.hbh.application.BaseApplication;
+
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 
-import com.gloria.hbh.application.BaseApplication;
-
 /**
-* ÎÄ ¼ş Ãû : NetworkUtils
-* ´´ ½¨ ÈË£º gejian
-* ÈÕ     ÆÚ£º2012-8-28
-* ĞŞ ¸Ä ÈË£ºgejian
-* ÈÕ    ÆÚ£º2012-8-28
-* Ãè    Êö£ºÍøÂç×´Ì¬µÄ·½·¨Àà
-*/
+ * æ–‡ ä»¶ å : NetworkUtils åˆ› å»º äººï¼š gejian æ—¥ æœŸï¼š2012-8-28 ä¿® æ”¹ äººï¼šgejian æ—¥ æœŸï¼š2012-8-28 æ
+ * è¿°ï¼šç½‘ç»œçŠ¶æ€çš„æ–¹æ³•ç±»
+ */
 public class NetworkUtils {
-	
-	public static boolean ONLINE = false; //ÊÇ·ñÁªÍø
-	public static int NETWORKTYPE = 0; //ÁªÍøÀàĞÍ
-	
-    public static final int NETWORK_NONE = 0;
-    public static final int NETWORK_WIFI = 1;
-    public static final int NETWORK_MOBILE = 2;
-    
-    //ÍøÂçÊÇ·ñ¿ÉÓÃ
-    public static boolean isNetworkAvailable() { 
-        Context context = BaseApplication.getInstance().getApplicationContext() ;
-        ConnectivityManager connectivity = (ConnectivityManager) context 
-                .getSystemService(Context.CONNECTIVITY_SERVICE); 
-        if (connectivity == null) {
-        	ONLINE = false;
-            return false; 
-        } else { 
-            NetworkInfo[] info = connectivity.getAllNetworkInfo(); 
-            if (info != null) { 
-                for (int i = 0; i < info.length; i++) { 
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED) { 
-                    	ONLINE=true;         //ÊÇ·ñÁªÍø
-                    	NETWORKTYPE= getNetworkState();   // ÁªÍø·½Ê½
-                    	return true; 
-                    } 
-                } 
-            } 
-        } 
-        ONLINE=false;
-        return false; 
-    }
-    
-    //»ñÈ¡ÍøÂçÊÇ·ñ×´Ì¬
-    public static int getNetworkState(){
-    	Context context = BaseApplication.getInstance().getApplicationContext() ;
-        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        //Wifi
-        State state = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
-        if(state == State.CONNECTED||state == State.CONNECTING){
-            return NETWORK_WIFI;
-        }
+	public static boolean ONLINE = false; // æ˜¯å¦è”ç½‘
+	public static int NETWORKTYPE = 0; // è”ç½‘ç±»å‹
 
-        //3G
-        state = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
-        if(state == State.CONNECTED||state == State.CONNECTING){
-            return NETWORK_MOBILE;
-        }
-        return NETWORK_NONE;
-    }
-    
-  //»ñÈ¡ÍøÂçÊÇ·ñ×´Ì¬
-    public static String getNetworkStateByType(int type){
-    	String net_type = "";
-    	switch (type) {
+	public static final int NETWORK_NONE = 0;
+	public static final int NETWORK_WIFI = 1;
+	public static final int NETWORK_MOBILE = 2;
+
+	// ç½‘ç»œæ˜¯å¦å¯ç”¨
+	public static boolean isNetworkAvailable() {
+		Context context = BaseApplication.getInstance().getApplicationContext();
+		ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		if (connectivity == null) {
+			ONLINE = false;
+			return false;
+		} else {
+			NetworkInfo[] info = connectivity.getAllNetworkInfo();
+			if (info != null) {
+				for (int i = 0; i < info.length; i++) {
+					if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+						ONLINE = true; // æ˜¯å¦è”ç½‘
+						NETWORKTYPE = getNetworkState(); // è”ç½‘æ–¹å¼
+						return true;
+					}
+				}
+			}
+		}
+		ONLINE = false;
+		return false;
+	}
+
+	// è·å–ç½‘ç»œæ˜¯å¦çŠ¶æ€
+	public static int getNetworkState() {
+		Context context = BaseApplication.getInstance().getApplicationContext();
+		ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+		// Wifi
+		State state = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
+		if (state == State.CONNECTED || state == State.CONNECTING) {
+			return NETWORK_WIFI;
+		}
+
+		// 3G
+		state = connManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
+		if (state == State.CONNECTED || state == State.CONNECTING) {
+			return NETWORK_MOBILE;
+		}
+		return NETWORK_NONE;
+	}
+
+	// è·å–ç½‘ç»œæ˜¯å¦çŠ¶æ€
+	public static String getNetworkStateByType(int type) {
+		String net_type = "";
+		switch (type) {
 		case NETWORK_MOBILE:
 			net_type = "mobile";
 			break;
@@ -83,6 +78,6 @@ public class NetworkUtils {
 		default:
 			break;
 		}
-        return net_type;
-    }
+		return net_type;
+	}
 }

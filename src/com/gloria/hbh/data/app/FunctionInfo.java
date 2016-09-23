@@ -9,115 +9,130 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 /**
- * ÂÛÌ³µÄÖ§³ÖµÄÄÚ²¿¹¦ÄÜ
- * @author gejian
- * 2013-1-23
+ * è®ºå›çš„æ”¯æŒçš„å†…éƒ¨åŠŸèƒ½
+ * 
+ * @author gejian 2013-1-23
  */
 public class FunctionInfo {
-	boolean autologin = true;  //true £º×Ô¶¯µÇÂ¼
-	boolean isCreatShortCut = false;  //true £ºÌí¼Ó×ÀÃæÍ¼±ê  false:²»Ìí¼Ó×ÀÃæÍ¼±ê
-	boolean isSendChanle = false;  //true £ºÖ§³ÖÇşµÀ·ÖÎö  false:²»Ö§³Ö
-	boolean isSupportDataAnalysis = false;  //true £ºÌí¼ÓÊı¾İ·ÖÎö  
-	boolean isSupportPushInfo = false;  //true £ºÖ§³ÖÍÆËÍ
-	boolean isSupportSinaShare = false;  //true £ºÖ§³ÖÍÆËÍ
-	boolean isSupportBaiDuInput = false;  //true £ºÖ§³Ö°Ù¶ÈÊäÈë
-	
+	boolean autologin = true; // true ï¼šè‡ªåŠ¨ç™»å½•
+	boolean isCreatShortCut = false; // true ï¼šæ·»åŠ æ¡Œé¢å›¾æ ‡ false:ä¸æ·»åŠ æ¡Œé¢å›¾æ ‡
+	boolean isSendChanle = false; // true ï¼šæ”¯æŒæ¸ é“åˆ†æ false:ä¸æ”¯æŒ
+	boolean isSupportDataAnalysis = false; // true ï¼šæ·»åŠ æ•°æ®åˆ†æ
+	boolean isSupportPushInfo = false; // true ï¼šæ”¯æŒæ¨é€
+	boolean isSupportSinaShare = false; // true ï¼šæ”¯æŒæ¨é€
+	boolean isSupportBaiDuInput = false; // true ï¼šæ”¯æŒç™¾åº¦è¾“å…¥
+
 	WeiBoShareInfo weiBoShareInfo = null;
-	
-//	int postsShowMode = 0; // 0£º²é¿´ËùÓĞÄÚÈİ   1£ºÖ»¿´Â¥Ö÷
-//	int textSizeMode = 0;  //0:Ğ¡£¨14sp£©  1£ºÖĞ(16sp)  2£º´ó(18sp) 3£º³¬´ó(20sp)
-//	int perpage = 20;	// Ìû×ÓÃ¿Ò³ÏÔÊ¾µÄÌõÊı
-//	boolean isShowImageWithoutWIFI = false;  // false:²»ÉèÖÃ·ÇWIFIÏÂ½ûÖ¹ÏÂÍ¼   true:·ÇWIFIÏÂ½ûÖ¹ÏÂÍ¼
-//	boolean pushInfoMode = false; //ÔÚÖ§³ÖÍÆËÍµÄÇé¿öÏÂ   true:Ä¬ÈÏÍÆËÍ false:Ä¬ÈÏ²»ÍÆËÍ    
-//	boolean isShareToSina = false; //Ö§³ÖĞÂÀË·ÖÏí  false:²»·ÖÏí
-	
+
+	// int postsShowMode = 0; // 0ï¼šæŸ¥çœ‹æ‰€æœ‰å†…å®¹ 1ï¼šåªçœ‹æ¥¼ä¸»
+	// int textSizeMode = 0; //0:å°ï¼ˆ14spï¼‰ 1ï¼šä¸­(16sp) 2ï¼šå¤§(18sp) 3ï¼šè¶…å¤§(20sp)
+	// int perpage = 20; // å¸–å­æ¯é¡µæ˜¾ç¤ºçš„æ¡æ•°
+	// boolean isShowImageWithoutWIFI = false; // false:ä¸è®¾ç½®éWIFIä¸‹ç¦æ­¢ä¸‹å›¾
+	// true:éWIFIä¸‹ç¦æ­¢ä¸‹å›¾
+	// boolean pushInfoMode = false; //åœ¨æ”¯æŒæ¨é€çš„æƒ…å†µä¸‹ true:é»˜è®¤æ¨é€ false:é»˜è®¤ä¸æ¨é€
+	// boolean isShareToSina = false; //æ”¯æŒæ–°æµªåˆ†äº« false:ä¸åˆ†äº«
+
 	public boolean isAutologin() {
 		return autologin;
 	}
+
 	public void setAutologin(boolean autologin) {
 		this.autologin = autologin;
 	}
+
 	public boolean isCreatShortCut() {
 		return isCreatShortCut;
 	}
+
 	public void setCreatShortCut(boolean isCreatShortCut) {
 		this.isCreatShortCut = isCreatShortCut;
 	}
+
 	public boolean isSendChanle() {
 		return isSendChanle;
 	}
+
 	public void setSendChanle(boolean isSendChanle) {
 		this.isSendChanle = isSendChanle;
 	}
+
 	public boolean isSupportDataAnalysis() {
 		return isSupportDataAnalysis;
 	}
+
 	public void setSupportDataAnalysis(String isSupportDataAnalysis) {
-		if(isSupportDataAnalysis == null){
+		if (isSupportDataAnalysis == null) {
 			return;
 		}
-		if(isSupportDataAnalysis.equalsIgnoreCase("YES")){
+		if (isSupportDataAnalysis.equalsIgnoreCase("YES")) {
 			this.isSupportDataAnalysis = true;
-		}else if(isSupportDataAnalysis.equalsIgnoreCase("NO")){
+		} else if (isSupportDataAnalysis.equalsIgnoreCase("NO")) {
 			this.isSupportDataAnalysis = false;
 		}
 	}
+
 	public boolean isSupportPushInfo() {
 		return isSupportPushInfo;
 	}
+
 	public void setSupportPushInfo(String isSupportPushInfo) {
-		if(isSupportPushInfo == null){
+		if (isSupportPushInfo == null) {
 			return;
 		}
-		if(isSupportPushInfo.equalsIgnoreCase("YES")){
+		if (isSupportPushInfo.equalsIgnoreCase("YES")) {
 			this.isSupportPushInfo = true;
-		}else if(isSupportPushInfo.equalsIgnoreCase("NO")){
+		} else if (isSupportPushInfo.equalsIgnoreCase("NO")) {
 			this.isSupportPushInfo = false;
 		}
 	}
+
 	public boolean isSupportSinaShare() {
 		return isSupportSinaShare;
 	}
+
 	public void setSupportSinaShare(String isSupportSinaShare) {
-		if(isSupportSinaShare == null){
+		if (isSupportSinaShare == null) {
 			return;
 		}
-		if(isSupportSinaShare.equalsIgnoreCase("YES")){
+		if (isSupportSinaShare.equalsIgnoreCase("YES")) {
 			this.isSupportSinaShare = true;
-		}else if(isSupportSinaShare.equalsIgnoreCase("NO")){
+		} else if (isSupportSinaShare.equalsIgnoreCase("NO")) {
 			this.isSupportSinaShare = false;
 		}
 	}
+
 	public boolean isSupportBaiDuInput() {
 		return isSupportBaiDuInput;
 	}
+
 	public void setSupportBaiDuInput(String isSupportBaiDuInput) {
-		if(isSupportBaiDuInput == null){
+		if (isSupportBaiDuInput == null) {
 			return;
 		}
-		if(isSupportBaiDuInput.equalsIgnoreCase("YES")){
+		if (isSupportBaiDuInput.equalsIgnoreCase("YES")) {
 			this.isSupportBaiDuInput = true;
-		}else if(isSupportBaiDuInput.equalsIgnoreCase("NO")){
+		} else if (isSupportBaiDuInput.equalsIgnoreCase("NO")) {
 			this.isSupportBaiDuInput = false;
 		}
 	}
-	
+
 	public WeiBoShareInfo getWeiBoShareInfo() {
-		if(weiBoShareInfo == null){
-			//¶ÁÈ¡±¾µØµÄÅäÖÃÊı¾İ
-    		String jsonString_lastLogin =  PreferencesUtils.getStringPreferences(
-		  			BaseConstants.WeiBoShare_NAME, BaseConstants.SharedPreferences_WeiBoShareInfo, null);
-			if(jsonString_lastLogin!=null&&!jsonString_lastLogin.equals("")){
-				JsonObject jsonObject= JsonMethed.getJsonObject(JsonMethed.getJsonElement(jsonString_lastLogin));
+		if (weiBoShareInfo == null) {
+			// è¯»å–æœ¬åœ°çš„é…ç½®æ•°æ®
+			String jsonString_lastLogin = PreferencesUtils.getStringPreferences(BaseConstants.WeiBoShare_NAME,
+					BaseConstants.SharedPreferences_WeiBoShareInfo, null);
+			if (jsonString_lastLogin != null && !jsonString_lastLogin.equals("")) {
+				JsonObject jsonObject = JsonMethed.getJsonObject(JsonMethed.getJsonElement(jsonString_lastLogin));
 				weiBoShareInfo = WeiBoShareInfo.getFromJsonObject(jsonObject);
 			}
-//			else{
-//				weiBoShareInfo = new WeiBoShareInfo();
-//				Gson gson=new Gson();
-//				String gsonString=gson.toJson(weiBoShareInfo);
-//				//±£´æÅäÖÃ
-//				PreferencesUtils.setStringPreferences(BaseConstants.WeiBoShare_NAME, BaseConstants.SharedPreferences_WeiBoShareInfo, gsonString);
-//			}
+			// else{
+			// weiBoShareInfo = new WeiBoShareInfo();
+			// Gson gson=new Gson();
+			// String gsonString=gson.toJson(weiBoShareInfo);
+			// //ä¿å­˜é…ç½®
+			// PreferencesUtils.setStringPreferences(BaseConstants.WeiBoShare_NAME,
+			// BaseConstants.SharedPreferences_WeiBoShareInfo, gsonString);
+			// }
 		}
 		return weiBoShareInfo;
 	}
@@ -125,8 +140,8 @@ public class FunctionInfo {
 	public void setWeiBoShareInfo(WeiBoShareInfo weiBoShareInfo) {
 		this.weiBoShareInfo = weiBoShareInfo;
 	}
-	
-	public static FunctionInfo getFromJsonObject(JsonObject jsonObject){
+
+	public static FunctionInfo getFromJsonObject(JsonObject jsonObject) {
 		FunctionInfo functionInfo = new FunctionInfo();
 		try {
 			functionInfo.setAutologin(JsonMethed.getJsonBoolean(jsonObject.get("autologin")));
@@ -135,23 +150,24 @@ public class FunctionInfo {
 			functionInfo.setSupportDataAnalysis(JsonMethed.getJsonString(jsonObject.get("isSupportDataAnalysis")));
 			functionInfo.setSupportPushInfo(JsonMethed.getJsonString(jsonObject.get("isSupportPushInfo")));
 			functionInfo.setSupportSinaShare(JsonMethed.getJsonString(jsonObject.get("isSupportSinaShare")));
-		}catch (JsonParseException e) {
-		}catch (Exception e) {
+		} catch (JsonParseException e) {
+		} catch (Exception e) {
 		}
 		return functionInfo;
 	}
 
 	@SuppressWarnings("unchecked")
 	public static FunctionInfo getFunctionInfo(HashMap<String, Object> root) {
-		if(root == null){
+		if (root == null) {
 			return null;
 		}
 		FunctionInfo functionInfo = new FunctionInfo();
-		functionInfo.setSupportSinaShare((String)root.get("share"));
-		functionInfo.setSupportPushInfo((String)root.get("push"));
-		functionInfo.setSupportDataAnalysis((String)root.get("statistics"));
-		functionInfo.setSupportBaiDuInput((String)root.get("baidu_input"));
-		functionInfo.setWeiBoShareInfo(WeiBoShareInfo.getWeiBoShareInfo((HashMap<String, Object>)root.get("weibo_share")));
+		functionInfo.setSupportSinaShare((String) root.get("share"));
+		functionInfo.setSupportPushInfo((String) root.get("push"));
+		functionInfo.setSupportDataAnalysis((String) root.get("statistics"));
+		functionInfo.setSupportBaiDuInput((String) root.get("baidu_input"));
+		functionInfo
+				.setWeiBoShareInfo(WeiBoShareInfo.getWeiBoShareInfo((HashMap<String, Object>) root.get("weibo_share")));
 		return functionInfo;
 	}
 

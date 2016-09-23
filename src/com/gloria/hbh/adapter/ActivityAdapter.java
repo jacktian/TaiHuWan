@@ -2,19 +2,17 @@ package com.gloria.hbh.adapter;
 
 import java.util.List;
 
-import android.net.Uri;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView.ScaleType;
-import android.widget.TextView;
-
 import com.gloria.hbh.main.R;
-import com.gloria.hbh.util.Methods;
 import com.gloria.hbh.util.ScreenUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.parse.ParseImageView;
 import com.parse.ParseObject;
+
+import android.net.Uri;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * 
@@ -22,12 +20,12 @@ import com.parse.ParseObject;
  *
  */
 /**
-* ÎÄ ¼ş Ãû : PostListAdapter
-* ´´ ½¨ ÈË£º gejian
-* ÈÕ     ÆÚ£º2012-8-9
-* ĞŞ ¸Ä ÈË£ºgejian
-* ÈÕ    ÆÚ£º2012-8-9
-* Ãè    Êö£º¾ßÌå·ÖÀàÏÂÌû×ÓÁĞ±ílistviewµÄÊÊÅäÆ÷
+* æ–‡ ä»¶ å : PostListAdapter
+* åˆ› å»º äººï¼š gejian
+* æ—¥     æœŸï¼š2012-8-9
+* ä¿® æ”¹ äººï¼šgejian
+* æ—¥    æœŸï¼š2012-8-9
+* æ    è¿°ï¼šå…·ä½“åˆ†ç±»ä¸‹å¸–å­åˆ—è¡¨listviewçš„é€‚é…å™¨
 */
 public class ActivityAdapter extends Adapter_Base{
 	

@@ -9,26 +9,27 @@ import com.gloria.hbh.util.FileUtils;
 import com.google.gson.JsonObject;
 
 public class ImageInfo {
-	
+
 	public class ImgScaleTypeConstants {
-		//Í¼Æ¬Ëõ·ÅÀàĞÍ
-		public static final int IMGTYPE_INYERCEPT = 0;  //½ØÈ¡
-		public static final int IMGTYPE_SCALE = 1;  //Ëõ·Å
-		public static final int IMGTYPE_NORMAL = 2;  //Ô­Í¼
-		public static final int IMGTYPE_HOME = 1;  //Ê×Ò³·Å´ó
+		// å›¾ç‰‡ç¼©æ”¾ç±»å‹
+		public static final int IMGTYPE_INYERCEPT = 0; // æˆªå–
+		public static final int IMGTYPE_SCALE = 1; // ç¼©æ”¾
+		public static final int IMGTYPE_NORMAL = 2; // åŸå›¾
+		public static final int IMGTYPE_HOME = 1; // é¦–é¡µæ”¾å¤§
 	}
-	
+
 	static int IMGTYPE_NORMAL = 0;
 	static int IMGTYPE_FACE = 1;
 	private String code;
 	private String path;
-	private int imgtype = IMGTYPE_NORMAL; //0£º±íÇéÍ¼Æ¬   1:Ò»°ãÍ¼Æ¬  
-	private String url; //ÍøÂçURLÈ¡Í¼µÄµØÖ·
-	private String miniUrl; //ÍøÂçURLÈ¡Í¼µÄµØÖ·
+	private int imgtype = IMGTYPE_NORMAL; // 0ï¼šè¡¨æƒ…å›¾ç‰‡ 1:ä¸€èˆ¬å›¾ç‰‡
+	private String url; // ç½‘ç»œURLå–å›¾çš„åœ°å€
+	private String miniUrl; // ç½‘ç»œURLå–å›¾çš„åœ°å€
+
 	public String getMiniurl() {
-//		if(miniurl != null && !miniurl.contains("http://")){
-//			miniurl = BaseConfig.url + miniurl;
-//		}
+		// if(miniurl != null && !miniurl.contains("http://")){
+		// miniurl = BaseConfig.url + miniurl;
+		// }
 		return miniUrl;
 	}
 
@@ -36,8 +37,8 @@ public class ImageInfo {
 		this.miniUrl = miniurl;
 	}
 
-	private String motify_date = "0"; //Í¼Æ¬ĞŞ¸ÄÊ±¼ä
-		
+	private String motify_date = "0"; // å›¾ç‰‡ä¿®æ”¹æ—¶é—´
+
 	public int getImgType() {
 		return imgtype;
 	}
@@ -47,70 +48,69 @@ public class ImageInfo {
 	}
 
 	public String getMotifyDate() {
-		if(motify_date == null || motify_date.equals("")){
+		if (motify_date == null || motify_date.equals("")) {
 			motify_date = "0";
 		}
 		return motify_date;
 	}
 
 	public void setMotifyDate(String motify_date) {
-		if(motify_date == null){
+		if (motify_date == null) {
 			return;
 		}
 		this.motify_date = motify_date;
 	}
-	
-	public ImageInfo(){
-		
+
+	public ImageInfo() {
+
 	}
 
-	public ImageInfo(String urlString){
+	public ImageInfo(String urlString) {
 		this.path = urlString;
 		setTypeByUrl(path);
 	}
 
-	public ImageInfo(String code, String path){
+	public ImageInfo(String code, String path) {
 		this.code = code;
 		this.path = path;
 	}
 
-	public String getCode(){
+	public String getCode() {
 		return code;
 	}
 
-	public String getPath(){
+	public String getPath() {
 		return path;
 	}
-	
+
 	private void setTypeByUrl(String url) {
-		//URLÀàĞÍ
-		if(url.contains(BaseConstants.FACE_IMG_CONTAIN_PATH)){
+		// URLç±»å‹
+		if (url.contains(BaseConstants.FACE_IMG_CONTAIN_PATH)) {
 			imgtype = IMGTYPE_FACE;
 		}
 		imgtype = IMGTYPE_NORMAL;
 	}
-	
+
 	/*
-	 * »ñÈ¡Í¼Æ¬±£´æµØÖ·
-	 * ²»Îª¿ÕÊ±£¬±íÊ¾Í¼Æ¬´æÔÚ£»
+	 * è·å–å›¾ç‰‡ä¿å­˜åœ°å€ ä¸ä¸ºç©ºæ—¶ï¼Œè¡¨ç¤ºå›¾ç‰‡å­˜åœ¨ï¼›
 	 */
-	public String  getImgSavePath(){
+	public String getImgSavePath() {
 		String img_save_path = "";
-		String fileDir = ""; 		// Â·¾¶Ãû
-		String fileName="";    	//ÎÄ¼şÃû
-		final String filePath;		//ÎÄ¼ş¾ø¶ÔÂ·¾¶
-		
-		//ÅĞ¶ÏÊÇ±íÇé£¬»¹ÊÇÒ»°ãµÄÍ¼Æ¬£¬´Ó¶ø´Ó²»Í¬µÄÂ·¾¶ÅĞ¶ÏÍ¼Æ¬ÊÇ·ñ´æÔÚ
-		//TODO ¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£
+		String fileDir = ""; // è·¯å¾„å
+		String fileName = ""; // æ–‡ä»¶å
+		final String filePath; // æ–‡ä»¶ç»å¯¹è·¯å¾„
+
+		// åˆ¤æ–­æ˜¯è¡¨æƒ…ï¼Œè¿˜æ˜¯ä¸€èˆ¬çš„å›¾ç‰‡ï¼Œä»è€Œä»ä¸åŒçš„è·¯å¾„åˆ¤æ–­å›¾ç‰‡æ˜¯å¦å­˜åœ¨
+		// TODO ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚ã€‚
 		fileName = url.substring(url.lastIndexOf('/') + 1);
 		fileName += url.replaceAll("[/|&|?|:|%]+", "_");
-		
-		fileDir = BaseConstants.CACHE_IMG_PATH;		
-		filePath=fileDir+fileName;
-		if(FileUtils.isHasSDCard()){
-			//ÎÄ¼ş´æÔÚ
+
+		fileDir = BaseConstants.CACHE_IMG_PATH;
+		filePath = fileDir + fileName;
+		if (FileUtils.isHasSDCard()) {
+			// æ–‡ä»¶å­˜åœ¨
 			File file = new File(filePath);
-			if (file.exists()){
+			if (file.exists()) {
 				img_save_path = filePath;
 			}
 		}
@@ -118,32 +118,32 @@ public class ImageInfo {
 	}
 
 	public String getUrl() {
-//		if(url != null && !url.equals("")
-//				&& !url.contains(BaseConfig.url)){
-//			url = BaseConfig.url+url;
-//		}
+		// if(url != null && !url.equals("")
+		// && !url.contains(BaseConfig.url)){
+		// url = BaseConfig.url+url;
+		// }
 		return url;
 	}
 
 	public void setUrl(String url) {
-		if(url == null){
+		if (url == null) {
 			return;
 		}
 		this.url = url;
 	}
 
 	public static ImageInfo getImageInfo(HashMap<String, Object> root) {
-		if(root == null){
+		if (root == null) {
 			return null;
 		}
 		ImageInfo imageInfo = new ImageInfo();
-		imageInfo.setUrl((String)root.get("url"));
-		imageInfo.setMotifyDate((String)root.get("motify_date"));
+		imageInfo.setUrl((String) root.get("url"));
+		imageInfo.setMotifyDate((String) root.get("motify_date"));
 		return imageInfo;
 	}
 
 	public static ImageInfo getImageInfoFromJson(JsonObject jsonObject) {
-		if(jsonObject == null){
+		if (jsonObject == null) {
 			return null;
 		}
 		ImageInfo imageInfo = new ImageInfo();

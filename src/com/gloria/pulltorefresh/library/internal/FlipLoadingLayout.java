@@ -15,6 +15,10 @@
  *******************************************************************************/
 package com.gloria.pulltorefresh.library.internal;
 
+import com.gloria.hbh.main.R;
+import com.gloria.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.gloria.pulltorefresh.library.PullToRefreshBase.Orientation;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -25,10 +29,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView.ScaleType;
-
-import com.gloria.hbh.main.R;
-import com.gloria.pulltorefresh.library.PullToRefreshBase.Mode;
-import com.gloria.pulltorefresh.library.PullToRefreshBase.Orientation;
 
 @SuppressLint("ViewConstructor")
 public class FlipLoadingLayout extends LoadingLayout {
@@ -122,22 +122,22 @@ public class FlipLoadingLayout extends LoadingLayout {
 	private float getDrawableRotationAngle() {
 		float angle = 0f;
 		switch (mMode) {
-			case PULL_FROM_END:
-				if (mScrollDirection == Orientation.HORIZONTAL) {
-					angle = 90f;
-				} else {
-					angle = 180f;
-				}
-				break;
+		case PULL_FROM_END:
+			if (mScrollDirection == Orientation.HORIZONTAL) {
+				angle = 90f;
+			} else {
+				angle = 180f;
+			}
+			break;
 
-			case PULL_FROM_START:
-				if (mScrollDirection == Orientation.HORIZONTAL) {
-					angle = 270f;
-				}
-				break;
+		case PULL_FROM_START:
+			if (mScrollDirection == Orientation.HORIZONTAL) {
+				angle = 270f;
+			}
+			break;
 
-			default:
-				break;
+		default:
+			break;
 		}
 
 		return angle;

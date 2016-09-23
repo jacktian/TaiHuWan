@@ -17,13 +17,13 @@ package com.gloria.pulltorefresh.library.extras;
 
 import java.util.HashMap;
 
-import android.content.Context;
-import android.media.MediaPlayer;
-import android.view.View;
-
 import com.gloria.pulltorefresh.library.PullToRefreshBase;
 import com.gloria.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.gloria.pulltorefresh.library.PullToRefreshBase.State;
+
+import android.content.Context;
+import android.media.MediaPlayer;
+import android.view.View;
 
 public class SoundPullEventListener<V extends View> implements PullToRefreshBase.OnPullEventListener<V> {
 
@@ -35,7 +35,8 @@ public class SoundPullEventListener<V extends View> implements PullToRefreshBase
 	/**
 	 * Constructor
 	 * 
-	 * @param context - Context
+	 * @param context
+	 *            - Context
 	 */
 	public SoundPullEventListener(Context context) {
 		mContext = context;
@@ -57,8 +58,10 @@ public class SoundPullEventListener<V extends View> implements PullToRefreshBase
 	 * If you've already set a sound for a certain event, and add another sound
 	 * for that event, only the new sound will be played.
 	 * 
-	 * @param event - The event for which the sound will be played.
-	 * @param resId - Resource Id of the sound file to be played (e.g.
+	 * @param event
+	 *            - The event for which the sound will be played.
+	 * @param resId
+	 *            - Resource Id of the sound file to be played (e.g.
 	 *            <var>R.raw.pull_sound</var>)
 	 */
 	public void addSoundEvent(State event, int resId) {

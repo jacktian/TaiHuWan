@@ -1,13 +1,5 @@
 package com.gloria.hbh.main;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.baidu.mapapi.map.Geometry;
 import com.baidu.mapapi.map.Graphic;
 import com.baidu.mapapi.map.LocationData;
@@ -17,33 +9,40 @@ import com.baidu.mapapi.map.MyLocationOverlay;
 import com.baidu.mapapi.map.PopupClickListener;
 import com.baidu.mapapi.map.PopupOverlay;
 import com.baidu.mapapi.map.Symbol;
-import com.baidu.mapapi.map.Symbol.Color;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 import com.gloria.hbh.data.app.SubTabInfo.SubTabInfoTypeConstants;
 import com.gloria.hbh.util.BMapUtil;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 /*
- * ÄÚÈİÏêÏ¸Ò³Ãæ
+ * å†…å®¹è¯¦ç»†é¡µé¢
  */
-public class Activity_FoodLodgingDetail extends Activity_Base{
-	
-	//µØÍ¼Ïà¹Ø£¬Ê¹ÓÃ¼Ì³ĞMapViewµÄMyLocationMapViewÄ¿µÄÊÇÖØĞ´touchÊÂ¼şÊµÏÖÅİÅİ´¦Àí
-	//Èç¹û²»´¦ÀítouchÊÂ¼ş£¬ÔòÎŞĞè¼Ì³Ğ£¬Ö±½ÓÊ¹ÓÃMapView¼´¿É
-	MyLocationMapView mMapView = null;	// µØÍ¼View
+public class Activity_FoodLodgingDetail extends Activity_Base {
+
+	// åœ°å›¾ç›¸å…³ï¼Œä½¿ç”¨ç»§æ‰¿MapViewçš„MyLocationMapViewç›®çš„æ˜¯é‡å†™touchäº‹ä»¶å®ç°æ³¡æ³¡å¤„ç†
+	// å¦‚æœä¸å¤„ç†touchäº‹ä»¶ï¼Œåˆ™æ— éœ€ç»§æ‰¿ï¼Œç›´æ¥ä½¿ç”¨MapViewå³å¯
+	MyLocationMapView mMapView = null; // åœ°å›¾View
 	private MapController mMapController = null;
 
-	//¶¨Î»Í¼²ã
+	// å®šä½å›¾å±‚
 	locationOverlay myLocationOverlay = null;
-	//µ¯³öÅİÅİÍ¼²ã
-	private PopupOverlay   pop  = null;//µ¯³öÅİÅİÍ¼²ã£¬ä¯ÀÀ½ÚµãÊ±Ê¹ÓÃ
-	private TextView  popupText = null;//ÅİÅİview
+	// å¼¹å‡ºæ³¡æ³¡å›¾å±‚
+	private PopupOverlay pop = null;// å¼¹å‡ºæ³¡æ³¡å›¾å±‚ï¼Œæµè§ˆèŠ‚ç‚¹æ—¶ä½¿ç”¨
+	private TextView popupText = null;// æ³¡æ³¡view
 	private View viewCache = null;
-	
+
 	TextView text_title;
 	TextView text_adr;
 	TextView text_phonenum;
 	TextView text_distance;
-	
+
 	String title = "";
 	String adr = "";
 	String phonenum = "";
@@ -52,152 +51,153 @@ public class Activity_FoodLodgingDetail extends Activity_Base{
 	String longitude = "";
 	GeoPoint geoPoint;
 	int type = SubTabInfoTypeConstants.SUBCATE_COMMON;
-	
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_foodlodgingdetail);
-        
-        initData();
+		setContentView(R.layout.activity_foodlodgingdetail);
+
+		initData();
 		setView();
 		initMap();
 		setListener();
 	}
-	 
+
 	private void initData() {
 		title = getIntent().getStringExtra("title");
 		adr = getIntent().getStringExtra("adr");
 		phonenum = getIntent().getStringExtra("phonenum");
 		distance = getIntent().getStringExtra("distance");
-		latitude= getIntent().getStringExtra("latitude");
-		longitude= getIntent().getStringExtra("longitude");
+		latitude = getIntent().getStringExtra("latitude");
+		longitude = getIntent().getStringExtra("longitude");
 		geoPoint = new GeoPoint(Integer.valueOf(latitude), Integer.valueOf(longitude));
 	}
 
 	private void setView() {
-		titlebar = (LinearLayout)findViewById(R.id.titlebar);
+		titlebar = (LinearLayout) findViewById(R.id.titlebar);
 		titlebar.setVisibility(View.VISIBLE);
-    	titlebar_name = (TextView)findViewById(R.id.titlebar_name);
+		titlebar_name = (TextView) findViewById(R.id.titlebar_name);
 		titlebar_name.setText(title);
-		titlebar_back = (Button)findViewById(R.id.titlebar_back);
-		titlebar_menu = (Button)findViewById(R.id.titlebar_menu);
-	 	titlebar_back.setVisibility(View.VISIBLE);
-	 	titlebar_menu.setVisibility(View.INVISIBLE);
-	 	titlebar_name.setVisibility(View.VISIBLE);
-	 	titlebar_menu.setBackgroundResource(R.drawable.titlebtn_bg_share);
-	 	
-	 	text_title = (TextView)findViewById(R.id.title);
-	 	text_title.setText(title);
-	 	text_adr = (TextView)findViewById(R.id.adr);
-	 	text_adr.setText(adr);
-	 	text_phonenum = (TextView)findViewById(R.id.phonenum);
-	 	text_phonenum.setText(phonenum);
-	 	text_distance = (TextView)findViewById(R.id.distance);
-	 	text_distance.setText(distance);
+		titlebar_back = (Button) findViewById(R.id.titlebar_back);
+		titlebar_menu = (Button) findViewById(R.id.titlebar_menu);
+		titlebar_back.setVisibility(View.VISIBLE);
+		titlebar_menu.setVisibility(View.INVISIBLE);
+		titlebar_name.setVisibility(View.VISIBLE);
+		titlebar_menu.setBackgroundResource(R.drawable.titlebtn_bg_share);
+
+		text_title = (TextView) findViewById(R.id.title);
+		text_title.setText(title);
+		text_adr = (TextView) findViewById(R.id.adr);
+		text_adr.setText(adr);
+		text_phonenum = (TextView) findViewById(R.id.phonenum);
+		text_phonenum.setText(phonenum);
+		text_distance = (TextView) findViewById(R.id.distance);
+		text_distance.setText(distance);
 	}
-	
+
 	private void initMap() {
-		//µØÍ¼³õÊ¼»¯
-        mMapView = (MyLocationMapView)findViewById(R.id.bmapView);
-        mMapController = mMapView.getController();
-        mMapView.getController().setZoom(20);
-        mMapView.getController().enableClick(true);
-        mMapView.setBuiltInZoomControls(true);
-        //´´½¨ µ¯³öÅİÅİÍ¼²ã
-        createPaopao();
-        
-//        GraphicsOverlay graphicsOverlay = new GraphicsOverlay(mMapView);
-//        mMapView.getOverlays().add(graphicsOverlay);
-//    	//Ìí¼Óµã
-//        graphicsOverlay.setData(drawPoint(Integer.valueOf(latitude),Integer.valueOf(longitude)));
-//        
-        //¶¨Î»Í¼²ã³õÊ¼»¯
-        myLocationOverlay = new locationOverlay(mMapView);
-        LocationData locData = new LocationData();
-        locData.latitude = (double)geoPoint.getLatitudeE6()/1E6;
-        locData.longitude = (double)geoPoint.getLongitudeE6()/1E6;
-        //ÉèÖÃ¶¨Î»Êı¾İ
-        myLocationOverlay.setData(locData);
-        //Ìí¼Ó¶¨Î»Í¼²ã
-        mMapView.getOverlays().add(myLocationOverlay);
-        myLocationOverlay.enableCompass();
-        //Ö´ĞĞµØÍ¼Ë¢ĞÂÊ¹ÉúĞ§
-        mMapController.animateTo(geoPoint);
-        popupText.setBackgroundResource(R.drawable.popup);
+		// åœ°å›¾åˆå§‹åŒ–
+		mMapView = (MyLocationMapView) findViewById(R.id.bmapView);
+		mMapController = mMapView.getController();
+		mMapView.getController().setZoom(20);
+		mMapView.getController().enableClick(true);
+		mMapView.setBuiltInZoomControls(true);
+		// åˆ›å»º å¼¹å‡ºæ³¡æ³¡å›¾å±‚
+		createPaopao();
+
+		// GraphicsOverlay graphicsOverlay = new GraphicsOverlay(mMapView);
+		// mMapView.getOverlays().add(graphicsOverlay);
+		// //æ·»åŠ ç‚¹
+		// graphicsOverlay.setData(drawPoint(Integer.valueOf(latitude),Integer.valueOf(longitude)));
+		//
+		// å®šä½å›¾å±‚åˆå§‹åŒ–
+		myLocationOverlay = new locationOverlay(mMapView);
+		LocationData locData = new LocationData();
+		locData.latitude = (double) geoPoint.getLatitudeE6() / 1E6;
+		locData.longitude = (double) geoPoint.getLongitudeE6() / 1E6;
+		// è®¾ç½®å®šä½æ•°æ®
+		myLocationOverlay.setData(locData);
+		// æ·»åŠ å®šä½å›¾å±‚
+		mMapView.getOverlays().add(myLocationOverlay);
+		myLocationOverlay.enableCompass();
+		// æ‰§è¡Œåœ°å›¾åˆ·æ–°ä½¿ç”Ÿæ•ˆ
+		mMapController.animateTo(geoPoint);
+		popupText.setBackgroundResource(R.drawable.popup);
 		popupText.setText("  " + title + "  ");
-		pop.showPopup(BMapUtil.getBitmapFromView(popupText),geoPoint,8);
-        mMapView.refresh();
+		pop.showPopup(BMapUtil.getBitmapFromView(popupText), geoPoint, 8);
+		mMapView.refresh();
 	}
-	
-	//¼Ì³ĞMyLocationOverlayÖØĞ´dispatchTapÊµÏÖµã»÷´¦Àí
-  	public class locationOverlay extends MyLocationOverlay{
 
-  		public locationOverlay(MapView mapView) {
-  			super(mapView);
-  			// TODO Auto-generated constructor stub
-  		}
-  		@Override
-  		protected boolean dispatchTap() {
-  			// TODO Auto-generated method stub
-  			//´¦Àíµã»÷ÊÂ¼ş,µ¯³öÅİÅİ
-  			popupText.setBackgroundResource(R.drawable.popup);
+	// ç»§æ‰¿MyLocationOverlayé‡å†™dispatchTapå®ç°ç‚¹å‡»å¤„ç†
+	public class locationOverlay extends MyLocationOverlay {
+
+		public locationOverlay(MapView mapView) {
+			super(mapView);
+			// TODO Auto-generated constructor stub
+		}
+
+		@Override
+		protected boolean dispatchTap() {
+			// TODO Auto-generated method stub
+			// å¤„ç†ç‚¹å‡»äº‹ä»¶,å¼¹å‡ºæ³¡æ³¡
+			popupText.setBackgroundResource(R.drawable.popup);
 			popupText.setText(title);
-			pop.showPopup(BMapUtil.getBitmapFromView(popupText),geoPoint,8);
-  			return true;
-  		}
-  		
-  	}
+			pop.showPopup(BMapUtil.getBitmapFromView(popupText), geoPoint, 8);
+			return true;
+		}
 
-	
+	}
+
 	/**
-     * »æÖÆµ¥µã£¬¸Ãµã×´Ì¬²»ËæµØÍ¼×´Ì¬±ä»¯¶ø±ä»¯
-     * @return µã¶ÔÏó
-     */
-    public Graphic drawPoint(int lat, int lon){
-//       	double mLat = 39.98923;
-//       	double mLon = 116.397428;
-//    	int lat = (int) (mLat*1E6);
-//	   	int lon = (int) (mLon*1E6);   	
-	   	GeoPoint pt1 = new GeoPoint(lat, lon);
-	   	
-	   	//¹¹½¨µã
-  		Geometry pointGeometry = new Geometry();
-  		//ÉèÖÃ×ø±ê
-  		pointGeometry.setPoint(pt1, 10);
-  		//Éè¶¨ÑùÊ½
-  		Symbol pointSymbol = new Symbol();
- 		Symbol.Color pointColor = pointSymbol.new Color();
- 		pointColor.red = 0;
- 		pointColor.green = 126;
- 		pointColor.blue = 255;
- 		pointColor.alpha = 255;
- 		pointSymbol.setPointSymbol(pointColor);
-  		//Éú³ÉGraphic¶ÔÏó
-  		Graphic pointGraphic = new Graphic(pointGeometry, pointSymbol);
-  		return pointGraphic;
-    }
-	
-	 /**
-	 * ´´½¨µ¯³öÅİÅİÍ¼²ã
+	 * ç»˜åˆ¶å•ç‚¹ï¼Œè¯¥ç‚¹çŠ¶æ€ä¸éšåœ°å›¾çŠ¶æ€å˜åŒ–è€Œå˜åŒ–
+	 * 
+	 * @return ç‚¹å¯¹è±¡
 	 */
-	public void createPaopao(){
+	public Graphic drawPoint(int lat, int lon) {
+		// double mLat = 39.98923;
+		// double mLon = 116.397428;
+		// int lat = (int) (mLat*1E6);
+		// int lon = (int) (mLon*1E6);
+		GeoPoint pt1 = new GeoPoint(lat, lon);
+
+		// æ„å»ºç‚¹
+		Geometry pointGeometry = new Geometry();
+		// è®¾ç½®åæ ‡
+		pointGeometry.setPoint(pt1, 10);
+		// è®¾å®šæ ·å¼
+		Symbol pointSymbol = new Symbol();
+		Symbol.Color pointColor = pointSymbol.new Color();
+		pointColor.red = 0;
+		pointColor.green = 126;
+		pointColor.blue = 255;
+		pointColor.alpha = 255;
+		pointSymbol.setPointSymbol(pointColor);
+		// ç”ŸæˆGraphicå¯¹è±¡
+		Graphic pointGraphic = new Graphic(pointGeometry, pointSymbol);
+		return pointGraphic;
+	}
+
+	/**
+	 * åˆ›å»ºå¼¹å‡ºæ³¡æ³¡å›¾å±‚
+	 */
+	public void createPaopao() {
 		viewCache = getLayoutInflater().inflate(R.layout.custom_text_view, null);
-        popupText =(TextView) viewCache.findViewById(R.id.textcache);
-        //ÅİÅİµã»÷ÏìÓ¦»Øµ÷
-        PopupClickListener popListener = new PopupClickListener(){
+		popupText = (TextView) viewCache.findViewById(R.id.textcache);
+		// æ³¡æ³¡ç‚¹å‡»å“åº”å›è°ƒ
+		PopupClickListener popListener = new PopupClickListener() {
 			@Override
 			public void onClickedPopup(int index) {
 				Log.v("click", "clickapoapo");
 			}
-        };
-        pop = new PopupOverlay(mMapView,popListener);
-        MyLocationMapView.pop = pop;
+		};
+		pop = new PopupOverlay(mMapView, popListener);
+		MyLocationMapView.pop = pop;
 	}
 
 	private void setListener() {
 		titlebar_back.setOnClickListener(onClickListener);
 		titlebar_menu.setOnClickListener(onClickListener);
 	}
-	
+
 	private OnClickListener onClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			switch (v.getId()) {
@@ -205,12 +205,12 @@ public class Activity_FoodLodgingDetail extends Activity_Base{
 				finish();
 				break;
 			case R.id.titlebar_menu:
-//				goToShare();
+				// goToShare();
 				break;
 			default:
 				break;
 			}
 		}
 	};
-	
+
 }

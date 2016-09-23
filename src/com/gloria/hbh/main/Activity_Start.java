@@ -3,23 +3,6 @@ package com.gloria.hbh.main;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.preference.PreferenceManager;
-import android.provider.Settings;
-import android.widget.ImageView;
-
-import com.baidu.mobstat.SendStrategyEnum;
-import com.baidu.mobstat.StatService;
 import com.gloria.hbh.application.BaseApplication;
 import com.gloria.hbh.data.app.Plist;
 import com.gloria.hbh.data.app.UpdateInfo;
@@ -29,191 +12,201 @@ import com.gloria.hbh.util.Methods;
 import com.gloria.hbh.util.NetworkUtils;
 import com.gloria.hbh.util.ScreenUtils;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.Settings;
+import android.widget.ImageView;
+
 /**
-* ÎÄ ¼ş Ãû : Start_Activity
-* ´´ ½¨ ÈË£º gejian
-* ÈÕ     ÆÚ£º2013-1-15
-* ĞŞ ¸Ä ÈË£ºgejian
-* ÈÕ    ÆÚ£º2013-1-15
-* Ãè    Êö£ºÆô¶¯Ò³Ãæ
-*/
+ * æ–‡ ä»¶ å : Start_Activity åˆ› å»º äººï¼š gejian æ—¥ æœŸï¼š2013-1-15 ä¿® æ”¹ äººï¼šgejian æ—¥ æœŸï¼š2013-1-15
+ * æ è¿°ï¼šå¯åŠ¨é¡µé¢
+ */
 public class Activity_Start extends Activity_Base {
-	
-//	LinearLayout layout;
+
+	// LinearLayout layout;
 	ImageView item_img;
-	
-	UpdateInfo updateInfo;  //¸üĞÂĞÅÏ¢
-	long stime, etime;  //¿ªÊ¼£¬½áÊøÊ±¼ä
-	private final int DIALOG_NONETWORK = 0; // ÌáÊ¾ÎŞÍøÂç
-	private final int DIALOG_VERSIONUPDATE = 1; // ÌáÊ¾°æ±¾¸üĞÂ
-	private boolean islogin = false; //ÊÇ·ñµÇÂ¼
-	int ret = 1; //·µ»Ø1¾ÍÊÇ¿ÉÒÔÊ¹ÓÃ 0²»¿ÉÒÔÊ¹ÓÃ
-	
+
+	UpdateInfo updateInfo; // æ›´æ–°ä¿¡æ¯
+	long stime, etime; // å¼€å§‹ï¼Œç»“æŸæ—¶é—´
+	private final int DIALOG_NONETWORK = 0; // æç¤ºæ— ç½‘ç»œ
+	private final int DIALOG_VERSIONUPDATE = 1; // æç¤ºç‰ˆæœ¬æ›´æ–°
+	private boolean islogin = false; // æ˜¯å¦ç™»å½•
+	int ret = 1; // è¿”å›1å°±æ˜¯å¯ä»¥ä½¿ç”¨ 0ä¸å¯ä»¥ä½¿ç”¨
+
 	String img_url = "";
 	String filePath = "";
-	
+
 	private final Timer timer = new Timer();
 	private TimerTask task;
 	boolean isStart = true;
-	 
-    public void onCreate(Bundle savedInstanceState) {
-    	super.onCreate(savedInstanceState);
-	    setContentView(R.layout.activity_start);
-	    
-        stime = System.currentTimeMillis();
-        
-        item_img = (ImageView) findViewById(R.id.item_img);
-        
-        img_url = Plist.getInstance().getAppInfo().getLaunchImage().getUrl();
-        filePath = ImageUtils.IsSaveImageFileExist(img_url,ScreenUtils.getInstance().getWidth(),
+
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_start);
+
+		stime = System.currentTimeMillis();
+
+		item_img = (ImageView) findViewById(R.id.item_img);
+
+		img_url = Plist.getInstance().getAppInfo().getLaunchImage().getUrl();
+		filePath = ImageUtils.IsSaveImageFileExist(img_url, ScreenUtils.getInstance().getWidth(),
 				ScreenUtils.getInstance().getHeight(), ImgScaleTypeConstants.IMGTYPE_SCALE);
-        
-//        if(!filePath.equals("")){
-//       	 	Bitmap bitmap = ImageUtils.getBitmapByPath(filePath);
-//       	 	item_img.setImageBitmap(bitmap);
-//        }else{
-        	item_img.setBackgroundResource(R.drawable.backgroud);
-//        }
-        
-//		new StartRequestTask().execute();
-        //Òì²½²Ù×÷
-	    task = new TimerTask() {
-        	 public void run() {
-        		Message message = new Message();
-        		message.what = 1;
-        		handler.sendMessage(message);
-        	}
-        };
-        timer.schedule(task, 100, 500);
-        
+
+		// if(!filePath.equals("")){
+		// Bitmap bitmap = ImageUtils.getBitmapByPath(filePath);
+		// item_img.setImageBitmap(bitmap);
+		// }else{
+		item_img.setBackgroundResource(R.drawable.backgroud);
+		// }
+
+		// new StartRequestTask().execute();
+		// å¼‚æ­¥æ“ä½œ
+		task = new TimerTask() {
+			public void run() {
+				Message message = new Message();
+				message.what = 1;
+				handler.sendMessage(message);
+			}
+		};
+		timer.schedule(task, 100, 500);
+
 	}
-	
+
 	Handler handler = new Handler() {
 		public void handleMessage(Message message) {
-			if(isStart){
+			if (isStart) {
 				isStart = false;
 				new StartRequestTask().execute();
 			}
 			super.handleMessage(message);
 		}
 	};
-	
-	protected  void onDestroy() {
+
+	protected void onDestroy() {
 		super.onDestroy();
 		timer.cancel();
 	}
 
-//    public void  gotoMainActivity(){
-//    	if(ret == 0){
-//    		BaseApplication.getInstance().exit();
-//    		return;
-//    	}
-//    	
-//    	etime = System.currentTimeMillis();
-//    	long time = etime -stime;
-//    	if(time < 2*1000){
-//    		try {
-//				Thread.sleep(2*1000-time);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//    	}
-//    	
-//    	SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//    	// ÊÇ·ñÔÚ×ÀÃæÉÏÌí¼ÓÁË¿ì½İ·½Ê½
-//    	boolean isFirstOpenSoft = sp.getBoolean("isFirstOpenSoft",true);
-//    	// ´æÔÚ¿ì½İ·½Ê½»òÕß²»ÔÊĞíÌí¼Ó£¬return
-//    	if (isFirstOpenSoft){
-//    		// ÅäÖÃ²»ÔÙÌáÊ¾Ìí¼Ó¿ì½İ·½Ê½
-//        	Editor editor = sp.edit();
-//        	editor.putBoolean("isFirstOpenSoft", false);
-//        	editor.commit();
-//        	Intent intent = new Intent();
-//    		intent.setClass(Activity_Start.this, Activity_NewFunctionHint.class);
-//        	intent.putExtra("type", "FromStart");
-//        	startActivity(intent);
-//    	}else{
-//    		Intent select_i = new Intent();
-////    		select_i.setClass(Activity_Start.this, Activity_Main.class);
-//    		select_i.setClass(Activity_Start.this, Activity_Guide.class);
-//			startActivity(select_i);
-//    	}
-//    }
-	
+	// public void gotoMainActivity(){
+	// if(ret == 0){
+	// BaseApplication.getInstance().exit();
+	// return;
+	// }
+	//
+	// etime = System.currentTimeMillis();
+	// long time = etime -stime;
+	// if(time < 2*1000){
+	// try {
+	// Thread.sleep(2*1000-time);
+	// } catch (InterruptedException e) {
+	// e.printStackTrace();
+	// }
+	// }
+	//
+	// SharedPreferences sp =
+	// PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+	// // æ˜¯å¦åœ¨æ¡Œé¢ä¸Šæ·»åŠ äº†å¿«æ·æ–¹å¼
+	// boolean isFirstOpenSoft = sp.getBoolean("isFirstOpenSoft",true);
+	// // å­˜åœ¨å¿«æ·æ–¹å¼æˆ–è€…ä¸å…è®¸æ·»åŠ ï¼Œreturn
+	// if (isFirstOpenSoft){
+	// // é…ç½®ä¸å†æç¤ºæ·»åŠ å¿«æ·æ–¹å¼
+	// Editor editor = sp.edit();
+	// editor.putBoolean("isFirstOpenSoft", false);
+	// editor.commit();
+	// Intent intent = new Intent();
+	// intent.setClass(Activity_Start.this, Activity_NewFunctionHint.class);
+	// intent.putExtra("type", "FromStart");
+	// startActivity(intent);
+	// }else{
+	// Intent select_i = new Intent();
+	//// select_i.setClass(Activity_Start.this, Activity_Main.class);
+	// select_i.setClass(Activity_Start.this, Activity_Guide.class);
+	// startActivity(select_i);
+	// }
+	// }
+
 	protected void gotoGuideActivity() {
-    	if(ret == 0){
-		BaseApplication.getInstance().exit();
-		return;
-    	}
-	
-    	etime = System.currentTimeMillis();
-    	long time = etime -stime;
-    	if(time < 2*1000){
-    		try {
-    			Thread.sleep(2*1000-time);
-    		} catch (InterruptedException e) {
-    			e.printStackTrace();
-    		}
+		if (ret == 0) {
+			BaseApplication.getInstance().exit();
+			return;
 		}
-	
-    	//SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-    	// ÊÇ·ñÔÚ×ÀÃæÉÏÌí¼ÓÁË¿ì½İ·½Ê½
-    	//boolean isFirstOpenSoft = sp.getBoolean("isFirstOpenSoft",true);
-    	// ´æÔÚ¿ì½İ·½Ê½»òÕß²»ÔÊĞíÌí¼Ó£¬return
-//		if (isFirstOpenSoft){
-//			// ÅäÖÃ²»ÔÙÌáÊ¾Ìí¼Ó¿ì½İ·½Ê½
-//			Editor editor = sp.edit();
-//			editor.putBoolean("isFirstOpenSoft", false);
-//			editor.commit();
-//			Intent intent = new Intent();
-//			intent.setClass(Activity_Start.this, Activity_NewFunctionHint.class);
-//			intent.putExtra("type", "FromStart");
-//			startActivity(intent);
-//			finish();
-//		}else{
-//			Intent select_i = new Intent();
-////			select_i.setClass(Activity_Start.this, Activity_Main.class);
-//			select_i.setClass(Activity_Start.this, Activity_Guide.class);
-//			startActivity(select_i);
-//			finish();
-			
-			
-			Intent intent = new Intent();
-	        intent.setClass(Activity_Start.this, Activity_Main.class);
-	        intent.putExtra("type", Activity_Main.TYPE_INFO);
-	        startActivity(intent);
-			
-		//}
+
+		etime = System.currentTimeMillis();
+		long time = etime - stime;
+		if (time < 2 * 1000) {
+			try {
+				Thread.sleep(2 * 1000 - time);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		// SharedPreferences sp =
+		// PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		// æ˜¯å¦åœ¨æ¡Œé¢ä¸Šæ·»åŠ äº†å¿«æ·æ–¹å¼
+		// boolean isFirstOpenSoft = sp.getBoolean("isFirstOpenSoft",true);
+		// å­˜åœ¨å¿«æ·æ–¹å¼æˆ–è€…ä¸å…è®¸æ·»åŠ ï¼Œreturn
+		// if (isFirstOpenSoft){
+		// // é…ç½®ä¸å†æç¤ºæ·»åŠ å¿«æ·æ–¹å¼
+		// Editor editor = sp.edit();
+		// editor.putBoolean("isFirstOpenSoft", false);
+		// editor.commit();
+		// Intent intent = new Intent();
+		// intent.setClass(Activity_Start.this, Activity_NewFunctionHint.class);
+		// intent.putExtra("type", "FromStart");
+		// startActivity(intent);
+		// finish();
+		// }else{
+		// Intent select_i = new Intent();
+		//// select_i.setClass(Activity_Start.this, Activity_Main.class);
+		// select_i.setClass(Activity_Start.this, Activity_Guide.class);
+		// startActivity(select_i);
+		// finish();
+
+		Intent intent = new Intent();
+		intent.setClass(Activity_Start.this, Activity_Main.class);
+		intent.putExtra("type", Activity_Main.TYPE_INFO);
+		startActivity(intent);
+
+		// }
 	}
-    
-    //ÏÔÊ¾¶Ô»°¿ò
-    @SuppressWarnings("deprecation")
+
+	// æ˜¾ç¤ºå¯¹è¯æ¡†
+	@SuppressWarnings("deprecation")
 	protected Dialog onCreateDialog(int id, Bundle args) {
 		switch (id) {
 		case DIALOG_NONETWORK:
-			return new AlertDialog.Builder(this).setTitle(R.string.hint_Msg)
-					.setMessage(R.string.msg_isSetNetwork).setPositiveButton(R.string.ok,networkListener)
-					.setNegativeButton(R.string.cancel,gotoGuideListener).create();
+			return new AlertDialog.Builder(this).setTitle(R.string.hint_Msg).setMessage(R.string.msg_isSetNetwork)
+					.setPositiveButton(R.string.ok, networkListener)
+					.setNegativeButton(R.string.cancel, gotoGuideListener).create();
 		case DIALOG_VERSIONUPDATE:
-			return new AlertDialog.Builder(this).setTitle(R.string.hint_Msg)
-					.setMessage(updateInfo.getUpdateContent()).setPositiveButton(R.string.ok,gotoUpdateListener)
-					.setNegativeButton(R.string.cancel,gotoUpdateListener).create();
+			return new AlertDialog.Builder(this).setTitle(R.string.hint_Msg).setMessage(updateInfo.getUpdateContent())
+					.setPositiveButton(R.string.ok, gotoUpdateListener)
+					.setNegativeButton(R.string.cancel, gotoUpdateListener).create();
 		default:
 			return super.onCreateDialog(id);
 		}
 	}
-    
-    //¶Ô»°¿ò¼àÌıÊÂ¼ş
+
+	// å¯¹è¯æ¡†ç›‘å¬äº‹ä»¶
 	DialogInterface.OnClickListener networkListener = new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int which) {
-			startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));  //´ò¿ªÉèÖÃÍøÂçµÄ½çÃæ
+			startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS)); // æ‰“å¼€è®¾ç½®ç½‘ç»œçš„ç•Œé¢
 		}
 	};
-//	DialogInterface.OnClickListener gotoMainListener = new DialogInterface.OnClickListener() {
-//		public void onClick(DialogInterface dialog, int which) {
-//			gotoMainActivity();
-//		}
-//	};
+	// DialogInterface.OnClickListener gotoMainListener = new
+	// DialogInterface.OnClickListener() {
+	// public void onClick(DialogInterface dialog, int which) {
+	// gotoMainActivity();
+	// }
+	// };
 	DialogInterface.OnClickListener gotoGuideListener = new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int which) {
 			gotoGuideActivity();
@@ -221,67 +214,72 @@ public class Activity_Start extends Activity_Base {
 	};
 	DialogInterface.OnClickListener gotoUpdateListener = new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int which) {
-			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(updateInfo.getApkUrl()));  
-            startActivity(intent);
+			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(updateInfo.getApkUrl()));
+			startActivity(intent);
 		}
 	};
-	
-	
+
 	/**
-	 * Òì²½¼ÓÔØ
+	 * å¼‚æ­¥åŠ è½½
 	 */
-	 public  class StartRequestTask extends AsyncTask<Void, Void, Boolean> {     //Òì²½ÇëÇó
+	public class StartRequestTask extends AsyncTask<Void, Void, Boolean> { // å¼‚æ­¥è¯·æ±‚
 		protected void onPostExecute(Boolean result) {
-			if(!NetworkUtils.isNetworkAvailable()){
-//				ForumToast.show(getString(R.string.hint_NoNetwork));
-			    showDialog(DIALOG_NONETWORK);
-			    return;
-			}
-			if(Methods.disposeDataException(result)){
+			if (!NetworkUtils.isNetworkAvailable()) {
+				// ForumToast.show(getString(R.string.hint_NoNetwork));
+				showDialog(DIALOG_NONETWORK);
 				return;
 			}
-//			etime =System.currentTimeMillis();
-			if((Boolean) result){  //×Ô¶¯¸üĞÂ£¬Ìø×ªµ½µç×ÓÊĞ³¡
+			if (Methods.disposeDataException(result)) {
+				return;
+			}
+			// etime =System.currentTimeMillis();
+			if ((Boolean) result) { // è‡ªåŠ¨æ›´æ–°ï¼Œè·³è½¬åˆ°ç”µå­å¸‚åœº
 				showDialog(DIALOG_VERSIONUPDATE);
-			}else{
-				gotoGuideActivity();	
+			} else {
+				gotoGuideActivity();
 			}
 		}
-		
-		protected Boolean doInBackground(Void... params) {	
-			boolean isUpdate = false; //false:Ã»¸üĞÂ
-			
-//			String isAvailable = DataDispose.IsAvailable();
-//			isAvailable = "";
-//			JsonObject jsonObject = JsonMethed.getJsonObject(JsonMethed.getJsonElement(isAvailable));
-//			if(jsonObject != null){
-//				ret = JsonMethed.getJsonInt(jsonObject.get("ret"));
-//				if(ret == 0){
-//					return isUpdate;
-//				}
-//			}
-			
-//			//¼ì²é¸üĞÂ
-//			try {
-//				InputStream is = HttpUtils.readXMLDataFromInternet(BaseConfig.checkupdate);
-//				BufferedReader in = new BufferedReader(new InputStreamReader(is));
-//				StringBuffer buffer = new StringBuffer();
-//				String line = "";
-//				while ((line = in.readLine()) != null){
-//				  buffer.append(line);
-//				}
-//				String json_update = buffer.toString();
-//				JsonObject jsonObject_update = JsonMethed.getJsonObject(JsonMethed.getJsonElement(json_update));
-//				updateInfo = UpdateInfo.getFromJsonObject(jsonObject_update);
-//				PackageManager pm = Activity_Start.this.getPackageManager();  
-//		    	PackageInfo pi = pm.getPackageInfo(Activity_Start.this.getPackageName(), 0);
-//		    	if(updateInfo != null && (updateInfo.getLastVerCode() > pi.versionCode)) {
-//		    		isUpdate =  true;
-//		    	} 
-//			}catch (Exception e) {
-//				e.printStackTrace();
-//			}
-		    return isUpdate;
+
+		protected Boolean doInBackground(Void... params) {
+			boolean isUpdate = false; // false:æ²¡æ›´æ–°
+
+			// String isAvailable = DataDispose.IsAvailable();
+			// isAvailable = "";
+			// JsonObject jsonObject =
+			// JsonMethed.getJsonObject(JsonMethed.getJsonElement(isAvailable));
+			// if(jsonObject != null){
+			// ret = JsonMethed.getJsonInt(jsonObject.get("ret"));
+			// if(ret == 0){
+			// return isUpdate;
+			// }
+			// }
+
+			// //æ£€æŸ¥æ›´æ–°
+			// try {
+			// InputStream is =
+			// HttpUtils.readXMLDataFromInternet(BaseConfig.checkupdate);
+			// BufferedReader in = new BufferedReader(new
+			// InputStreamReader(is));
+			// StringBuffer buffer = new StringBuffer();
+			// String line = "";
+			// while ((line = in.readLine()) != null){
+			// buffer.append(line);
+			// }
+			// String json_update = buffer.toString();
+			// JsonObject jsonObject_update =
+			// JsonMethed.getJsonObject(JsonMethed.getJsonElement(json_update));
+			// updateInfo = UpdateInfo.getFromJsonObject(jsonObject_update);
+			// PackageManager pm = Activity_Start.this.getPackageManager();
+			// PackageInfo pi =
+			// pm.getPackageInfo(Activity_Start.this.getPackageName(), 0);
+			// if(updateInfo != null && (updateInfo.getLastVerCode() >
+			// pi.versionCode)) {
+			// isUpdate = true;
+			// }
+			// }catch (Exception e) {
+			// e.printStackTrace();
+			// }
+			return isUpdate;
 		}
 	}
 

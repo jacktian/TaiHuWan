@@ -2,120 +2,157 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background="@color/white"  >
-	<include android:id="@+id/titlebar" layout="@layout/titlebar" android:visibility="gone"/>
-	<ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content"
-	    android:scrollbars="vertical">
-	    <LinearLayout  android:layout_width="fill_parent" android:layout_height="wrap_content"
-	        android:orientation="vertical">
-	        <com.gloria.hbh.main.MyLocationMapView android:id="@+id/bmapView"
-	    	android:layout_width="fill_parent" android:layout_height="300dip" 
-	    	android:clickable="true" />
-	        
-	        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
-	    	android:orientation="horizontal" android:layout_margin="10dip" android:padding="10dip"
-	    	android:background="@drawable/coner_text_bg">
-	    		<TextView
-		    	android:layout_width="wrap_content"
-		    	android:layout_height="wrap_content"
-		    	android:singleLine="true"
-		   	 	android:text="名称："
-		    	android:textColor="@color/black"
-		   	 	android:textSize="18sp"
-		    	android:textStyle="bold" />
+    android:background="@color/white"
+    android:orientation="vertical" >
 
-				<TextView
-		    	android:id="@+id/title"
-		    	android:layout_width="0dip"
-		    	android:layout_height="wrap_content"
-		    	android:layout_weight="1.0"
-		    	android:paddingTop="5dip"
-		    	android:ellipsize="end"
-		    	android:singleLine="true"
-		    	android:textColor="@color/lightblue"
-		    	android:gravity="right" />
-			</LinearLayout>
-	
-			<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
-	    	android:orientation="vertical" android:layout_margin="10dip"
-	    	android:background="@drawable/coner_text_bg">
-				<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
-	    		android:orientation="horizontal"  android:padding="10dip">
-	    		<TextView
-		    	android:layout_width="wrap_content"
-		    	android:layout_height="wrap_content"
-		    	android:singleLine="true"
-		    	android:text="地址："
-		    	android:textColor="@color/black"
-		    	android:textSize="18sp"
-		    	android:textStyle="bold" />
+    <include
+        android:id="@+id/titlebar"
+        layout="@layout/titlebar"
+        android:visibility="gone" />
 
-				<TextView
-		    	android:id="@+id/adr"
-		    	android:layout_width="0dip"
-		    	android:layout_height="wrap_content"
-		    	android:layout_weight="1.0"
-		    	android:paddingTop="5dip"
-		    	android:ellipsize="end"
-		    	android:singleLine="true"
-		    	android:textColor="@color/lightblue"
-		    	android:gravity="right" />
-			</LinearLayout>
-		
-			<ImageView android:layout_width="fill_parent"   
-           	android:layout_height="wrap_content" 
-           	android:background="@drawable/divider"/>
-		
-			<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
-	    	android:orientation="vertical"  android:padding="10dip">
-	    		<TextView
-		    	android:layout_width="wrap_content"
-		    	android:layout_height="wrap_content"
-		    	android:singleLine="true"
-		    	android:text="电话："
-		    	android:textColor="@color/black"
-		    	android:textSize="18sp"
-		    	android:textStyle="bold" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" >
 
-				<TextView
-		    	android:id="@+id/phonenum"
-		    	android:layout_width="fill_parent"
-		    	android:layout_height="wrap_content"
-			    android:paddingTop="5dip"
-		    	android:ellipsize="end"
-		    	android:singleLine="true"
-		    	android:textColor="@color/text_gray"
-		    	android:gravity="right" />
-			</LinearLayout>
-		
-			<ImageView android:layout_width="fill_parent"   
-           	android:layout_height="wrap_content" 
-           	android:background="@drawable/divider"/>
-		
-			<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
-	    	android:orientation="horizontal"  android:padding="10dip">
-	    		<TextView
-		    	android:layout_width="wrap_content"
-		    	android:layout_height="wrap_content"
-		    	android:singleLine="true"
-		    	android:text="距离："
-		    	android:textColor="@color/black"
-		    	android:textSize="18sp"
-		    	android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-				<TextView
-		    	android:id="@+id/distance"
-		    	android:layout_width="0dip"
-		    	android:layout_height="wrap_content"
-		    	android:layout_weight="1.0"
-		    	android:paddingTop="5dip"
-		    	android:ellipsize="end"
-		    	android:singleLine="true"
-		    	android:textColor="@color/lightblue"
-		    	android:gravity="right" />
-			</LinearLayout>
-		</LinearLayout>
-	    </LinearLayout>
-	</ScrollView>
+            <com.gloria.hbh.main.MyLocationMapView
+                android:id="@+id/bmapView"
+                android:layout_width="fill_parent"
+                android:layout_height="300dip"
+                android:clickable="true" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                android:background="@drawable/coner_text_bg"
+                android:orientation="horizontal"
+                android:padding="10dip" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="名称："
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:ellipsize="end"
+                    android:gravity="right"
+                    android:paddingTop="5dip"
+                    android:singleLine="true"
+                    android:textColor="@color/lightblue" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                android:background="@drawable/coner_text_bg"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="地址："
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/adr"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:ellipsize="end"
+                        android:gravity="right"
+                        android:paddingTop="5dip"
+                        android:singleLine="true"
+                        android:textColor="@color/lightblue" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/divider" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="电话："
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/phonenum"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="right"
+                        android:paddingTop="5dip"
+                        android:singleLine="true"
+                        android:textColor="@color/text_gray" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/divider" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="距离："
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/distance"
+                        android:layout_width="0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:ellipsize="end"
+                        android:gravity="right"
+                        android:paddingTop="5dip"
+                        android:singleLine="true"
+                        android:textColor="@color/lightblue" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

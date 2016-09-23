@@ -34,38 +34,34 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 /**
-* ÎÄ ¼ş Ãû : HttpUtils
-* ´´ ½¨ ÈË£º gejian
-* ÈÕ     ÆÚ£º2013-1-30
-* ĞŞ ¸Ä ÈË£ºgejian
-* ÈÕ    ÆÚ£º2013-1-30
-* Ãè    Êö£ºHttp  getºÍPost´¦ÀíÀà
-*/
+ * æ–‡ ä»¶ å : HttpUtils åˆ› å»º äººï¼š gejian æ—¥ æœŸï¼š2013-1-30 ä¿® æ”¹ äººï¼šgejian æ—¥ æœŸï¼š2013-1-30 æ
+ * è¿°ï¼šHttp getå’ŒPostå¤„ç†ç±»
+ */
 public class HttpUtils {
-	
+
 	private static final String TAG = HttpUtils.class.getName();
-	private static boolean DEBUG = false;  
-	
+	private static boolean DEBUG = false;
+
 	/*
-	 * ´ÓÍøÂçÉÏ»ñÈ¡XMLÊı¾İ
+	 * ä»ç½‘ç»œä¸Šè·å–XMLæ•°æ®
 	 */
-	public static InputStream readXMLDataFromInternet(String url){
+	public static InputStream readXMLDataFromInternet(String url) {
 		URL infoUrl = null;
 		InputStream inStream = null;
-		
-		if(NetworkUtils.isNetworkAvailable()){				
+
+		if (NetworkUtils.isNetworkAvailable()) {
 			try {
-				if(DEBUG)
-					System.out.println(TAG+"URL-->"+url);
+				if (DEBUG)
+					System.out.println(TAG + "URL-->" + url);
 				infoUrl = new URL(url);
 				URLConnection connection;
 				connection = infoUrl.openConnection();
 				connection.setConnectTimeout(BaseConstants.TimeoutConnection);
 				connection.setReadTimeout(BaseConstants.TimeoutSocket);
-				HttpURLConnection httpConnection = (HttpURLConnection)connection;
+				HttpURLConnection httpConnection = (HttpURLConnection) connection;
 				int responseCode = httpConnection.getResponseCode();
-				if(responseCode == HttpURLConnection.HTTP_OK){
-					inStream = httpConnection.getInputStream();	
+				if (responseCode == HttpURLConnection.HTTP_OK) {
+					inStream = httpConnection.getInputStream();
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -73,201 +69,200 @@ public class HttpUtils {
 		}
 		return inStream;
 	}
-	
+
 	/*
-	 * »ñÈ¡Json×Ö·û´®
+	 * è·å–Jsonå­—ç¬¦ä¸²
 	 */
-	public static String getJsonString(String url,boolean isRefresh){
+	public static String getJsonString(String url, boolean isRefresh) {
 		String result = "";
-		if(!isRefresh){
-			//Ê×ÏÈ³¢ÊÔ¶ÁÈ¡»º´æ
-	        String cacheConfigString = ConfigCache.getUrlCache(url);
-	        //¸ù¾İ½á¹ûÅĞ¶¨ÊÇ¶ÁÈ¡»º´æ£¬»¹ÊÇÖØĞÂ¶ÁÈ¡
-	        if (cacheConfigString != null) {
-	            return cacheConfigString;
-	        }
+		if (!isRefresh) {
+			// é¦–å…ˆå°è¯•è¯»å–ç¼“å­˜
+			String cacheConfigString = ConfigCache.getUrlCache(url);
+			// æ ¹æ®ç»“æœåˆ¤å®šæ˜¯è¯»å–ç¼“å­˜ï¼Œè¿˜æ˜¯é‡æ–°è¯»å–
+			if (cacheConfigString != null) {
+				return cacheConfigString;
+			}
 		}
-        
-		if(DEBUG)
-			System.out.println(TAG+"URL-->"+url);
-		//ÅĞ¶ÏÊÇ·ñÓĞÍøÂç£¬ÓĞµÄ»°£¬ÁªÍøÈ¡Êı¾İ²¢´æÈëcache
-		if(NetworkUtils.isNetworkAvailable()){
+
+		if (DEBUG)
+			System.out.println(TAG + "URL-->" + url);
+		// åˆ¤æ–­æ˜¯å¦æœ‰ç½‘ç»œï¼Œæœ‰çš„è¯ï¼Œè”ç½‘å–æ•°æ®å¹¶å­˜å…¥cache
+		if (NetworkUtils.isNetworkAvailable()) {
 			HttpGet httpGetRequest = null;
 			try {
 				httpGetRequest = new HttpGet(new URI(url));
-			
-				// ´´½¨HttpPost¶ÔÏó
-				HttpParams httpParameters = new BasicHttpParams(); 
-				HttpConnectionParams.setConnectionTimeout(httpParameters, BaseConstants.TimeoutConnection); 
-				HttpConnectionParams.setSoTimeout(httpParameters, BaseConstants.TimeoutSocket); 
-				httpGetRequest.setParams(httpParameters);	
+
+				// åˆ›å»ºHttpPostå¯¹è±¡
+				HttpParams httpParameters = new BasicHttpParams();
+				HttpConnectionParams.setConnectionTimeout(httpParameters, BaseConstants.TimeoutConnection);
+				HttpConnectionParams.setSoTimeout(httpParameters, BaseConstants.TimeoutSocket);
+				httpGetRequest.setParams(httpParameters);
 			} catch (URISyntaxException e1) {
 				e1.printStackTrace();
-			} 
+			}
 
-			DefaultHttpClient httpclient = new DefaultHttpClient();  
+			DefaultHttpClient httpclient = new DefaultHttpClient();
 			httpclient.setCookieStore(ShareCookie.getCookie());
 			httpclient.getParams().setBooleanParameter("http.protocol.expect-continue", false);
-			
-			try{	
+
+			try {
 				HttpResponse httpResponse = httpclient.execute(httpGetRequest);
-				if(httpResponse.getStatusLine().getStatusCode() == BaseConstants.StatusCode_OK){   // Á¬½Ó³É¹¦
-					result = EntityUtils.toString(httpResponse.getEntity(),"utf-8"); // »ñµÃ×ÊÔ´
-					if(DEBUG)
-						System.out.println(TAG+"---result-->"+result);
-					 //³É¹¦ÏÂÔØ£¬Ôò±£´æµ½±¾µØ×÷ÎªºóÃæ»º´æÎÄ¼ş
-                    ConfigCache.setUrlCache(result,url);
+				if (httpResponse.getStatusLine().getStatusCode() == BaseConstants.StatusCode_OK) { // è¿æ¥æˆåŠŸ
+					result = EntityUtils.toString(httpResponse.getEntity(), "utf-8"); // è·å¾—èµ„æº
+					if (DEBUG)
+						System.out.println(TAG + "---result-->" + result);
+					// æˆåŠŸä¸‹è½½ï¼Œåˆ™ä¿å­˜åˆ°æœ¬åœ°ä½œä¸ºåé¢ç¼“å­˜æ–‡ä»¶
+					ConfigCache.setUrlCache(result, url);
 				}
-			}catch(UnknownHostException ex2){
+			} catch (UnknownHostException ex2) {
 				result = "";
 				ex2.printStackTrace();
-			}
-			catch (Exception e){
+			} catch (Exception e) {
 				result = "";
 				e.printStackTrace();
 			}
-		}	
+		}
 		return result;
 	}
-	
+
 	/*
-	 * »ñÈ¡Json×Ö·û´®
+	 * è·å–Jsonå­—ç¬¦ä¸²
 	 */
-	public static String getJsonString(String url,boolean isRefresh,boolean isSaveCookies){
+	public static String getJsonString(String url, boolean isRefresh, boolean isSaveCookies) {
 		String result = "";
-		if(!isRefresh){
-			//Ê×ÏÈ³¢ÊÔ¶ÁÈ¡»º´æ
-	        String cacheConfigString = ConfigCache.getUrlCache(url);
-	        //¸ù¾İ½á¹ûÅĞ¶¨ÊÇ¶ÁÈ¡»º´æ£¬»¹ÊÇÖØĞÂ¶ÁÈ¡
-	        if (cacheConfigString != null) {
-	            return cacheConfigString;
-	        }
+		if (!isRefresh) {
+			// é¦–å…ˆå°è¯•è¯»å–ç¼“å­˜
+			String cacheConfigString = ConfigCache.getUrlCache(url);
+			// æ ¹æ®ç»“æœåˆ¤å®šæ˜¯è¯»å–ç¼“å­˜ï¼Œè¿˜æ˜¯é‡æ–°è¯»å–
+			if (cacheConfigString != null) {
+				return cacheConfigString;
+			}
 		}
-        
-		if(DEBUG)
-			System.out.println(TAG+"URL-->"+url);
-		//ÅĞ¶ÏÊÇ·ñÓĞÍøÂç£¬ÓĞµÄ»°£¬ÁªÍøÈ¡Êı¾İ²¢´æÈëcache
-		if(NetworkUtils.isNetworkAvailable()){
+
+		if (DEBUG)
+			System.out.println(TAG + "URL-->" + url);
+		// åˆ¤æ–­æ˜¯å¦æœ‰ç½‘ç»œï¼Œæœ‰çš„è¯ï¼Œè”ç½‘å–æ•°æ®å¹¶å­˜å…¥cache
+		if (NetworkUtils.isNetworkAvailable()) {
 			HttpGet httpGetRequest = null;
 			try {
 				httpGetRequest = new HttpGet(new URI(url));
-			
-				// ´´½¨HttpPost¶ÔÏó
-				HttpParams httpParameters = new BasicHttpParams(); 
-				HttpConnectionParams.setConnectionTimeout(httpParameters, BaseConstants.TimeoutConnection); 
-				HttpConnectionParams.setSoTimeout(httpParameters, BaseConstants.TimeoutSocket); 
-				httpGetRequest.setParams(httpParameters);	
-				httpGetRequest.setURI(new URI(url)); 
+
+				// åˆ›å»ºHttpPostå¯¹è±¡
+				HttpParams httpParameters = new BasicHttpParams();
+				HttpConnectionParams.setConnectionTimeout(httpParameters, BaseConstants.TimeoutConnection);
+				HttpConnectionParams.setSoTimeout(httpParameters, BaseConstants.TimeoutSocket);
+				httpGetRequest.setParams(httpParameters);
+				httpGetRequest.setURI(new URI(url));
 
 			} catch (URISyntaxException e1) {
 				e1.printStackTrace();
-			} 
+			}
 
-			DefaultHttpClient httpclient = new DefaultHttpClient();  
+			DefaultHttpClient httpclient = new DefaultHttpClient();
 			httpclient.setCookieStore(ShareCookie.getCookie());
 			httpclient.getParams().setBooleanParameter("http.protocol.expect-continue", false);
-			
-			try{	
+
+			try {
 				HttpResponse httpResponse = httpclient.execute(httpGetRequest);
-				if(httpResponse.getStatusLine().getStatusCode() == BaseConstants.StatusCode_OK){   // Á¬½Ó³É¹¦
-					result = EntityUtils.toString(httpResponse.getEntity(),"utf-8"); // »ñµÃ×ÊÔ´
-					if(DEBUG)
-						System.out.println(TAG+"---result-->"+result);
-					 //³É¹¦ÏÂÔØ£¬Ôò±£´æµ½±¾µØ×÷ÎªºóÃæ»º´æÎÄ¼ş
-                    ConfigCache.setUrlCache(result,url);
-                    if(isSaveCookies){
-                    	ShareCookie.clearCookie();
-        				ShareCookie.setCookie(httpclient.getCookieStore());	
-                    }
+				if (httpResponse.getStatusLine().getStatusCode() == BaseConstants.StatusCode_OK) { // è¿æ¥æˆåŠŸ
+					result = EntityUtils.toString(httpResponse.getEntity(), "utf-8"); // è·å¾—èµ„æº
+					if (DEBUG)
+						System.out.println(TAG + "---result-->" + result);
+					// æˆåŠŸä¸‹è½½ï¼Œåˆ™ä¿å­˜åˆ°æœ¬åœ°ä½œä¸ºåé¢ç¼“å­˜æ–‡ä»¶
+					ConfigCache.setUrlCache(result, url);
+					if (isSaveCookies) {
+						ShareCookie.clearCookie();
+						ShareCookie.setCookie(httpclient.getCookieStore());
+					}
 				}
-			}catch(UnknownHostException ex2){
+			} catch (UnknownHostException ex2) {
 				result = "";
 				ex2.printStackTrace();
-			}
-			catch (Exception e){
+			} catch (Exception e) {
 				result = "";
 				e.printStackTrace();
 			}
-		}	
+		}
 		return result;
 	}
-	
+
 	/*
-	 * »ñÈ¡Json¶ÔÏó
+	 * è·å–Jsonå¯¹è±¡
 	 */
-	public static JsonObject getJsonObject(String url,boolean isRefresh){
-		String result = getJsonString(url,isRefresh);
-		String filePath="";
+	public static JsonObject getJsonObject(String url, boolean isRefresh) {
+		String result = getJsonString(url, isRefresh);
+		String filePath = "";
 		filePath = ConfigCache.SetUrlToFilePath(BaseConstants.CACHE_FILETYPE_FILE, url);
 		File file = new File(filePath);
-		try{
-			if (result == null || result.equals("")) {  
+		try {
+			if (result == null || result.equals("")) {
 				return null;
 			}
 			JsonObject jsonObject = JsonMethed.getJsonObject(JsonMethed.getJsonElement(result));
 			return jsonObject;
-		}catch (JsonParseException e) {
+		} catch (JsonParseException e) {
 			e.printStackTrace();
-			if (result != null &&FileUtils.isHasSDCard() && file.exists()) {  
+			if (result != null && FileUtils.isHasSDCard() && file.exists()) {
 				file.delete();
 			}
 		}
 		return null;
 	}
-	
+
 	/*
-	 * »ñÈ¡JsonArray
+	 * è·å–JsonArray
 	 */
-	public static JsonArray getJsonArray(String url,boolean isRefresh){
-		String result = getJsonString(url,isRefresh);
-		String filePath="";
+	public static JsonArray getJsonArray(String url, boolean isRefresh) {
+		String result = getJsonString(url, isRefresh);
+		String filePath = "";
 		filePath = ConfigCache.SetUrlToFilePath(BaseConstants.CACHE_FILETYPE_FILE, url);
 		File file = new File(filePath);
-		try{
-			if (result == null || result.equals("")) {  
+		try {
+			if (result == null || result.equals("")) {
 				return null;
 			}
 			JsonArray jsonArray = JsonMethed.getJsonArray(JsonMethed.getJsonElement(result));
 			return jsonArray;
-		}catch (JsonParseException e) {
+		} catch (JsonParseException e) {
 			e.printStackTrace();
-			if (result != null &&FileUtils.isHasSDCard() && file.exists()) {  
+			if (result != null && FileUtils.isHasSDCard() && file.exists()) {
 				file.delete();
 			}
 		}
 		return null;
 	}
-	
+
 	/**
-	 * Post·½·¨»ñÈ¡http½á¹û
+	 * Postæ–¹æ³•è·å–httpç»“æœ
+	 * 
 	 * @param url
 	 * @param params
 	 * @return
 	 */
-	public static String getPostResult(String url,List<NameValuePair> params){
+	public static String getPostResult(String url, List<NameValuePair> params) {
 		String strResult = "";
-		DefaultHttpClient httpClient=new DefaultHttpClient();
+		DefaultHttpClient httpClient = new DefaultHttpClient();
 		httpClient.setCookieStore(ShareCookie.getCookie());
-		if(DEBUG)
-			System.out.println("Post url-->"+url);
+		if (DEBUG)
+			System.out.println("Post url-->" + url);
 		HttpPost httpRequest = new HttpPost(url);
-		HttpParams httpParameters = new BasicHttpParams();  
-	    HttpConnectionParams.setConnectionTimeout(httpParameters, BaseConstants.TimeoutConnection);
-	    HttpConnectionParams.setSoTimeout(httpParameters, BaseConstants.TimeoutSocket);
-	    httpRequest.setParams(httpParameters);
+		HttpParams httpParameters = new BasicHttpParams();
+		HttpConnectionParams.setConnectionTimeout(httpParameters, BaseConstants.TimeoutConnection);
+		HttpConnectionParams.setSoTimeout(httpParameters, BaseConstants.TimeoutSocket);
+		httpRequest.setParams(httpParameters);
 		try {
-			httpRequest.setEntity(new UrlEncodedFormEntity(params,"UTF-8"));
-			InputStream is= httpClient.execute(httpRequest,ShareCookie.getHttpContext()).getEntity().getContent();
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is,"GBK"));
+			httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			InputStream is = httpClient.execute(httpRequest, ShareCookie.getHttpContext()).getEntity().getContent();
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is, "GBK"));
 			StringBuilder stringBuilder = new StringBuilder();
 			String line;
-			for (line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()){
+			for (line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
 				stringBuilder.append(line);
 			}
-			
+
 			strResult = stringBuilder.toString();
-			if(DEBUG)
-				System.out.println("getPostResult-->"+strResult);
+			if (DEBUG)
+				System.out.println("getPostResult-->" + strResult);
 			return strResult;
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
@@ -278,41 +273,43 @@ public class HttpUtils {
 		}
 		return "";
 	}
-	
+
 	/**
-	 * Post·½·¨»ñÈ¡http½á¹û£¨µÇÂ¼·½·¨£©
+	 * Postæ–¹æ³•è·å–httpç»“æœï¼ˆç™»å½•æ–¹æ³•ï¼‰
+	 * 
 	 * @param url
 	 * @param params
-	 * @param isSaveCookie (ÊÇ·ñ±£´æCookies)
+	 * @param isSaveCookie
+	 *            (æ˜¯å¦ä¿å­˜Cookies)
 	 * @return
 	 */
-	public static String getPostResult(String url,List<NameValuePair> params,boolean isSaveCookie){
+	public static String getPostResult(String url, List<NameValuePair> params, boolean isSaveCookie) {
 		String strResult = "";
-		DefaultHttpClient httpClient=new DefaultHttpClient();
+		DefaultHttpClient httpClient = new DefaultHttpClient();
 		httpClient.setCookieStore(ShareCookie.getCookie());
-		if(DEBUG)
-			System.out.println("Post  url-->"+url);
+		if (DEBUG)
+			System.out.println("Post  url-->" + url);
 		HttpPost httpRequest = new HttpPost(url);
-		HttpParams httpParameters = new BasicHttpParams();  
-	    HttpConnectionParams.setConnectionTimeout(httpParameters, BaseConstants.TimeoutConnection);
-	    HttpConnectionParams.setSoTimeout(httpParameters, BaseConstants.TimeoutSocket);
-	    httpRequest.setParams(httpParameters);
+		HttpParams httpParameters = new BasicHttpParams();
+		HttpConnectionParams.setConnectionTimeout(httpParameters, BaseConstants.TimeoutConnection);
+		HttpConnectionParams.setSoTimeout(httpParameters, BaseConstants.TimeoutSocket);
+		httpRequest.setParams(httpParameters);
 		try {
-			httpRequest.setEntity(new UrlEncodedFormEntity(params,"UTF-8"));
-			InputStream is= httpClient.execute(httpRequest).getEntity().getContent();
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is,"GBK"));
+			httpRequest.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+			InputStream is = httpClient.execute(httpRequest).getEntity().getContent();
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is, "GBK"));
 			StringBuilder stringBuilder = new StringBuilder();
 			String line;
-			for (line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()){
+			for (line = bufferedReader.readLine(); line != null; line = bufferedReader.readLine()) {
 				stringBuilder.append(line);
 			}
-			if(isSaveCookie){  //Èç¹ûÊÇµÇÂ¼£¬Ôò±£´æCookies
+			if (isSaveCookie) { // å¦‚æœæ˜¯ç™»å½•ï¼Œåˆ™ä¿å­˜Cookies
 				ShareCookie.clearCookie();
-				ShareCookie.setCookie(httpClient.getCookieStore());	
+				ShareCookie.setCookie(httpClient.getCookieStore());
 			}
 			strResult = stringBuilder.toString();
-			if(DEBUG)
-				System.out.println("getPostResult-->"+strResult);
+			if (DEBUG)
+				System.out.println("getPostResult-->" + strResult);
 			return strResult;
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();

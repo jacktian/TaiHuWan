@@ -2,10 +2,10 @@ package com.gloria.pulltorefresh.library;
 
 import java.util.HashSet;
 
+import com.gloria.pulltorefresh.library.internal.LoadingLayout;
+
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-
-import com.gloria.pulltorefresh.library.internal.LoadingLayout;
 
 public class LoadingLayoutProxy implements ILoadingLayout {
 
@@ -22,7 +22,8 @@ public class LoadingLayoutProxy implements ILoadingLayout {
 	 * {@link PullToRefreshBase#createLoadingLayoutProxy(boolean, boolean)
 	 * createLoadingLayoutProxy(...)} calls.
 	 * 
-	 * @param layout - LoadingLayout to have included.
+	 * @param layout
+	 *            - LoadingLayout to have included.
 	 */
 	public void addLayout(LoadingLayout layout) {
 		if (null != layout) {

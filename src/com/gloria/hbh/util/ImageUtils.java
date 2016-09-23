@@ -8,431 +8,431 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Calendar;
 
+import com.gloria.hbh.application.BaseApplication;
+import com.gloria.hbh.constant.BaseConfig;
+import com.gloria.hbh.constant.BaseConstants;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Bitmap.Config;
-import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.provider.MediaStore;
 
-import com.gloria.hbh.application.BaseApplication;
-import com.gloria.hbh.constant.BaseConfig;
-import com.gloria.hbh.constant.BaseConstants;
-
 /**
- * Í¼Æ¬´¦Àí·½Ê½
- * @author gejian
- * 2013-1-24
+ * å›¾ç‰‡å¤„ç†æ–¹å¼
+ * 
+ * @author gejian 2013-1-24
  */
 public class ImageUtils {
-	
-	/*
-     * »ñÈ¡Ñ¹ËõµÄÍ¼Æ¬
-     */
-    public static Bitmap getScaleImage(Bitmap bitmap) {
-    	if(bitmap == null){
-    		return null;
-    	}
-		int height_bm = bitmap.getHeight();
-		int width_bm = bitmap.getWidth();
-		float width_bm_new = 0;
-		float height_bm_new = 0;
-		width_bm_new = width_bm;
-		height_bm_new = height_bm;
-//		if(width_bm > ScreenUtils.getInstance().getWidth()){
-//			width_bm_new = ScreenUtils.getInstance().getWidth();
-//			height_bm_new = width_bm_new*height_bm/width_bm;
-//			if(height_bm_new > ScreenUtils.getInstance().getWidth()){
-//				height_bm_new = ScreenUtils.getInstance().getWidth();
-//				width_bm_new = height_bm_new*width_bm/height_bm;
-//			}
-//		}
-		width_bm_new = width_bm/2;
-		height_bm_new = height_bm/2;
-		float scaleWidth =  width_bm_new/width_bm;
-	    float scaleHeight = width_bm_new/height_bm;
-	    // È¡µÃÏëÒªËõ·ÅµÄmatrix²ÎÊı
-	    Matrix matrix = new Matrix();
-	    matrix.postScale(scaleWidth, scaleHeight);
-	    // µÃµ½ĞÂµÄÍ¼Æ¬
-		if(bitmap != null && width_bm >0 && height_bm >0 && width_bm_new>0 && height_bm_new >0){
-			Bitmap newbm = Bitmap.createBitmap(bitmap, 0, 0, width_bm, height_bm, matrix,
-				      true);
-			if(bitmap != null && !bitmap.isRecycled() && bitmap != newbm){
-				bitmap.recycle();
-			}
-			return newbm;
-		}
-    	return bitmap;
-    }
-    
-    /*
-     * »ñÈ¡·Å´óµÄÍ¼Æ¬
-     */
-    public static Bitmap getBigScaleImage(Bitmap bitmap) {
-    	if(bitmap == null){
-    		return null;
-    	}
-		int height_bm = bitmap.getHeight();
-		int width_bm = bitmap.getWidth();
-		float width_bm_new = 0;
-		float height_bm_new = 0;
-		width_bm_new = width_bm;
-		height_bm_new = height_bm;
-		if(height_bm < ScreenUtils.getInstance().getHeight()){
-			height_bm_new = ScreenUtils.getInstance().getHeight();
-			width_bm_new = height_bm_new*width_bm/height_bm;
-			if(width_bm_new < ScreenUtils.getInstance().getWidth()){
-				width_bm_new = ScreenUtils.getInstance().getWidth();
-				height_bm_new = width_bm_new*height_bm/width_bm;
-			}
-		}
-		float scaleWidth =  width_bm_new/width_bm;
-	    float scaleHeight = height_bm_new/height_bm;
-	    // È¡µÃÏëÒªËõ·ÅµÄmatrix²ÎÊı
-	    Matrix matrix = new Matrix();
-	    matrix.postScale(scaleWidth, scaleHeight);
-	    // µÃµ½ĞÂµÄÍ¼Æ¬
-		if(bitmap != null && width_bm >0 && height_bm >0 && width_bm_new>0 && height_bm_new >0){
-			Bitmap newbm = Bitmap.createBitmap(bitmap, 0, 0, width_bm, height_bm, matrix,
-				      true);
-			if(bitmap != null && !bitmap.isRecycled() && bitmap != newbm){
-				bitmap.recycle();
-			}
-			return newbm;
-		}
-    	return bitmap;
-	}
-    
-    /*
-     * ±£´æBitmapÍ¼Æ¬
-     */
-    public static boolean saveBitmap(Bitmap bitmap,String path) throws IOException{
-    	return saveBitmap(bitmap,path,true);
-    }
-    
-    /*
-     * ±£´æBitmapÍ¼Æ¬
-     * isRecycle ÊÇ·ñÊÍ·Å
-     */
-    public static boolean saveBitmap(Bitmap bitmap,String path,boolean isRecycle) throws IOException{
-    	boolean isSave = false;
-    	if(bitmap == null){
-    		return isSave;
-    	}
-    	File file = new File(path);
-    	if(!file.getParentFile().exists()){
-    		file.getParentFile().mkdirs();
-    	}
-        FileOutputStream out;
-        try{
-        	out = new FileOutputStream(file);
-            if(bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)) {
-            	out.flush();
-                out.close();
-                isSave = true;
-            }
-        } catch (FileNotFoundException e) {
-        	e.printStackTrace();
-        } catch (IOException e) {
-        	e.printStackTrace(); 
-        }finally{
-        	//ÊÍ·Åbitmap
-			if(isRecycle && bitmap != null && !bitmap.isRecycled()){
-				bitmap.recycle();
-			}
-        }
-        return isSave;
-    }
 
-    /*
-     * Í¼Æ¬µØÖ·ÊÇ·ñ´æÔÚ
-     */
-    public static String IsImageFileExist(String url,final int width,final int height,int scale) {
-//		boolean IsImageFileExist = false;
-		String result = "";	
-		String fileDir = ""; 		// Â·¾¶Ãû
-		String fileName="";    	//ÎÄ¼şÃû
-		String filePath = "";		//ÎÄ¼ş¾ø¶ÔÂ·¾¶
-		String newurlString = "";  
-		if(url != null && !url.equals("")){   //Í¼Æ¬µØÖ·Îª¿ÕÊ±
-			newurlString = BaseConfig.requestImageUrl(width,height,url,scale);
-			fileName+=newurlString.replaceAll("[/|&|?|:|%]+", "_");
-			
+	/*
+	 * è·å–å‹ç¼©çš„å›¾ç‰‡
+	 */
+	public static Bitmap getScaleImage(Bitmap bitmap) {
+		if (bitmap == null) {
+			return null;
+		}
+		int height_bm = bitmap.getHeight();
+		int width_bm = bitmap.getWidth();
+		float width_bm_new = 0;
+		float height_bm_new = 0;
+		width_bm_new = width_bm;
+		height_bm_new = height_bm;
+		// if(width_bm > ScreenUtils.getInstance().getWidth()){
+		// width_bm_new = ScreenUtils.getInstance().getWidth();
+		// height_bm_new = width_bm_new*height_bm/width_bm;
+		// if(height_bm_new > ScreenUtils.getInstance().getWidth()){
+		// height_bm_new = ScreenUtils.getInstance().getWidth();
+		// width_bm_new = height_bm_new*width_bm/height_bm;
+		// }
+		// }
+		width_bm_new = width_bm / 2;
+		height_bm_new = height_bm / 2;
+		float scaleWidth = width_bm_new / width_bm;
+		float scaleHeight = width_bm_new / height_bm;
+		// å–å¾—æƒ³è¦ç¼©æ”¾çš„matrixå‚æ•°
+		Matrix matrix = new Matrix();
+		matrix.postScale(scaleWidth, scaleHeight);
+		// å¾—åˆ°æ–°çš„å›¾ç‰‡
+		if (bitmap != null && width_bm > 0 && height_bm > 0 && width_bm_new > 0 && height_bm_new > 0) {
+			Bitmap newbm = Bitmap.createBitmap(bitmap, 0, 0, width_bm, height_bm, matrix, true);
+			if (bitmap != null && !bitmap.isRecycled() && bitmap != newbm) {
+				bitmap.recycle();
+			}
+			return newbm;
+		}
+		return bitmap;
+	}
+
+	/*
+	 * è·å–æ”¾å¤§çš„å›¾ç‰‡
+	 */
+	public static Bitmap getBigScaleImage(Bitmap bitmap) {
+		if (bitmap == null) {
+			return null;
+		}
+		int height_bm = bitmap.getHeight();
+		int width_bm = bitmap.getWidth();
+		float width_bm_new = 0;
+		float height_bm_new = 0;
+		width_bm_new = width_bm;
+		height_bm_new = height_bm;
+		if (height_bm < ScreenUtils.getInstance().getHeight()) {
+			height_bm_new = ScreenUtils.getInstance().getHeight();
+			width_bm_new = height_bm_new * width_bm / height_bm;
+			if (width_bm_new < ScreenUtils.getInstance().getWidth()) {
+				width_bm_new = ScreenUtils.getInstance().getWidth();
+				height_bm_new = width_bm_new * height_bm / width_bm;
+			}
+		}
+		float scaleWidth = width_bm_new / width_bm;
+		float scaleHeight = height_bm_new / height_bm;
+		// å–å¾—æƒ³è¦ç¼©æ”¾çš„matrixå‚æ•°
+		Matrix matrix = new Matrix();
+		matrix.postScale(scaleWidth, scaleHeight);
+		// å¾—åˆ°æ–°çš„å›¾ç‰‡
+		if (bitmap != null && width_bm > 0 && height_bm > 0 && width_bm_new > 0 && height_bm_new > 0) {
+			Bitmap newbm = Bitmap.createBitmap(bitmap, 0, 0, width_bm, height_bm, matrix, true);
+			if (bitmap != null && !bitmap.isRecycled() && bitmap != newbm) {
+				bitmap.recycle();
+			}
+			return newbm;
+		}
+		return bitmap;
+	}
+
+	/*
+	 * ä¿å­˜Bitmapå›¾ç‰‡
+	 */
+	public static boolean saveBitmap(Bitmap bitmap, String path) throws IOException {
+		return saveBitmap(bitmap, path, true);
+	}
+
+	/*
+	 * ä¿å­˜Bitmapå›¾ç‰‡ isRecycle æ˜¯å¦é‡Šæ”¾
+	 */
+	public static boolean saveBitmap(Bitmap bitmap, String path, boolean isRecycle) throws IOException {
+		boolean isSave = false;
+		if (bitmap == null) {
+			return isSave;
+		}
+		File file = new File(path);
+		if (!file.getParentFile().exists()) {
+			file.getParentFile().mkdirs();
+		}
+		FileOutputStream out;
+		try {
+			out = new FileOutputStream(file);
+			if (bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)) {
+				out.flush();
+				out.close();
+				isSave = true;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			// é‡Šæ”¾bitmap
+			if (isRecycle && bitmap != null && !bitmap.isRecycled()) {
+				bitmap.recycle();
+			}
+		}
+		return isSave;
+	}
+
+	/*
+	 * å›¾ç‰‡åœ°å€æ˜¯å¦å­˜åœ¨
+	 */
+	public static String IsImageFileExist(String url, final int width, final int height, int scale) {
+		// boolean IsImageFileExist = false;
+		String result = "";
+		String fileDir = ""; // è·¯å¾„å
+		String fileName = ""; // æ–‡ä»¶å
+		String filePath = ""; // æ–‡ä»¶ç»å¯¹è·¯å¾„
+		String newurlString = "";
+		if (url != null && !url.equals("")) { // å›¾ç‰‡åœ°å€ä¸ºç©ºæ—¶
+			newurlString = BaseConfig.requestImageUrl(width, height, url, scale);
+			fileName += newurlString.replaceAll("[/|&|?|:|%]+", "_");
+
 			fileDir = BaseConstants.CACHE_IMG_PATH;
-			filePath=fileDir+fileName;
-			
-			if(FileUtils.isHasSDCard()){
+			filePath = fileDir + fileName;
+
+			if (FileUtils.isHasSDCard()) {
 				File file = new File(filePath);
-				//ÎÄ¼ş´æÔÚ
-				if (file.exists()){
-//					IsImageFileExist = true;
+				// æ–‡ä»¶å­˜åœ¨
+				if (file.exists()) {
+					// IsImageFileExist = true;
 					result = filePath;
 				}
 			}
 		}
 		return result;
 	}
-    
-    /*
-     * Í¼Æ¬µØÖ·ÊÇ·ñ´æÔÚ
-     */
-    public static String IsSaveImageFileExist(String url,final int width,final int height,int scale) {
-//		boolean IsImageFileExist = false;
-		String result = "";	
-		String fileDir = ""; 		// Â·¾¶Ãû
-		String fileName="";    	//ÎÄ¼şÃû
-		String filePath = "";		//ÎÄ¼ş¾ø¶ÔÂ·¾¶
-		if(url != null && !url.equals("")){   //Í¼Æ¬µØÖ·Îª¿ÕÊ±
+
+	/*
+	 * å›¾ç‰‡åœ°å€æ˜¯å¦å­˜åœ¨
+	 */
+	public static String IsSaveImageFileExist(String url, final int width, final int height, int scale) {
+		// boolean IsImageFileExist = false;
+		String result = "";
+		String fileDir = ""; // è·¯å¾„å
+		String fileName = ""; // æ–‡ä»¶å
+		String filePath = ""; // æ–‡ä»¶ç»å¯¹è·¯å¾„
+		if (url != null && !url.equals("")) { // å›¾ç‰‡åœ°å€ä¸ºç©ºæ—¶
 			fileName = url.substring(url.lastIndexOf('/') + 1);
 			fileDir = BaseConstants.CACHE_SAVE_IMG_PATH;
 			filePath = fileDir + fileName;
-			
-			if(FileUtils.isHasSDCard()){
+
+			if (FileUtils.isHasSDCard()) {
 				File file = new File(filePath);
-				//ÎÄ¼ş´æÔÚ
-				if (file.exists()){
-//					IsImageFileExist = true;
+				// æ–‡ä»¶å­˜åœ¨
+				if (file.exists()) {
+					// IsImageFileExist = true;
 					result = filePath;
 				}
 			}
 		}
 		return result;
 	}
-    
-    /*
-     * ÓÉURIµÄµ½¾ø¶ÔÂ·¾¶
-     */
-	public static String getAbsoluteImagePath(Activity activity,Uri uri){
-        // can post image
-        String [] proj={MediaStore.Images.Media.DATA};
-        Cursor cursor = activity.managedQuery( uri,
-                        proj,                 // Which columns to return
-                        null,       // WHERE clause; which rows to return (all rows)
-                        null,       // WHERE clause selection arguments (none)
-                        null);                 // Order-by clause (ascending by name)
-        
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();         
-        return cursor.getString(column_index);
-    }
-	
+
 	/*
-	 * »ñÈ¡Ïà»úÅÄÕÕµÄÍ¼Æ¬µØÖ·
+	 * ç”±URIçš„åˆ°ç»å¯¹è·¯å¾„
 	 */
-	public static String getCameraFileName(String srcPath) { 
-    	String picPathString = "";
-    	Calendar c = Calendar.getInstance();
+	public static String getAbsoluteImagePath(Activity activity, Uri uri) {
+		// can post image
+		String[] proj = { MediaStore.Images.Media.DATA };
+		Cursor cursor = activity.managedQuery(uri, proj, // Which columns to
+															// return
+				null, // WHERE clause; which rows to return (all rows)
+				null, // WHERE clause selection arguments (none)
+				null); // Order-by clause (ascending by name)
+
+		int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+		cursor.moveToFirst();
+		return cursor.getString(column_index);
+	}
+
+	/*
+	 * è·å–ç›¸æœºæ‹ç…§çš„å›¾ç‰‡åœ°å€
+	 */
+	public static String getCameraFileName(String srcPath) {
+		String picPathString = "";
+		Calendar c = Calendar.getInstance();
 		String year = String.valueOf(c.get(Calendar.YEAR));
-        String month = String.valueOf(c.get(Calendar.MONTH)+1);
-        String day = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
-        String hour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));
-        String minute = String.valueOf(c.get(Calendar.MINUTE));
-        String second= String.valueOf(c.get(Calendar.SECOND));
-        String name = "IMG_"+year+"_"+month+"_"+day+"_"+hour+"_"+minute+"_"+second;
-        picPathString = srcPath;  //ÁÙÊ±Í¼Æ¬´æ´¢µØÖ·
-        if(FileUtils.isHasSDCard()){
-        	File destDir = new File(picPathString);
-        	if (!destDir.exists())  {
-             	destDir.mkdirs();
-            }
-        }
-        picPathString = picPathString+name+".jpg";		
-        return picPathString;
-    }
-	
+		String month = String.valueOf(c.get(Calendar.MONTH) + 1);
+		String day = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
+		String hour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));
+		String minute = String.valueOf(c.get(Calendar.MINUTE));
+		String second = String.valueOf(c.get(Calendar.SECOND));
+		String name = "IMG_" + year + "_" + month + "_" + day + "_" + hour + "_" + minute + "_" + second;
+		picPathString = srcPath; // ä¸´æ—¶å›¾ç‰‡å­˜å‚¨åœ°å€
+		if (FileUtils.isHasSDCard()) {
+			File destDir = new File(picPathString);
+			if (!destDir.exists()) {
+				destDir.mkdirs();
+			}
+		}
+		picPathString = picPathString + name + ".jpg";
+		return picPathString;
+	}
+
 	/*
-	 * »ñÈ¡BitmapÍ¨¹ıPath
+	 * è·å–Bitmapé€šè¿‡Path
 	 */
-	public static Bitmap getBitmapByPath(String path) { 
-    	Bitmap bitmap = null;
-    	if(FileUtils.isHasSDCard()){
+	public static Bitmap getBitmapByPath(String path) {
+		Bitmap bitmap = null;
+		if (FileUtils.isHasSDCard()) {
 			File file = new File(path);
-			if (file.exists()){
-				if(FileUtils.isImage(path)){
-					//Èç¹ûÄÚ´æ´óÓÚÒªÏÔÊ¾µÄÍ¼Æ¬Ê±£¬²ÅÏÔÊ¾
-					if(SystemMemoryUtil.getAvailMemory(BaseApplication.getInstance().getApplicationContext()) > file.length()){
-//						bitmap=BitmapFactory.decodeFile(path);
-						InputStream inputStream = null; 
-						try { 
-							inputStream = new FileInputStream(path); 
-						} catch (FileNotFoundException e) { 
-							e.printStackTrace(); 
-						} 
-//						if(BaseConfig.screenUtils.getWidth()>480){
-//							BitmapFactory.Options options=new BitmapFactory.Options(); 
-//						    options.inJustDecodeBounds = false; 
-//						    options.inSampleSize = 2;   //width£¬hightÉèÎªÔ­À´µÄËÄ·ÖÖ®Ò» 
-//							bitmap = BitmapFactory.decodeStream(inputStream,null,options);
-//						}else{
-//							bitmap = BitmapFactory.decodeStream(inputStream);
-//						}
+			if (file.exists()) {
+				if (FileUtils.isImage(path)) {
+					// å¦‚æœå†…å­˜å¤§äºè¦æ˜¾ç¤ºçš„å›¾ç‰‡æ—¶ï¼Œæ‰æ˜¾ç¤º
+					if (SystemMemoryUtil.getAvailMemory(BaseApplication.getInstance().getApplicationContext()) > file
+							.length()) {
+						// bitmap=BitmapFactory.decodeFile(path);
+						InputStream inputStream = null;
+						try {
+							inputStream = new FileInputStream(path);
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+						// if(BaseConfig.screenUtils.getWidth()>480){
+						// BitmapFactory.Options options=new
+						// BitmapFactory.Options();
+						// options.inJustDecodeBounds = false;
+						// options.inSampleSize = 2; //widthï¼Œhightè®¾ä¸ºåŸæ¥çš„å››åˆ†ä¹‹ä¸€
+						// bitmap =
+						// BitmapFactory.decodeStream(inputStream,null,options);
+						// }else{
+						// bitmap = BitmapFactory.decodeStream(inputStream);
+						// }
 						bitmap = BitmapFactory.decodeStream(inputStream);
 					}
 				}
 			}
-    	}
-        return bitmap;
-    }
-	
+		}
+		return bitmap;
+	}
+
 	/*
-	 * »ñÈ¡DrawableÍ¨¹ıPath
+	 * è·å–Drawableé€šè¿‡Path
 	 */
 	@SuppressWarnings("deprecation")
-	public static Drawable getDrawableByPath(String path) { 
-    	Bitmap bitmap = null;
-    	Drawable drawable = null;
-    	if(FileUtils.isHasSDCard()){
+	public static Drawable getDrawableByPath(String path) {
+		Bitmap bitmap = null;
+		Drawable drawable = null;
+		if (FileUtils.isHasSDCard()) {
 			File file = new File(path);
-			if (file.exists()){
-				if(FileUtils.isImage(path)){
-					//Èç¹ûÄÚ´æ´óÓÚÒªÏÔÊ¾µÄÍ¼Æ¬Ê±£¬²ÅÏÔÊ¾
-					if(SystemMemoryUtil.getAvailMemory(BaseApplication.getInstance().getApplicationContext()) > file.length()){
-//						bitmap=BitmapFactory.decodeFile(path);
-						InputStream inputStream = null; 
-						try { 
-							inputStream = new FileInputStream(path); 
-						} catch (FileNotFoundException e) { 
-							e.printStackTrace(); 
-						} 
-//						if(BaseConfig.screenUtils.getWidth()>480){
-//							BitmapFactory.Options options=new BitmapFactory.Options(); 
-//						    options.inJustDecodeBounds = false; 
-//						    options.inSampleSize = 2;   //width£¬hightÉèÎªÔ­À´µÄËÄ·ÖÖ®Ò» 
-//							bitmap = BitmapFactory.decodeStream(inputStream,null,options);
-//						}else{
-//							bitmap = BitmapFactory.decodeStream(inputStream);
-//						}
+			if (file.exists()) {
+				if (FileUtils.isImage(path)) {
+					// å¦‚æœå†…å­˜å¤§äºè¦æ˜¾ç¤ºçš„å›¾ç‰‡æ—¶ï¼Œæ‰æ˜¾ç¤º
+					if (SystemMemoryUtil.getAvailMemory(BaseApplication.getInstance().getApplicationContext()) > file
+							.length()) {
+						// bitmap=BitmapFactory.decodeFile(path);
+						InputStream inputStream = null;
+						try {
+							inputStream = new FileInputStream(path);
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+						// if(BaseConfig.screenUtils.getWidth()>480){
+						// BitmapFactory.Options options=new
+						// BitmapFactory.Options();
+						// options.inJustDecodeBounds = false;
+						// options.inSampleSize = 2; //widthï¼Œhightè®¾ä¸ºåŸæ¥çš„å››åˆ†ä¹‹ä¸€
+						// bitmap =
+						// BitmapFactory.decodeStream(inputStream,null,options);
+						// }else{
+						// bitmap = BitmapFactory.decodeStream(inputStream);
+						// }
 						bitmap = BitmapFactory.decodeStream(inputStream);
 						drawable = new BitmapDrawable(bitmap);
 					}
 				}
 			}
-    	}
-        return drawable;
-    }
-	
+		}
+		return drawable;
+	}
+
 	/*
-	 * »ñÈ¡Ô²½ÇBitmapÍ¨¹ıPath
+	 * è·å–åœ†è§’Bitmapé€šè¿‡Path
 	 */
-	public static Bitmap getRoundedCornerBitmapByPath(String path,int res_color,float roundPx) { 
-    	Bitmap bitmap = null;
-    	Bitmap bitmap_rounded = null;
-    	if(FileUtils.isHasSDCard()){
+	public static Bitmap getRoundedCornerBitmapByPath(String path, int res_color, float roundPx) {
+		Bitmap bitmap = null;
+		Bitmap bitmap_rounded = null;
+		if (FileUtils.isHasSDCard()) {
 			File file = new File(path);
-			if (file.exists()){
+			if (file.exists()) {
 				bitmap = getBitmapByPath(path);
-				bitmap_rounded = getRoundedCornerBitmap(bitmap,res_color,roundPx);
-				if(bitmap_rounded != null){
-					if(bitmap != null && !bitmap.isRecycled()){
+				bitmap_rounded = getRoundedCornerBitmap(bitmap, res_color, roundPx);
+				if (bitmap_rounded != null) {
+					if (bitmap != null && !bitmap.isRecycled()) {
 						bitmap.recycle();
 					}
 					return bitmap_rounded;
 				}
 			}
-    	}
-        return bitmap;
-    }
-	
+		}
+		return bitmap;
+	}
+
 	/**
-	* Í¼Æ¬Ô²½Ç
-	* £Àparam bitmap
-	* £Àreturn
-	*/
-	public static Bitmap getRoundedCornerBitmap(Bitmap bitmap,int res_color,float roundPx) {
+	 * å›¾ç‰‡åœ†è§’ ï¼ param bitmap ï¼ return
+	 */
+	public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int res_color, float roundPx) {
 		final Paint paint = new Paint();
 		Canvas canvas = null;
 		Bitmap output = null;
-		if(bitmap != null){
+		if (bitmap != null) {
 			int width = bitmap.getWidth();
 			int height = bitmap.getHeight();
-			if(roundPx == BaseConstants.DEFAULT_AVATER){
+			if (roundPx == BaseConstants.DEFAULT_AVATER) {
 				int f = Math.min(width, height);
 				output = Bitmap.createBitmap(f, f, Config.ARGB_8888);
 				canvas = new Canvas(output);
 				final Rect rect = new Rect(0, 0, f, f);
 				final RectF rectF = new RectF(rect);
 				paint.setAntiAlias(true);
-				canvas.drawARGB(0,0,0,0);
+				canvas.drawARGB(0, 0, 0, 0);
 				paint.setColor(res_color);
-				canvas.drawRoundRect(rectF, f/2, f/2, paint);
+				canvas.drawRoundRect(rectF, f / 2, f / 2, paint);
 				paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
-				canvas.drawBitmap(bitmap, rect,rect, paint); 
-			}else{
+				canvas.drawBitmap(bitmap, rect, rect, paint);
+			} else {
 				output = Bitmap.createBitmap(width, height, Config.ARGB_8888);
 				canvas = new Canvas(output);
 				final Rect rect = new Rect(0, 0, width, height);
 				final RectF rectF = new RectF(rect);
 
 				paint.setAntiAlias(true);
-				canvas.drawARGB(0,0,0,0);
+				canvas.drawARGB(0, 0, 0, 0);
 				paint.setColor(res_color);
 				canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
 				paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
-				canvas.drawBitmap(bitmap, rect,rect, paint); 
+				canvas.drawBitmap(bitmap, rect, rect, paint);
 			}
 		}
 		return output;
 	}
-	
+
 	/*
-     * »ñÈ¡Í¼Æ¬µÄĞı×ª
-     */
-    public static String getOrientation(Uri mImageCaptureUri) {  
-    	  
-        // ²»¹ÜÊÇÅÄÕÕ»¹ÊÇÑ¡ÔñÍ¼Æ¬Ã¿ÕÅÍ¼Æ¬¶¼ÓĞÔÚÊı¾İÖĞ´æ´¢Ò²´æ´¢ÓĞ¶ÔÓ¦Ğı×ª½Ç¶ÈorientationÖµ  
-        // ËùÒÔÎÒÃÇÔÚÈ¡³öÍ¼Æ¬ÊÇ°Ñ½Ç¶ÈÖµÈ¡³öÒÔ±ãÄÜÕıÈ·µÄÏÔÊ¾Í¼Æ¬,Ã»ÓĞĞı×ªÊ±µÄĞ§¹û¹Û¿´  
-    	String orientation = "";
-        ContentResolver cr = BaseApplication.getInstance().getContentResolver();  
-        Cursor cursor = cr.query(mImageCaptureUri, null, null, null, null);// ¸ù¾İUri´ÓÊı¾İ¿âÖĞÕÒ  
-        if (cursor != null) {  
-            cursor.moveToFirst();// °ÑÓÎ±êÒÆ¶¯µ½Ê×Î»£¬ÒòÎªÕâÀïµÄUriÊÇ°üº¬IDµÄËùÒÔÊÇÎ¨Ò»µÄ²»ĞèÒªÑ­»·ÕÒÖ¸ÏòµÚÒ»¸ö¾ÍÊÇÁË  
-            orientation = cursor.getString(cursor  
-                    .getColumnIndex("orientation"));// »ñÈ¡Ğı×ªµÄ½Ç¶È  
-            cursor.close();  
-        } 
-        return orientation;
-    } 
-    
-    /*
-     * »ñÈ¡Í¼Æ¬µÄĞı×ª
-     */
-    @SuppressLint("NewApi")
-	public static String getOrientation(String imgPath) {  
-//    	BitmapFactory.Options options = new BitmapFactory.Options();
-//    	options.inJustDecodeBounds = true;
-//    	Bitmap bmp = BitmapFactory.decodeFile(imgPath, options);
-//    	int width = options.outWidth;
-//    	int height = options.outHeight;
-//    	if(width > height){
-//    		return "90";
-//    	}
-    	
-    	ExifInterface exifInterface;
+	 * è·å–å›¾ç‰‡çš„æ—‹è½¬
+	 */
+	public static String getOrientation(Uri mImageCaptureUri) {
+
+		// ä¸ç®¡æ˜¯æ‹ç…§è¿˜æ˜¯é€‰æ‹©å›¾ç‰‡æ¯å¼ å›¾ç‰‡éƒ½æœ‰åœ¨æ•°æ®ä¸­å­˜å‚¨ä¹Ÿå­˜å‚¨æœ‰å¯¹åº”æ—‹è½¬è§’åº¦orientationå€¼
+		// æ‰€ä»¥æˆ‘ä»¬åœ¨å–å‡ºå›¾ç‰‡æ˜¯æŠŠè§’åº¦å€¼å–å‡ºä»¥ä¾¿èƒ½æ­£ç¡®çš„æ˜¾ç¤ºå›¾ç‰‡,æ²¡æœ‰æ—‹è½¬æ—¶çš„æ•ˆæœè§‚çœ‹
+		String orientation = "";
+		ContentResolver cr = BaseApplication.getInstance().getContentResolver();
+		Cursor cursor = cr.query(mImageCaptureUri, null, null, null, null);// æ ¹æ®Uriä»æ•°æ®åº“ä¸­æ‰¾
+		if (cursor != null) {
+			cursor.moveToFirst();// æŠŠæ¸¸æ ‡ç§»åŠ¨åˆ°é¦–ä½ï¼Œå› ä¸ºè¿™é‡Œçš„Uriæ˜¯åŒ…å«IDçš„æ‰€ä»¥æ˜¯å”¯ä¸€çš„ä¸éœ€è¦å¾ªç¯æ‰¾æŒ‡å‘ç¬¬ä¸€ä¸ªå°±æ˜¯äº†
+			orientation = cursor.getString(cursor.getColumnIndex("orientation"));// è·å–æ—‹è½¬çš„è§’åº¦
+			cursor.close();
+		}
+		return orientation;
+	}
+
+	/*
+	 * è·å–å›¾ç‰‡çš„æ—‹è½¬
+	 */
+	@SuppressLint("NewApi")
+	public static String getOrientation(String imgPath) {
+		// BitmapFactory.Options options = new BitmapFactory.Options();
+		// options.inJustDecodeBounds = true;
+		// Bitmap bmp = BitmapFactory.decodeFile(imgPath, options);
+		// int width = options.outWidth;
+		// int height = options.outHeight;
+		// if(width > height){
+		// return "90";
+		// }
+
+		ExifInterface exifInterface;
 		try {
 			exifInterface = new ExifInterface(imgPath);
 			int tag = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, -1);
-	    	if (tag == ExifInterface.ORIENTATION_ROTATE_90) {//Èç¹ûÊÇĞı×ªµØÍ¼Æ¬ÔòÏÈĞı×ª
-	    		return "90";
-	    	}
+			if (tag == ExifInterface.ORIENTATION_ROTATE_90) {// å¦‚æœæ˜¯æ—‹è½¬åœ°å›¾ç‰‡åˆ™å…ˆæ—‹è½¬
+				return "90";
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        return "0";
-    }
+		return "0";
+	}
 
 	public static Bitmap getBitmapByDrawable(int res) {
 		BitmapDrawable bd = (BitmapDrawable) BaseApplication.getInstance().getResources().getDrawable(res);

@@ -5,21 +5,22 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonParseException;
 
 /**
- * »ù±¾Êı¾İ½á¹¹
+ * åŸºæœ¬æ•°æ®ç»“æ„
+ * 
  * @author gejian
  *
  */
 public class BaseData {
-	
-	private int result = 0; //0:²»³É¹¦ 1: ³É¹¦£¨Ä¬ÈÏ£©
-	private String message = "OK";//´íÎóÊ±·µ»Ø´íÎóÔ­Òò,³É¹¦·µ»Ø"OK" 
-	
-	private int firstpos = 0; //listviewÉÏ´ÎÏÔÊ¾µÄµÚÒ»¸öItem
-	
-	private static Page page; //Ò³Âë
-	
+
+	private int result = 0; // 0:ä¸æˆåŠŸ 1: æˆåŠŸï¼ˆé»˜è®¤ï¼‰
+	private String message = "OK";// é”™è¯¯æ—¶è¿”å›é”™è¯¯åŸå› ,æˆåŠŸè¿”å›"OK"
+
+	private int firstpos = 0; // listviewä¸Šæ¬¡æ˜¾ç¤ºçš„ç¬¬ä¸€ä¸ªItem
+
+	private static Page page; // é¡µç 
+
 	public static Page getPage() {
-		if(page == null){
+		if (page == null) {
 			page = new Page();
 		}
 		return page;
@@ -49,23 +50,23 @@ public class BaseData {
 		this.message = message;
 	}
 
-	String webString="";//·şÎñÆ÷·µ»ØÔ­Ê¼ĞÅÏ¢
-	
-	public String getWebString(){
-		return "·şÎñÆ÷·µ»Ø£º"+webString;
+	String webString = "";// æœåŠ¡å™¨è¿”å›åŸå§‹ä¿¡æ¯
+
+	public String getWebString() {
+		return "æœåŠ¡å™¨è¿”å›ï¼š" + webString;
 	}
-	
-	public void setWebString(String str){
-		webString=str;
+
+	public void setWebString(String str) {
+		webString = str;
 	}
-	
-	public static Page getPageFromJson(JsonArray jsonArray){
-		if(jsonArray != null){
-			try{
-			}catch (JsonParseException e) {
+
+	public static Page getPageFromJson(JsonArray jsonArray) {
+		if (jsonArray != null) {
+			try {
+			} catch (JsonParseException e) {
 			} catch (Exception e) {
 			}
-			
+
 			getPage().setPerPage(JsonMethed.getJsonInt(jsonArray.get(0)));
 			getPage().setCurPage(JsonMethed.getJsonInt(jsonArray.get(1)));
 			getPage().setTopic(JsonMethed.getJsonInt(jsonArray.get(2)));

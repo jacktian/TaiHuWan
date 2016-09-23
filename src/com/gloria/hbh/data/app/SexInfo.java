@@ -1,28 +1,34 @@
 package com.gloria.hbh.data.app;
 
 /*
- * ĞÔ±ğµÄÊı¾İ½á¹¹
+ * æ€§åˆ«çš„æ•°æ®ç»“æ„
  */
 public class SexInfo {
 
-	private int sex_id ; //1£ºÄĞ 2£ºÅ®
-	private String code = ""; //´úÂë
-	private String name = ""; // "ÄĞ"
+	private int sex_id; // 1ï¼šç”· 2ï¼šå¥³
+	private String code = ""; // ä»£ç 
+	private String name = ""; // "ç”·"
+
 	public int getSex_id() {
 		return sex_id;
 	}
+
 	public void setSex_id(int sex_id) {
 		this.sex_id = sex_id;
 	}
+
 	public String getCode() {
 		return code;
 	}
+
 	public void setCode(String code) {
 		this.code = code;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}

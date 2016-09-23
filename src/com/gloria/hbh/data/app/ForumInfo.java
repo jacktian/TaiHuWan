@@ -2,39 +2,36 @@ package com.gloria.hbh.data.app;
 
 import java.util.HashMap;
 
-import com.gloria.hbh.constant.BaseConstants;
-import com.gloria.hbh.datadispose.JsonMethed;
-import com.gloria.hbh.util.PreferencesUtils;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
 /**
- * ÂÛÌ³»ù±¾ĞÅÏ¢
- * @author gejian
- * 2013-1-23
+ * è®ºå›åŸºæœ¬ä¿¡æ¯
+ * 
+ * @author gejian 2013-1-23
  */
 public class ForumInfo {
-	
+
 	public class PhoneTypeConstants {
-		public static final String PhoneType_IPHONE = "1"; //iphone
-		public static final String PhoneType_ANDROID = "2"; //android
-		public static final String PhoneType_WP = "3"; //WP
+		public static final String PhoneType_IPHONE = "1"; // iphone
+		public static final String PhoneType_ANDROID = "2"; // android
+		public static final String PhoneType_WP = "3"; // WP
 	}
-	
+
 	public class FeedBackTypeConstants {
-		public static final String FeedBackType_CRASH = "1"; //±ÀÀ£·´À¡
-		public static final String FeedBackType_SUGGESTION = "2"; //Òâ¼û·´À¡
+		public static final String FeedBackType_CRASH = "1"; // å´©æºƒåé¦ˆ
+		public static final String FeedBackType_SUGGESTION = "2"; // æ„è§åé¦ˆ
 	}
-	
-	String forum_type = ""; //ÂÛÌ³µÄÀàĞÍ
-	String phone_type = PhoneTypeConstants.PhoneType_ANDROID; //ÊÖ»úÀàĞÍ  1£ºiphone  2£º°²×¿   3£ºWP
-	String back_type = FeedBackTypeConstants.FeedBackType_CRASH; //·´À¡ÀàĞÍ 1£º±ÀÀ£ĞÅÏ¢Ìá½»  2£ºÒâ¼û·´À¡
-	String company_id = ""; //ÂÛÌ³ËùÊô¹«Ë¾µÄidºÅ
-	String host_url = "";  //ÂÛÌ³Ö÷Õ¾µÄurlµØÖ·
-	String api_url = "";   //api½Ó¿ÚÎ»ÓÚÖ÷Õ¾µÄurlµØÖ·
-	String min_post_word_count = ""; //ÂÛÌ³·¢ÌûµÄ×îÉÙ×Ö·ûÊı
-	FunctionInfo functionInfo = null; //ÂÛÌ³µÄÖ§³ÖµÄÄÚ²¿¹¦ÄÜ
-	
+
+	String forum_type = ""; // è®ºå›çš„ç±»å‹
+	String phone_type = PhoneTypeConstants.PhoneType_ANDROID; // æ‰‹æœºç±»å‹ 1ï¼šiphone
+																// 2ï¼šå®‰å“ 3ï¼šWP
+	String back_type = FeedBackTypeConstants.FeedBackType_CRASH; // åé¦ˆç±»å‹
+																	// 1ï¼šå´©æºƒä¿¡æ¯æäº¤
+																	// 2ï¼šæ„è§åé¦ˆ
+	String company_id = ""; // è®ºå›æ‰€å±å…¬å¸çš„idå·
+	String host_url = ""; // è®ºå›ä¸»ç«™çš„urlåœ°å€
+	String api_url = ""; // apiæ¥å£ä½äºä¸»ç«™çš„urlåœ°å€
+	String min_post_word_count = ""; // è®ºå›å‘å¸–çš„æœ€å°‘å­—ç¬¦æ•°
+	FunctionInfo functionInfo = null; // è®ºå›çš„æ”¯æŒçš„å†…éƒ¨åŠŸèƒ½
+
 	public String getForumType() {
 		return forum_type;
 	}
@@ -82,16 +79,16 @@ public class ForumInfo {
 	@SuppressWarnings("unchecked")
 	public static ForumInfo getForumInfo(HashMap<String, Object> root) {
 		// TODO Auto-generated method stub
-		if(root == null){
+		if (root == null) {
 			return null;
 		}
 		ForumInfo forumInfo = new ForumInfo();
-		forumInfo.setApiUrl((String)root.get("api_url"));
-		forumInfo.setCompanyId((String)root.get("company_id"));
-		forumInfo.setForumType((String)root.get("forum_type"));
-		forumInfo.setHostUrl((String)root.get("host_url"));
-		forumInfo.setMinPostWordCount((String)root.get("min_post_word_count"));
-		forumInfo.setFunctionInfo(FunctionInfo.getFunctionInfo((HashMap<String, Object>)root.get("function_support")));
+		forumInfo.setApiUrl((String) root.get("api_url"));
+		forumInfo.setCompanyId((String) root.get("company_id"));
+		forumInfo.setForumType((String) root.get("forum_type"));
+		forumInfo.setHostUrl((String) root.get("host_url"));
+		forumInfo.setMinPostWordCount((String) root.get("min_post_word_count"));
+		forumInfo.setFunctionInfo(FunctionInfo.getFunctionInfo((HashMap<String, Object>) root.get("function_support")));
 		return forumInfo;
 	}
 

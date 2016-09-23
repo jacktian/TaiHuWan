@@ -5,25 +5,20 @@ import com.gloria.hbh.data.forum.WeatherInfo;
 import com.gloria.hbh.util.HttpUtils;
 import com.google.gson.JsonObject;
 
-
 /**
-* ÎÄ ¼ş Ãû : DataDispose
-* ´´ ½¨ ÈË£º gejian
-* ÈÕ     ÆÚ£º2012-8-7
-* ĞŞ ¸Ä ÈË£ºgejian
-* ÈÕ    ÆÚ£º2012-8-7
-* Ãè    Êö£ºÊı¾İ´¦ÀíÀà
-*/
+ * æ–‡ ä»¶ å : DataDispose åˆ› å»º äººï¼š gejian æ—¥ æœŸï¼š2012-8-7 ä¿® æ”¹ äººï¼šgejian æ—¥ æœŸï¼š2012-8-7 æ
+ * è¿°ï¼šæ•°æ®å¤„ç†ç±»
+ */
 public class DataDispose {
 
 	/*
-	 *ÌìÆøĞÅÏ¢
+	 * å¤©æ°”ä¿¡æ¯
 	 */
-	public static WeatherInfo getWeatherInfo(String code,boolean isRefresh) {
+	public static WeatherInfo getWeatherInfo(String code, boolean isRefresh) {
 		JsonObject jsonObject = null;
 		WeatherInfo weatherInfo = null;
-		jsonObject = HttpUtils.getJsonObject(BaseConfig.requestWeatherInfoUrl(code),isRefresh);
-//		weatherInfo = WeatherInfo.getWeatherInfoFromJson(jsonObject);
+		jsonObject = HttpUtils.getJsonObject(BaseConfig.requestWeatherInfoUrl(code), isRefresh);
+		// weatherInfo = WeatherInfo.getWeatherInfoFromJson(jsonObject);
 		weatherInfo = new WeatherInfo(jsonObject);
 		return weatherInfo;
 	}

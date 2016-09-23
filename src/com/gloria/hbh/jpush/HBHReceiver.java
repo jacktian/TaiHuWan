@@ -1,5 +1,8 @@
 package com.gloria.hbh.jpush;
 
+import com.gloria.hbh.data.app.SubTabInfo.SubTabInfoTypeConstants;
+import com.gloria.hbh.main.Activity_Detail;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -7,67 +10,63 @@ import android.os.Bundle;
 import android.util.Log;
 import cn.jpush.android.api.JPushInterface;
 
-import com.gloria.hbh.data.app.SubTabInfo.SubTabInfoTypeConstants;
-import com.gloria.hbh.main.Activity_Detail;
-
 /**
- * ×Ô¶¨Òå½ÓÊÕÆ÷
+ * è‡ªå®šä¹‰æŽ¥æ”¶å™¨
  * 
- * Èç¹û²»¶¨ÒåÕâ¸ö Receiver£¬Ôò£º
- * 1) Ä¬ÈÏÓÃ»§»á´ò¿ªÖ÷½çÃæ
- * 2) ½ÓÊÕ²»µ½×Ô¶¨ÒåÏûÏ¢
+ * å¦‚æžœä¸å®šä¹‰è¿™ä¸ª Receiverï¼Œåˆ™ï¼š 1) é»˜è®¤ç”¨æˆ·ä¼šæ‰“å¼€ä¸»ç•Œé¢ 2) æŽ¥æ”¶ä¸åˆ°è‡ªå®šä¹‰æ¶ˆæ¯
  */
 public class HBHReceiver extends BroadcastReceiver {
 	private static final String TAG = "MyReceiver";
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-        Bundle bundle = intent.getExtras();
+		Bundle bundle = intent.getExtras();
 		Log.d(TAG, "onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
-		
-        if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
-            String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
-            Log.d(TAG, "½ÓÊÕRegistration Id : " + regId);
-            //send the Registration Id to your server...
-        }else if (JPushInterface.ACTION_UNREGISTER.equals(intent.getAction())){
-        	String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
-            Log.d(TAG, "½ÓÊÕUnRegistration Id : " + regId);
-          //send the UnRegistration Id to your server...
-        } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-        	Log.d(TAG, "½ÓÊÕµ½ÍÆËÍÏÂÀ´µÄ×Ô¶¨ÒåÏûÏ¢: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
-        	processCustomMessage(context, bundle);
-        
-        } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
-            Log.d(TAG, "½ÓÊÕµ½ÍÆËÍÏÂÀ´µÄÍ¨Öª");
-            int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
-            Log.d(TAG, "½ÓÊÕµ½ÍÆËÍÏÂÀ´µÄÍ¨ÖªµÄID: " + notifactionId);
-        	
-        } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
-            Log.d(TAG, "ÓÃ»§µã»÷´ò¿ªÁËÍ¨Öª");
-            
-        	//´ò¿ª×Ô¶¨ÒåµÄActivity
-        	Intent i = new Intent(context, Activity_Detail.class);
-        	String title = bundle.getString(JPushInterface.EXTRA_NOTIFICATION_TITLE);
-	        String content = bundle.getString(JPushInterface.EXTRA_ALERT);
-        	i.putExtra("text","Ì«ºþÍå×ÊÑ¶ÄÚÈÝ");
-    		i.putExtra("title",title);
-    		i.putExtra("description",content);
-    		i.putExtra("imageUrl","");
-    		i.putExtra("date","");
-    		i.putExtra("type",SubTabInfoTypeConstants.SUBCATE_COMMON);
-        	i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        	context.startActivity(i);
-        	
-        } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
-            Log.d(TAG, "ÓÃ»§ÊÕµ½µ½RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
-            //ÔÚÕâÀï¸ù¾Ý JPushInterface.EXTRA_EXTRA µÄÄÚÈÝ´¦Àí´úÂë£¬±ÈÈç´ò¿ªÐÂµÄActivity£¬ ´ò¿ªÒ»¸öÍøÒ³µÈ..
-        	
-        } else {
-        	Log.d(TAG, "Unhandled intent - " + intent.getAction());
-        }
+
+		if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
+			String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
+			Log.d(TAG, "æŽ¥æ”¶Registration Id : " + regId);
+			// send the Registration Id to your server...
+		} else if (JPushInterface.ACTION_UNREGISTER.equals(intent.getAction())) {
+			String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
+			Log.d(TAG, "æŽ¥æ”¶UnRegistration Id : " + regId);
+			// send the UnRegistration Id to your server...
+		} else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
+			Log.d(TAG, "æŽ¥æ”¶åˆ°æŽ¨é€ä¸‹æ¥çš„è‡ªå®šä¹‰æ¶ˆæ¯: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
+			processCustomMessage(context, bundle);
+
+		} else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
+			Log.d(TAG, "æŽ¥æ”¶åˆ°æŽ¨é€ä¸‹æ¥çš„é€šçŸ¥");
+			int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
+			Log.d(TAG, "æŽ¥æ”¶åˆ°æŽ¨é€ä¸‹æ¥çš„é€šçŸ¥çš„ID: " + notifactionId);
+
+		} else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
+			Log.d(TAG, "ç”¨æˆ·ç‚¹å‡»æ‰“å¼€äº†é€šçŸ¥");
+
+			// æ‰“å¼€è‡ªå®šä¹‰çš„Activity
+			Intent i = new Intent(context, Activity_Detail.class);
+			String title = bundle.getString(JPushInterface.EXTRA_NOTIFICATION_TITLE);
+			String content = bundle.getString(JPushInterface.EXTRA_ALERT);
+			i.putExtra("text", "å¤ªæ¹–æ¹¾èµ„è®¯å†…å®¹");
+			i.putExtra("title", title);
+			i.putExtra("description", content);
+			i.putExtra("imageUrl", "");
+			i.putExtra("date", "");
+			i.putExtra("type", SubTabInfoTypeConstants.SUBCATE_COMMON);
+			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(i);
+
+		} else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
+			Log.d(TAG, "ç”¨æˆ·æ”¶åˆ°åˆ°RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
+			// åœ¨è¿™é‡Œæ ¹æ® JPushInterface.EXTRA_EXTRA çš„å†…å®¹å¤„ç†ä»£ç ï¼Œæ¯”å¦‚æ‰“å¼€æ–°çš„Activityï¼Œ
+			// æ‰“å¼€ä¸€ä¸ªç½‘é¡µç­‰..
+
+		} else {
+			Log.d(TAG, "Unhandled intent - " + intent.getAction());
+		}
 	}
 
-	// ´òÓ¡ËùÓÐµÄ intent extra Êý¾Ý
+	// æ‰“å°æ‰€æœ‰çš„ intent extra æ•°æ®
 	private static String printBundle(Bundle bundle) {
 		StringBuilder sb = new StringBuilder();
 		for (String key : bundle.keySet()) {
@@ -79,26 +78,26 @@ public class HBHReceiver extends BroadcastReceiver {
 		}
 		return sb.toString();
 	}
-	
-	//send msg to MainActivity
+
+	// send msg to MainActivity
 	private void processCustomMessage(Context context, Bundle bundle) {
-//		if (MainActivity.isForeground) {
-//			String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
-//			String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-//			Intent msgIntent = new Intent(MainActivity.MESSAGE_RECEIVED_ACTION);
-//			msgIntent.putExtra(MainActivity.KEY_MESSAGE, message);
-//			if (!ExampleUtil.isEmpty(extras)) {
-//				try {
-//					JSONObject extraJson = new JSONObject(extras);
-//					if (null != extraJson && extraJson.length() > 0) {
-//						msgIntent.putExtra(MainActivity.KEY_EXTRAS, extras);
-//					}
-//				} catch (JSONException e) {
-//
-//				}
-//
-//			}
-//			context.sendBroadcast(msgIntent);
-//		}
+		// if (MainActivity.isForeground) {
+		// String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+		// String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+		// Intent msgIntent = new Intent(MainActivity.MESSAGE_RECEIVED_ACTION);
+		// msgIntent.putExtra(MainActivity.KEY_MESSAGE, message);
+		// if (!ExampleUtil.isEmpty(extras)) {
+		// try {
+		// JSONObject extraJson = new JSONObject(extras);
+		// if (null != extraJson && extraJson.length() > 0) {
+		// msgIntent.putExtra(MainActivity.KEY_EXTRAS, extras);
+		// }
+		// } catch (JSONException e) {
+		//
+		// }
+		//
+		// }
+		// context.sendBroadcast(msgIntent);
+		// }
 	}
 }

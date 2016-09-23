@@ -9,31 +9,31 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-
 /**
- * Ìû×ÓÔªËØ 
+ * å¸–å­å…ƒç´ 
+ * 
  * @author gejian
  *
  */
 public class PostBasic {
-	
-	String id=""; // Ìû×ÓÊÕ²Øid
-	
-	String tid=""; // Ìû×Óid
-	String fid=""; // 
-	String subject=""; // Ìû×Ó±êÌâ
-	String author=""; // Ìû×Ó×÷Õß
-	String authorid=""; // Ìû×Ó×÷Õß
-	String postdate=""; // ¸üĞÂÊ±¼ä 
-	String type="";  //Ìû×ÓÀàĞÍ
-	String url="";  //Á´½Ó
-	int  replies=0;   //Ö÷ÌâÊı »ò »Ø¸´Êı
-	int  hits=0;	//Ìû×ÓÊı »ò ä¯ÀÀÊı
-	String ifupload =""; //ÊÇ·ñº¬ÓĞÍ¼Æ¬»ò¸½¼ş
-	String lastpost=""; // ×îºó¸üĞÂÊ±¼ä 
-	String pid = "";  //Â¥²ã»Ø¸´µÄid
-	String blockquote = ""; // ÒıÓÃÄÚÈİ
-	
+
+	String id = ""; // å¸–å­æ”¶è—id
+
+	String tid = ""; // å¸–å­id
+	String fid = ""; //
+	String subject = ""; // å¸–å­æ ‡é¢˜
+	String author = ""; // å¸–å­ä½œè€…
+	String authorid = ""; // å¸–å­ä½œè€…
+	String postdate = ""; // æ›´æ–°æ—¶é—´
+	String type = ""; // å¸–å­ç±»å‹
+	String url = ""; // é“¾æ¥
+	int replies = 0; // ä¸»é¢˜æ•° æˆ– å›å¤æ•°
+	int hits = 0; // å¸–å­æ•° æˆ– æµè§ˆæ•°
+	String ifupload = ""; // æ˜¯å¦å«æœ‰å›¾ç‰‡æˆ–é™„ä»¶
+	String lastpost = ""; // æœ€åæ›´æ–°æ—¶é—´
+	String pid = ""; // æ¥¼å±‚å›å¤çš„id
+	String blockquote = ""; // å¼•ç”¨å†…å®¹
+
 	public String getBlockquote() {
 		return blockquote;
 	}
@@ -42,16 +42,16 @@ public class PostBasic {
 		this.blockquote = blockquote;
 	}
 
-	String content = ""; // Ìû×ÓÄÚÈİ
-	int lou = 0; // Â¥
-	String micon = ""; // Í·Ïñ
-	ArrayList<ImageInfo> attachments = null; // ¸½¼şÍ¼Æ¬ÁĞ±í
-	ArrayList<String> imgLists = null; // ¸½¼şÍ¼Æ¬ÁĞ±í
-	
+	String content = ""; // å¸–å­å†…å®¹
+	int lou = 0; // æ¥¼
+	String micon = ""; // å¤´åƒ
+	ArrayList<ImageInfo> attachments = null; // é™„ä»¶å›¾ç‰‡åˆ—è¡¨
+	ArrayList<String> imgLists = null; // é™„ä»¶å›¾ç‰‡åˆ—è¡¨
+
 	public ArrayList<String> getImgLists() {
-		if(imgLists == null){
+		if (imgLists == null) {
 			imgLists = new ArrayList<String>();
-			for(ImageInfo imgInfo:attachments){
+			for (ImageInfo imgInfo : attachments) {
 				imgLists.add(imgInfo.getUrl());
 			}
 		}
@@ -91,7 +91,7 @@ public class PostBasic {
 	}
 
 	public ArrayList<ImageInfo> getAttachments() {
-		if(attachments == null){
+		if (attachments == null) {
 			attachments = new ArrayList<ImageInfo>();
 		}
 		return attachments;
@@ -108,37 +108,37 @@ public class PostBasic {
 	public String getTid() {
 		return tid;
 	}
-	
-	public void setTid(String tid){
+
+	public void setTid(String tid) {
 		this.tid = tid;
 	}
 
 	public String getFid() {
 		return fid;
 	}
-	
-	public void setFid(String fid){
+
+	public void setFid(String fid) {
 		this.fid = fid;
 	}
 
 	public String getAuthor() {
 		return author;
 	}
-	
-	public void setAuthor(String author){
+
+	public void setAuthor(String author) {
 		this.author = author;
 	}
-	
-	public void setType(String type){
+
+	public void setType(String type) {
 		this.type = type;
 	}
 
 	public String getType() {
 		return type;
 	}
-	
-	public void setUrl(String url){
-		if(url != null && !url.contains("http://")){
+
+	public void setUrl(String url) {
+		if (url != null && !url.contains("http://")) {
 			url = BaseConfig.url + url;
 		}
 		this.url = url;
@@ -147,15 +147,15 @@ public class PostBasic {
 	public String getUrl() {
 		return url;
 	}
-	
-	public void setIfupload(String ifupload){
+
+	public void setIfupload(String ifupload) {
 		this.ifupload = ifupload;
 	}
 
 	public String getIfupload() {
 		return ifupload;
 	}
-	
+
 	public String getPid() {
 		return pid;
 	}
@@ -164,19 +164,19 @@ public class PostBasic {
 		this.pid = pid;
 	}
 
-	public static  PostBasic getFromJsonObject(JsonObject jsonObject){
-		PostBasic postBasic=new PostBasic();
+	public static PostBasic getFromJsonObject(JsonObject jsonObject) {
+		PostBasic postBasic = new PostBasic();
 		String content = "";
 		String newcontentString = "";
 		ArrayList<String> contentUrlList = null;
 		try {
 			postBasic.setAuthor(JsonMethed.getJsonString(jsonObject.get("author")));
 			postBasic.setAuthorId(JsonMethed.getJsonString(jsonObject.get("authorid")));
-			
+
 			content = JsonMethed.getJsonString(jsonObject.get("content"));
-			newcontentString = Methods.setNewContent(content);    //Ìæ»»±íÇé
-			contentUrlList = Methods.getContentPicUrlList(content);  //»ñÈ¡contentÖĞµÄÍ¼Æ¬
-			
+			newcontentString = Methods.setNewContent(content); // æ›¿æ¢è¡¨æƒ…
+			contentUrlList = Methods.getContentPicUrlList(content); // è·å–contentä¸­çš„å›¾ç‰‡
+
 			postBasic.setContent(newcontentString);
 			postBasic.setId(JsonMethed.getJsonString(jsonObject.get("id")));
 			postBasic.setFid(JsonMethed.getJsonString(jsonObject.get("fid")));
@@ -193,11 +193,11 @@ public class PostBasic {
 			postBasic.setUrl(JsonMethed.getJsonString(jsonObject.get("url")));
 			postBasic.setPid(JsonMethed.getJsonString(jsonObject.get("pid")));
 			postBasic.setBlockquote(JsonMethed.getJsonString(jsonObject.get("blockquote")));
-			
-			//¸½¼şÍ¼Æ¬
+
+			// é™„ä»¶å›¾ç‰‡
 			JsonArray jsonArray_attachments = JsonMethed.getJsonArray(jsonObject.get("attachments"));
-			if(jsonArray_attachments != null){
-				for(int i = 0; i < jsonArray_attachments.size(); i++){
+			if (jsonArray_attachments != null) {
+				for (int i = 0; i < jsonArray_attachments.size(); i++) {
 					JsonObject jsonObject_attachments = JsonMethed.getJsonObject(jsonArray_attachments.get(i));
 					ImageInfo imageInfo = new ImageInfo();
 					imageInfo.setUrl(JsonMethed.getJsonString(jsonObject_attachments.get("url")));
@@ -205,16 +205,16 @@ public class PostBasic {
 					postBasic.getAttachments().add(imageInfo);
 				}
 			}
-			//Ìí¼ÓContentÖĞµÄÍ¼Æ¬
-			for(int m=0;m < contentUrlList.size();m++){
-				if(!postBasic.getAttachments().contains(contentUrlList.get(m))){
+			// æ·»åŠ Contentä¸­çš„å›¾ç‰‡
+			for (int m = 0; m < contentUrlList.size(); m++) {
+				if (!postBasic.getAttachments().contains(contentUrlList.get(m))) {
 					ImageInfo imageInfo = new ImageInfo();
 					imageInfo.setUrl(contentUrlList.get(m));
 					imageInfo.setMiniurl(contentUrlList.get(m));
 					postBasic.getAttachments().add(imageInfo);
 				}
 			}
-		}catch (JsonParseException e) {
+		} catch (JsonParseException e) {
 		} catch (Exception e) {
 		}
 		return postBasic;
@@ -261,11 +261,11 @@ public class PostBasic {
 	}
 
 	public static PostBasic getPostBasicFromJsonObject(JsonObject jsonObject) {
-		PostBasic postBasic =new PostBasic();
+		PostBasic postBasic = new PostBasic();
 		try {
-			if(JsonMethed.getJsonString(jsonObject.get("author")) == null){
+			if (JsonMethed.getJsonString(jsonObject.get("author")) == null) {
 				postBasic.setAuthor(JsonMethed.getJsonString(jsonObject.get("username")));
-			}else{
+			} else {
 				postBasic.setAuthor(JsonMethed.getJsonString(jsonObject.get("author")));
 			}
 			postBasic.setAuthorId(JsonMethed.getJsonString(jsonObject.get("authorid")));
@@ -280,10 +280,9 @@ public class PostBasic {
 			postBasic.setTid(JsonMethed.getJsonString(jsonObject.get("tid")));
 			postBasic.setType(JsonMethed.getJsonString(jsonObject.get("type")));
 			postBasic.setUrl(JsonMethed.getJsonString(jsonObject.get("url")));
-		}catch (JsonParseException e) {
+		} catch (JsonParseException e) {
 		} catch (Exception e) {
 		}
 		return postBasic;
 	}
 }
-

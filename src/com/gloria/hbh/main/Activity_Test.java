@@ -5,52 +5,47 @@ import android.webkit.WebSettings;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 
-public class Activity_Test  extends Activity_Base {
+public class Activity_Test extends Activity_Base {
 
 	private WebView webview;
-	
+
 	public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_webview); 
-        
-        webview = (WebView)findViewById(R.id.webview);
-        setWebView();
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_webview);
+
+		webview = (WebView) findViewById(R.id.webview);
+		setWebView();
 	}
-	
-	 private  String getURl() {
-		 String url = "";
-		 
-		 url = "<html><body background=file:///android_asset/bg_main.png topmargin=30 leftmargin=30 bottommargin=30 rightmargin=30>" 
-				 + "<img src='file:///android_asset/bg_main_house.jpg'/>"
-				 + "<table cellspacing=10 cellpadding=0 bgcolor=#B2FFFFFF width=100% >"
-				 + "<tr >" 
-				 + "<td background='file:///android_asset/section_bg.png'>¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¸Å¿ö</td>"
-				 + "</tr>" 
-				 + "<tr >" 
-				 + "<td width=100%>ÖĞ¹ú»¨»Ü²©ÀÀ»á£¨¼ò³Æ¡°»¨²©»á¡±£©´´Ê¼ÓÚ1987Äê£¬Ã¿ËÄÄê¾Ù°ìÒ»´Î£¬ÊÇÎÒ¹ú¹æÄ£×î´ó¡¢Ó°Ïì×î¹ãµÄ¹ú¼Ò¼¶ »¨ÊÂÊ¢»á£¬±»ÓşÎªÖĞ¹ú»¨»Ü½çµÄ¡°°ÂÁÖÆ¥¿Ë¡±£¬ÖÁ½ñÒÑÔÚ±±¾©¡¢ÉÏº£¡¢¹ãÖİ¡¢³É¶¼µÈµØ³É¹¦¾Ù°ìÆß½ì£¬¹æÄ£ ¡¢Ó°Ïì²»¶Ï¼ÓÉî£¬Õı³¯×Å¹ú¼Ê»¯µÄ·½Ïò·¢Õ¹¡£µÚ°Ë½ìÖĞ¹ú»¨»Ü²©ÀÀ»á½«ÓÚ2013Äê9ÔÂ£¬ÔÚËØÓĞ¡°¹ú¼Ê»¨Ô°³ÇÊĞ¡±¡¢¡°»¨¶¼Ë®³Ç¡±ÃÀÓşµÄ½­ËÕÊ¡³£ÖİÊĞÎä½øÇø¾«²ÊÕÀ·Å¡£Ê± ¼ä£º2013Äê9ÔÂ28ÈÕ¡ª10ÔÂ27ÈÕÖ÷ Ìâ£ºĞÒ¸£Ïñ»¨¶ùÒ»Ñù »á »¨£ºÔÂ¼¾»¨Ö÷°ìµ¥Î»£ºÖĞ¹ú»¨»ÜĞ­»á£¬½­ËÕÊ¡ÈËÃñÕş¸®³Ğ°ìµ¥Î»£º½­ËÕÊ¡»¨Ä¾Ğ­»á£¬½­ËÕÊ¡³£ÖİÊĞÈËÃñÕş¸®ÊµÊ©µ¥Î»£º½­ËÕÊ¡³£ÖİÊĞÎä½øÇøÈËÃñÕş¸®</td>"
-				 + "</tr>" 
-				 + "</table>"
-				 + "</body</html>";
-		 
-		 return url;
-	 }
-	
+
+	private String getURl() {
+		String url = "";
+
+		url = "<html><body background=file:///android_asset/bg_main.png topmargin=30 leftmargin=30 bottommargin=30 rightmargin=30>"
+				+ "<img src='file:///android_asset/bg_main_house.jpg'/>"
+				+ "<table cellspacing=10 cellpadding=0 bgcolor=#B2FFFFFF width=100% >" + "<tr >"
+				+ "<td background='file:///android_asset/section_bg.png'>ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€æ¦‚å†µ</td>" + "</tr>" + "<tr >"
+				+ "<td width=100%>ä¸­å›½èŠ±å‰åšè§ˆä¼šï¼ˆç®€ç§°â€œèŠ±åšä¼šâ€ï¼‰åˆ›å§‹äº1987å¹´ï¼Œæ¯å››å¹´ä¸¾åŠä¸€æ¬¡ï¼Œæ˜¯æˆ‘å›½è§„æ¨¡æœ€å¤§ã€å½±å“æœ€å¹¿çš„å›½å®¶çº§ èŠ±äº‹ç››ä¼šï¼Œè¢«èª‰ä¸ºä¸­å›½èŠ±å‰ç•Œçš„â€œå¥¥æ—åŒ¹å…‹â€ï¼Œè‡³ä»Šå·²åœ¨åŒ—äº¬ã€ä¸Šæµ·ã€å¹¿å·ã€æˆéƒ½ç­‰åœ°æˆåŠŸä¸¾åŠä¸ƒå±Šï¼Œè§„æ¨¡ ã€å½±å“ä¸æ–­åŠ æ·±ï¼Œæ­£æœç€å›½é™…åŒ–çš„æ–¹å‘å‘å±•ã€‚ç¬¬å…«å±Šä¸­å›½èŠ±å‰åšè§ˆä¼šå°†äº2013å¹´9æœˆï¼Œåœ¨ç´ æœ‰â€œå›½é™…èŠ±å›­åŸå¸‚â€ã€â€œèŠ±éƒ½æ°´åŸâ€ç¾èª‰çš„æ±Ÿè‹çœå¸¸å·å¸‚æ­¦è¿›åŒºç²¾å½©ç»½æ”¾ã€‚æ—¶ é—´ï¼š2013å¹´9æœˆ28æ—¥â€”10æœˆ27æ—¥ä¸» é¢˜ï¼šå¹¸ç¦åƒèŠ±å„¿ä¸€æ · ä¼š èŠ±ï¼šæœˆå­£èŠ±ä¸»åŠå•ä½ï¼šä¸­å›½èŠ±å‰åä¼šï¼Œæ±Ÿè‹çœäººæ°‘æ”¿åºœæ‰¿åŠå•ä½ï¼šæ±Ÿè‹çœèŠ±æœ¨åä¼šï¼Œæ±Ÿè‹çœå¸¸å·å¸‚äººæ°‘æ”¿åºœå®æ–½å•ä½ï¼šæ±Ÿè‹çœå¸¸å·å¸‚æ­¦è¿›åŒºäººæ°‘æ”¿åºœ</td>"
+				+ "</tr>" + "</table>" + "</body</html>";
+
+		return url;
+	}
+
 	private void setWebView() {
-		WebSettings  webSettings = webview.getSettings();
+		WebSettings webSettings = webview.getSettings();
 		webSettings.setSavePassword(false);
-		//ÉèÖÃ±£´æÊı¾İ
+		// è®¾ç½®ä¿å­˜æ•°æ®
 		webSettings.setSaveFormData(true);
 		webSettings.setSupportZoom(true);
-		//»º´æ¶ÁÈ¡·½Ê½
+		// ç¼“å­˜è¯»å–æ–¹å¼
 		webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-		
+
 		webview.setFocusable(true);
 		webview.requestFocus();
-		
+
 		final String mimeType = "text/html";
 		final String encoding = "UTF-8";
 		webview.loadDataWithBaseURL("", getURl(), mimeType, encoding, "");
 		webview.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
 		webview.setBackgroundResource(R.drawable.bg_main);
- }
+	}
 }

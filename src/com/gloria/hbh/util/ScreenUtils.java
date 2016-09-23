@@ -1,73 +1,68 @@
 package com.gloria.hbh.util;
 
-import android.util.DisplayMetrics;
-
 import com.gloria.hbh.application.BaseApplication;
 
+import android.util.DisplayMetrics;
 
 /**
-* ÎÄ ¼ş Ãû : ScreenUtils
-* ´´ ½¨ ÈË£º gejian
-* ÈÕ     ÆÚ£º2012-8-7
-* ĞŞ ¸Ä ÈË£ºgejian
-* ÈÕ    ÆÚ£º2012-8-7
-* Ãè    Êö£º»ñÈ¡ÆÁÄ»·Ö±æÂÊµÄ·½·¨Àà
-*/
+ * æ–‡ ä»¶ å : ScreenUtils åˆ› å»º äººï¼š gejian æ—¥ æœŸï¼š2012-8-7 ä¿® æ”¹ äººï¼šgejian æ—¥ æœŸï¼š2012-8-7 æ
+ * è¿°ï¼šè·å–å±å¹•åˆ†è¾¨ç‡çš„æ–¹æ³•ç±»
+ */
 public class ScreenUtils {
 
 	private static ScreenUtils instance;
-    private static int mWidth =0;
-    private static int mHeight=0;
-    private static float mscaledDensity;
-    private int default_Width=0;
-    private int default_Height=0;
-    
-    public static ScreenUtils getInstance()   {   
-    	if(null == instance){   
-    		instance = new ScreenUtils();  
-    		DisplayMetrics metrics = new DisplayMetrics();
-    		metrics = BaseApplication.getInstance().getApplicationContext().getResources().getDisplayMetrics();
-    		setScreenUtil(metrics.widthPixels, metrics.heightPixels, metrics.density);  //»ñÈ¡ÆÁÄ»·Ö±æÂÊ
-    	}   
-    	return instance;    
-    }  
-    
-    public int getDefault_Width() {
-    	default_Width = getWidth()*440/480;
+	private static int mWidth = 0;
+	private static int mHeight = 0;
+	private static float mscaledDensity;
+	private int default_Width = 0;
+	private int default_Height = 0;
+
+	public static ScreenUtils getInstance() {
+		if (null == instance) {
+			instance = new ScreenUtils();
+			DisplayMetrics metrics = new DisplayMetrics();
+			metrics = BaseApplication.getInstance().getApplicationContext().getResources().getDisplayMetrics();
+			setScreenUtil(metrics.widthPixels, metrics.heightPixels, metrics.density); // è·å–å±å¹•åˆ†è¾¨ç‡
+		}
+		return instance;
+	}
+
+	public int getDefault_Width() {
+		default_Width = getWidth() * 440 / 480;
 		return default_Width;
 	}
 
 	public int getDefault_Height() {
-    	default_Height = getHeight()*650/800;
+		default_Height = getHeight() * 650 / 800;
 		return default_Height;
 	}
 
-    public float getScaledDensity() {
+	public float getScaledDensity() {
 		return mscaledDensity;
 	}
 
 	public int getWidth() {
-		if(mWidth == 0){
+		if (mWidth == 0) {
 			DisplayMetrics metrics = new DisplayMetrics();
-    		metrics = BaseApplication.getInstance().getApplicationContext().getResources().getDisplayMetrics();
-    		setScreenUtil(metrics.widthPixels, metrics.heightPixels, metrics.density);  //»ñÈ¡ÆÁÄ»·Ö±æÂÊ
+			metrics = BaseApplication.getInstance().getApplicationContext().getResources().getDisplayMetrics();
+			setScreenUtil(metrics.widthPixels, metrics.heightPixels, metrics.density); // è·å–å±å¹•åˆ†è¾¨ç‡
 		}
-        return mWidth;
-    }
+		return mWidth;
+	}
 
-    public  int getHeight() {
-    	if(mHeight == 0){
+	public int getHeight() {
+		if (mHeight == 0) {
 			DisplayMetrics metrics = new DisplayMetrics();
-    		metrics = BaseApplication.getInstance().getApplicationContext().getResources().getDisplayMetrics();
-    		setScreenUtil(metrics.widthPixels, metrics.heightPixels, metrics.density);  //»ñÈ¡ÆÁÄ»·Ö±æÂÊ
+			metrics = BaseApplication.getInstance().getApplicationContext().getResources().getDisplayMetrics();
+			setScreenUtil(metrics.widthPixels, metrics.heightPixels, metrics.density); // è·å–å±å¹•åˆ†è¾¨ç‡
 		}
-        return mHeight;
-    }
+		return mHeight;
+	}
 
-    public static void setScreenUtil(int width,int height,float scaledDensity){
-    	mWidth = width;
-    	mHeight = height;
-    	mscaledDensity = scaledDensity;
-    }
-   
+	public static void setScreenUtil(int width, int height, float scaledDensity) {
+		mWidth = width;
+		mHeight = height;
+		mscaledDensity = scaledDensity;
+	}
+
 }

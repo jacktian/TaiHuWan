@@ -13,453 +13,453 @@ import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import com.gloria.hbh.constant.BaseConstants;
+
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 
-import com.gloria.hbh.constant.BaseConstants;
-
 /**
-* ÎÄ ¼ş Ãû : FileUtils
-* ´´ ½¨ ÈË£º gejian
-* ÈÕ     ÆÚ£º2012-8-28
-* ĞŞ ¸Ä ÈË£ºgejian
-* ÈÕ    ÆÚ£º2012-8-28
-* Ãè    Êö£ºÎÄ¼ş´¦ÀíÀà
-*/
+ * æ–‡ ä»¶ å : FileUtils åˆ› å»º äººï¼š gejian æ—¥ æœŸï¼š2012-8-28 ä¿® æ”¹ äººï¼šgejian æ—¥ æœŸï¼š2012-8-28 æ
+ * è¿°ï¼šæ–‡ä»¶å¤„ç†ç±»
+ */
 public class FileUtils {
-	
-//	private static String TAG = "FileUtils";
-//	private static boolean DEBUG = false; //ÊÇ·ñDebug
-//    private static final int BUFFER = 8192;
-    
-    //ÊÇ·ñÓĞSD¿¨
-    public static boolean isHasSDCard(){
-    	boolean  isHasSDCard = false;
-    	if (Environment.getExternalStorageState().equals(  
-                Environment.MEDIA_MOUNTED)) {
-    		isHasSDCard = true;
-    	}
-    	return isHasSDCard;
-    }
-    
-    /*
-     * ¶ÁÈ¡ÎÄ±¾ÎÄ¼ş
-     * param String
-     */
-    public static String readTextFile(File file) throws IOException {
-        String text = null;
-        InputStream is = null;
-        if(isHasSDCard()){
-        	try {
-                is = new FileInputStream(file);
-                text = readTextInputStream(is);;
-            } finally {
-                if(is != null) {
-                    is.close();
-                }
-            }
-        }
-        return text;
-    }
 
-    /*
-     * ¶ÁÈ¡ÎÄ±¾ÎÄ¼ş
-     * param InputStream
-     */
-    public static String readTextInputStream(InputStream is) throws IOException {
-        StringBuffer strbuffer = new StringBuffer();
-        String line;
-        BufferedReader reader = null;
-        if(!isHasSDCard()){
-        	return null;
-        }
-        try{
-            reader = new BufferedReader(new InputStreamReader(is));
-            while((line = reader.readLine()) != null) {
-                strbuffer.append(line).append("\r\n");
-            }
-        } finally {
-            if(reader != null) {
-                reader.close();
-            }
-        }
-        return strbuffer.toString();
-    }
+	// private static String TAG = "FileUtils";
+	// private static boolean DEBUG = false; //æ˜¯å¦Debug
+	// private static final int BUFFER = 8192;
 
-    /*
-     * Ğ´ÈëÎÄ±¾ÎÄ¼ş
-     * param String
-     */
+	// æ˜¯å¦æœ‰SDå¡
+	public static boolean isHasSDCard() {
+		boolean isHasSDCard = false;
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+			isHasSDCard = true;
+		}
+		return isHasSDCard;
+	}
+
+	/*
+	 * è¯»å–æ–‡æœ¬æ–‡ä»¶ param String
+	 */
+	public static String readTextFile(File file) throws IOException {
+		String text = null;
+		InputStream is = null;
+		if (isHasSDCard()) {
+			try {
+				is = new FileInputStream(file);
+				text = readTextInputStream(is);
+				;
+			} finally {
+				if (is != null) {
+					is.close();
+				}
+			}
+		}
+		return text;
+	}
+
+	/*
+	 * è¯»å–æ–‡æœ¬æ–‡ä»¶ param InputStream
+	 */
+	public static String readTextInputStream(InputStream is) throws IOException {
+		StringBuffer strbuffer = new StringBuffer();
+		String line;
+		BufferedReader reader = null;
+		if (!isHasSDCard()) {
+			return null;
+		}
+		try {
+			reader = new BufferedReader(new InputStreamReader(is));
+			while ((line = reader.readLine()) != null) {
+				strbuffer.append(line).append("\r\n");
+			}
+		} finally {
+			if (reader != null) {
+				reader.close();
+			}
+		}
+		return strbuffer.toString();
+	}
+
+	/*
+	 * å†™å…¥æ–‡æœ¬æ–‡ä»¶ param String
+	 */
 	public static void writeTextFile(File file, String str) throws IOException {
-        DataOutputStream out = null;
-        if(isHasSDCard()){
-        	if(!file.getParentFile().exists()){
-        		file.getParentFile().mkdirs();
-        	}
-        	try {
-                out = new DataOutputStream(new FileOutputStream(file));
-                out.write(str.getBytes());
-            } finally {
-                if(out != null) {
-                    out.close();
-                }
-            }
-        }
-    }
-	
-	 /*
-     * Ğ´ÈëÎÄ±¾ÎÄ¼ş
-     * param inStream
-     */
+		DataOutputStream out = null;
+		if (isHasSDCard()) {
+			if (!file.getParentFile().exists()) {
+				file.getParentFile().mkdirs();
+			}
+			try {
+				out = new DataOutputStream(new FileOutputStream(file));
+				out.write(str.getBytes());
+			} finally {
+				if (out != null) {
+					out.close();
+				}
+			}
+		}
+	}
+
+	/*
+	 * å†™å…¥æ–‡æœ¬æ–‡ä»¶ param inStream
+	 */
 	public static void writeTextFile(File file, InputStream inStream) throws IOException {
-        FileOutputStream outStream = null;
-        if(isHasSDCard()){
-        	if(!file.getParentFile().exists()){
-        		file.getParentFile().mkdirs();
-        	}
-        	try {
-        		outStream = new FileOutputStream(file);
+		FileOutputStream outStream = null;
+		if (isHasSDCard()) {
+			if (!file.getParentFile().exists()) {
+				file.getParentFile().mkdirs();
+			}
+			try {
+				outStream = new FileOutputStream(file);
 				byte[] buffer = new byte[1024];
 				int len = -1;
-				while ((len = inStream.read(buffer)) != -1)
-				{
+				while ((len = inStream.read(buffer)) != -1) {
 					outStream.write(buffer, 0, len);
 				}
-            } finally {
-            	if(outStream != null) {
-            		outStream.flush();
-    				outStream.close();
-            	}
-            }
-        }
-    }
-
-	/**  
-     *   
-     * @param fromFile ±»¸´ÖÆµÄÎÄ¼ş  
-     * @param toFile ¸´ÖÆµÄÄ¿Â¼ÎÄ¼ş  
-     * @param rewrite ÊÇ·ñÖØĞÂ´´½¨ÎÄ¼ş  
-     *   
-     * <p>ÎÄ¼şµÄ¸´ÖÆ²Ù×÷·½·¨  
-     */  
-    public static boolean copyfile(File fromFile, File toFile,Boolean rewrite ){  
-          
-        if(!fromFile.exists()){  
-            return false;  
-        }  
-          
-        if(!fromFile.isFile()){  
-            return false;  
-        }  
-        if(!fromFile.canRead()){  
-            return false;  
-        }  
-        if(!toFile.getParentFile().exists()){  
-            toFile.getParentFile().mkdirs();  
-        }  
-        if(toFile.exists() && rewrite){  
-            toFile.delete();  
-        }  
-          
-        try {  
-            FileInputStream fosfrom = new FileInputStream(fromFile);  
-            FileOutputStream fosto = new FileOutputStream(toFile);  
-              
-            byte[] bt = new byte[1024];  
-            int c;  
-            while((c=fosfrom.read(bt)) > 0){  
-                fosto.write(bt,0,c);  
-            }  
-            //¹Ø±ÕÊäÈë¡¢Êä³öÁ÷  
-            fosfrom.close();  
-            fosto.close();  
-            return true;
-              
-        } catch (FileNotFoundException e) {  
-            // TODO Auto-generated catch block  
-            e.printStackTrace();  
-        } catch (IOException e) {  
-            // TODO Auto-generated catch block  
-            e.printStackTrace();  
-        }  
-        return false;
-    }  
-    
-    /*
-     * µİ¹é»ñµÃÎÄ¼ş¼Ğ´óĞ¡
-     */
-    public static long getFileSize(File file){		
-		long size = 0;
-		if(isHasSDCard()){
-			if(!file.exists())
-				return 0;
-			
-			File [] files=file.listFiles();
-			for(int i=0;i<files.length;i++)
-			{
-				if(files[i].isDirectory())
-				{
-					size+=getFileSize(files[i]);
+			} finally {
+				if (outStream != null) {
+					outStream.flush();
+					outStream.close();
 				}
-				else
-				{
-					size+=files[i].length();
-				}
-			} 
+			}
 		}
-		return size;	
 	}
-    
-    /*
-     * É¾³ıÎÄ¼ş¼°ÆäÏÂÃæµÄ×ÓÎÄ¼ş
-     */
-    public static  void delFile(File file){
-    	if(isHasSDCard()){
-    		if(!file.exists())
-    			return;
-    		File []files=file.listFiles();
-    		for(int i=0;i<files.length;i++)
-    		{
-    			if(files[i].isDirectory())
-    			{
-    				delFile(files[i]);   //É¾³ıÏÂÃæ×ÓÎÄ¼ş»òÎÄ¼ş¼Ğ
-    				files[i].delete();	//É¾³ı×Ô¸ö¶ù
-    			}
-    			else {
-    				files[i].delete();	//ÎÄ¼şÖ±½ÓÉ¾µô
-    			}
-    		}
-    	}
+
+	/**
+	 * 
+	 * @param fromFile
+	 *            è¢«å¤åˆ¶çš„æ–‡ä»¶
+	 * @param toFile
+	 *            å¤åˆ¶çš„ç›®å½•æ–‡ä»¶
+	 * @param rewrite
+	 *            æ˜¯å¦é‡æ–°åˆ›å»ºæ–‡ä»¶
+	 * 
+	 *            <p>
+	 *            æ–‡ä»¶çš„å¤åˆ¶æ“ä½œæ–¹æ³•
+	 */
+	public static boolean copyfile(File fromFile, File toFile, Boolean rewrite) {
+
+		if (!fromFile.exists()) {
+			return false;
+		}
+
+		if (!fromFile.isFile()) {
+			return false;
+		}
+		if (!fromFile.canRead()) {
+			return false;
+		}
+		if (!toFile.getParentFile().exists()) {
+			toFile.getParentFile().mkdirs();
+		}
+		if (toFile.exists() && rewrite) {
+			toFile.delete();
+		}
+
+		try {
+			FileInputStream fosfrom = new FileInputStream(fromFile);
+			FileOutputStream fosto = new FileOutputStream(toFile);
+
+			byte[] bt = new byte[1024];
+			int c;
+			while ((c = fosfrom.read(bt)) > 0) {
+				fosto.write(bt, 0, c);
+			}
+			// å…³é—­è¾“å…¥ã€è¾“å‡ºæµ
+			fosfrom.close();
+			fosto.close();
+			return true;
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
-    
-    /*
-     * Í¼Æ¬Ñ¹Ëõ
-     * @param file :´ıÑ¹ËõÔ´ÎÄ¼ş
-     * @param size £ºÑ¹Ëõ´óĞ¡
-     * @param path £ºÑ¹Ëõ
-     */
-    public static File  compressImg(File file,long size,String path) throws IOException{
+
+	/*
+	 * é€’å½’è·å¾—æ–‡ä»¶å¤¹å¤§å°
+	 */
+	public static long getFileSize(File file) {
+		long size = 0;
+		if (isHasSDCard()) {
+			if (!file.exists())
+				return 0;
+
+			File[] files = file.listFiles();
+			for (int i = 0; i < files.length; i++) {
+				if (files[i].isDirectory()) {
+					size += getFileSize(files[i]);
+				} else {
+					size += files[i].length();
+				}
+			}
+		}
+		return size;
+	}
+
+	/*
+	 * åˆ é™¤æ–‡ä»¶åŠå…¶ä¸‹é¢çš„å­æ–‡ä»¶
+	 */
+	public static void delFile(File file) {
+		if (isHasSDCard()) {
+			if (!file.exists())
+				return;
+			File[] files = file.listFiles();
+			for (int i = 0; i < files.length; i++) {
+				if (files[i].isDirectory()) {
+					delFile(files[i]); // åˆ é™¤ä¸‹é¢å­æ–‡ä»¶æˆ–æ–‡ä»¶å¤¹
+					files[i].delete(); // åˆ é™¤è‡ªä¸ªå„¿
+				} else {
+					files[i].delete(); // æ–‡ä»¶ç›´æ¥åˆ æ‰
+				}
+			}
+		}
+	}
+
+	/*
+	 * å›¾ç‰‡å‹ç¼©
+	 * 
+	 * @param file :å¾…å‹ç¼©æºæ–‡ä»¶
+	 * 
+	 * @param size ï¼šå‹ç¼©å¤§å°
+	 * 
+	 * @param path ï¼šå‹ç¼©
+	 */
+	public static File compressImg(File file, long size, String path) throws IOException {
 		OutputStream os = null;
 		Bitmap btm = null;
-		if(isHasSDCard()){
-			if (!file.exists() || file.length() < size) // ÈôÎÄ¼ş²»´æÔÚ£¬»òÕßĞ¡ÓÚsize£¬Ôò²»½øĞĞÑ¹Ëõ
+		if (isHasSDCard()) {
+			if (!file.exists() || file.length() < size) // è‹¥æ–‡ä»¶ä¸å­˜åœ¨ï¼Œæˆ–è€…å°äºsizeï¼Œåˆ™ä¸è¿›è¡Œå‹ç¼©
 				return file;
-			
-			try{
-				File tmpfile=new File(path,"tmp.jpg");
-				
-				while(file.length() > size){		
-					// ¶ÔÍ¼Æ¬½øĞĞÑ¹Ëõ£¬ÊÇÔÚ¶ÁÈ¡µÄ¹ı³ÌÖĞ½øĞĞÑ¹Ëõ£¬¶ø²»ÊÇ°ÑÍ¼Æ¬¶Á½øÁËÄÚ´æÔÙ½øĞĞÑ¹Ëõ
+
+			try {
+				File tmpfile = new File(path, "tmp.jpg");
+
+				while (file.length() > size) {
+					// å¯¹å›¾ç‰‡è¿›è¡Œå‹ç¼©ï¼Œæ˜¯åœ¨è¯»å–çš„è¿‡ç¨‹ä¸­è¿›è¡Œå‹ç¼©ï¼Œè€Œä¸æ˜¯æŠŠå›¾ç‰‡è¯»è¿›äº†å†…å­˜å†è¿›è¡Œå‹ç¼©
 					BitmapFactory.Options newOpts = new BitmapFactory.Options();
-					// Ëõ·ÅµÄ±ÈÀı£¬Ëõ·ÅÊÇºÜÄÑ°´×¼±¸µÄ±ÈÀı½øĞĞËõ·ÅµÄ£¬Ä¿Ç°ÎÒÖ»·¢ÏÖÖ»ÄÜÍ¨¹ıinSampleSizeÀ´½øĞĞËõ·Å£¬ÆäÖµ±íÃ÷Ëõ·ÅµÄ±¶Êı£¬SDKÖĞ½¨ÒéÆäÖµÊÇ2µÄÖ¸ÊıÖµ
+					// ç¼©æ”¾çš„æ¯”ä¾‹ï¼Œç¼©æ”¾æ˜¯å¾ˆéš¾æŒ‰å‡†å¤‡çš„æ¯”ä¾‹è¿›è¡Œç¼©æ”¾çš„ï¼Œç›®å‰æˆ‘åªå‘ç°åªèƒ½é€šè¿‡inSampleSizeæ¥è¿›è¡Œç¼©æ”¾ï¼Œå…¶å€¼è¡¨æ˜ç¼©æ”¾çš„å€æ•°ï¼ŒSDKä¸­å»ºè®®å…¶å€¼æ˜¯2çš„æŒ‡æ•°å€¼
 					newOpts.inSampleSize = 2;
-					// inJustDecodeBoundsÉèÎªfalse±íÊ¾°ÑÍ¼Æ¬¶Á½øÄÚ´æÖĞ
+					// inJustDecodeBoundsè®¾ä¸ºfalseè¡¨ç¤ºæŠŠå›¾ç‰‡è¯»è¿›å†…å­˜ä¸­
 					newOpts.inJustDecodeBounds = false;
-					// ÉèÖÃ´óĞ¡£¬Õâ¸öÒ»°ãÊÇ²»×¼È·µÄ£¬ÊÇÒÔinSampleSizeµÄÎª×¼£¬µ«ÊÇÈç¹û²»ÉèÖÃÈ´²»ÄÜËõ·Å
+					// è®¾ç½®å¤§å°ï¼Œè¿™ä¸ªä¸€èˆ¬æ˜¯ä¸å‡†ç¡®çš„ï¼Œæ˜¯ä»¥inSampleSizeçš„ä¸ºå‡†ï¼Œä½†æ˜¯å¦‚æœä¸è®¾ç½®å´ä¸èƒ½ç¼©æ”¾
 					btm = BitmapFactory.decodeFile(file.getAbsolutePath(), newOpts);
-						
-					// ´´½¨ÎÄ¼şÊä³öÁ÷
-					if(btm==null){
+
+					// åˆ›å»ºæ–‡ä»¶è¾“å‡ºæµ
+					if (btm == null) {
 						return file;
 					}
-					tmpfile=new File(path,"tmp.jpg");
+					tmpfile = new File(path, "tmp.jpg");
 					os = new FileOutputStream(tmpfile);
-					// ´æ´¢
+					// å­˜å‚¨
 					btm.compress(CompressFormat.JPEG, 100, os);
-					// ¹Ø±ÕÁ÷
+					// å…³é—­æµ
 					os.flush();
 					os.close();
-					if(!btm.isRecycled()){
+					if (!btm.isRecycled()) {
 						btm.recycle();
 					}
-					file=new File(path+file.getName());
+					file = new File(path + file.getName());
 					tmpfile.renameTo(file);
 				}
 				return file;
-			}
-			catch (Exception e){
+			} catch (Exception e) {
 				return file;
 			}
 		}
 		return file;
 	}
-    
-    /*
-	 * zip½âÑ¹
+
+	/*
+	 * zipè§£å‹
 	 * 
-	 * AssetManager assetManager = getAssets();
-	 * // ĞèÒª½âÑ¹µÄ¶ÔÏó
-	 * InputStream dataSource = assetManager.open("ShiningTrip.zip");
-	 *  //    Õ{ÓÃ½âÑ¹µÄ·½·¨
-	 *  ZipUtil.unzip(dataSource, android.os.Environment.getExternalStorageDirectory()  + "");
+	 * AssetManager assetManager = getAssets(); // éœ€è¦è§£å‹çš„å¯¹è±¡ InputStream
+	 * dataSource = assetManager.open("ShiningTrip.zip"); // èª¿ç”¨è§£å‹çš„æ–¹æ³•
+	 * ZipUtil.unzip(dataSource,
+	 * android.os.Environment.getExternalStorageDirectory() + "");
 	 */
 	public static void unzip(InputStream zipFileName, String outputDirectory) {
 		try {
 			ZipInputStream in = new ZipInputStream(zipFileName);
-	        // »ñÈ¡ZipInputStreamÖĞµÄZipEntryÌõÄ¿£¬Ò»¸özipÎÄ¼şÖĞ¿ÉÄÜ°üº¬¶à¸öZipEntry£¬
-	        // µ±getNextEntry·½·¨µÄ·µ»ØÖµÎªnull£¬Ôò´ú±íZipInputStreamÖĞÃ»ÓĞÏÂÒ»¸öZipEntry£¬
-	        // ÊäÈëÁ÷¶ÁÈ¡Íê³É£»
-	        ZipEntry entry = in.getNextEntry();
-	        while (entry != null) {
+			// è·å–ZipInputStreamä¸­çš„ZipEntryæ¡ç›®ï¼Œä¸€ä¸ªzipæ–‡ä»¶ä¸­å¯èƒ½åŒ…å«å¤šä¸ªZipEntryï¼Œ
+			// å½“getNextEntryæ–¹æ³•çš„è¿”å›å€¼ä¸ºnullï¼Œåˆ™ä»£è¡¨ZipInputStreamä¸­æ²¡æœ‰ä¸‹ä¸€ä¸ªZipEntryï¼Œ
+			// è¾“å…¥æµè¯»å–å®Œæˆï¼›
+			ZipEntry entry = in.getNextEntry();
+			while (entry != null) {
 
-	        	// ´´½¨ÒÔzip°üÎÄ¼şÃûÎªÄ¿Â¼ÃûµÄ¸ùÄ¿Â¼
-	        	if(FileUtils.isHasSDCard()){
-	        		File file = new File(outputDirectory);
-		            file.mkdir();
-		            if (entry.isDirectory()) {
-		            String name = entry.getName();
-		            name = name.substring(0, name.length() - 1);
-		              
-		            file = new File(outputDirectory + File.separator + name);
-		            	file.mkdir();
-		            } else {
-		            	file = new File(outputDirectory + File.separator + entry.getName());
-		                file.createNewFile();
-		                FileOutputStream out = new FileOutputStream(file);
-		                int b;
-		                while ((b = in.read()) != -1) {
-		                	out.write(b);
-		                }
-		                out.close();
-		            }
-		            // ¶ÁÈ¡ÏÂÒ»¸öZipEntry
-		            entry = in.getNextEntry();
-	        	}
-	        }
-	        in.close();
-	    } catch (FileNotFoundException e) {
-	    	e.printStackTrace();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+				// åˆ›å»ºä»¥zipåŒ…æ–‡ä»¶åä¸ºç›®å½•åçš„æ ¹ç›®å½•
+				if (FileUtils.isHasSDCard()) {
+					File file = new File(outputDirectory);
+					file.mkdir();
+					if (entry.isDirectory()) {
+						String name = entry.getName();
+						name = name.substring(0, name.length() - 1);
+
+						file = new File(outputDirectory + File.separator + name);
+						file.mkdir();
+					} else {
+						file = new File(outputDirectory + File.separator + entry.getName());
+						file.createNewFile();
+						FileOutputStream out = new FileOutputStream(file);
+						int b;
+						while ((b = in.read()) != -1) {
+							out.write(b);
+						}
+						out.close();
+					}
+					// è¯»å–ä¸‹ä¸€ä¸ªZipEntry
+					entry = in.getNextEntry();
+				}
+			}
+			in.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	//Ñ¹ËõÎÄ¼ş£¨ÀıÈçÍ¼Æ¬£© --->·µ»ØÒªÅĞ¶ÏÊÇ·ñÎªnull
-	public static File  compressImg(File file) throws IOException{
+
+	// å‹ç¼©æ–‡ä»¶ï¼ˆä¾‹å¦‚å›¾ç‰‡ï¼‰ --->è¿”å›è¦åˆ¤æ–­æ˜¯å¦ä¸ºnull
+	public static File compressImg(File file) throws IOException {
 		String orientation = "";
 		int angle = 0;
 		Bitmap mBitmap = null;
 		Bitmap tmpBitmap = null;
 		OutputStream os = null;
 		Bitmap btm = null;
-		
-		// ÎÄ¼ş²»´æÔÚ
+
+		// æ–‡ä»¶ä¸å­˜åœ¨
 		if (!file.exists()) {
 			return null;
 		}
-		
+
 		String filepath = file.getAbsolutePath();
 		orientation = ImageUtils.getOrientation(filepath);
-		
-		// ÈôÎÄ¼şĞ¡ÓÚÖ¸¶¨´óĞ¡£¬Ôò²»½øĞĞÑ¹Ëõ
-		if (file.length() > BaseConstants.FILE_IMAGE_MAXSIZE){
-			try{
-				String path= BaseConstants.CACHE_IMG_TEMP_PATH;
-				File tmpfile=new File(path);
-				if(!tmpfile.exists()){
+
+		// è‹¥æ–‡ä»¶å°äºæŒ‡å®šå¤§å°ï¼Œåˆ™ä¸è¿›è¡Œå‹ç¼©
+		if (file.length() > BaseConstants.FILE_IMAGE_MAXSIZE) {
+			try {
+				String path = BaseConstants.CACHE_IMG_TEMP_PATH;
+				File tmpfile = new File(path);
+				if (!tmpfile.exists()) {
 					tmpfile.mkdirs();
 				}
-				tmpfile=new File(path,"tmp.jpg");
-					
-				while(file.length() > BaseConstants.FILE_IMAGE_MAXSIZE){		
-//					// ¶ÔÍ¼Æ¬½øĞĞÑ¹Ëõ£¬ÊÇÔÚ¶ÁÈ¡µÄ¹ı³ÌÖĞ½øĞĞÑ¹Ëõ£¬¶ø²»ÊÇ°ÑÍ¼Æ¬¶Á½øÁËÄÚ´æÔÙ½øĞĞÑ¹Ëõ
-//					BitmapFactory.Options newOpts = new BitmapFactory.Options();
-//					// Ëõ·ÅµÄ±ÈÀı£¬Ëõ·ÅÊÇºÜÄÑ°´×¼±¸µÄ±ÈÀı½øĞĞËõ·ÅµÄ£¬Ä¿Ç°ÎÒÖ»·¢ÏÖÖ»ÄÜÍ¨¹ıinSampleSizeÀ´½øĞĞËõ·Å£¬ÆäÖµ±íÃ÷Ëõ·ÅµÄ±¶Êı£¬SDKÖĞ½¨ÒéÆäÖµÊÇ2µÄÖ¸ÊıÖµ
-//					//newOpts.inSampleSize = 2;
-//					// inJustDecodeBoundsÉèÎªfalse±íÊ¾°ÑÍ¼Æ¬¶Á½øÄÚ´æÖĞ
-//					newOpts.inJustDecodeBounds = true;
-//					// ÉèÖÃ´óĞ¡£¬Õâ¸öÒ»°ãÊÇ²»×¼È·µÄ£¬ÊÇÒÔinSampleSizeµÄÎª×¼£¬µ«ÊÇÈç¹û²»ÉèÖÃÈ´²»ÄÜËõ·Å
-//					Bitmap btm_tmp = BitmapFactory.decodeFile(file.getAbsolutePath(), newOpts);
-//					int xScale = newOpts.outWidth / BaseConfig.screenUtils.getWidth();
-//					int yScale = newOpts.outHeight / BaseConfig.screenUtils.getWidth();
-//					newOpts.inSampleSize = xScale > yScale?xScale:yScale;
-					
+				tmpfile = new File(path, "tmp.jpg");
+
+				while (file.length() > BaseConstants.FILE_IMAGE_MAXSIZE) {
+					// // å¯¹å›¾ç‰‡è¿›è¡Œå‹ç¼©ï¼Œæ˜¯åœ¨è¯»å–çš„è¿‡ç¨‹ä¸­è¿›è¡Œå‹ç¼©ï¼Œè€Œä¸æ˜¯æŠŠå›¾ç‰‡è¯»è¿›äº†å†…å­˜å†è¿›è¡Œå‹ç¼©
+					// BitmapFactory.Options newOpts = new
+					// BitmapFactory.Options();
+					// //
+					// ç¼©æ”¾çš„æ¯”ä¾‹ï¼Œç¼©æ”¾æ˜¯å¾ˆéš¾æŒ‰å‡†å¤‡çš„æ¯”ä¾‹è¿›è¡Œç¼©æ”¾çš„ï¼Œç›®å‰æˆ‘åªå‘ç°åªèƒ½é€šè¿‡inSampleSizeæ¥è¿›è¡Œç¼©æ”¾ï¼Œå…¶å€¼è¡¨æ˜ç¼©æ”¾çš„å€æ•°ï¼ŒSDKä¸­å»ºè®®å…¶å€¼æ˜¯2çš„æŒ‡æ•°å€¼
+					// //newOpts.inSampleSize = 2;
+					// // inJustDecodeBoundsè®¾ä¸ºfalseè¡¨ç¤ºæŠŠå›¾ç‰‡è¯»è¿›å†…å­˜ä¸­
+					// newOpts.inJustDecodeBounds = true;
+					// // è®¾ç½®å¤§å°ï¼Œè¿™ä¸ªä¸€èˆ¬æ˜¯ä¸å‡†ç¡®çš„ï¼Œæ˜¯ä»¥inSampleSizeçš„ä¸ºå‡†ï¼Œä½†æ˜¯å¦‚æœä¸è®¾ç½®å´ä¸èƒ½ç¼©æ”¾
+					// Bitmap btm_tmp =
+					// BitmapFactory.decodeFile(file.getAbsolutePath(),
+					// newOpts);
+					// int xScale = newOpts.outWidth /
+					// BaseConfig.screenUtils.getWidth();
+					// int yScale = newOpts.outHeight /
+					// BaseConfig.screenUtils.getWidth();
+					// newOpts.inSampleSize = xScale > yScale?xScale:yScale;
+
 					BitmapFactory.Options opts = new BitmapFactory.Options();
-					// Ëõ·ÅµÄ±ÈÀı£¬Ëõ·ÅÊÇºÜÄÑ°´×¼±¸µÄ±ÈÀı½øĞĞËõ·ÅµÄ£¬Ä¿Ç°ÎÒÖ»·¢ÏÖÖ»ÄÜÍ¨¹ıinSampleSizeÀ´½øĞĞËõ·Å£¬ÆäÖµ±íÃ÷Ëõ·ÅµÄ±¶Êı£¬SDKÖĞ½¨ÒéÆäÖµÊÇ2µÄÖ¸ÊıÖµ
+					// ç¼©æ”¾çš„æ¯”ä¾‹ï¼Œç¼©æ”¾æ˜¯å¾ˆéš¾æŒ‰å‡†å¤‡çš„æ¯”ä¾‹è¿›è¡Œç¼©æ”¾çš„ï¼Œç›®å‰æˆ‘åªå‘ç°åªèƒ½é€šè¿‡inSampleSizeæ¥è¿›è¡Œç¼©æ”¾ï¼Œå…¶å€¼è¡¨æ˜ç¼©æ”¾çš„å€æ•°ï¼ŒSDKä¸­å»ºè®®å…¶å€¼æ˜¯2çš„æŒ‡æ•°å€¼
 					opts.inSampleSize = 2;
-					// inJustDecodeBoundsÉèÎªfalse±íÊ¾°ÑÍ¼Æ¬¶Á½øÄÚ´æÖĞ
+					// inJustDecodeBoundsè®¾ä¸ºfalseè¡¨ç¤ºæŠŠå›¾ç‰‡è¯»è¿›å†…å­˜ä¸­
 					opts.inJustDecodeBounds = false;
-					// ÉèÖÃ´óĞ¡£¬Õâ¸öÒ»°ãÊÇ²»×¼È·µÄ£¬ÊÇÒÔinSampleSizeµÄÎª×¼£¬µ«ÊÇÈç¹û²»ÉèÖÃÈ´²»ÄÜËõ·Å
+					// è®¾ç½®å¤§å°ï¼Œè¿™ä¸ªä¸€èˆ¬æ˜¯ä¸å‡†ç¡®çš„ï¼Œæ˜¯ä»¥inSampleSizeçš„ä¸ºå‡†ï¼Œä½†æ˜¯å¦‚æœä¸è®¾ç½®å´ä¸èƒ½ç¼©æ”¾
 					btm = BitmapFactory.decodeFile(file.getAbsolutePath(), opts);
-							
-					// ´´½¨ÎÄ¼şÊä³öÁ÷
-					if(btm==null){
+
+					// åˆ›å»ºæ–‡ä»¶è¾“å‡ºæµ
+					if (btm == null) {
 						return file;
 					}
-						
-					tmpfile=new File(path,"tmp.jpg");
+
+					tmpfile = new File(path, "tmp.jpg");
 					os = new FileOutputStream(tmpfile);
-					// ´æ´¢
+					// å­˜å‚¨
 					btm.compress(CompressFormat.JPEG, 100, os);
-					// ¹Ø±ÕÁ÷
+					// å…³é—­æµ
 					os.flush();
 					os.close();
-					if(btm!= null && !btm.isRecycled()){
+					if (btm != null && !btm.isRecycled()) {
 						btm.recycle();
 					}
-					file=new File(path+file.getName());
+					file = new File(path + file.getName());
 					tmpfile.renameTo(file);
 				}
-			}catch (Exception e)	{
+			} catch (Exception e) {
 				return null;
 			}
 		}
-//		filepath = file.getAbsolutePath();
-//		
-//		if(orientation != null && !orientation.equals("") && !orientation.equals("0")){
-//			angle = Integer.parseInt(orientation); 
-//			Matrix matrix = new Matrix();  
-//            matrix.setRotate(angle);  
-//            mBitmap = getBitmapByPath(filepath);
-//            imageDispose.mBitmapRefs.add(new SoftReference<Bitmap>(mBitmap));     //´Ë´¦¼ÓÈëArrayList  
-//            tmpBitmap = Bitmap.createBitmap(mBitmap,0,0, mBitmap.getWidth(), mBitmap.getHeight(),matrix, true);  
-//            imageDispose.mBitmapRefs.add(new SoftReference<Bitmap>(tmpBitmap));     //´Ë´¦¼ÓÈëArrayList  
-//            saveBitmap(tmpBitmap, filepath);
-//		}
+		// filepath = file.getAbsolutePath();
+		//
+		// if(orientation != null && !orientation.equals("") &&
+		// !orientation.equals("0")){
+		// angle = Integer.parseInt(orientation);
+		// Matrix matrix = new Matrix();
+		// matrix.setRotate(angle);
+		// mBitmap = getBitmapByPath(filepath);
+		// imageDispose.mBitmapRefs.add(new SoftReference<Bitmap>(mBitmap));
+		// //æ­¤å¤„åŠ å…¥ArrayList
+		// tmpBitmap = Bitmap.createBitmap(mBitmap,0,0, mBitmap.getWidth(),
+		// mBitmap.getHeight(),matrix, true);
+		// imageDispose.mBitmapRefs.add(new SoftReference<Bitmap>(tmpBitmap));
+		// //æ­¤å¤„åŠ å…¥ArrayList
+		// saveBitmap(tmpBitmap, filepath);
+		// }
 		return file;
 	}
-		
+
 	/**
-	 * ÅĞ¶ÏÎÄ¼şÊÇ·ñÎªÍ¼Æ¬ÎÄ¼ş(GIF,PNG,JPG)
+	 * åˆ¤æ–­æ–‡ä»¶æ˜¯å¦ä¸ºå›¾ç‰‡æ–‡ä»¶(GIF,PNG,JPG)
+	 * 
 	 * @param srcFileName
 	 * @return
 	 */
-	public static boolean  isImage(String srcFileName) {
+	public static boolean isImage(String srcFileName) {
 		boolean isImage = false;
-		if(!srcFileName.contains(".")){
+		if (!srcFileName.contains(".")) {
 			return isImage;
 		}
 		String imagetype = srcFileName.substring(srcFileName.lastIndexOf("."));
-		
-		if( imagetype.equalsIgnoreCase(".jpg") || imagetype.equalsIgnoreCase(".gif")
-			|| imagetype.equalsIgnoreCase(".jpeg") || imagetype.equalsIgnoreCase(".bmp")
-			|| imagetype.equalsIgnoreCase(".png")){  
+
+		if (imagetype.equalsIgnoreCase(".jpg") || imagetype.equalsIgnoreCase(".gif")
+				|| imagetype.equalsIgnoreCase(".jpeg") || imagetype.equalsIgnoreCase(".bmp")
+				|| imagetype.equalsIgnoreCase(".png")) {
 			isImage = true;
 		}
-     return isImage;  
+		return isImage;
 	}
-	
-	// É¾³ınumDaysÖ®Ç°µÄÎÄ¼ş¼Ğ
-	public static int clearCacheFolder(File dir, long numDays) {        
-	      int deletedFiles = 0;       
-	      if (dir!= null && dir.isDirectory()) {           
-	          try {              
-	              for (File child:dir.listFiles()) {  
-	                  if (child.isDirectory()) {            
-	                      deletedFiles += clearCacheFolder(child, numDays);        
-	                  }  
-	                  if (child.lastModified() < numDays) {   
-	                      if (child.delete()) {                 
-	                          deletedFiles++;         
-	                      }  
-	                  }  
-	              }           
-	          } catch(Exception e) {     
-	              e.printStackTrace();  
-	          }   
-	      }     
-	      return deletedFiles;   
-	  }  
+
+	// åˆ é™¤numDaysä¹‹å‰çš„æ–‡ä»¶å¤¹
+	public static int clearCacheFolder(File dir, long numDays) {
+		int deletedFiles = 0;
+		if (dir != null && dir.isDirectory()) {
+			try {
+				for (File child : dir.listFiles()) {
+					if (child.isDirectory()) {
+						deletedFiles += clearCacheFolder(child, numDays);
+					}
+					if (child.lastModified() < numDays) {
+						if (child.delete()) {
+							deletedFiles++;
+						}
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return deletedFiles;
+	}
 }

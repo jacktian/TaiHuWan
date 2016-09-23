@@ -1,29 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-	xmlns:android="http://schemas.android.com/apk/res/android">
-	
-    <PreferenceCategory android:title="流量控制" android:key="flowcontrol"> 
-        <CheckBoxPreference android:title="帖子页默认只看楼主" android:key="帖子页默认只看楼主"  android:summary="查看所有内容" android:defaultValue="false" />
-        <CheckBoxPreference android:title="2G/3G网络下禁止图片显示"  android:key="2G/3G网络下禁止图片显示" android:summary="非WIFI下帮你节省流量" android:defaultValue="false" />    
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:key="flowcontrol"
+        android:title="流量控制" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="帖子页默认只看楼主"
+            android:summary="查看所有内容"
+            android:title="帖子页默认只看楼主" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="2G/3G网络下禁止图片显示"
+            android:summary="非WIFI下帮你节省流量"
+            android:title="2G/3G网络下禁止图片显示" />
     </PreferenceCategory>
-    
-    <PreferenceCategory android:title="推送">	
-        <CheckBoxPreference android:title="自动推送" android:key="自动推送" android:summary="是否自动推送"  android:defaultValue="false" />       
+    <PreferenceCategory android:title="推送" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="自动推送"
+            android:summary="是否自动推送"
+            android:title="自动推送" />
     </PreferenceCategory>
-    
-    <PreferenceCategory android:title="缓存设置"  >  
-        <PreferenceScreen android:title="清楚缓存" android:summary="清楚缓存中的临时文件，当前缓存文件大小为：0M">
+    <PreferenceCategory android:title="缓存设置" >
+        <PreferenceScreen
+            android:summary="清楚缓存中的临时文件，当前缓存文件大小为：0M"
+            android:title="清楚缓存" >
         </PreferenceScreen>
     </PreferenceCategory>
-    
-    <PreferenceCategory android:title="恢复设置"  >  
-        <PreferenceScreen android:title="恢复默认设置"  >
+    <PreferenceCategory android:title="恢复设置" >
+        <PreferenceScreen android:title="恢复默认设置" >
         </PreferenceScreen>
     </PreferenceCategory>
-    
-      <PreferenceCategory android:title="新手引导"  >  
-        <PreferenceScreen android:title="进入新手引导"  >
+    <PreferenceCategory android:title="新手引导" >
+        <PreferenceScreen android:title="进入新手引导" >
         </PreferenceScreen>
     </PreferenceCategory>
-    
+
 </PreferenceScreen>

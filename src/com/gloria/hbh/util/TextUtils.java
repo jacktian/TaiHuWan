@@ -5,68 +5,63 @@ import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
 public class TextUtils {
-	
+
 	/*
-     * Î¢²©·ÖÏíÕýÎÄÏÞÖÆ120¸ö×Ö
-     */
+	 * å¾®åšåˆ†äº«æ­£æ–‡é™åˆ¶120ä¸ªå­—
+	 */
 	public static String getWeiBoContent(String content_tmp) {
 		// TODO Auto-generated method stub
 		int num = content_tmp.length();
 		if (num > 120) {
-			String content =  content_tmp.substring(0, 120);
+			String content = content_tmp.substring(0, 120);
 			return content;
 		}
 		return content_tmp;
-	} 
-	
-	/*
-	 * ¹æ¸ñ»¯Ê±¼ä
-	 */
-	public static String  calTime(long endTime){
-	    long between=endTime-System.currentTimeMillis();
-	     int tmp=(int) (between/(1000*60*60*24));
-	     between=between%(1000*60*60*24);
-	     String timeStr="";
-	     if(tmp>0)
-	     {
-		     timeStr+=String.valueOf(tmp)+"Ìì";
-	     }
-	     
-	     tmp=(int) (between/(1000*60*60));
-	     between=between%(1000*60*60);
-	     if(tmp>0)
-	     {
-		     timeStr+= String.valueOf(tmp)+"Ð¡Ê±";
-	     }
-	     
-	     
-	     tmp=(int) (between/(1000*60));
-	     between=between%(1000*60);
-	     if(tmp>0)
-	     {
-		     timeStr+=  String.valueOf(tmp)+"·Ö";
-	     }
-	     
-	     tmp=(int) (between/(1000));
-	     if(tmp>0)
-	     {
-		     timeStr+=  String.valueOf(tmp)+"Ãë";
-	     }
-	     return timeStr;
-    }
-	
-	public static String getCurrentTime() {
-		  SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		  dateformat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-		  Date date = new Date(System.currentTimeMillis());
-		  return "×î½ü¸üÐÂ£º"+dateformat.format(date);
 	}
-	
+
+	/*
+	 * è§„æ ¼åŒ–æ—¶é—´
+	 */
+	public static String calTime(long endTime) {
+		long between = endTime - System.currentTimeMillis();
+		int tmp = (int) (between / (1000 * 60 * 60 * 24));
+		between = between % (1000 * 60 * 60 * 24);
+		String timeStr = "";
+		if (tmp > 0) {
+			timeStr += String.valueOf(tmp) + "å¤©";
+		}
+
+		tmp = (int) (between / (1000 * 60 * 60));
+		between = between % (1000 * 60 * 60);
+		if (tmp > 0) {
+			timeStr += String.valueOf(tmp) + "å°æ—¶";
+		}
+
+		tmp = (int) (between / (1000 * 60));
+		between = between % (1000 * 60);
+		if (tmp > 0) {
+			timeStr += String.valueOf(tmp) + "åˆ†";
+		}
+
+		tmp = (int) (between / (1000));
+		if (tmp > 0) {
+			timeStr += String.valueOf(tmp) + "ç§’";
+		}
+		return timeStr;
+	}
+
+	public static String getCurrentTime() {
+		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		dateformat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+		Date date = new Date(System.currentTimeMillis());
+		return "æœ€è¿‘æ›´æ–°ï¼š" + dateformat.format(date);
+	}
+
 	public static String getCurrentTime2() {
-		  SimpleDateFormat dateformat = new SimpleDateFormat("yyyyÄêMMÔÂddÈÕ");
-		  dateformat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
-		  Date date = new Date(System.currentTimeMillis());
-		  return "×î½ü¸üÐÂ£º"+dateformat.format(date);
+		SimpleDateFormat dateformat = new SimpleDateFormat("yyyyå¹´MMæœˆddæ—¥");
+		dateformat.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+		Date date = new Date(System.currentTimeMillis());
+		return "æœ€è¿‘æ›´æ–°ï¼š" + dateformat.format(date);
 	}
 
 }

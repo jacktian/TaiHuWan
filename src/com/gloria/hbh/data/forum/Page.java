@@ -1,30 +1,30 @@
 package com.gloria.hbh.data.forum;
 
 /**
- * ±¾ÀàÌá¹©Ã¿Ò³ÏÔÊ¾µÄÌõÊıºÍ×Ü¹²ÓĞ¶àÉÙÒ³
- * @author gejian
- * 2013-1-23
+ * æœ¬ç±»æä¾›æ¯é¡µæ˜¾ç¤ºçš„æ¡æ•°å’Œæ€»å…±æœ‰å¤šå°‘é¡µ
+ * 
+ * @author gejian 2013-1-23
  */
 
 public class Page {
-	
-	public static int perPage=0;     //Ã¿Ò³ÏÔÊ¾µÄÌõÊı
-	public static int curPage=1;		//µ±Ç°¹²¶àÉÙÒ³
-	public static int topic = 1;		//×ÜÖ÷ÌâÊı
-	public static int total_page = 1;	//×Ü¹²Ò³Êı
-	
+
+	public static int perPage = 0; // æ¯é¡µæ˜¾ç¤ºçš„æ¡æ•°
+	public static int curPage = 1; // å½“å‰å…±å¤šå°‘é¡µ
+	public static int topic = 1; // æ€»ä¸»é¢˜æ•°
+	public static int total_page = 1; // æ€»å…±é¡µæ•°
+
 	public Page() {
-		
+
 	}
-//	public Page(int perPage, int curPage,int topic) {
-//		Page.perPage = perPage;
-//		Page.curPage = curPage;
-//		Page.topic = topic;
-////		setTotal_page(); //¼ÆËãÒ³Êı
-//	}
-	
+	// public Page(int perPage, int curPage,int topic) {
+	// Page.perPage = perPage;
+	// Page.curPage = curPage;
+	// Page.topic = topic;
+	//// setTotal_page(); //è®¡ç®—é¡µæ•°
+	// }
+
 	public int getTopic() {
-		if(topic == 0){
+		if (topic == 0) {
 			topic = 1;
 		}
 		return topic;
@@ -33,29 +33,32 @@ public class Page {
 	public void setPerPage(int perPage) {
 		Page.perPage = perPage;
 	}
+
 	public void setCurPage(int curPage) {
 		Page.curPage = curPage;
 	}
+
 	public void setTopic(int topic) {
 		Page.topic = topic;
 	}
 
 	public int getTotal_page() {
-//		if(total_page == 0){
-			setTotal_page();
-//		}
+		// if(total_page == 0){
+		setTotal_page();
+		// }
 		return total_page;
 	}
 
 	public void setTotal_page() {
-		if(perPage !=0 && perPage > 0)
-			total_page = (getTopic()+getPerPage()-1)/getPerPage();
+		if (perPage != 0 && perPage > 0)
+			total_page = (getTopic() + getPerPage() - 1) / getPerPage();
 	}
 
 	public int getPerPage() {
 		return perPage;
 	}
-	public int getCurPage() { 
+
+	public int getCurPage() {
 		return curPage;
 	}
 }

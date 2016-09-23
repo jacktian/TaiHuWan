@@ -2,47 +2,36 @@ package com.gloria.hbh.map;
 
 import java.util.ArrayList;
 
-public class MapObjectContainer 
-{
+public class MapObjectContainer {
 	private ArrayList<MapObjectModel> container;
-	
-	public MapObjectContainer()
-	{
+
+	public MapObjectContainer() {
 		container = new ArrayList<MapObjectModel>();
 	}
 
-	
-	public void addObject(MapObjectModel object) 
-	{
+	public void addObject(MapObjectModel object) {
 		container.add(object);
 	}
-	
-	
-	public void removeObject(MapObjectModel object)
-	{
+
+	public void removeObject(MapObjectModel object) {
 		container.remove(object);
 	}
-	
-	public MapObjectModel getObject(int index)
-	{
+
+	public MapObjectModel getObject(int index) {
 		return container.get(index);
 	}
-	
-	
-	public MapObjectModel getObjectById(int id)
-	{
-		for (MapObjectModel model:container) {
+
+	public MapObjectModel getObjectById(int id) {
+		for (MapObjectModel model : container) {
 			if (model.getId() == id) {
 				return model;
 			}
 		}
-		
+
 		return null;
 	}
-	
-	
-	public int size()
-	{
+
+	public int size() {
 		return container.size();
 	}
 

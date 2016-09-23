@@ -10,38 +10,37 @@ import android.content.Context;
 import android.text.format.Formatter;
 
 public class SystemMemoryUtil {
-	
-	public static long getAvailMemory(Context c) {// »ñÈ¡androidµ±Ç°¿ÉÓÃÄÚ´æ´óĞ¡  
-		  
-        ActivityManager am = (ActivityManager) c.getSystemService(Context.ACTIVITY_SERVICE);  
-        MemoryInfo mi = new MemoryInfo();  
-        am.getMemoryInfo(mi);  
-        //mi.availMem; µ±Ç°ÏµÍ³µÄ¿ÉÓÃÄÚ´æ  
-        return mi.availMem;// ½«»ñÈ¡µÄÄÚ´æ´óĞ¡¹æ¸ñ»¯  
-    }  
-  
-	public static String getTotalMemory(Context c) {  
-        String str1 = "/proc/meminfo";// ÏµÍ³ÄÚ´æĞÅÏ¢ÎÄ¼ş  
-        String str2;  
-        String[] arrayOfString;  
-        long initial_memory = 0;  
-  
-        try {  
-            FileReader localFileReader = new FileReader(str1);  
-            BufferedReader localBufferedReader = new BufferedReader(  
-                    localFileReader, 8192);  
-            str2 = localBufferedReader.readLine();// ¶ÁÈ¡meminfoµÚÒ»ĞĞ£¬ÏµÍ³×ÜÄÚ´æ´óĞ¡  
-  
-            arrayOfString = str2.split("//s+");  
-//            for (String num : arrayOfString) {  
-//                Log.i(str2, num + "/t");  
-//            }  
-  
-            initial_memory = Integer.valueOf(arrayOfString[1]).intValue() * 1024;// »ñµÃÏµÍ³×ÜÄÚ´æ£¬µ¥Î»ÊÇKB£¬³ËÒÔ1024×ª»»ÎªByte  
-            localBufferedReader.close();  
-  
-        } catch (IOException e) {  
-        }  
-        return Formatter.formatFileSize(c, initial_memory);// Byte×ª»»ÎªKB»òÕßMB£¬ÄÚ´æ´óĞ¡¹æ¸ñ»¯  
-    }  
+
+	public static long getAvailMemory(Context c) {// è·å–androidå½“å‰å¯ç”¨å†…å­˜å¤§å°
+
+		ActivityManager am = (ActivityManager) c.getSystemService(Context.ACTIVITY_SERVICE);
+		MemoryInfo mi = new MemoryInfo();
+		am.getMemoryInfo(mi);
+		// mi.availMem; å½“å‰ç³»ç»Ÿçš„å¯ç”¨å†…å­˜
+		return mi.availMem;// å°†è·å–çš„å†…å­˜å¤§å°è§„æ ¼åŒ–
+	}
+
+	public static String getTotalMemory(Context c) {
+		String str1 = "/proc/meminfo";// ç³»ç»Ÿå†…å­˜ä¿¡æ¯æ–‡ä»¶
+		String str2;
+		String[] arrayOfString;
+		long initial_memory = 0;
+
+		try {
+			FileReader localFileReader = new FileReader(str1);
+			BufferedReader localBufferedReader = new BufferedReader(localFileReader, 8192);
+			str2 = localBufferedReader.readLine();// è¯»å–meminfoç¬¬ä¸€è¡Œï¼Œç³»ç»Ÿæ€»å†…å­˜å¤§å°
+
+			arrayOfString = str2.split("//s+");
+			// for (String num : arrayOfString) {
+			// Log.i(str2, num + "/t");
+			// }
+
+			initial_memory = Integer.valueOf(arrayOfString[1]).intValue() * 1024;// è·å¾—ç³»ç»Ÿæ€»å†…å­˜ï¼Œå•ä½æ˜¯KBï¼Œä¹˜ä»¥1024è½¬æ¢ä¸ºByte
+			localBufferedReader.close();
+
+		} catch (IOException e) {
+		}
+		return Formatter.formatFileSize(c, initial_memory);// Byteè½¬æ¢ä¸ºKBæˆ–è€…MBï¼Œå†…å­˜å¤§å°è§„æ ¼åŒ–
+	}
 }

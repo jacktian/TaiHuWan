@@ -2,16 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
-	<ImageView  android:layout_width="fill_parent" android:layout_height="wrap_content" 
-	     android:background="@drawable/divider"  android:layout_alignParentTop="true"  android:id="@+id/pull_to_refresh_headline"/>
+
+    <ImageView
+        android:id="@+id/pull_to_refresh_headline"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/divider" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-         android:paddingBottom="10dip"
-   		 android:paddingTop="10dp"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dp" >
 
         <TextView
             android:id="@+id/pull_to_refresh_text"
@@ -35,10 +41,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        
         android:paddingLeft="30dip"
         android:paddingRight="20dip" />
-    
-	<ImageView  android:layout_width="fill_parent" android:layout_height="wrap_content"   android:id="@+id/pull_to_refresh_footline"
-	     android:background="@drawable/divider"  android:layout_below="@+id/pull_to_refresh_image"  android:layout_marginTop="10dip"/>
+
+    <ImageView
+        android:id="@+id/pull_to_refresh_footline"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pull_to_refresh_image"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/divider" />
+
 </RelativeLayout>

@@ -3,11 +3,6 @@ package com.gloria.hbh.application;
 import java.util.LinkedList;
 import java.util.List;
 
-import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
-import cn.jpush.android.api.JPushInterface;
-
 import com.baidu.mapapi.BMapManager;
 import com.baidu.mapapi.MKGeneralListener;
 import com.baidu.mapapi.map.MKEvent;
@@ -21,6 +16,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
+import cn.jpush.android.api.JPushInterface;
 
 //@ReportsCrashes(formKey = "",
 //		customReportContent = { 
@@ -43,154 +43,149 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 //		mode = ReportingInteractionMode.TOAST,
 //		forceCloseDialogAfterToast = false,
 //		resToastText = R.string.crash_toast_text)
-		
+
 /**
-* ÎÄ ¼ş Ãû : BaseApplication
-* ´´ ½¨ ÈË£º gejian
-* ÈÕ     ÆÚ£º2012-9-7
-* ĞŞ ¸Ä ÈË£ºgejian
-* ÈÕ    ÆÚ£º2012-9-7
-* Ãè    Êö£ºApplicationµÄ×Ô¶¨Òå
-*/
+ * æ–‡ ä»¶ å : BaseApplication åˆ› å»º äººï¼š gejian æ—¥ æœŸï¼š2012-9-7 ä¿® æ”¹ äººï¼šgejian æ—¥ æœŸï¼š2012-9-7
+ * æ è¿°ï¼šApplicationçš„è‡ªå®šä¹‰
+ */
 
-public   class BaseApplication extends Application {   
-	  
-	private List<Activity> activityList = new LinkedList<Activity>();   
-    private static BaseApplication instance;   
-    
-    public boolean m_bKeyRight = true;
-    public BMapManager mBMapManager = null;
-    public static final String strKey = "Ppuv5aL6Ohv7NxATZlGLtUQI";
-//    public static final String strKey = "4481390def8086e7da9b1c778119a2e6";
+public class BaseApplication extends Application {
 
- //	private final static int CWJ_HEAP_SIZE =20* 1024* 1024 ;
-//	private final static float floatTARGET_HEAP_UTILIZATION = 0.75f;  
-    
+	private List<Activity> activityList = new LinkedList<Activity>();
+	private static BaseApplication instance;
+
+	public boolean m_bKeyRight = true;
+	public BMapManager mBMapManager = null;
+	public static final String strKey = "Ppuv5aL6Ohv7NxATZlGLtUQI";
+	// public static final String strKey = "4481390def8086e7da9b1c778119a2e6";
+
+	// private final static int CWJ_HEAP_SIZE =20* 1024* 1024 ;
+	// private final static float floatTARGET_HEAP_UTILIZATION = 0.75f;
+
 	public void onCreate() {
-//    	ACRA.init(this);  
-//		MySender mySender=new MySender();
-//		ErrorReporter.getInstance().setReportSender(mySender);
-//		ErrorReporter.getInstance().setReportSender(new IOReportSender(this));
-//		VMRuntime.getRuntime().setMinimumHeapSize(CWJ_HEAP_SIZE); //ÉèÖÃ×îĞ¡heapÄÚ´æÎª10MB´óĞ¡¡£µ±È»¶ÔÓÚÄÚ´æ³Ô½ôÀ´Ëµ»¹¿ÉÒÔÍ¨¹ıÊÖ¶¯¸ÉÉæGCÈ¥´¦Àí
-//		VMRuntime.getRuntime().setTargetHeapUtilization(floatTARGET_HEAP_UTILIZATION); 
+		// ACRA.init(this);
+		// MySender mySender=new MySender();
+		// ErrorReporter.getInstance().setReportSender(mySender);
+		// ErrorReporter.getInstance().setReportSender(new
+		// IOReportSender(this));
+		// VMRuntime.getRuntime().setMinimumHeapSize(CWJ_HEAP_SIZE);
+		// //è®¾ç½®æœ€å°heapå†…å­˜ä¸º10MBå¤§å°ã€‚å½“ç„¶å¯¹äºå†…å­˜åƒç´§æ¥è¯´è¿˜å¯ä»¥é€šè¿‡æ‰‹åŠ¨å¹²æ¶‰GCå»å¤„ç†
+		// VMRuntime.getRuntime().setTargetHeapUtilization(floatTARGET_HEAP_UTILIZATION);
 		super.onCreate();
-        instance = this;
-        JPushInterface.setDebugMode(true); 	//ÉèÖÃ¿ªÆôÈÕÖ¾,·¢²¼Ê±Çë¹Ø±ÕÈÕÖ¾
-        JPushInterface.init(this);     		// ³õÊ¼»¯ JPush
-        initEngineManager(this);
-        // This configuration tuning is custom. You can tune every option, you may tune some of them, 
+		instance = this;
+		JPushInterface.setDebugMode(true); // è®¾ç½®å¼€å¯æ—¥å¿—,å‘å¸ƒæ—¶è¯·å…³é—­æ—¥å¿—
+		JPushInterface.init(this); // åˆå§‹åŒ– JPush
+		initEngineManager(this);
+		// This configuration tuning is custom. You can tune every option, you
+		// may tune some of them,
 		// or you can create default configuration by
-		//  ImageLoaderConfiguration.createDefault(this);
+		// ImageLoaderConfiguration.createDefault(this);
 		// method.
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-		.threadPriority(Thread.NORM_PRIORITY - 2)
-		.memoryCacheSize(2 * 1024 * 1024) // 2 Mb
-		.denyCacheImageMultipleSizesInMemory()
-		.discCacheFileNameGenerator(new Md5FileNameGenerator())
-		.imageDownloader(new BaseImageDownloader(getApplicationContext()))
-		.tasksProcessingOrder(QueueProcessingType.LIFO)
-		.enableLogging() // Not necessary in common
-		.build();
-		
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+				.threadPriority(Thread.NORM_PRIORITY - 2).memoryCacheSize(2 * 1024 * 1024) // 2
+																							// Mb
+				.denyCacheImageMultipleSizesInMemory().discCacheFileNameGenerator(new Md5FileNameGenerator())
+				.imageDownloader(new BaseImageDownloader(getApplicationContext()))
+				.tasksProcessingOrder(QueueProcessingType.LIFO).enableLogging() // Not
+																				// necessary
+																				// in
+																				// common
+				.build();
+
 		// Initialize ImageLoader with configuration.
 		ImageLoader.getInstance().init(config);
-		
+
 		Plist.getInstance();
-		
-		// ÉèÖÃAppKeyÒÔ¼°ppChannel
-     	StatService.setAppKey("7e54332dfd");//appkey±ØĞëÔÚmtjÍøÕ¾ÉÏ×¢²áÉú³É£¬¸ÃÉèÖÃÒ²¿ÉÒÔÔÚAndroidManifest.xmlÖĞÌîĞ´
-     	StatService.setAppChannel("Baidu Market");//appChannelÊÇÓ¦ÓÃµÄ·¢²¼ÇşµÀ£¬²»ĞèÒªÔÚmtjÍøÕ¾ÉÏ×¢²á£¬Ö±½ÓÌîĞ´¾Í¿ÉÒÔ
-     	StatService.setSessionTimeOut(30);//²âÊÔÊ±£¬¿ÉÒÔÊ¹ÓÃ1ÃëÖÓsession¹ıÆÚ£¬ÕâÑù²»¶ÏµÄÆô¶¯ÍË³ö»á²úÉú´óÁ¿ÈÕÖ¾¡£
-     	// setOnÒ²¿ÉÒÔÔÚAndroidManifest.xmlÎÄ¼şÖĞÌîĞ´£¬BaiduMobAd_EXCEPTION_LOG
-     	StatService.setOn(this,StatService.EXCEPTION_LOG);
-     	/*
- 		 * ÉèÖÃÆô¶¯Ê±ÈÕÖ¾·¢ËÍÑÓÊ±µÄÃëÊı<br/> µ¥Î»ÎªÃë£¬´óĞ¡Îª0sµ½30sÖ®¼ä<br/>
- 		 * ×¢£ºÇëÔÚStatService.setSendLogStrategyÖ®Ç°µ÷ÓÃ£¬·ñÔòÉèÖÃ²»Æğ×÷ÓÃ
- 		 * 
- 		 * Èç¹ûÉèÖÃµÄÊÇ·¢ËÍ²ßÂÔÊÇÆô¶¯Ê±·¢ËÍ£¬ÄÇÃ´Õâ¸ö²ÎÊı¾Í»áÔÚ·¢ËÍÇ°¼ì²éÄúÉèÖÃµÄÕâ¸ö²ÎÊı£¬±íÊ¾ÑÓ³Ù¶àÉÙS·¢ËÍ¡£<br/>
- 		 * Õâ¸ö²ÎÊıµÄÉèÖÃÔİÊ±Ö»Ö§³Ö´úÂë¼ÓÈë£¬ ÔÚÄúµÄÊ×¸öÆô¶¯µÄActivityÖĞµÄonCreateº¯ÊıÖĞÊ¹ÓÃ¾Í¿ÉÒÔ¡£<br/>
- 		 */
-     	StatService.setLogSenderDelayed(10);
-     	/*
- 		 * ÓÃÓÚÉèÖÃÈÕÖ¾·¢ËÍ²ßÂÔ<br /> Ç¶ÈëÎ»ÖÃ£ºActivityµÄonCreate()º¯ÊıÖĞ <br />
- 		 * 
- 		 * µ÷ÓÃ·½Ê½£ºStatService.setSendLogStrategy(this,SendStrategyEnum.
- 		 * SET_TIME_INTERVAL, 1, false);
- 		 * µÚ¶ş¸ö²ÎÊı¿ÉÑ¡£º SendStrategyEnum.APP_START SendStrategyEnum.ONCE_A_DAY
- 		 * SendStrategyEnum.SET_TIME_INTERVAL 
- 		 * µÚÈı¸ö²ÎÊı£º
- 		 * Õâ¸ö²ÎÊıÔÚµÚ¶ş¸ö²ÎÊıÑ¡ÔñSendStrategyEnum.SET_TIME_INTERVALÊ±ÉúĞ§¡¢
- 		 * È¡Öµ¡£Îª1-24Ö®¼äµÄÕûÊı,¼´1<=rtime_interval<=24£¬ÒÔĞ¡Ê±Îªµ¥Î»
- 		 * µÚËÄ¸ö²ÎÊı£º
- 		 * ±íÊ¾ÊÇ·ñ½öÖ§³ÖwifiÏÂÈÕÖ¾·¢ËÍ£¬ÈôÎªtrue£¬±íÊ¾½öÔÚwifi»·¾³ÏÂ·¢ËÍÈÕÖ¾£»ÈôÎªfalse£¬±íÊ¾¿ÉÒÔÔÚÈÎºÎÁªÍø»·¾³ÏÂ·¢ËÍÈÕÖ¾
- 		 */
-     	StatService.setSendLogStrategy(this,SendStrategyEnum.APP_START, 1,false);
-    }
-	
-	public void initEngineManager(Context context) {
-        if (mBMapManager == null) {
-            mBMapManager = new BMapManager(context);
-        }
 
-        if (!mBMapManager.init(strKey,new MyGeneralListener())) {
-        	ForumToast.show("BMapManager  ³õÊ¼»¯´íÎó!");
-        }
+		// è®¾ç½®AppKeyä»¥åŠppChannel
+		StatService.setAppKey("7e54332dfd");// appkeyå¿…é¡»åœ¨mtjç½‘ç«™ä¸Šæ³¨å†Œç”Ÿæˆï¼Œè¯¥è®¾ç½®ä¹Ÿå¯ä»¥åœ¨AndroidManifest.xmlä¸­å¡«å†™
+		StatService.setAppChannel("Baidu Market");// appChannelæ˜¯åº”ç”¨çš„å‘å¸ƒæ¸ é“ï¼Œä¸éœ€è¦åœ¨mtjç½‘ç«™ä¸Šæ³¨å†Œï¼Œç›´æ¥å¡«å†™å°±å¯ä»¥
+		StatService.setSessionTimeOut(30);// æµ‹è¯•æ—¶ï¼Œå¯ä»¥ä½¿ç”¨1ç§’é’Ÿsessionè¿‡æœŸï¼Œè¿™æ ·ä¸æ–­çš„å¯åŠ¨é€€å‡ºä¼šäº§ç”Ÿå¤§é‡æ—¥å¿—ã€‚
+		// setOnä¹Ÿå¯ä»¥åœ¨AndroidManifest.xmlæ–‡ä»¶ä¸­å¡«å†™ï¼ŒBaiduMobAd_EXCEPTION_LOG
+		StatService.setOn(this, StatService.EXCEPTION_LOG);
+		/*
+		 * è®¾ç½®å¯åŠ¨æ—¶æ—¥å¿—å‘é€å»¶æ—¶çš„ç§’æ•°<br/> å•ä½ä¸ºç§’ï¼Œå¤§å°ä¸º0såˆ°30sä¹‹é—´<br/>
+		 * æ³¨ï¼šè¯·åœ¨StatService.setSendLogStrategyä¹‹å‰è°ƒç”¨ï¼Œå¦åˆ™è®¾ç½®ä¸èµ·ä½œç”¨
+		 * 
+		 * å¦‚æœè®¾ç½®çš„æ˜¯å‘é€ç­–ç•¥æ˜¯å¯åŠ¨æ—¶å‘é€ï¼Œé‚£ä¹ˆè¿™ä¸ªå‚æ•°å°±ä¼šåœ¨å‘é€å‰æ£€æŸ¥æ‚¨è®¾ç½®çš„è¿™ä¸ªå‚æ•°ï¼Œè¡¨ç¤ºå»¶è¿Ÿå¤šå°‘Så‘é€ã€‚<br/>
+		 * è¿™ä¸ªå‚æ•°çš„è®¾ç½®æš‚æ—¶åªæ”¯æŒä»£ç åŠ å…¥ï¼Œ åœ¨æ‚¨çš„é¦–ä¸ªå¯åŠ¨çš„Activityä¸­çš„onCreateå‡½æ•°ä¸­ä½¿ç”¨å°±å¯ä»¥ã€‚<br/>
+		 */
+		StatService.setLogSenderDelayed(10);
+		/*
+		 * ç”¨äºè®¾ç½®æ—¥å¿—å‘é€ç­–ç•¥<br /> åµŒå…¥ä½ç½®ï¼šActivityçš„onCreate()å‡½æ•°ä¸­ <br />
+		 * 
+		 * è°ƒç”¨æ–¹å¼ï¼šStatService.setSendLogStrategy(this,SendStrategyEnum.
+		 * SET_TIME_INTERVAL, 1, false); ç¬¬äºŒä¸ªå‚æ•°å¯é€‰ï¼š SendStrategyEnum.APP_START
+		 * SendStrategyEnum.ONCE_A_DAY SendStrategyEnum.SET_TIME_INTERVAL ç¬¬ä¸‰ä¸ªå‚æ•°ï¼š
+		 * è¿™ä¸ªå‚æ•°åœ¨ç¬¬äºŒä¸ªå‚æ•°é€‰æ‹©SendStrategyEnum.SET_TIME_INTERVALæ—¶ç”Ÿæ•ˆã€
+		 * å–å€¼ã€‚ä¸º1-24ä¹‹é—´çš„æ•´æ•°,å³1<=rtime_interval<=24ï¼Œä»¥å°æ—¶ä¸ºå•ä½ ç¬¬å››ä¸ªå‚æ•°ï¼š
+		 * è¡¨ç¤ºæ˜¯å¦ä»…æ”¯æŒwifiä¸‹æ—¥å¿—å‘é€ï¼Œè‹¥ä¸ºtrueï¼Œè¡¨ç¤ºä»…åœ¨wifiç¯å¢ƒä¸‹å‘é€æ—¥å¿—ï¼›è‹¥ä¸ºfalseï¼Œè¡¨ç¤ºå¯ä»¥åœ¨ä»»ä½•è”ç½‘ç¯å¢ƒä¸‹å‘é€æ—¥å¿—
+		 */
+		StatService.setSendLogStrategy(this, SendStrategyEnum.APP_START, 1, false);
 	}
-	
-	// ³£ÓÃÊÂ¼ş¼àÌı£¬ÓÃÀ´´¦ÀíÍ¨³£µÄÍøÂç´íÎó£¬ÊÚÈ¨ÑéÖ¤´íÎóµÈ
-    public static class MyGeneralListener implements MKGeneralListener {
-        
-        public void onGetNetworkState(int iError) {
-            if (iError == MKEvent.ERROR_NETWORK_CONNECT) {
-            	ForumToast.show("ÄúµÄÍøÂç³ö´íÀ²£¡");
-            }
-            else if (iError == MKEvent.ERROR_NETWORK_DATA) {
-            	ForumToast.show( "ÊäÈëÕıÈ·µÄ¼ìË÷Ìõ¼ş£¡");
-            }
-        }
 
-        public void onGetPermissionState(int iError) {
-            if (iError ==  MKEvent.ERROR_PERMISSION_DENIED) {
-                //ÊÚÈ¨Key´íÎó£º
-//            	ForumToast.show("ÇëÊäÈëÕıÈ·µÄÊÚÈ¨Key£¡");
-            	getInstance().m_bKeyRight = false;
-            }
-        }
-    }
-	
-    /*
-     * µ¥ÀıÄ£Ê½ÖĞ»ñÈ¡Î¨Ò»µÄExitApplicationÊµÀı   
-     */
-    public static BaseApplication getInstance()   {   
-    	if(null == instance){   
-    		instance = new BaseApplication();   
-    	}   
-    	return instance;    
-    }  
-    
-    //Ìí¼ÓActivityµ½ÈİÆ÷ÖĞ   
-    public void addActivity(Activity activity)   {   
-    	activityList.add(activity); 
-    }  
-    
-	//Activity½áÊøfinish   
-    public void exitForLog()   { 
-    	ShareCookie.clearCookie();
-    	for(Activity activity:activityList)   { 
-    		activity.finish();   
-    	} 
-    }
-    
-    //±éÀúËùÓĞActivity²¢finish   
-    public void exit()   { 
-    	//ÍË³ö
+	public void initEngineManager(Context context) {
+		if (mBMapManager == null) {
+			mBMapManager = new BMapManager(context);
+		}
+
+		if (!mBMapManager.init(strKey, new MyGeneralListener())) {
+			ForumToast.show("BMapManager  åˆå§‹åŒ–é”™è¯¯!");
+		}
+	}
+
+	// å¸¸ç”¨äº‹ä»¶ç›‘å¬ï¼Œç”¨æ¥å¤„ç†é€šå¸¸çš„ç½‘ç»œé”™è¯¯ï¼ŒæˆæƒéªŒè¯é”™è¯¯ç­‰
+	public static class MyGeneralListener implements MKGeneralListener {
+
+		public void onGetNetworkState(int iError) {
+			if (iError == MKEvent.ERROR_NETWORK_CONNECT) {
+				ForumToast.show("æ‚¨çš„ç½‘ç»œå‡ºé”™å•¦ï¼");
+			} else if (iError == MKEvent.ERROR_NETWORK_DATA) {
+				ForumToast.show("è¾“å…¥æ­£ç¡®çš„æ£€ç´¢æ¡ä»¶ï¼");
+			}
+		}
+
+		public void onGetPermissionState(int iError) {
+			if (iError == MKEvent.ERROR_PERMISSION_DENIED) {
+				// æˆæƒKeyé”™è¯¯ï¼š
+				// ForumToast.show("è¯·è¾“å…¥æ­£ç¡®çš„æˆæƒKeyï¼");
+				getInstance().m_bKeyRight = false;
+			}
+		}
+	}
+
+	/*
+	 * å•ä¾‹æ¨¡å¼ä¸­è·å–å”¯ä¸€çš„ExitApplicationå®ä¾‹
+	 */
+	public static BaseApplication getInstance() {
+		if (null == instance) {
+			instance = new BaseApplication();
+		}
+		return instance;
+	}
+
+	// æ·»åŠ Activityåˆ°å®¹å™¨ä¸­
+	public void addActivity(Activity activity) {
+		activityList.add(activity);
+	}
+
+	// Activityç»“æŸfinish
+	public void exitForLog() {
 		ShareCookie.clearCookie();
-		for(Activity activity:activityList)   { 
-    		activity.finish();   
-    	} 
-//		android.os.Process.killProcess(android.os.Process.myPid());    
-    	System.exit(0); 
-//    	new LogoutRequestTask().execute();
-    }  
-}  
+		for (Activity activity : activityList) {
+			activity.finish();
+		}
+	}
 
+	// éå†æ‰€æœ‰Activityå¹¶finish
+	public void exit() {
+		// é€€å‡º
+		ShareCookie.clearCookie();
+		for (Activity activity : activityList) {
+			activity.finish();
+		}
+		// android.os.Process.killProcess(android.os.Process.myPid());
+		System.exit(0);
+		// new LogoutRequestTask().execute();
+	}
+}

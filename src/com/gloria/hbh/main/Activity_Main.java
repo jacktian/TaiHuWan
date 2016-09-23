@@ -2,6 +2,20 @@ package com.gloria.hbh.main;
 
 import java.util.ArrayList;
 
+import com.baidu.mobstat.StatService;
+import com.gloria.hbh.application.BaseApplication;
+import com.gloria.hbh.data.app.TabInfo;
+import com.gloria.slidingmenu.lib.SlidingMenu;
+import com.gloria.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.gloria.slidingmenu.lib.fragment.ActivityFragment;
+import com.gloria.slidingmenu.lib.fragment.InformationFragment;
+import com.gloria.slidingmenu.lib.fragment.MallFragment;
+import com.gloria.slidingmenu.lib.fragment.MapFragment;
+import com.gloria.slidingmenu.lib.fragment.RightMenu;
+import com.gloria.slidingmenu.lib.fragment.TicketFragment;
+import com.gloria.slidingmenu.lib.fragment.TrafficFragment;
+import com.parse.Parse;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -17,25 +31,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
- 
- 
- 
- 
-
-import com.baidu.mobstat.StatService;
-import com.gloria.hbh.application.BaseApplication;
-import com.gloria.hbh.data.app.TabInfo;
-import com.gloria.slidingmenu.lib.SlidingMenu;
-import com.gloria.slidingmenu.lib.app.SlidingFragmentActivity;
-import com.gloria.slidingmenu.lib.fragment.ActivityFragment;
-import com.gloria.slidingmenu.lib.fragment.InformationFragment;
-import com.gloria.slidingmenu.lib.fragment.LeftMenu;
-import com.gloria.slidingmenu.lib.fragment.MallFragment;
-import com.gloria.slidingmenu.lib.fragment.MapFragment;
-import com.gloria.slidingmenu.lib.fragment.RightMenu;
-import com.gloria.slidingmenu.lib.fragment.TicketFragment;
-import com.gloria.slidingmenu.lib.fragment.TrafficFragment;
-import com.parse.Parse;
 
 /**
  * 
@@ -44,88 +39,87 @@ import com.parse.Parse;
  * @version 1.0.0
  */
 public class Activity_Main extends SlidingFragmentActivity {
-	
+
 	FragmentTransaction fragmentTransaction;
-	 
-	protected LinearLayout titlebar,layout;
-	protected Button titlebar_left,titlebar_right;
+
+	protected LinearLayout titlebar, layout;
+	protected Button titlebar_left, titlebar_right;
 	protected TextView titlebar_name;
-	
+
 	public static RadioGroup radioGroup;
-	RadioButton tab_radiobtn_1,tab_radiobtn_2,tab_radiobtn_3,
-				tab_radiobtn_4,tab_radiobtn_5;
-	 
+	RadioButton tab_radiobtn_1, tab_radiobtn_2, tab_radiobtn_3, tab_radiobtn_4, tab_radiobtn_5;
+
 	private static final int DIALOG_EXIT = 0;
 	private ArrayList<TabInfo> tabInfos;
 	String img_path = "";
-	String orientation="";
-	protected final int PICTYPE_CAMERA = 10; // Ïà»úÈ¡Í¼
-	protected final int PICTYPE_LIB = 20; // ÊÖ»úÏà²áÈ¡Í¼
-	boolean isSaveCookies=true;
+	String orientation = "";
+	protected final int PICTYPE_CAMERA = 10; // ç›¸æœºå–å›¾
+	protected final int PICTYPE_LIB = 20; // æ‰‹æœºç›¸å†Œå–å›¾
+	boolean isSaveCookies = true;
 	boolean isRefresh = true;
 	ProgressDialog pdialog;
 	public static int menu_selectPos = 0;
 	public static String fid = "351";
-	
-	public static int menu_style = 0; //²Ëµ¥ÑùÊ½ 
-	
-	int type = 0; 
-	public final static int TYPE_INFO = 0; 
-	public final static int TYPE_MAP = 1; 
-	 
+
+	public static int menu_style = 0; // èœå•æ ·å¼
+
+	int type = 0;
+	public final static int TYPE_INFO = 0;
+	public final static int TYPE_MAP = 1;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        setContentView(R.layout.frame_main);
-        
+		setContentView(R.layout.frame_main);
+
 		initData();
-        //×ó±ßÀ¸     	  
-        setView();   
-        if(type == TYPE_INFO){
-        	getInformationFragment();
-        }else{
-        	getMapFragment();
-        }
-    }
-    
-    private void initData() {
-    	type = getIntent().getIntExtra("type", TYPE_INFO);
-    	if(type == TYPE_INFO){
-        	menu_selectPos = 0;
-        }else{
-        	menu_selectPos = 1;
-        }
-    	
-    	String applicationId = "jx7XTM6gS1YGBcTX82kPbwZRNTuhRhvRYq6tQOM9";
-		String clientKey = "4z6JnvbHbOX8Rc70kryVhSxmgqpR9Mjp2MCZHVbs";
-		Parse.initialize(this, applicationId, clientKey);
-		
-//		String applicationId = "c2bcZnrowbIprG6rhWyuTBk1NhoWIt66rHefmZ7A";
-//		String clientKey = "NRC7SzCxeY8poAcep8ny9g4qoRbFXDoWU18s9Qey";
-//		Parse.initialize(this, applicationId, clientKey);
+		// å·¦è¾¹æ 
+		setView();
+		if (type == TYPE_INFO) {
+			getInformationFragment();
+		} else {
+			getMapFragment();
+		}
 	}
 
-	private void setView(){
-    	 initSlidingMenu();
-    	setMenuView();
-    	
-    	radioGroup = (RadioGroup)findViewById(R.id.main_radio);
-    	tab_radiobtn_1 = (RadioButton)findViewById(R.id.tab_radiobtn_1);
-    	tab_radiobtn_2 = (RadioButton)findViewById(R.id.tab_radiobtn_2);
-    	tab_radiobtn_3 = (RadioButton)findViewById(R.id.tab_radiobtn_3);
-    	tab_radiobtn_4 = (RadioButton)findViewById(R.id.tab_radiobtn_4);
-    	tab_radiobtn_5 = (RadioButton)findViewById(R.id.tab_radiobtn_5);
-    	
-    	tab_radiobtn_1.setOnCheckedChangeListener(onCheckedChangeListener);
-    	tab_radiobtn_2.setOnCheckedChangeListener(onCheckedChangeListener);
-    	tab_radiobtn_3.setOnCheckedChangeListener(onCheckedChangeListener);
-    	tab_radiobtn_4.setOnCheckedChangeListener(onCheckedChangeListener);
-    	tab_radiobtn_5.setOnCheckedChangeListener(onCheckedChangeListener);
-    }
-    
-    OnCheckedChangeListener onCheckedChangeListener = new OnCheckedChangeListener() {
+	private void initData() {
+		type = getIntent().getIntExtra("type", TYPE_INFO);
+		if (type == TYPE_INFO) {
+			menu_selectPos = 0;
+		} else {
+			menu_selectPos = 1;
+		}
+
+		String applicationId = "jx7XTM6gS1YGBcTX82kPbwZRNTuhRhvRYq6tQOM9";
+		String clientKey = "4z6JnvbHbOX8Rc70kryVhSxmgqpR9Mjp2MCZHVbs";
+		Parse.initialize(this, applicationId, clientKey);
+
+		// String applicationId = "c2bcZnrowbIprG6rhWyuTBk1NhoWIt66rHefmZ7A";
+		// String clientKey = "NRC7SzCxeY8poAcep8ny9g4qoRbFXDoWU18s9Qey";
+		// Parse.initialize(this, applicationId, clientKey);
+	}
+
+	private void setView() {
+		initSlidingMenu();
+		setMenuView();
+
+		radioGroup = (RadioGroup) findViewById(R.id.main_radio);
+		tab_radiobtn_1 = (RadioButton) findViewById(R.id.tab_radiobtn_1);
+		tab_radiobtn_2 = (RadioButton) findViewById(R.id.tab_radiobtn_2);
+		tab_radiobtn_3 = (RadioButton) findViewById(R.id.tab_radiobtn_3);
+		tab_radiobtn_4 = (RadioButton) findViewById(R.id.tab_radiobtn_4);
+		tab_radiobtn_5 = (RadioButton) findViewById(R.id.tab_radiobtn_5);
+
+		tab_radiobtn_1.setOnCheckedChangeListener(onCheckedChangeListener);
+		tab_radiobtn_2.setOnCheckedChangeListener(onCheckedChangeListener);
+		tab_radiobtn_3.setOnCheckedChangeListener(onCheckedChangeListener);
+		tab_radiobtn_4.setOnCheckedChangeListener(onCheckedChangeListener);
+		tab_radiobtn_5.setOnCheckedChangeListener(onCheckedChangeListener);
+	}
+
+	OnCheckedChangeListener onCheckedChangeListener = new OnCheckedChangeListener() {
 		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-			if(isChecked){
+			if (isChecked) {
 				switch (buttonView.getId()) {
 				case R.id.tab_radiobtn_1:
 					menu_style = 0;
@@ -155,26 +149,26 @@ public class Activity_Main extends SlidingFragmentActivity {
 				default:
 					break;
 				}
-				//setMenuStyle(menu_style);
+				// setMenuStyle(menu_style);
 			}
 		}
 	};
-    	
+
 	/*
-	 * ÉèÖÃ²Ëµ¥Ä£Ê½
+	 * è®¾ç½®èœå•æ¨¡å¼
 	 */
 	public void setMenuStyle(int i) {
 		switch (i) {
 		case 0:
-			 getSlidingMenu().setMode(SlidingMenu.LEFT_RIGHT);
-			 getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+			getSlidingMenu().setMode(SlidingMenu.LEFT_RIGHT);
+			getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 			break;
 		case 1:
 		case 2:
 		case 3:
 		case 4:
-			 getSlidingMenu().setMode(SlidingMenu.RIGHT);
-			 getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+			getSlidingMenu().setMode(SlidingMenu.RIGHT);
+			getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 			break;
 		case 10:
 			getSlidingMenu().setMode(SlidingMenu.LEFT_RIGHT);
@@ -196,100 +190,101 @@ public class Activity_Main extends SlidingFragmentActivity {
 			break;
 		}
 	}
-	
-	//»¨²©×ÊÑ¶
-	private void getMapFragment(){
-		String text = "µØÍ¼µ¼ÀÀ";
+
+	// èŠ±åšèµ„è®¯
+	private void getMapFragment() {
+		String text = "åœ°å›¾å¯¼è§ˆ";
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentTransaction = fragmentManager.beginTransaction();
 		MapFragment mapFragment = (MapFragment) fragmentManager.findFragmentByTag(text);
-		fragmentTransaction.replace(R.id.content_main,
-				mapFragment == null ? new MapFragment("µØÍ¼µ¼ÀÀ"):mapFragment,text);
-		fragmentTransaction.addToBackStack(text);
-		fragmentTransaction.commit();
-	}
-	
-	//»¨²©×ÊÑ¶
-	private void getInformationFragment(){
-		String text = RightMenu.mResArrayTextRight[0]+"_×ÊÑ¶";
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentTransaction = fragmentManager.beginTransaction();
-		InformationFragment informationFragment = (InformationFragment) fragmentManager.findFragmentByTag(text);
-		fragmentTransaction.replace(R.id.content_main,
-				informationFragment == null ? new InformationFragment("×ÊÑ¶"):informationFragment,text);
+		fragmentTransaction.replace(R.id.content_main, mapFragment == null ? new MapFragment("åœ°å›¾å¯¼è§ˆ") : mapFragment,
+				text);
 		fragmentTransaction.addToBackStack(text);
 		fragmentTransaction.commit();
 	}
 
-	//»î¶¯
-	private void getActivityFragment(){
-		String text = RightMenu.mResArrayTextRight[0]+"_»î¶¯";
+	// èŠ±åšèµ„è®¯
+	private void getInformationFragment() {
+		String text = RightMenu.mResArrayTextRight[0] + "_èµ„è®¯";
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		fragmentTransaction = fragmentManager.beginTransaction();
+		InformationFragment informationFragment = (InformationFragment) fragmentManager.findFragmentByTag(text);
+		fragmentTransaction.replace(R.id.content_main,
+				informationFragment == null ? new InformationFragment("èµ„è®¯") : informationFragment, text);
+		fragmentTransaction.addToBackStack(text);
+		fragmentTransaction.commit();
+	}
+
+	// æ´»åŠ¨
+	private void getActivityFragment() {
+		String text = RightMenu.mResArrayTextRight[0] + "_æ´»åŠ¨";
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentTransaction = fragmentManager.beginTransaction();
 		ActivityFragment activityFragment = (ActivityFragment) fragmentManager.findFragmentByTag(text);
 		fragmentTransaction.replace(R.id.content_main,
-				activityFragment == null ? new ActivityFragment("»î¶¯"):activityFragment,text);
+				activityFragment == null ? new ActivityFragment("æ´»åŠ¨") : activityFragment, text);
 		fragmentTransaction.addToBackStack(text);
 		fragmentTransaction.commit();
 	}
-	
-	//ÉÌ³Ç
-	private void getMallFragment(){
-		String text = RightMenu.mResArrayTextRight[0]+"_ÉÌ³Ç";
+
+	// å•†åŸ
+	private void getMallFragment() {
+		String text = RightMenu.mResArrayTextRight[0] + "_å•†åŸ";
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentTransaction = fragmentManager.beginTransaction();
 		MallFragment mallFragment = (MallFragment) fragmentManager.findFragmentByTag(text);
-		fragmentTransaction.replace(R.id.content_main,
-				mallFragment == null ? new MallFragment("ÉÌ³Ç"):mallFragment,text);
+		fragmentTransaction.replace(R.id.content_main, mallFragment == null ? new MallFragment("å•†åŸ") : mallFragment,
+				text);
 		fragmentTransaction.addToBackStack(text);
 		fragmentTransaction.commit();
 	}
-	
-	//Æ±Îñ
-	private void getTicketFragment(){
-		String text = RightMenu.mResArrayTextRight[0]+"_Æ±Îñ";
+
+	// ç¥¨åŠ¡
+	private void getTicketFragment() {
+		String text = RightMenu.mResArrayTextRight[0] + "_ç¥¨åŠ¡";
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentTransaction = fragmentManager.beginTransaction();
 		TicketFragment ticketFragment = (TicketFragment) fragmentManager.findFragmentByTag(text);
 		fragmentTransaction.replace(R.id.content_main,
-				ticketFragment == null ? new TicketFragment("Æ±Îñ"):ticketFragment,text);
+				ticketFragment == null ? new TicketFragment("ç¥¨åŠ¡") : ticketFragment, text);
 		fragmentTransaction.addToBackStack(text);
 		fragmentTransaction.commit();
 	}
-	
-	//½»Í¨
-	private void getTrafficFragment(){
-		String text = RightMenu.mResArrayTextRight[0]+"_½»Í¨";
+
+	// äº¤é€š
+	private void getTrafficFragment() {
+		String text = RightMenu.mResArrayTextRight[0] + "_äº¤é€š";
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentTransaction = fragmentManager.beginTransaction();
 		TrafficFragment trafficFragment = (TrafficFragment) fragmentManager.findFragmentByTag(text);
 		fragmentTransaction.replace(R.id.content_main,
-				trafficFragment == null ? new TrafficFragment("½»Í¨"):trafficFragment,text);
+				trafficFragment == null ? new TrafficFragment("äº¤é€š") : trafficFragment, text);
 		fragmentTransaction.addToBackStack(text);
 		fragmentTransaction.commit();
 	}
-	
+
 	/*
-	 * ³õÊ¼²Ëµ¥
+	 * åˆå§‹èœå•
 	 */
 	private void initSlidingMenu() {
-        SlidingMenu sm = getSlidingMenu();
-        sm.setShadowWidth(50);
-        sm.setShadowDrawable(R.drawable.shadow);
-        sm.setBehindOffset(80);
-        sm.setFadeDegree(0.35f);
-        //ÉèÖÃslding menuµÄ¼¸ÖÖÊÖÊÆÄ£Ê½
-        //TOUCHMODE_FULLSCREEN È«ÆÁÄ£Ê½£¬ÔÚcontentÒ³ÃæÖĞ£¬»¬¶¯£¬¿ÉÒÔ´ò¿ªsliding menu
-        //TOUCHMODE_MARGIN ±ßÔµÄ£Ê½£¬ÔÚcontentÒ³ÃæÖĞ£¬Èç¹ûÏë´ò¿ªslding ,ÄãĞèÒªÔÚÆÁÄ»±ßÔµ»¬¶¯²Å¿ÉÒÔ´ò¿ªslding menu
-        //TOUCHMODE_NONE ×ÔÈ»ÊÇ²»ÄÜÍ¨¹ıÊÖÊÆ´ò¿ªÀ²
-        sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
-    }
-	
-	public void onResume() {  
+		SlidingMenu sm = getSlidingMenu();
+		sm.setShadowWidth(50);
+		sm.setShadowDrawable(R.drawable.shadow);
+		sm.setBehindOffset(80);
+		sm.setFadeDegree(0.35f);
+		// è®¾ç½®slding menuçš„å‡ ç§æ‰‹åŠ¿æ¨¡å¼
+		// TOUCHMODE_FULLSCREEN å…¨å±æ¨¡å¼ï¼Œåœ¨contenté¡µé¢ä¸­ï¼Œæ»‘åŠ¨ï¼Œå¯ä»¥æ‰“å¼€sliding menu
+		// TOUCHMODE_MARGIN è¾¹ç¼˜æ¨¡å¼ï¼Œåœ¨contenté¡µé¢ä¸­ï¼Œå¦‚æœæƒ³æ‰“å¼€slding ,ä½ éœ€è¦åœ¨å±å¹•è¾¹ç¼˜æ»‘åŠ¨æ‰å¯ä»¥æ‰“å¼€slding
+		// menu
+		// TOUCHMODE_NONE è‡ªç„¶æ˜¯ä¸èƒ½é€šè¿‡æ‰‹åŠ¿æ‰“å¼€å•¦
+		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+	}
+
+	public void onResume() {
 		super.onResume();
-		//setMenuStyle(menu_style);
+		// setMenuStyle(menu_style);
 		/**
-		 * FragmentÒ³ÃæÆğÊ¼ (×¢Òâ£º Èç¹ûÓĞ¼Ì³ĞµÄ¸¸FragmentÖĞÒÑ¾­Ìí¼ÓÁË¸Ãµ÷ÓÃ£¬ÄÇÃ´×ÓFragmentÖĞÎñ±Ø²»ÄÜÌí¼Ó£©
+		 * Fragmenté¡µé¢èµ·å§‹ (æ³¨æ„ï¼š å¦‚æœæœ‰ç»§æ‰¿çš„çˆ¶Fragmentä¸­å·²ç»æ·»åŠ äº†è¯¥è°ƒç”¨ï¼Œé‚£ä¹ˆå­Fragmentä¸­åŠ¡å¿…ä¸èƒ½æ·»åŠ ï¼‰
 		 */
 		StatService.onResume(this);
 	}
@@ -297,82 +292,89 @@ public class Activity_Main extends SlidingFragmentActivity {
 	public void onPause() {
 		super.onPause();
 		/**
-		 *Fragment Ò³Ãæ½áÊø£¨×¢Òâ£ºÈç¹ûÓĞ¼Ì³ĞµÄ¸¸FragmentÖĞÒÑ¾­Ìí¼ÓÁË¸Ãµ÷ÓÃ£¬ÄÇÃ´×ÓFragmentÖĞÎñ±Ø²»ÄÜÌí¼Ó£©
+		 * Fragment é¡µé¢ç»“æŸï¼ˆæ³¨æ„ï¼šå¦‚æœæœ‰ç»§æ‰¿çš„çˆ¶Fragmentä¸­å·²ç»æ·»åŠ äº†è¯¥è°ƒç”¨ï¼Œé‚£ä¹ˆå­Fragmentä¸­åŠ¡å¿…ä¸èƒ½æ·»åŠ ï¼‰
 		 */
 		StatService.onPause(this);
 	}
-    
-    /*
-     * ÉèÖÃ²Ëµ¥ÊÓÍ¼
-     */
+
+	/*
+	 * è®¾ç½®èœå•è§†å›¾
+	 */
 	private void setMenuView() {
-////		setBehindContentView(R.layout.frame_menu_left);
-////	    getSlidingMenu().setMode(SlidingMenu.LEFT_RIGHT);
-////	    getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
-////	    getSlidingMenu().setBehindWidthRes(R.dimen.left_menu_width);
-////	    getSlidingMenu().setMenu(R.layout.frame_menu_left);
-////	    getSlidingMenu().setSecondaryMenu(R.layout.frame_menu_right);
-//		 SlidingMenu _SlidingMenu=new SlidingMenu(this);
-//		//_SlidingMenu = getSlidingMenu(); // ÓÉÓÚActivity¼Ì³Ğ×ÔSlidingFragmentActivity,ËùÒÔÖ±½Ó»ñÈ¡µ±Ç°µÄ²à±ßÀ¸²Ëµ¥
-//
-//		_SlidingMenu.setMode(SlidingMenu.RIGHT); // ÉèÖÃ²à±ßÀ¸²Ëµ¥Îª×óÓÒÄ£Ê½
-//	 
-//		_SlidingMenu.setSecondaryShadowDrawable(R.drawable.shadow); // ÉèÖÃ×ó²Ëµ¥µÄÒõÓ°
-//		_SlidingMenu.setShadowWidth(10); // ÉèÖÃÒõÓ°¿í¶È
-//		_SlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN); // ÉèÖÃ²à±ßÀ¸²Ëµ¥´¥ÃşÄ£Ê½ÎªÈ«ÆÁÄ£Ê½
-//
-//		setBehindContentView(R.layout.frame_menu_left); // ÉèÖÃ×ó²Ëµ¥µÄÄ¬ÈÏVIEW
-//		RightMenu leftMenu = new RightMenu();
-//		getSupportFragmentManager().beginTransaction().replace(R.id.menu_left, leftMenu).commit();
-//	        
-////	 
-////		_SlidingMenu.setSecondaryMenu(R.layout.frame_menu_right); // ÉèÖÃÓÒ²Ëµ¥Ä¬ÈÏVIEW
-////		_SlidingMenu.setSecondaryShadowDrawable(R.drawable.shadowright); // ÉèÖÃÓÒ²Ëµ¥ÒõÓ°
-////		_SlidingMenu.setRightBehindWidthRes(R.dimen.right_menu_width); // ÉèÖÃÓÒ²Ëµ¥µÄ¿í¶È,¸ÃÖµÎªÓÒ²Ëµ¥Õ¹¿ªµÄ¿í¶È
-////	 
-////        RightMenu rightMenu = new RightMenu();
-////        getSupportFragmentManager().beginTransaction().replace(R.id.menu_right, rightMenu).commit();
-		
-		 setBehindContentView(R.layout.frame_menu_left);
-	    getSlidingMenu().setMode(SlidingMenu.LEFT);
-	    getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
-	    
-	   // getSlidingMenu().setMenu(R.layout.frame_menu_left);
-	    getSlidingMenu().setSecondaryMenu(R.layout.frame_menu_right);
-	    
-	    RightMenu leftMenu = new RightMenu();
-	    getSupportFragmentManager().beginTransaction().replace(R.id.menu_right, leftMenu).commit();
-	    
-	    //LeftMenu lef=new LeftMenu();
-	   // getSupportFragmentManager().beginTransaction().replace(R.id.menu_right, lef).commit();
-	   
+		//// setBehindContentView(R.layout.frame_menu_left);
+		//// getSlidingMenu().setMode(SlidingMenu.LEFT_RIGHT);
+		//// getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+		//// getSlidingMenu().setBehindWidthRes(R.dimen.left_menu_width);
+		//// getSlidingMenu().setMenu(R.layout.frame_menu_left);
+		//// getSlidingMenu().setSecondaryMenu(R.layout.frame_menu_right);
+		// SlidingMenu _SlidingMenu=new SlidingMenu(this);
+		// //_SlidingMenu = getSlidingMenu(); //
+		//// ç”±äºActivityç»§æ‰¿è‡ªSlidingFragmentActivity,æ‰€ä»¥ç›´æ¥è·å–å½“å‰çš„ä¾§è¾¹æ èœå•
+		//
+		// _SlidingMenu.setMode(SlidingMenu.RIGHT); // è®¾ç½®ä¾§è¾¹æ èœå•ä¸ºå·¦å³æ¨¡å¼
+		//
+		// _SlidingMenu.setSecondaryShadowDrawable(R.drawable.shadow); //
+		//// è®¾ç½®å·¦èœå•çš„é˜´å½±
+		// _SlidingMenu.setShadowWidth(10); // è®¾ç½®é˜´å½±å®½åº¦
+		// _SlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN); //
+		//// è®¾ç½®ä¾§è¾¹æ èœå•è§¦æ‘¸æ¨¡å¼ä¸ºå…¨å±æ¨¡å¼
+		//
+		// setBehindContentView(R.layout.frame_menu_left); // è®¾ç½®å·¦èœå•çš„é»˜è®¤VIEW
+		// RightMenu leftMenu = new RightMenu();
+		// getSupportFragmentManager().beginTransaction().replace(R.id.menu_left,
+		//// leftMenu).commit();
+		//
+		////
+		//// _SlidingMenu.setSecondaryMenu(R.layout.frame_menu_right); //
+		//// è®¾ç½®å³èœå•é»˜è®¤VIEW
+		//// _SlidingMenu.setSecondaryShadowDrawable(R.drawable.shadowright); //
+		//// è®¾ç½®å³èœå•é˜´å½±
+		//// _SlidingMenu.setRightBehindWidthRes(R.dimen.right_menu_width); //
+		//// è®¾ç½®å³èœå•çš„å®½åº¦,è¯¥å€¼ä¸ºå³èœå•å±•å¼€çš„å®½åº¦
+		////
+		//// RightMenu rightMenu = new RightMenu();
+		//// getSupportFragmentManager().beginTransaction().replace(R.id.menu_right,
+		//// rightMenu).commit();
+
+		setBehindContentView(R.layout.frame_menu_left);
+		getSlidingMenu().setMode(SlidingMenu.LEFT);
+		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+
+		// getSlidingMenu().setMenu(R.layout.frame_menu_left);
+		getSlidingMenu().setSecondaryMenu(R.layout.frame_menu_right);
+
+		RightMenu leftMenu = new RightMenu();
+		getSupportFragmentManager().beginTransaction().replace(R.id.menu_right, leftMenu).commit();
+
+		// LeftMenu lef=new LeftMenu();
+		// getSupportFragmentManager().beginTransaction().replace(R.id.menu_right,
+		// lef).commit();
+
 	}
-	
+
 	protected Dialog onCreateDialog(int id) {
 		if (id == DIALOG_EXIT) {
-			return new AlertDialog.Builder(this).setTitle(
-				R.string.hint_Msg).setMessage(R.string.isExitAPP)
-				.setPositiveButton(R.string.ok,exitListener)
-				.setNegativeButton(R.string.cancel, null).create();
+			return new AlertDialog.Builder(this).setTitle(R.string.hint_Msg).setMessage(R.string.isExitAPP)
+					.setPositiveButton(R.string.ok, exitListener).setNegativeButton(R.string.cancel, null).create();
 		}
 		return super.onCreateDialog(id);
 	}
-		
+
 	DialogInterface.OnClickListener exitListener = new DialogInterface.OnClickListener() {
 		public void onClick(DialogInterface dialog, int which) {
-			BaseApplication.getInstance().exit(); 
+			BaseApplication.getInstance().exit();
 		}
 	};
-	
-	@Override 
-	public boolean dispatchKeyEvent(KeyEvent event) { 
-		if(event.getKeyCode()==KeyEvent.KEYCODE_BACK){			
-			if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0){
+
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+			if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
 				showDialog(DIALOG_EXIT);
-				return true; 
+				return true;
 			}
-	     }
-		 return super.dispatchKeyEvent(event);
-	} 
+		}
+		return super.dispatchKeyEvent(event);
+	}
 
 }

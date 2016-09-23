@@ -1,83 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- listview 头条小图列表布局 的view-->
+<!-- listview 头条小图列表布局 的view -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:orientation="horizontal"	
-	android:padding="10dip" >
-	<LinearLayout 
-	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
-	android:padding ="8dip"
-	android:orientation="horizontal"	
-	android:background="#B2FFFFFF" >
-	<LinearLayout
-		android:layout_width="0dip"
-		android:layout_height="wrap_content"
-		android:orientation="vertical"
-		android:layout_marginRight="8dip"
-		android:layout_weight="3.0">
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dip" >
 
-		<TextView
-		    android:id="@+id/title"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:ellipsize="none"
-		    android:text="here show title"
-		    android:textColor="@color/dackgray"
-		    android:textSize="18sp"
-		    android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#B2FFFFFF"
+        android:orientation="horizontal"
+        android:padding="8dip" >
 
-		<TextView
-		    android:id="@+id/subtitle"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:ellipsize="none"
-		    android:singleLine="true"
-		    android:text="subtitle"
-		    android:textColor="@color/text_gray"
-		    android:textSize="16sp" />
-		    
-		<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical">
-		<TextView
-		    android:id="@+id/stars"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:ellipsize="none"
-		    android:singleLine="true" 
-		    android:visibility="gone"/>
-		<TextView
-		    android:id="@+id/distance"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:drawableLeft="@drawable/icon_location"
-		    android:drawablePadding="5dip"
-		    android:ellipsize="none"
-		    android:singleLine="true"
-		    android:text="Stars"
-		    android:textColor="@color/text_gray"
-		    android:textSize="16sp" 
-			android:visibility="gone"/>
-		</LinearLayout>
-	</LinearLayout>
-	<ImageView   
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:id="@+id/recommend"
-		android:layout_gravity="center"
-		android:scaleType="centerCrop"
-		android:src="@drawable/recommend"
-		android:visibility="visible"/>
-	<ImageView   
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:id="@+id/dialog"
-		android:layout_gravity="center"
-		android:scaleType="centerCrop"
-		android:src="@drawable/icon_dialog_new"
-		android:visibility="gone"/>
-	</LinearLayout>
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dip"
+            android:layout_weight="3.0"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+                android:text="here show title"
+                android:textColor="@color/dackgray"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/subtitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+                android:singleLine="true"
+                android:text="subtitle"
+                android:textColor="@color/text_gray"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/stars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="none"
+                    android:singleLine="true"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/distance"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_location"
+                    android:drawablePadding="5dip"
+                    android:ellipsize="none"
+                    android:singleLine="true"
+                    android:text="Stars"
+                    android:textColor="@color/text_gray"
+                    android:textSize="16sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/recommend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/recommend"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_dialog_new"
+            android:visibility="gone" />
+    </LinearLayout>
+
 </LinearLayout>

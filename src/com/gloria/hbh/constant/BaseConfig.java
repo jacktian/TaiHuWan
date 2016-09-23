@@ -4,88 +4,91 @@ import com.gloria.hbh.data.app.Plist;
 import com.gloria.hbh.data.forum.ImageInfo.ImgScaleTypeConstants;
 
 /**
- * Ó¦ÓÃµÄ»ù±¾ÅäÖÃ
+ * åº”ç”¨çš„åŸºæœ¬é…ç½®
+ * 
  * @author gejian
  *
  */
 public class BaseConfig {
 
-	//public static int perpage = Integer.valueOf(Plist.getInstance().getForum().getSetting_PAGE_COUNT().getValue()); //Ã¿Ò³ÏÔÊ¾ÌõÊı
-	public static int perpage=20;
+	// public static int perpage =
+	// Integer.valueOf(Plist.getInstance().getForum().getSetting_PAGE_COUNT().getValue());
+	// //æ¯é¡µæ˜¾ç¤ºæ¡æ•°
+	public static int perpage = 20;
+
 	public static void resetPerpage(int perpage) {
 		BaseConfig.perpage = perpage;
 	}
-	
+
 	public static int getPerpage() {
 		return perpage;
 	}
 
 	/*
-	 * ÉèÖÃÃ¿Ò³ÏÔÊ¾ÌõÊı
+	 * è®¾ç½®æ¯é¡µæ˜¾ç¤ºæ¡æ•°
 	 */
-	public void setPerPag(int _perpage){
+	public void setPerPag(int _perpage) {
 		perpage = 20;
 	}
 
 	/*
-	 * ÕıÊ½ÍøÕ¾µØÖ· 
+	 * æ­£å¼ç½‘ç«™åœ°å€
 	 */
-	public static String url = Plist.getInstance().getForum().getForumInfo().getHostUrl(); //ÕıÊ½Õ¾
-	
-	/*
-	 * ÍøÕ¾APIµØÖ·
-	 */
-	public static String urlString = Plist.getInstance().getForum().getForumInfo().getApiUrl(); //ÕıÊ½Õ¾
+	public static String url = Plist.getInstance().getForum().getForumInfo().getHostUrl(); // æ­£å¼ç«™
 
 	/*
-	 * ¼ì²é°æ±¾¸üĞÂ
+	 * ç½‘ç«™APIåœ°å€
 	 */
-	public static String checkupdate="http://go.glavesoft.com/t/android_update.txt";
-	
+	public static String urlString = Plist.getInstance().getForum().getForumInfo().getApiUrl(); // æ­£å¼ç«™
+
 	/*
-	 * »ñÈ¡ËõÂÔÍ¼£¨width£¬height£©
+	 * æ£€æŸ¥ç‰ˆæœ¬æ›´æ–°
 	 */
-	public static String requestImageUrl(int width,int height,String url,int type){ //type:Ëõ·ÅÀàĞÍ
+	public static String checkupdate = "http://go.glavesoft.com/t/android_update.txt";
+
+	/*
+	 * è·å–ç¼©ç•¥å›¾ï¼ˆwidthï¼Œheightï¼‰
+	 */
+	public static String requestImageUrl(int width, int height, String url, int type) { // type:ç¼©æ”¾ç±»å‹
 		String result = "";
-		
-//		if(!url.contains("/")){
-//			return url;
-//		}
-//		String fileName = url.substring(url.lastIndexOf('/') + 1);
-//		if(!fileName.contains(".")){
-//			return url;
-//		}
-//		String Suffix = fileName.substring(fileName.lastIndexOf('.'));
-//		if(Suffix.equalsIgnoreCase(".gif")){
-//			return url;
-//		}
-		
+
+		// if(!url.contains("/")){
+		// return url;
+		// }
+		// String fileName = url.substring(url.lastIndexOf('/') + 1);
+		// if(!fileName.contains(".")){
+		// return url;
+		// }
+		// String Suffix = fileName.substring(fileName.lastIndexOf('.'));
+		// if(Suffix.equalsIgnoreCase(".gif")){
+		// return url;
+		// }
+
 		switch (type) {
 		case ImgScaleTypeConstants.IMGTYPE_NORMAL:
 			result = url;
 			break;
 		case ImgScaleTypeConstants.IMGTYPE_INYERCEPT:
-			result = urlString+"phone_image.php?width="+width+"&height="+height+"&scale=0&path="+url;
+			result = urlString + "phone_image.php?width=" + width + "&height=" + height + "&scale=0&path=" + url;
 			break;
 		case ImgScaleTypeConstants.IMGTYPE_SCALE:
-			result = urlString+"phone_image.php?width="+width+"&height="+height+"&scale=1&path="+url;
+			result = urlString + "phone_image.php?width=" + width + "&height=" + height + "&scale=1&path=" + url;
 			break;
 		default:
-			result = urlString+"phone_image.php?width="+width+"&height="+height+"&scale=1&path="+url;
+			result = urlString + "phone_image.php?width=" + width + "&height=" + height + "&scale=1&path=" + url;
 			break;
 		}
-		
-//		result = url;
+
+		// result = url;
 		return result;
 	}
 
 	/*
-	 * Ä³¸ö³ÇÊĞÌìÆøĞÅÏ¢
+	 * æŸä¸ªåŸå¸‚å¤©æ°”ä¿¡æ¯
 	 */
-	public static String requestWeatherInfoUrl(String code)
-	{
+	public static String requestWeatherInfoUrl(String code) {
 		String url = "http://www.weather.com.cn/data/cityinfo/" + code + ".html";
 		return url;
 	}
-	
+
 }

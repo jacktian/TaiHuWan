@@ -6,20 +6,16 @@ import android.content.Context;
 import android.widget.Toast;
 
 /**
-* ÎÄ ¼ş Ãû : ForumToast
-* ´´ ½¨ ÈË£º gejian
-* ÈÕ     ÆÚ£º2012-8-28
-* ĞŞ ¸Ä ÈË£ºgejian
-* ÈÕ    ÆÚ£º2012-8-28
-* Ãè    Êö£ºToastÏÔÊ¾
-*/
+ * æ–‡ ä»¶ å : ForumToast åˆ› å»º äººï¼š gejian æ—¥ æœŸï¼š2012-8-28 ä¿® æ”¹ äººï¼šgejian æ—¥ æœŸï¼š2012-8-28 æ
+ * è¿°ï¼šToastæ˜¾ç¤º
+ */
 public class ForumToast {
 
-	public static void show(Context context,String text){
+	public static void show(Context context, String text) {
 		Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
 	}
 
-	public static void show(String text){
+	public static void show(String text) {
 		Toast.makeText(BaseApplication.getInstance().getApplicationContext(), text, Toast.LENGTH_SHORT).show();
 	}
 }

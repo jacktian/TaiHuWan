@@ -15,11 +15,11 @@
  *******************************************************************************/
 package com.gloria.pulltorefresh.extras.listfragment;
 
+import com.gloria.pulltorefresh.library.PullToRefreshListView;
+
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
-
-import com.gloria.pulltorefresh.library.PullToRefreshListView;
 
 /**
  * A sample implementation of how to use {@link PullToRefreshListView} with

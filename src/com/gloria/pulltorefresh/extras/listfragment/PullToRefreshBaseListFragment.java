@@ -15,6 +15,8 @@
  *******************************************************************************/
 package com.gloria.pulltorefresh.extras.listfragment;
 
+import com.gloria.pulltorefresh.library.PullToRefreshBase;
+
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -22,8 +24,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
-
-import com.gloria.pulltorefresh.library.PullToRefreshBase;
 
 abstract class PullToRefreshBaseListFragment<T extends PullToRefreshBase<? extends AbsListView>> extends ListFragment {
 
@@ -57,8 +57,10 @@ abstract class PullToRefreshBaseListFragment<T extends PullToRefreshBase<? exten
 	 * created from ListFragment. You should override this method if you wish to
 	 * customise the {@link PullToRefreshBase} from the default.
 	 * 
-	 * @param inflater - LayoutInflater which can be used to inflate from XML.
-	 * @param savedInstanceState - Bundle passed through from
+	 * @param inflater
+	 *            - LayoutInflater which can be used to inflate from XML.
+	 * @param savedInstanceState
+	 *            - Bundle passed through from
 	 *            {@link ListFragment#onCreateView(LayoutInflater, ViewGroup, Bundle)
 	 *            onCreateView(...)}
 	 * @return The {@link PullToRefreshBase} which will replace the ListView.

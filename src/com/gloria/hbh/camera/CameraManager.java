@@ -3,6 +3,8 @@ package com.gloria.hbh.camera;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import com.gloria.hbh.util.ScreenUtils;
+
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,9 +18,7 @@ import android.hardware.Camera.ShutterCallback;
 import android.os.Handler;
 import android.os.Message;
 import android.view.SurfaceHolder;
-import android.widget.Toast; 
-import com.gloria.hbh.util.ImageUtils;
-import com.gloria.hbh.util.ScreenUtils;
+import android.widget.Toast;
 
 final class CameraManager {
 
@@ -50,27 +50,28 @@ final class CameraManager {
 	}
 
 	@SuppressLint("NewApi")
-	public String openDriver(SurfaceHolder holder)
-			throws IOException {
+	public String openDriver(SurfaceHolder holder) throws IOException {
 		String result = null;
 		if (camera == null) {
 			camera = Camera.open();
 			camera.setPreviewDisplay(holder);
-		    camera.setDisplayOrientation(90);
-			
+			camera.setDisplayOrientation(90);
+
 			/**
-			 * ÔÚandroidÄ£ÄâÆ÷ÉèÖÃ»Ø³öÏÖ´íÎó£¬ÔÚÕæ»úÉÏ¿ÉÒÔÉèÖÃ£¬Èç¹ûÔÚÕæ»úÉÏ²»ÉèÖÃ£¬ÔÚÅÄÕÕºó»ñÈ¡ÕÕÆ¬»áºÜÂı
-			 * */
-//			Camera.Parameters p =camera.getParameters();
-//			p.setPreviewFormat(PixelFormat.JPEG);
-//			p.setPreviewSize(CameraPreview.ScrrenWidth, CameraPreview.ScrrenHeight);
-//			p.setPictureSize(CameraPreview.ScrrenWidth, CameraPreview.ScrrenHeight);
-//			camera.setParameters(p);
+			 * åœ¨androidæ¨¡æ‹Ÿå™¨è®¾ç½®å›å‡ºç°é”™è¯¯ï¼Œåœ¨çœŸæœºä¸Šå¯ä»¥è®¾ç½®ï¼Œå¦‚æœåœ¨çœŸæœºä¸Šä¸è®¾ç½®ï¼Œåœ¨æ‹ç…§åè·å–ç…§ç‰‡ä¼šå¾ˆæ…¢
+			 */
+			// Camera.Parameters p =camera.getParameters();
+			// p.setPreviewFormat(PixelFormat.JPEG);
+			// p.setPreviewSize(CameraPreview.ScrrenWidth,
+			// CameraPreview.ScrrenHeight);
+			// p.setPictureSize(CameraPreview.ScrrenWidth,
+			// CameraPreview.ScrrenHeight);
+			// camera.setParameters(p);
 
 		}
 		return result;
 	}
-	
+
 	public void closeDriver() {
 		if (camera != null) {
 			camera.release();
@@ -90,8 +91,7 @@ final class CameraManager {
 			// if (!useOneShotPreviewCallback) {
 			// camera.setPreviewCallback(null);
 			// }
-			
-			
+
 			camera.stopPreview();
 			previewHandler = null;
 			autoFocusHandler = null;
@@ -99,111 +99,95 @@ final class CameraManager {
 		}
 	}
 
-	public void requestPreviewFrame(Handler handler, int message,final CameraPreview instanceCameraPreview) {
+	public void requestPreviewFrame(Handler handler, int message, final CameraPreview instanceCameraPreview) {
 		if (camera != null && previewing) {
 			previewHandler = handler;
 			previewMessage = message;
-			 camera.autoFocus(new AutoFocusCallback()
-	            {
-	                public void onAutoFocus(boolean success,Camera camera1)
-	                {
-	                    // TODO Auto-generated method stub  
-	                    // successÎªtrue±íÊ¾¶Ô½¹³É¹¦  
-	                    if(success)
-	                    {
-	                        if(camera1!=null)
-	                        {
-	                            camera1.takePicture(null,null,jpegCallback);
-	                            Toast.makeText(context,"ÕıÔÚ±£´æÕÕÆ¬  ÇëÉÔºó",Toast.LENGTH_SHORT).show(); 
-	                        }
-	                        else
-	                        {
-	                            Toast.makeText(context,"ÅÄÕÕ´íÎó,ÇëÖØĞÂÅÄÉã",Toast.LENGTH_SHORT).show(); 
-	                            instanceCameraPreview.finish();
-	                        }
-	                    }
-	                    else
-	                    {
-	                        Toast.makeText(context,"ÅÄÕÕ´íÎó,ÇëÖØĞÂÅÄÉã",Toast.LENGTH_SHORT).show(); 
-	                        instanceCameraPreview.finish();
-	                    }
-	                }
-	            });
-	        }
-	        else
-	        {
-	            Toast.makeText(context,"ÅÄÕÕ´íÎó,ÇëÖØĞÂÅÄÉã",Toast.LENGTH_SHORT).show(); 
-	            instanceCameraPreview.finish();
-	        }
+			camera.autoFocus(new AutoFocusCallback() {
+				public void onAutoFocus(boolean success, Camera camera1) {
+					// TODO Auto-generated method stub
+					// successä¸ºtrueè¡¨ç¤ºå¯¹ç„¦æˆåŠŸ
+					if (success) {
+						if (camera1 != null) {
+							camera1.takePicture(null, null, jpegCallback);
+							Toast.makeText(context, "æ­£åœ¨ä¿å­˜ç…§ç‰‡  è¯·ç¨å", Toast.LENGTH_SHORT).show();
+						} else {
+							Toast.makeText(context, "æ‹ç…§é”™è¯¯,è¯·é‡æ–°æ‹æ‘„", Toast.LENGTH_SHORT).show();
+							instanceCameraPreview.finish();
+						}
+					} else {
+						Toast.makeText(context, "æ‹ç…§é”™è¯¯,è¯·é‡æ–°æ‹æ‘„", Toast.LENGTH_SHORT).show();
+						instanceCameraPreview.finish();
+					}
+				}
+			});
+		} else {
+			Toast.makeText(context, "æ‹ç…§é”™è¯¯,è¯·é‡æ–°æ‹æ‘„", Toast.LENGTH_SHORT).show();
+			instanceCameraPreview.finish();
+		}
 	}
 
 	public void requestAutoFocus(Handler handler, int message) {
-//		if (camera != null && previewing) {
-//			autoFocusHandler = handler;
-//			autoFocusMessage = message;
-//			camera.autoFocus(autoFocusCallback);
-//		}
+		// if (camera != null && previewing) {
+		// autoFocusHandler = handler;
+		// autoFocusMessage = message;
+		// camera.autoFocus(autoFocusCallback);
+		// }
 	}
-	
+
 	private ShutterCallback shuuterCallback = new ShutterCallback() {
 
 		public void onShutter() {
 
 		}
 	};
-	
+
 	ProgressDialog alertDialog;
-    private PictureCallback jpegCallback = new PictureCallback() {
+	private PictureCallback jpegCallback = new PictureCallback() {
 
 		public void onPictureTaken(byte[] data, Camera camera) {
-			
-			if(previewHandler!=null){
-				
-				try{
-				
-				Bitmap $bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-				
-				int sizew= ScreenUtils.getInstance().getWidth();
-				int sizeh= ScreenUtils.getInstance().getHeight();
-				float scaleWidth = ((float) sizew) / $bitmap.getWidth();  
-				float scaleHeight = ((float) sizeh) / $bitmap.getHeight();
-				Matrix matrix = new Matrix();  
-		        matrix.postScale(scaleWidth, scaleHeight);  
-		        matrix.setRotate(90);  
-		        
-		        Bitmap resizedBitmap = Bitmap.createBitmap($bitmap, 0, 0, $bitmap.getWidth(),  
-		        		$bitmap.getHeight(), matrix, true); 
-		        
-		        if($bitmap != null && !$bitmap.isRecycled()){
-		        	$bitmap.recycle();
-		        }
-				
-				ByteArrayOutputStream out = new ByteArrayOutputStream(data.length);
-				resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-				
-				byte[] array= out.toByteArray();
-				
-				out.flush();
-				out.close();
 
-				Message message = previewHandler.obtainMessage(previewMessage, array);
-			    message.sendToTarget();
-			    previewHandler=null;
-		    
-			    System.gc();
-				}catch(Exception ex)
-				{ 
+			if (previewHandler != null) {
+
+				try {
+
+					Bitmap $bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+
+					int sizew = ScreenUtils.getInstance().getWidth();
+					int sizeh = ScreenUtils.getInstance().getHeight();
+					float scaleWidth = ((float) sizew) / $bitmap.getWidth();
+					float scaleHeight = ((float) sizeh) / $bitmap.getHeight();
+					Matrix matrix = new Matrix();
+					matrix.postScale(scaleWidth, scaleHeight);
+					matrix.setRotate(90);
+
+					Bitmap resizedBitmap = Bitmap.createBitmap($bitmap, 0, 0, $bitmap.getWidth(), $bitmap.getHeight(),
+							matrix, true);
+
+					if ($bitmap != null && !$bitmap.isRecycled()) {
+						$bitmap.recycle();
+					}
+
+					ByteArrayOutputStream out = new ByteArrayOutputStream(data.length);
+					resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+
+					byte[] array = out.toByteArray();
+
+					out.flush();
+					out.close();
+
+					Message message = previewHandler.obtainMessage(previewMessage, array);
+					message.sendToTarget();
+					previewHandler = null;
+
+					System.gc();
+				} catch (Exception ex) {
 				}
 			}
 		}
 
 	};
-	
-	
-	
-	
-	
-	
+
 	private PictureCallback rawCallback = new PictureCallback() {
 
 		public void onPictureTaken(byte[] data, Camera camera) {
@@ -211,6 +195,5 @@ final class CameraManager {
 		}
 
 	};
-
 
 }

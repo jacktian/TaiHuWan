@@ -17,11 +17,11 @@ package com.gloria.pulltorefresh.library.extras;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.gloria.pulltorefresh.library.PullToRefreshWebView;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.webkit.WebView;
-
-import com.gloria.pulltorefresh.library.PullToRefreshWebView;
 
 /**
  * An advanced version of {@link PullToRefreshWebView} which delegates the

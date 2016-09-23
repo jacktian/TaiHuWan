@@ -2,11 +2,11 @@ package com.gloria.hbh.camera;
 
 
 
+import com.gloria.hbh.main.R;
+
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-
-import com.gloria.hbh.main.R;
 
 
 final class SaveThread extends Thread {

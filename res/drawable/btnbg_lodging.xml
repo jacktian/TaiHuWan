@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="utf-8" ?>    
-<selector xmlns:android="http://schemas.android.com/apk/res/android">  
-<item android:state_checked="true" android:drawable="@drawable/icon_lodging_sel" />
-<item android:state_checked="false" android:drawable="@drawable/icon_lodging" />
-<item android:drawable="@drawable/icon_lodging" />   
-</selector>  
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/icon_lodging_sel" android:state_checked="true"/>
+    <item android:drawable="@drawable/icon_lodging" android:state_checked="false"/>
+    <item android:drawable="@drawable/icon_lodging"/>
+
+</selector>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listMenu_layout"
-    android:layout_width="fill_parent" 
-    android:layout_height="fill_parent" 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical" >
 
     <ImageView
@@ -10,14 +10,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-       android:src="@drawable/right_table_header"
-        />
-    
-    <ListView android:id="@+id/listview_menu"
-        android:layout_below="@id/button1"
+        android:src="@drawable/right_table_header" />
+
+    <ListView
+        android:id="@+id/listview_menu"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"      
-        android:listSelector="@drawable/list_bg_selector"  
+        android:layout_height="fill_parent"
+        android:layout_below="@id/button1"
+        android:cacheColorHint="#00000000"
         android:divider="@drawable/setting_line"
-        android:cacheColorHint="#00000000"/>
+        android:listSelector="@drawable/list_bg_selector" />
+
 </RelativeLayout>

@@ -2,12 +2,6 @@ package com.gloria.hbh.adapter;
 
 import java.util.ArrayList;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-
 import com.gloria.hbh.application.BaseApplication;
 import com.gloria.hbh.data.forum.PostInfo;
 import com.gloria.hbh.main.R;
@@ -15,62 +9,52 @@ import com.gloria.hbh.util.Methods;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+
 /**
  * 
  * @author gejian
  *
  */
 /**
-* Œƒ º˛ √˚ : PostListAdapter
-* ¥¥ Ω® »À£∫ gejian
-* »’     ∆⁄£∫2013-2-5
-* –ﬁ ∏ƒ »À£∫gejian
-* »’    ∆⁄£∫2013-2-5
-* √Ë     ˆ£∫ª˘¿‡µƒ  ≈‰∆˜
-*/
-public class Adapter_Base extends BaseAdapter{
-	
+ * Êñá ‰ª∂ Âêç : PostListAdapter Âàõ Âª∫ ‰∫∫Ôºö gejian Êó• ÊúüÔºö2013-2-5 ‰øÆ Êîπ ‰∫∫Ôºögejian Êó• ÊúüÔºö2013-2-5
+ * Êèè Ëø∞ÔºöÂü∫Á±ªÁöÑÈÄÇÈÖçÂô®
+ */
+public class Adapter_Base extends BaseAdapter {
+
 	Context _context;
 	ArrayList<PostInfo> lastviewsList;
 	ArrayList<String> lastviewsTidList;
 	DisplayImageOptions options;
 	DisplayImageOptions options_icon;
 	DisplayImageOptions options_big;
-    ImageLoader imageLoader;
-	
-	public Adapter_Base(){
-//		super();
+	ImageLoader imageLoader;
+
+	public Adapter_Base() {
+		// super();
 		_context = BaseApplication.getInstance().getApplicationContext();
-//		lastviewsList = Methods.getLastViewsList();
-//		lastviewsTidList = Methods.getLastViewsTidList(lastviewsList);
-		options = new DisplayImageOptions.Builder()
-			.showStubImage(R.drawable.defalut_img_small)
-			.showImageForEmptyUri(R.drawable.defalut_img_small)
-			.cacheInMemory()
-			.cacheOnDisc()
-			.bitmapConfig(Bitmap.Config.RGB_565)
-			.build();
-		options_icon = new DisplayImageOptions.Builder()
-		.showStubImage(R.drawable.portrait)
-		.showImageForEmptyUri(R.drawable.portrait)
-		.cacheInMemory()
-		.cacheOnDisc()
-		.bitmapConfig(Bitmap.Config.RGB_565)
-		.build();
-		options_big = new DisplayImageOptions.Builder()
-		.showStubImage(R.drawable.defalut_img_big)
-		.showImageForEmptyUri(R.drawable.defalut_img_big)
-		.cacheInMemory()
-		.cacheOnDisc()
-		.bitmapConfig(Bitmap.Config.RGB_565)
-		.build();
+		// lastviewsList = Methods.getLastViewsList();
+		// lastviewsTidList = Methods.getLastViewsTidList(lastviewsList);
+		options = new DisplayImageOptions.Builder().showStubImage(R.drawable.defalut_img_small)
+				.showImageForEmptyUri(R.drawable.defalut_img_small).cacheInMemory().cacheOnDisc()
+				.bitmapConfig(Bitmap.Config.RGB_565).build();
+		options_icon = new DisplayImageOptions.Builder().showStubImage(R.drawable.portrait)
+				.showImageForEmptyUri(R.drawable.portrait).cacheInMemory().cacheOnDisc()
+				.bitmapConfig(Bitmap.Config.RGB_565).build();
+		options_big = new DisplayImageOptions.Builder().showStubImage(R.drawable.defalut_img_big)
+				.showImageForEmptyUri(R.drawable.defalut_img_big).cacheInMemory().cacheOnDisc()
+				.bitmapConfig(Bitmap.Config.RGB_565).build();
 	}
-	
-	public long getItemId(int position){
+
+	public long getItemId(int position) {
 		return position;
 	}
-	
-	public View getView(int position, View convertView, ViewGroup parent){
+
+	public View getView(int position, View convertView, ViewGroup parent) {
 		return convertView;
 	}
 

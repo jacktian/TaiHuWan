@@ -12,6 +12,15 @@ package com.gloria.hbh.camera;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import com.gloria.hbh.adapter.WaterImgGalleryAdapter;
+import com.gloria.hbh.constant.BaseConstants;
+import com.gloria.hbh.main.Activity_Base;
+import com.gloria.hbh.main.R;
+import com.gloria.hbh.myview.MyGallery;
+import com.gloria.hbh.myview.PageIndicatorView;
+import com.gloria.hbh.util.ImageUtils;
+
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -36,414 +45,379 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.gloria.hbh.adapter.WaterImgGalleryAdapter;
-import com.gloria.hbh.constant.BaseConstants;
-import com.gloria.hbh.main.Activity_Base;
-import com.gloria.hbh.main.R;
-import com.gloria.hbh.myview.MyGallery;
-import com.gloria.hbh.myview.PageIndicatorView;
-import com.gloria.hbh.util.ImageUtils;
 
 // ----------------------------------------------------------------------
-public class CameraPreview extends Activity_Base implements SurfaceHolder.Callback,OnClickListener
-{
-    // private SurfaceView mSurfaceView;
-    // private SurfaceHolder mSurfaceHolder;
-    // private boolean bifPrieview = false;
-    // private Camera mCamera;
-    public static int ScrrenWidth;
-    public static int ScrrenHeight;
-    Button btn_back;
-    Button btn_pic;
-    TextView btn_takephoto;
-    LinearLayout layout_takephoto;
-    private SaveThread mSaveThread=null;
-    private static int PicPhotoCount=-1;
-    MyGallery gallery;
-    PageIndicatorView view_page;
-    ArrayList<String> imgLists;
-    WaterImgGalleryAdapter imgGalleryAdapter;
-    int isSelectPos=0;
-    private CameraPreview instanceCameraPreview;
-    
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        Window window=getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(R.layout.activity_camera);
-        CameraManager.init(getApplication());
-        this.instanceCameraPreview=this;
-        // DisplayMetrics dm = new DisplayMetrics();
-        // getWindowManager().getDefaultDisplay().getMetrics(dm);
-        // ScrrenWidth = dm.widthPixels;
-        // ScrrenHeight=dm.heightPixels;
-        // mSurfaceView = (SurfaceView) findViewById(R.id.surface_camera);
-        btn_back=(Button)findViewById(R.id.btn_back);
-        btn_takephoto=(TextView)findViewById(R.id.btn_takephoto);
-        btn_pic=(Button)findViewById(R.id.btn_pic);
-        layout_takephoto=(LinearLayout)findViewById(R.id.layout_takephoto);
-        // mSurfaceHolder = mSurfaceView.getHolder();
-        // mSurfaceHolder.addCallback(CameraPreview.this);
-        // mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-        SurfaceView surfaceView=(SurfaceView)findViewById(R.id.surface_camera);
-        SurfaceHolder surfaceHolder=surfaceView.getHolder();
-        surfaceHolder.addCallback(this);
-        surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
-        btn_back.setOnClickListener(this);
-        btn_takephoto.setOnClickListener(this);
-        btn_pic.setOnClickListener(this);
-        layout_takephoto.setOnClickListener(this);
-        PicPhotoCount=0;
-        initData();
-        gallery=(MyGallery)findViewById(R.id.gallery);
-        view_page=(PageIndicatorView)findViewById(R.id.view_page);
-        view_page.setTotalPage(getImgLists().size());
-        gallery.setOnItemSelectedListener(new OnItemSelectedListener(){
-            public void onItemSelected(AdapterView<?> arg0,View arg1,int position,long id)
-            {
-                isSelectPos=position;
-                view_page.setCurrentPage(position);
-            }
-            public void onNothingSelected(AdapterView<?> arg0)
-            {
-            }
-        });
-        imgGalleryAdapter=new WaterImgGalleryAdapter(imgLists,imageLoader);
-        gallery.setAdapter(imgGalleryAdapter);
-    }
-    private void initData()
-    {
-        // String imageUri = "drawable://" + R.drawable.image; // from drawables
-        // (only images, non-9patch)
-        getImgLists().add("drawable://" + R.drawable.water_0);
-        getImgLists().add("drawable://" + R.drawable.water_1);
-        getImgLists().add("drawable://" + R.drawable.water_2);
-        getImgLists().add("drawable://" + R.drawable.water_3);
-        getImgLists().add("drawable://" + R.drawable.water_4);
-        getImgLists().add("drawable://" + R.drawable.water_5);
-    }
-    public ArrayList<String> getImgLists()
-    {
-        if(imgLists == null)
-        {
-            imgLists=new ArrayList<String>(1);
-        }
-        return imgLists;
-    }
-    public void setImgLists(ArrayList<String> imgLists)
-    {
-        this.imgLists=imgLists;
-    }
-    public void onClick(View v)
-    {
-        if(v == btn_back)
-        {
-            finish();
-        }
-        else
-            if(v == btn_takephoto || v == layout_takephoto)
-            {
-                btn_takephoto.setClickable(false);
-                layout_takephoto.setClickable(false);
-                btn_pic.setClickable(false);
-                CameraManager.get().requestPreviewFrame(mHandler,R.id.save,instanceCameraPreview);
-            }
-            else
-                if(v == btn_pic)
-                {
-                    // TODO
-                    if(PicPhotoCount == 0)
-                    {
-                        PicPhotoCount++;
-                        btn_takephoto.setClickable(false);
-                        layout_takephoto.setClickable(false);
-                        btn_pic.setClickable(false);
-                        CameraManager.get().requestPreviewFrame(mHandler,R.id.save,instanceCameraPreview);
-                    }
-                }
-    }
-    @Override
-    protected void onPause()
-    {
-        super.onPause();
-        CameraManager.get().stopPreview();
-        // if (mSaveThread != null) {
-        // Message quit = Message.obtain(mSaveThread.mHandler, R.id.quit);
-        // quit.sendToTarget();
-        // try {
-        // mSaveThread.join();
-        // } catch (InterruptedException e) {
-        // }
-        // mSaveThread = null;
-        // }
-        CameraManager.get().closeDriver();
-    }
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-        // if (mSaveThread == null ) {
-        // mSaveThread = new SaveThread(this);
-        // mSaveThread.start();
-        // }
-    }
-    
-    public final Handler mHandler=new Handler(){
-        @Override
-        public void handleMessage(Message message)
-        {
-            switch(message.what)
-            {
-                case R.id.save:
-                    byte buf[]=(byte[])message.obj;
-                    // Éú³ÉË®Ó¡Í¼Æ¬
-                    Bitmap bm=BitmapFactory.decodeByteArray(buf,0,buf.length);
-                    // Bitmap bitmap = ImageUtils.getScaleImage(bm);
-                    int res=0;
-                    switch(isSelectPos)
-                    {
-                        case 0:
-                            res=R.drawable.water_0;
-                        break;
-                        case 1:
-                            res=R.drawable.water_1;
-                        break;
-                        case 2:
-                            res=R.drawable.water_2;
-                        break;
-                        case 3:
-                            res=R.drawable.water_3;
-                        break;
-                        default:
-                        break;
-                    }
-                    Bitmap markbitmap=ImageUtils.getBitmapByDrawable(res);
-                    Bitmap resultbitmap=watermarkBitmap(bm,markbitmap,"");
-                    String filePath=ImageUtils.getCameraFileName(BaseConstants.CACHE_SAVE_IMG_PATH);
-                    try
-                    {
-                        // Ë®Ó¡Í¼Æ¬
-                        ImageUtils.saveBitmap(resultbitmap,filePath);
-                    }
-                    catch(IOException e)
-                    {
-                        Toast.makeText(CameraPreview.this,"ÅÄÕÕ´íÎó,ÇëÖØĞÂÅÄÉã",Toast.LENGTH_SHORT).show();
-                        instanceCameraPreview.finish();
-                    }
-                    finish();
-                break;
-            }
-        }
-    };
-    
-    /**
-     * ¼ÓË®Ó¡ Ò²¿ÉÒÔ¼ÓÎÄ×Ö
-     * @param src
-     * @param watermark
-     * @param title
-     * @return
-     */
-    public static Bitmap watermarkBitmap(Bitmap src,Bitmap watermark,String title)
-    {
-        if(src == null)
-        {
-            return null;
-        }
-        int w=src.getWidth();
-        int h=src.getHeight();
-        // ĞèÒª´¦ÀíÍ¼Æ¬Ì«´óÔì³ÉµÄÄÚ´æ³¬¹ıµÄÎÊÌâ,ÕâÀïÎÒµÄÍ¼Æ¬ºÜĞ¡ËùÒÔ²»Ğ´ÏàÓ¦´úÂëÁË
-        Bitmap newb=Bitmap.createBitmap(w,h,Config.ARGB_8888);// ´´½¨Ò»¸öĞÂµÄºÍSRC³¤¶È¿í¶ÈÒ»ÑùµÄÎ»Í¼
-        Canvas cv=new Canvas(newb);
-        cv.drawBitmap(src,0,0,null);// ÔÚ 0£¬0×ø±ê¿ªÊ¼»­Èësrc
-        Paint paint=new Paint();
-        // ¼ÓÈëÍ¼Æ¬
-        if(watermark != null)
-        {
-            int ww=watermark.getWidth();
-            int wh=watermark.getHeight();
-            // paint.setAlpha(50);
-            paint.setAlpha(100);
-            // cv.drawBitmap(watermark, w - ww + 5, h - wh + 5, paint);//
-            // ÔÚsrcµÄÓÒÏÂ½Ç»­ÈëË®Ó¡
-            // cv.drawBitmap(watermark, 0, 0, paint);// ÔÚsrcµÄ×óÉÏ½Ç»­ÈëË®Ó¡
-            cv.drawBitmap(watermark,(w - ww + 5) / 2,h - wh + 5,paint);
-        }
-        else
-        {
-            Log.i("i","water mark failed");
-        }
-        // ¼ÓÈëÎÄ×Ö
-        if(title != null)
-        {
-            String familyName="ËÎÌå";
-            Typeface font=Typeface.create(familyName,Typeface.NORMAL);
-            TextPaint textPaint=new TextPaint();
-            textPaint.setColor(Color.RED);
-            textPaint.setTypeface(font);
-            textPaint.setTextSize(40);
-            // ÕâÀïÊÇ×Ô¶¯»»ĞĞµÄ
-            // StaticLayout layout = new
-            // StaticLayout(title,textPaint,w,Alignment.ALIGN_OPPOSITE,1.0F,0.0F,true);
-            // layout.draw(cv);
-            // ÎÄ×Ö¾Í¼Ó×óÉÏ½ÇËãÁË
-            cv.drawText(title,w - 400,h - 40,textPaint);
-        }
-        cv.save(Canvas.ALL_SAVE_FLAG);// ±£´æ
-        cv.restore();// ´æ´¢
-        if(src != null && !src.isRecycled())
-        {
-            src.recycle();
-        }
-        if(watermark != null && !watermark.isRecycled())
-        {
-            watermark.recycle();
-        }
-        return newb;
-    }
-    public void surfaceChanged(SurfaceHolder holder,int format,int width,int height)
-    {
-        // CameraManager.get().DriverSurfaceChanged(holder,format, width,
-        // height);
-        // Log.d("digilinx-Camera surfaceChanged",
-        // "width="+width+"height="+height+"Format="+format);
-    }
-    public void surfaceCreated(SurfaceHolder holder)
-    {
-        // try {
-        // initCamera(holder);
-        // } catch (IOException e) {
-        // throw new RuntimeException(e);
-        // }
-        try
-        {
-            CameraManager.get().openDriver(holder);
-            CameraManager.get().startPreview();
-        }
-        catch(IOException e)
-        {
-            throw new RuntimeException(e);
-        }
-    }
-    public void surfaceDestroyed(SurfaceHolder holder)
-    {
-    }
-    // void initCamera(SurfaceHolder holder)throws IOException {
-    //
-    // if (!bifPrieview) {
-    // if(mCamera==null){
-    // mCamera = Camera.open();
-    // }
-    // if(mCamera==null)
-    // {
-    // throw new IOException();
-    // }
-    // }
-    // if (mCamera != null && !bifPrieview) {
-    // Camera.Parameters p = mCamera.getParameters();
-    // p.setPictureFormat(PixelFormat.JPEG);
-    // p.setPictureSize(ScrrenWidth, ScrrenHeight);
-    // mCamera.setParameters(p);
-    // try {
-    // mCamera.setPreviewDisplay(holder);
-    // } catch (IOException e) {
-    // e.printStackTrace();
-    // }
-    // mCamera.startPreview();
-    // bifPrieview = true;
-    // }
-    //
-    // }
-    // private void takePicture() {
-    // mCamera.takePicture(shuuterCallback, rawCallback, jpegCallback);
-    // }
-    // private void resetCamera() {
-    // if (mCamera != null && bifPrieview) {
-    // mCamera.stopPreview();
-    // mCamera = null;
-    // bifPrieview = false;
-    // }
-    // }
-    // private ShutterCallback shuuterCallback = new ShutterCallback() {
-    //
-    // public void onShutter() {
-    //
-    // }
-    //
-    // };
-    // private PictureCallback jpegCallback = new PictureCallback() {
-    //
-    // public void onPictureTaken(byte[] data, Camera camera) {
-    // getIntent().putExtra("pic", data);
-    // setResult(20, getIntent());
-    // finish();
-    // }
-    //
-    // };
-    // private PictureCallback rawCallback = new PictureCallback() {
-    //
-    // public void onPictureTaken(byte[] data, Camera camera) {
-    //
-    // }
-    //
-    // };
-    // public void stopPreview() {
-    // if(mCamera!=null&&bifPrieview){
-    // mCamera.stopPreview();
-    // bifPrieview=false;
-    // }
-    // }
-    //
-    // public void closeDriver() {
-    // if (mCamera != null) {
-    // mCamera.release();
-    // mCamera = null;
-    // }
-    //
-    // }
-    // private void displayFrameworkBugMessageAndExit() {
-    // AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    // builder.setTitle(getString(R.string.app_name));
-    // builder.setMessage(getString(R.string.msg_camera_framework_bug));
-    // builder.setPositiveButton("È·¶¨", new FinishListener(this));
-    // builder.setOnCancelListener(new FinishListener(this));
-    // builder.show();
-    //
-    // public void onError(int error, Camera camera) {
-    // /**
-    // * Ã½Ìå·şÎñÆ÷ËÀÍö¡£ÔÚÕâÖÖÇé¿öÏÂ£¬Ó¦ÓÃ³ÌĞò±ØĞëÊÍ·ÅCamera¶ÔÏóºÍÊµÀı»¯Ò»¸öĞÂµÄ¡£
-    // * */
-    // if(error==android.hardware.Camera.CAMERA_ERROR_SERVER_DIED)
-    // {
-    // Log.d(TAG, "CAMERA_ERROR_SERVER_DIED");
-    // camera.release();
-    // camera = null;
-    //
-    //
-    // AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    // builder.setTitle(getString(R.string.app_name));
-    // builder.setMessage("CAMERA_ERROR_SERVER_DIED");
-    // builder.setPositiveButton("È·¶¨", new FinishListener(this));
-    // builder.setOnCancelListener(new FinishListener(this));
-    // builder.show();
-    // }
-    // /**
-    // * Î´Ö¸¶¨µÄ´íÎócamerar
-    // * */
-    // else if(error==android.hardware.Camera.CAMERA_ERROR_UNKNOWN)
-    // {
-    // Log.d(TAG, "CAMERA_ERROR_UNKNOWN");
-    // camera.release();
-    // camera = null;
-    //
-    // AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    // builder.setTitle(getString(R.string.app_name));
-    // builder.setMessage("CAMERA_ERROR_UNKNOWN");
-    // builder.setPositiveButton("È·¶¨", new FinishListener(this));
-    // builder.setOnCancelListener(new FinishListener(this));
-    // builder.show();
-    // }
-    //
-    // }
+public class CameraPreview extends Activity_Base implements SurfaceHolder.Callback, OnClickListener {
+	// private SurfaceView mSurfaceView;
+	// private SurfaceHolder mSurfaceHolder;
+	// private boolean bifPrieview = false;
+	// private Camera mCamera;
+	public static int ScrrenWidth;
+	public static int ScrrenHeight;
+	Button btn_back;
+	Button btn_pic;
+	TextView btn_takephoto;
+	LinearLayout layout_takephoto;
+	private SaveThread mSaveThread = null;
+	private static int PicPhotoCount = -1;
+	MyGallery gallery;
+	PageIndicatorView view_page;
+	ArrayList<String> imgLists;
+	WaterImgGalleryAdapter imgGalleryAdapter;
+	int isSelectPos = 0;
+	private CameraPreview instanceCameraPreview;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Window window = getWindow();
+		window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		setContentView(R.layout.activity_camera);
+		CameraManager.init(getApplication());
+		this.instanceCameraPreview = this;
+		// DisplayMetrics dm = new DisplayMetrics();
+		// getWindowManager().getDefaultDisplay().getMetrics(dm);
+		// ScrrenWidth = dm.widthPixels;
+		// ScrrenHeight=dm.heightPixels;
+		// mSurfaceView = (SurfaceView) findViewById(R.id.surface_camera);
+		btn_back = (Button) findViewById(R.id.btn_back);
+		btn_takephoto = (TextView) findViewById(R.id.btn_takephoto);
+		btn_pic = (Button) findViewById(R.id.btn_pic);
+		layout_takephoto = (LinearLayout) findViewById(R.id.layout_takephoto);
+		// mSurfaceHolder = mSurfaceView.getHolder();
+		// mSurfaceHolder.addCallback(CameraPreview.this);
+		// mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		SurfaceView surfaceView = (SurfaceView) findViewById(R.id.surface_camera);
+		SurfaceHolder surfaceHolder = surfaceView.getHolder();
+		surfaceHolder.addCallback(this);
+		surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		btn_back.setOnClickListener(this);
+		btn_takephoto.setOnClickListener(this);
+		btn_pic.setOnClickListener(this);
+		layout_takephoto.setOnClickListener(this);
+		PicPhotoCount = 0;
+		initData();
+		gallery = (MyGallery) findViewById(R.id.gallery);
+		view_page = (PageIndicatorView) findViewById(R.id.view_page);
+		view_page.setTotalPage(getImgLists().size());
+		gallery.setOnItemSelectedListener(new OnItemSelectedListener() {
+			public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+				isSelectPos = position;
+				view_page.setCurrentPage(position);
+			}
+
+			public void onNothingSelected(AdapterView<?> arg0) {
+			}
+		});
+		imgGalleryAdapter = new WaterImgGalleryAdapter(imgLists, imageLoader);
+		gallery.setAdapter(imgGalleryAdapter);
+	}
+
+	private void initData() {
+		// String imageUri = "drawable://" + R.drawable.image; // from drawables
+		// (only images, non-9patch)
+		getImgLists().add("drawable://" + R.drawable.water_0);
+		getImgLists().add("drawable://" + R.drawable.water_1);
+		getImgLists().add("drawable://" + R.drawable.water_2);
+		getImgLists().add("drawable://" + R.drawable.water_3);
+		getImgLists().add("drawable://" + R.drawable.water_4);
+		getImgLists().add("drawable://" + R.drawable.water_5);
+	}
+
+	public ArrayList<String> getImgLists() {
+		if (imgLists == null) {
+			imgLists = new ArrayList<String>(1);
+		}
+		return imgLists;
+	}
+
+	public void setImgLists(ArrayList<String> imgLists) {
+		this.imgLists = imgLists;
+	}
+
+	public void onClick(View v) {
+		if (v == btn_back) {
+			finish();
+		} else if (v == btn_takephoto || v == layout_takephoto) {
+			btn_takephoto.setClickable(false);
+			layout_takephoto.setClickable(false);
+			btn_pic.setClickable(false);
+			CameraManager.get().requestPreviewFrame(mHandler, R.id.save, instanceCameraPreview);
+		} else if (v == btn_pic) {
+			// TODO
+			if (PicPhotoCount == 0) {
+				PicPhotoCount++;
+				btn_takephoto.setClickable(false);
+				layout_takephoto.setClickable(false);
+				btn_pic.setClickable(false);
+				CameraManager.get().requestPreviewFrame(mHandler, R.id.save, instanceCameraPreview);
+			}
+		}
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		CameraManager.get().stopPreview();
+		// if (mSaveThread != null) {
+		// Message quit = Message.obtain(mSaveThread.mHandler, R.id.quit);
+		// quit.sendToTarget();
+		// try {
+		// mSaveThread.join();
+		// } catch (InterruptedException e) {
+		// }
+		// mSaveThread = null;
+		// }
+		CameraManager.get().closeDriver();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		// if (mSaveThread == null ) {
+		// mSaveThread = new SaveThread(this);
+		// mSaveThread.start();
+		// }
+	}
+
+	public final Handler mHandler = new Handler() {
+		@Override
+		public void handleMessage(Message message) {
+			switch (message.what) {
+			case R.id.save:
+				byte buf[] = (byte[]) message.obj;
+				// ç”Ÿæˆæ°´å°å›¾ç‰‡
+				Bitmap bm = BitmapFactory.decodeByteArray(buf, 0, buf.length);
+				// Bitmap bitmap = ImageUtils.getScaleImage(bm);
+				int res = 0;
+				switch (isSelectPos) {
+				case 0:
+					res = R.drawable.water_0;
+					break;
+				case 1:
+					res = R.drawable.water_1;
+					break;
+				case 2:
+					res = R.drawable.water_2;
+					break;
+				case 3:
+					res = R.drawable.water_3;
+					break;
+				default:
+					break;
+				}
+				Bitmap markbitmap = ImageUtils.getBitmapByDrawable(res);
+				Bitmap resultbitmap = watermarkBitmap(bm, markbitmap, "");
+				String filePath = ImageUtils.getCameraFileName(BaseConstants.CACHE_SAVE_IMG_PATH);
+				try {
+					// æ°´å°å›¾ç‰‡
+					ImageUtils.saveBitmap(resultbitmap, filePath);
+				} catch (IOException e) {
+					Toast.makeText(CameraPreview.this, "æ‹ç…§é”™è¯¯,è¯·é‡æ–°æ‹æ‘„", Toast.LENGTH_SHORT).show();
+					instanceCameraPreview.finish();
+				}
+				finish();
+				break;
+			}
+		}
+	};
+
+	/**
+	 * åŠ æ°´å° ä¹Ÿå¯ä»¥åŠ æ–‡å­—
+	 * 
+	 * @param src
+	 * @param watermark
+	 * @param title
+	 * @return
+	 */
+	public static Bitmap watermarkBitmap(Bitmap src, Bitmap watermark, String title) {
+		if (src == null) {
+			return null;
+		}
+		int w = src.getWidth();
+		int h = src.getHeight();
+		// éœ€è¦å¤„ç†å›¾ç‰‡å¤ªå¤§é€ æˆçš„å†…å­˜è¶…è¿‡çš„é—®é¢˜,è¿™é‡Œæˆ‘çš„å›¾ç‰‡å¾ˆå°æ‰€ä»¥ä¸å†™ç›¸åº”ä»£ç äº†
+		Bitmap newb = Bitmap.createBitmap(w, h, Config.ARGB_8888);// åˆ›å»ºä¸€ä¸ªæ–°çš„å’ŒSRCé•¿åº¦å®½åº¦ä¸€æ ·çš„ä½å›¾
+		Canvas cv = new Canvas(newb);
+		cv.drawBitmap(src, 0, 0, null);// åœ¨ 0ï¼Œ0åæ ‡å¼€å§‹ç”»å…¥src
+		Paint paint = new Paint();
+		// åŠ å…¥å›¾ç‰‡
+		if (watermark != null) {
+			int ww = watermark.getWidth();
+			int wh = watermark.getHeight();
+			// paint.setAlpha(50);
+			paint.setAlpha(100);
+			// cv.drawBitmap(watermark, w - ww + 5, h - wh + 5, paint);//
+			// åœ¨srcçš„å³ä¸‹è§’ç”»å…¥æ°´å°
+			// cv.drawBitmap(watermark, 0, 0, paint);// åœ¨srcçš„å·¦ä¸Šè§’ç”»å…¥æ°´å°
+			cv.drawBitmap(watermark, (w - ww + 5) / 2, h - wh + 5, paint);
+		} else {
+			Log.i("i", "water mark failed");
+		}
+		// åŠ å…¥æ–‡å­—
+		if (title != null) {
+			String familyName = "å®‹ä½“";
+			Typeface font = Typeface.create(familyName, Typeface.NORMAL);
+			TextPaint textPaint = new TextPaint();
+			textPaint.setColor(Color.RED);
+			textPaint.setTypeface(font);
+			textPaint.setTextSize(40);
+			// è¿™é‡Œæ˜¯è‡ªåŠ¨æ¢è¡Œçš„
+			// StaticLayout layout = new
+			// StaticLayout(title,textPaint,w,Alignment.ALIGN_OPPOSITE,1.0F,0.0F,true);
+			// layout.draw(cv);
+			// æ–‡å­—å°±åŠ å·¦ä¸Šè§’ç®—äº†
+			cv.drawText(title, w - 400, h - 40, textPaint);
+		}
+		cv.save(Canvas.ALL_SAVE_FLAG);// ä¿å­˜
+		cv.restore();// å­˜å‚¨
+		if (src != null && !src.isRecycled()) {
+			src.recycle();
+		}
+		if (watermark != null && !watermark.isRecycled()) {
+			watermark.recycle();
+		}
+		return newb;
+	}
+
+	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+		// CameraManager.get().DriverSurfaceChanged(holder,format, width,
+		// height);
+		// Log.d("digilinx-Camera surfaceChanged",
+		// "width="+width+"height="+height+"Format="+format);
+	}
+
+	public void surfaceCreated(SurfaceHolder holder) {
+		// try {
+		// initCamera(holder);
+		// } catch (IOException e) {
+		// throw new RuntimeException(e);
+		// }
+		try {
+			CameraManager.get().openDriver(holder);
+			CameraManager.get().startPreview();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void surfaceDestroyed(SurfaceHolder holder) {
+	}
+	// void initCamera(SurfaceHolder holder)throws IOException {
+	//
+	// if (!bifPrieview) {
+	// if(mCamera==null){
+	// mCamera = Camera.open();
+	// }
+	// if(mCamera==null)
+	// {
+	// throw new IOException();
+	// }
+	// }
+	// if (mCamera != null && !bifPrieview) {
+	// Camera.Parameters p = mCamera.getParameters();
+	// p.setPictureFormat(PixelFormat.JPEG);
+	// p.setPictureSize(ScrrenWidth, ScrrenHeight);
+	// mCamera.setParameters(p);
+	// try {
+	// mCamera.setPreviewDisplay(holder);
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	// mCamera.startPreview();
+	// bifPrieview = true;
+	// }
+	//
+	// }
+	// private void takePicture() {
+	// mCamera.takePicture(shuuterCallback, rawCallback, jpegCallback);
+	// }
+	// private void resetCamera() {
+	// if (mCamera != null && bifPrieview) {
+	// mCamera.stopPreview();
+	// mCamera = null;
+	// bifPrieview = false;
+	// }
+	// }
+	// private ShutterCallback shuuterCallback = new ShutterCallback() {
+	//
+	// public void onShutter() {
+	//
+	// }
+	//
+	// };
+	// private PictureCallback jpegCallback = new PictureCallback() {
+	//
+	// public void onPictureTaken(byte[] data, Camera camera) {
+	// getIntent().putExtra("pic", data);
+	// setResult(20, getIntent());
+	// finish();
+	// }
+	//
+	// };
+	// private PictureCallback rawCallback = new PictureCallback() {
+	//
+	// public void onPictureTaken(byte[] data, Camera camera) {
+	//
+	// }
+	//
+	// };
+	// public void stopPreview() {
+	// if(mCamera!=null&&bifPrieview){
+	// mCamera.stopPreview();
+	// bifPrieview=false;
+	// }
+	// }
+	//
+	// public void closeDriver() {
+	// if (mCamera != null) {
+	// mCamera.release();
+	// mCamera = null;
+	// }
+	//
+	// }
+	// private void displayFrameworkBugMessageAndExit() {
+	// AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	// builder.setTitle(getString(R.string.app_name));
+	// builder.setMessage(getString(R.string.msg_camera_framework_bug));
+	// builder.setPositiveButton("ç¡®å®š", new FinishListener(this));
+	// builder.setOnCancelListener(new FinishListener(this));
+	// builder.show();
+	//
+	// public void onError(int error, Camera camera) {
+	// /**
+	// * åª’ä½“æœåŠ¡å™¨æ­»äº¡ã€‚åœ¨è¿™ç§æƒ…å†µä¸‹ï¼Œåº”ç”¨ç¨‹åºå¿…é¡»é‡Šæ”¾Cameraå¯¹è±¡å’Œå®ä¾‹åŒ–ä¸€ä¸ªæ–°çš„ã€‚
+	// * */
+	// if(error==android.hardware.Camera.CAMERA_ERROR_SERVER_DIED)
+	// {
+	// Log.d(TAG, "CAMERA_ERROR_SERVER_DIED");
+	// camera.release();
+	// camera = null;
+	//
+	//
+	// AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	// builder.setTitle(getString(R.string.app_name));
+	// builder.setMessage("CAMERA_ERROR_SERVER_DIED");
+	// builder.setPositiveButton("ç¡®å®š", new FinishListener(this));
+	// builder.setOnCancelListener(new FinishListener(this));
+	// builder.show();
+	// }
+	// /**
+	// * æœªæŒ‡å®šçš„é”™è¯¯camerar
+	// * */
+	// else if(error==android.hardware.Camera.CAMERA_ERROR_UNKNOWN)
+	// {
+	// Log.d(TAG, "CAMERA_ERROR_UNKNOWN");
+	// camera.release();
+	// camera = null;
+	//
+	// AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	// builder.setTitle(getString(R.string.app_name));
+	// builder.setMessage("CAMERA_ERROR_UNKNOWN");
+	// builder.setPositiveButton("ç¡®å®š", new FinishListener(this));
+	// builder.setOnCancelListener(new FinishListener(this));
+	// builder.show();
+	// }
+	//
+	// }
 }

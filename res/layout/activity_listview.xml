@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 更多页面总布局 -->
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:orientation="vertical"
-  android:background ="@color/white"
-  android:cacheColorHint="@color/white">
-  <include android:id="@+id/titlebar" layout="@layout/titlebar" />
-  <ListView
-  	android:id="@+id/listView"
-  	android:layout_width="fill_parent"
-  	android:layout_height="wrap_content"
-  	android:layout_margin="10dip"
-  	android:divider="@drawable/divider"
-  	android:footerDividersEnabled="true"
-  	android:background="@color/listview_gray"
-  	android:fadingEdgeLength="4dip"
-  	android:cacheColorHint="#00000000"
-  	/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:cacheColorHint="@color/white"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/titlebar"
+        layout="@layout/titlebar" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:background="@color/listview_gray"
+        android:cacheColorHint="#00000000"
+        android:divider="@drawable/divider"
+        android:fadingEdgeLength="4dip"
+        android:footerDividersEnabled="true" />
+
 </LinearLayout>

@@ -1,26 +1,43 @@
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:background="@drawable/bg_main">
-  <SurfaceView android:id="@+id/surface_camera" android:layout_alignParentTop="true"
-	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:layout_weight="1" android:layout_above="@+id/camerabar">
-  </SurfaceView>
-  <com.gloria.hbh.myview.MyGallery  
-    android:id="@+id/gallery"
-	android:layout_width="fill_parent" android:layout_height="wrap_content"
-	android:gravity="center"  android:layout_above="@+id/camerabar"/>
-  <RelativeLayout android:layout_width="fill_parent" android:layout_height="20dip"
-        android:layout_above="@+id/camerabar" >
-    	<com.gloria.hbh.myview.PageIndicatorView
-    	android:id="@+id/view_page"   android:background="@color/transparent"
-		android:layout_width="60dip" android:layout_height="wrap_content"
-		android:gravity="center" android:layout_alignParentRight="true"/> 
-  </RelativeLayout>
-  <include android:id="@+id/camerabar" layout="@layout/camerabar"
-      android:layout_width="fill_parent"
-	  android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"/>
-</RelativeLayout> 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_main" >
 
+    <SurfaceView
+        android:id="@+id/surface_camera"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/camerabar"
+        android:layout_alignParentTop="true"
+        android:layout_weight="1" >
+    </SurfaceView>
+
+    <com.gloria.hbh.myview.MyGallery
+        android:id="@+id/gallery"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/camerabar"
+        android:gravity="center" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="20dip"
+        android:layout_above="@+id/camerabar" >
+
+        <com.gloria.hbh.myview.PageIndicatorView
+            android:id="@+id/view_page"
+            android:layout_width="60dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:gravity="center" />
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/camerabar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        layout="@layout/camerabar" />
+
+</RelativeLayout>

@@ -5,70 +5,83 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 /**
- * ¸üĞÂÎÄ¼şÊı¾İ½á¹¹
+ * æ›´æ–°æ–‡ä»¶æ•°æ®ç»“æ„
+ * 
  * @author gejian
  * @since 2013-1-21
  */
 public class UpdateInfo {
-	String verName = ""; //°æ±¾Ãû³Æ
-	int verCode = 0;	    //°æ±¾ºÅ
-	int lastVerCode = 0;  //×îĞÂ°æ±¾ºÅ
-	String lastVerName = "";  //×îĞÂ°æ±¾Ãû³Æ
-	String apkUrl = "";  //apk¸üĞÂµØÖ·
-	String apiHost = ""; //apkÓ¦ÓÃµÄÓòÃû
-	String updateContent = ""; //¸üĞÂÄÚÈİ
-	
+	String verName = ""; // ç‰ˆæœ¬åç§°
+	int verCode = 0; // ç‰ˆæœ¬å·
+	int lastVerCode = 0; // æœ€æ–°ç‰ˆæœ¬å·
+	String lastVerName = ""; // æœ€æ–°ç‰ˆæœ¬åç§°
+	String apkUrl = ""; // apkæ›´æ–°åœ°å€
+	String apiHost = ""; // apkåº”ç”¨çš„åŸŸå
+	String updateContent = ""; // æ›´æ–°å†…å®¹
+
 	public String getUpdateContent() {
 		return updateContent;
 	}
+
 	public void setUpdateContent(String updateContent) {
 		this.updateContent = updateContent;
 	}
-	
+
 	public String getVerName() {
 		return verName;
 	}
+
 	public void setVerName(String verName) {
 		this.verName = verName;
 	}
+
 	public int getVerCode() {
 		return verCode;
 	}
+
 	public void setVerCode(String verCode) {
-		if(verCode == null || verCode.equals("") || verCode.equals("null")){
+		if (verCode == null || verCode.equals("") || verCode.equals("null")) {
 			this.verCode = 0;
 			return;
 		}
 		this.verCode = Integer.valueOf(verCode);
 	}
+
 	public int getLastVerCode() {
 		return lastVerCode;
 	}
+
 	public void setLastVerCode(int lastVerCode) {
 		this.lastVerCode = lastVerCode;
 	}
+
 	public String getLastVerName() {
 		return lastVerName;
 	}
+
 	public void setLastVerName(String lastVerName) {
 		this.lastVerName = lastVerName;
 	}
+
 	public String getApkUrl() {
 		return apkUrl;
 	}
+
 	public void setApkUrl(String apkUrl) {
 		this.apkUrl = apkUrl;
 	}
+
 	public String getApiHost() {
 		return apiHost;
 	}
+
 	public void setApiHost(String apiHost) {
 		this.apiHost = apiHost;
 	}
-	
-	public static UpdateInfo getFromJsonObject(JsonObject jsonObject){
+
+	public static UpdateInfo getFromJsonObject(JsonObject jsonObject) {
 		UpdateInfo updateInfo = null;
-		if(jsonObject == null){
+		if (jsonObject == null) {
 			return updateInfo;
 		}
 		updateInfo = new UpdateInfo();
@@ -79,7 +92,7 @@ public class UpdateInfo {
 			updateInfo.setApkUrl(JsonMethed.getJsonString(jsonObject.get("apkUrl")));
 			updateInfo.setApiHost(JsonMethed.getJsonString(jsonObject.get("apiHost")));
 			updateInfo.setUpdateContent(JsonMethed.getJsonString(jsonObject.get("updateContent")));
-		}catch (JsonParseException e) {
+		} catch (JsonParseException e) {
 		} catch (Exception e) {
 		}
 		return updateInfo;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-      <declare-styleable name="PullToRefresh">
+
+    <declare-styleable name="PullToRefresh">
 
         <!-- A drawable to use as the background of the Refreshable View -->
         <attr name="ptrRefreshableViewBackground" format="reference|color" />
@@ -75,8 +76,7 @@
         <attr name="ptrDrawableTop" format="reference" />
         <attr name="ptrDrawableBottom" format="reference" />
     </declare-styleable>
-    
-	<declare-styleable name="SlidingMenu">
+    <declare-styleable name="SlidingMenu">
         <attr name="mode">
             <enum name="left" value="0" />
             <enum name="right" value="1" />
@@ -101,13 +101,12 @@
         <attr name="selectorEnabled" format="boolean" />
         <attr name="selectorDrawable" format="reference" />
     </declare-styleable>
-    
-	<declare-styleable name="SatelliteMenu">
-		<attr name="expandDuration" format="integer" />
-		<attr name="closeOnClick" format="boolean" />
-		<attr name="totalSpacingDegree" format="float" />
-		<attr name="satelliteDistance" format="dimension" />
-		<attr name="mainImage" format="reference" />		
-	</declare-styleable>
+    <declare-styleable name="SatelliteMenu">
+        <attr name="expandDuration" format="integer" />
+        <attr name="closeOnClick" format="boolean" />
+        <attr name="totalSpacingDegree" format="float" />
+        <attr name="satelliteDistance" format="dimension" />
+        <attr name="mainImage" format="reference" />
+    </declare-styleable>
 
 </resources>

@@ -3,26 +3,6 @@ package com.gloria.slidingmenu.lib.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -46,7 +26,6 @@ import com.gloria.hbh.adapter.HandlineListsAdapter;
 import com.gloria.hbh.application.BaseApplication;
 import com.gloria.hbh.constant.BaseConstants;
 import com.gloria.hbh.data.app.RecommondSightspots;
-import com.gloria.hbh.data.app.SubTabInfo.SubTabInfoTypeConstants;
 import com.gloria.hbh.data.forum.HandlinesBasicInfo;
 import com.gloria.hbh.main.Activity_Detail;
 import com.gloria.hbh.main.Activity_FoodLodgingDetail;
@@ -64,134 +43,154 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQuery.CachePolicy;
 
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
 /*
- * ²ÍÒû×¡ËŞÒ³Ãæ
+ * é¤é¥®ä½å®¿é¡µé¢
  */
 @SuppressLint("ValidFragment")
 
 @SuppressWarnings("static-access")
-public class FoodLodgingTouristFragment extends BaseFragment{
-	
-//	private static final String TAB_DATA = "tab_data";
-//	private static final String TAB_ADAPTER = "tab_adapter";
+public class FoodLodgingTouristFragment extends BaseFragment {
 
-	String text = "×ÉÑ¶";
-	
-    Activity_Main mMain = null;
-    private FrameLayout mFrameLayout = null;
-    
-    //µ×²¿ÊÓÍ¼
-    LinearLayout footView;
-    
-    // ¶¨Î»Ïà¹Ø
- 	LocationClient mLocClient;
- 	LocationData locData = null;
- 	public MyLocationListenner myListener = new MyLocationListenner();
- 	GeoPoint localGeoPoint;
- 	
- 	boolean isFirstSearch = true;
-    private MKSearch foodSearch = null;   // ËÑË÷Ä£¿é£¬Ò²¿ÉÈ¥µôµØÍ¼Ä£¿é¶ÀÁ¢Ê¹ÓÃ
-    private int load_Index_food = 1;
-//    boolean isGetFood = false;
-    
-    private MKSearch lodgingSearch = null;   // ËÑË÷Ä£¿é£¬Ò²¿ÉÈ¥µôµØÍ¼Ä£¿é¶ÀÁ¢Ê¹ÓÃ
-    private int load_Index_lodging = 1;
-//    boolean isGetlodging = false;
-    
-    ArrayList<HandlinesBasicInfo> foodlists;
+	// private static final String TAB_DATA = "tab_data";
+	// private static final String TAB_ADAPTER = "tab_adapter";
+
+	String text = "å’¨è®¯";
+
+	Activity_Main mMain = null;
+	private FrameLayout mFrameLayout = null;
+
+	// åº•éƒ¨è§†å›¾
+	LinearLayout footView;
+
+	// å®šä½ç›¸å…³
+	LocationClient mLocClient;
+	LocationData locData = null;
+	public MyLocationListenner myListener = new MyLocationListenner();
+	GeoPoint localGeoPoint;
+
+	boolean isFirstSearch = true;
+	private MKSearch foodSearch = null; // æœç´¢æ¨¡å—ï¼Œä¹Ÿå¯å»æ‰åœ°å›¾æ¨¡å—ç‹¬ç«‹ä½¿ç”¨
+	private int load_Index_food = 1;
+	// boolean isGetFood = false;
+
+	private MKSearch lodgingSearch = null; // æœç´¢æ¨¡å—ï¼Œä¹Ÿå¯å»æ‰åœ°å›¾æ¨¡å—ç‹¬ç«‹ä½¿ç”¨
+	private int load_Index_lodging = 1;
+	// boolean isGetlodging = false;
+
+	ArrayList<HandlinesBasicInfo> foodlists;
 	List<ParseObject> foodlistParseObject;
 	FoodAdapter foodAdapter;
-	
+
 	ArrayList<HandlinesBasicInfo> lodginglists;
 	List<ParseObject> lodginglistParseObject;
 	FoodAdapter lodgingAdapter;
-	
+
 	ArrayList<HandlinesBasicInfo> touristlists;
 	HandlineListsAdapter touristAdapter;
-    
-    PullToRefreshListView listview;
+
+	PullToRefreshListView listview;
 	ListView actualListView;
-	
+
 	RadioGroup radio;
-	RadioButton btn_food,btn_lodging,btn_tourist;
-	
+	RadioButton btn_food, btn_lodging, btn_tourist;
+
 	ProgressDialog pdialog;
-//	int tabIndex = 0;
+	// int tabIndex = 0;
 	boolean isRefresh = true;
 	boolean isFirstShow = true;
-	
-    public FoodLodgingTouristFragment() {
-    }
 
-    public FoodLodgingTouristFragment(String text) {
-        this.text = text;
-    }
+	public FoodLodgingTouristFragment() {
+	}
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-        
-        mMain = (Activity_Main) getActivity();
-        mFrameLayout = (FrameLayout) mMain.findViewById(R.id.content_main);
-    }
-    
+	public FoodLodgingTouristFragment(String text) {
+		this.text = text;
+	}
+
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
+
+		mMain = (Activity_Main) getActivity();
+		mFrameLayout = (FrameLayout) mMain.findViewById(R.id.content_main);
+	}
+
 	@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_foodlodgingtourist, null);
-        footView = (LinearLayout) inflater.inflate(R.layout.foot_food, null);
-	 	setView(view);
-	 	setListener();
-	 	initLocation();
-		
-	 	btn_food.setChecked(true);
-	 	changBtnBg(btn_food);
-	 	if(btn_food.isChecked()){
-	 		if(getFoodList().size() != 0 && foodAdapter != null){
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.activity_foodlodgingtourist, null);
+		footView = (LinearLayout) inflater.inflate(R.layout.foot_food, null);
+		setView(view);
+		setListener();
+		initLocation();
+
+		btn_food.setChecked(true);
+		changBtnBg(btn_food);
+		if (btn_food.isChecked()) {
+			if (getFoodList().size() != 0 && foodAdapter != null) {
 				actualListView.setAdapter(foodAdapter);
-			}else{
+			} else {
 				new FoodRequestTask().execute();
 			}
-	 	}
-        return view;
-    }
-	
-    private void initLocation() {
-    	//¶¨Î»³õÊ¼»¯
-        mLocClient = new LocationClient(mMain);
-        mLocClient.setAK(BaseApplication.strKey);
-        locData = new LocationData();
-        mLocClient.registerLocationListener( myListener );
-        LocationClientOption option = new LocationClientOption();
-        option.setOpenGps(true);//´ò¿ªgps
-        option.setCoorType("bd09ll");     //ÉèÖÃ×ø±êÀàĞÍ
-        option.setScanSpan(1000);
-        mLocClient.setLocOption(option);
-        mLocClient.start();
+		}
+		return view;
+	}
+
+	private void initLocation() {
+		// å®šä½åˆå§‹åŒ–
+		mLocClient = new LocationClient(mMain);
+		mLocClient.setAK(BaseApplication.strKey);
+		locData = new LocationData();
+		mLocClient.registerLocationListener(myListener);
+		LocationClientOption option = new LocationClientOption();
+		option.setOpenGps(true);// æ‰“å¼€gps
+		option.setCoorType("bd09ll"); // è®¾ç½®åæ ‡ç±»å‹
+		option.setScanSpan(1000);
+		mLocClient.setLocOption(option);
+		mLocClient.start();
 	}
 
 	private void setView(View view) {
-    	titlebar = (LinearLayout)view.findViewById(R.id.titlebar);
-        titlebar.setVisibility(View.VISIBLE);
-		titlebar_name = (TextView)view.findViewById(R.id.titlebar_name);
-		titlebar_menu = (Button)view.findViewById(R.id.titlebar_menu);
-		titlebar_left = (Button)view.findViewById(R.id.titlebar_left);
-	 	titlebar_menu.setVisibility(View.VISIBLE);
-	 	titlebar_left.setVisibility(View.INVISIBLE);
-	 	titlebar_name.setVisibility(View.VISIBLE);
-	 	titlebar_name.setText("³Ô×¡ÓÎ");
-	 	titlebar_name.setTextColor(Color.BLACK);
-	 	
-	 	radio = (RadioGroup)view.findViewById(R.id.radio);
-	 	btn_food = (RadioButton)view.findViewById(R.id.btn_food);
-	 	btn_food.setChecked(true);
-	 	btn_lodging = (RadioButton)view.findViewById(R.id.btn_lodging);
-	 	btn_tourist = (RadioButton)view.findViewById(R.id.btn_tourist);
-	 	
-	 	listview = (PullToRefreshListView)view.findViewById(R.id.listView);   
+		titlebar = (LinearLayout) view.findViewById(R.id.titlebar);
+		titlebar.setVisibility(View.VISIBLE);
+		titlebar_name = (TextView) view.findViewById(R.id.titlebar_name);
+		titlebar_menu = (Button) view.findViewById(R.id.titlebar_menu);
+		titlebar_left = (Button) view.findViewById(R.id.titlebar_left);
+		titlebar_menu.setVisibility(View.VISIBLE);
+		titlebar_left.setVisibility(View.INVISIBLE);
+		titlebar_name.setVisibility(View.VISIBLE);
+		titlebar_name.setText("åƒä½æ¸¸");
+		titlebar_name.setTextColor(Color.BLACK);
+
+		radio = (RadioGroup) view.findViewById(R.id.radio);
+		btn_food = (RadioButton) view.findViewById(R.id.btn_food);
+		btn_food.setChecked(true);
+		btn_lodging = (RadioButton) view.findViewById(R.id.btn_lodging);
+		btn_tourist = (RadioButton) view.findViewById(R.id.btn_tourist);
+
+		listview = (PullToRefreshListView) view.findViewById(R.id.listView);
 		listview.setMode(Mode.PULL_FROM_START);
 		actualListView = listview.getRefreshableView();
-		
-		//×¢²á²Ëµ¥
+
+		// æ³¨å†Œèœå•
 		registerForContextMenu(actualListView);
 		listview.setOnRefreshListener(new OnRefreshListener<ListView>() {
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
@@ -205,208 +204,212 @@ public class FoodLodgingTouristFragment extends BaseFragment{
 				goToLoadingData();
 			}
 		});
-		
+
 		listview.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-					long arg3) {
-				position = position -1;
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+				position = position - 1;
 				setItemClickOfList(position);
 			}
 		});
-		
-		// ³õÊ¼»¯ËÑË÷Ä£¿é£¬×¢²áËÑË÷ÊÂ¼ş¼àÌı
+
+		// åˆå§‹åŒ–æœç´¢æ¨¡å—ï¼Œæ³¨å†Œæœç´¢äº‹ä»¶ç›‘å¬
 		foodSearch = new MKSearch();
-		foodSearch.init(BaseApplication.getInstance().mBMapManager, new MKSearchListener(){
-            //ÔÚ´Ë´¦ÀíÏêÇéÒ³½á¹û
-            @Override
-            public void onGetPoiDetailSearchResult(int type, int error) {
-                if (error != 0) {
-                    ForumToast.show("±§Ç¸£¬Î´ÕÒµ½½á¹û");
-                }
-                else {
-                	ForumToast.show("³É¹¦£¬²é¿´ÏêÇéÒ³Ãæ");
-                }
-            }
-            /**
-             * ÔÚ´Ë´¦ÀípoiËÑË÷½á¹û
-             */
-            public void onGetPoiResult(MKPoiResult res, int type, int error) {
-            	if(pdialog != null && pdialog.isShowing()){
-            		pdialog.dismiss();
-            	}
-                // ´íÎóºÅ¿É²Î¿¼MKEventÖĞµÄ¶¨Òå
-                if (error != 0 || res == null) {
-                    ForumToast.show("±§Ç¸£¬Î´ÕÒµ½½á¹û");
-                    return;
-                }
-                // ½«µØÍ¼ÒÆ¶¯µ½µÚÒ»¸öPOIÖĞĞÄµã
-                if (res.getCurrentNumPois() > 0) {
-                	if(btn_food.isChecked()){
-                		for( MKPoiInfo info : res.getAllPoi() ){
-                        	if ( info.pt != null ){
-//                        		isGetFood = true;
-                        		HandlinesBasicInfo handlinesBasicInfo = new HandlinesBasicInfo();
-                    			handlinesBasicInfo.setTitle(info.name);
-                    			handlinesBasicInfo.setDescrip(info.address);
-                    			handlinesBasicInfo.setUrl(info.phoneNum);
-                    			handlinesBasicInfo.setAuthorId("0");
-                    			handlinesBasicInfo.setFid(String.valueOf(info.pt.getLatitudeE6()));
-                    			handlinesBasicInfo.setTid(String.valueOf(info.pt.getLongitudeE6()));
-                    			double distance = DistanceUtil.getDistance(info.pt, localGeoPoint);
-                    			handlinesBasicInfo.setAuthor(String.valueOf((int)distance) + "Ã×");
-                    			getFoodList().add(handlinesBasicInfo);
-                        	}
-                        }
-                    	if(foodAdapter == null){
-                    		foodAdapter = new FoodAdapter(getFoodList(), imageLoader);
-                    	}
-                    	foodAdapter.notifyDataSetChanged();
-                	}else if(btn_lodging.isChecked()){
-                		for( MKPoiInfo info : res.getAllPoi() ){
-                        	if ( info.pt != null ){
-//                        		isGetFood = true;
-                        		HandlinesBasicInfo handlinesBasicInfo = new HandlinesBasicInfo();
-                    			handlinesBasicInfo.setTitle(info.name);
-                    			handlinesBasicInfo.setDescrip(info.address);
-                    			handlinesBasicInfo.setUrl(info.phoneNum);
-                    			handlinesBasicInfo.setAuthorId("0");
-                    			handlinesBasicInfo.setFid(String.valueOf(info.pt.getLatitudeE6()));
-                    			handlinesBasicInfo.setTid(String.valueOf(info.pt.getLongitudeE6()));
-                    			double distance = DistanceUtil.getDistance(info.pt, localGeoPoint);
-                    			handlinesBasicInfo.setAuthor(String.valueOf((int)distance) + "Ã×");
-                    			getLodgingList().add(handlinesBasicInfo);
-                        	}
-                        }
-                    	if(lodgingAdapter == null){
-                    		lodgingAdapter = new FoodAdapter(getLodgingList(), imageLoader);
-                    	}
-                    	lodgingAdapter.notifyDataSetChanged();
-                	}
-                } else if (res.getCityListNum() > 0) {
-                	//µ±ÊäÈë¹Ø¼ü×ÖÔÚ±¾ÊĞÃ»ÓĞÕÒµ½£¬µ«ÔÚÆäËû³ÇÊĞÕÒµ½Ê±£¬·µ»Ø°üº¬¸Ã¹Ø¼ü×ÖĞÅÏ¢µÄ³ÇÊĞÁĞ±í
-                    String strInfo = "ÔÚ";
-                    for (int i = 0; i < res.getCityListNum(); i++) {
-                        strInfo += res.getCityListInfo(i).city;
-                        strInfo += ",";
-                    }
-                    strInfo += "ÕÒµ½½á¹û";
-                    ForumToast.show(strInfo);
-                }
-            }
-            public void onGetDrivingRouteResult(MKDrivingRouteResult res,
-                    int error) {
-            }
-            public void onGetTransitRouteResult(MKTransitRouteResult res,
-                    int error) {
-            }
-            public void onGetWalkingRouteResult(MKWalkingRouteResult res,
-                    int error) {
-            }
-            public void onGetAddrResult(MKAddrInfo res, int error) {
-            }
-            public void onGetBusDetailResult(MKBusLineResult result, int iError) {
-            }
-            /**
-             * ¸üĞÂ½¨ÒéÁĞ±í
-             */
-            @Override
-            public void onGetSuggestionResult(MKSuggestionResult res, int arg1) {
-            }
+		foodSearch.init(BaseApplication.getInstance().mBMapManager, new MKSearchListener() {
+			// åœ¨æ­¤å¤„ç†è¯¦æƒ…é¡µç»“æœ
 			@Override
-			public void onGetShareUrlResult(MKShareUrlResult result, int type,
-					int error) {
+			public void onGetPoiDetailSearchResult(int type, int error) {
+				if (error != 0) {
+					ForumToast.show("æŠ±æ­‰ï¼Œæœªæ‰¾åˆ°ç»“æœ");
+				} else {
+					ForumToast.show("æˆåŠŸï¼ŒæŸ¥çœ‹è¯¦æƒ…é¡µé¢");
+				}
 			}
-        });
-		
-//		lodgingSearch = new MKSearch();
-//		lodgingSearch.init(BaseApplication.getInstance().mBMapManager, new MKSearchListener(){
-//            //ÔÚ´Ë´¦ÀíÏêÇéÒ³½á¹û
-//            @Override
-//            public void onGetPoiDetailSearchResult(int type, int error) {
-//                if (error != 0) {
-//                    ForumToast.show("±§Ç¸£¬Î´ÕÒµ½½á¹û");
-//                }
-//                else {
-//                	ForumToast.show("³É¹¦£¬²é¿´ÏêÇéÒ³Ãæ");
-//                }
-//            }
-//            /**
-//             * ÔÚ´Ë´¦ÀípoiËÑË÷½á¹û
-//             */
-//            public void onGetPoiResult(MKPoiResult res, int type, int error) {
-//                // ´íÎóºÅ¿É²Î¿¼MKEventÖĞµÄ¶¨Òå
-//                if (error != 0 || res == null) {
-//                    ForumToast.show("±§Ç¸£¬Î´ÕÒµ½½á¹û");
-//                    return;
-//                }
-//                // ½«µØÍ¼ÒÆ¶¯µ½µÚÒ»¸öPOIÖĞĞÄµã
-//                if (res.getCurrentNumPois() > 0) {
-//                	for( MKPoiInfo info : res.getAllPoi() ){
-//                    	if ( info.pt != null ){
-////                    		isGetlodging = true;
-//                    		HandlinesBasicInfo handlinesBasicInfo = new HandlinesBasicInfo();
-//                			handlinesBasicInfo.setTitle(info.name);
-//                			handlinesBasicInfo.setDescrip(info.address);
-//                			getLodgingList().add(handlinesBasicInfo);
-//                    	}
-//                    }
-//                	lodgingAdapter.notifyDataSetChanged();
-//                } else if (res.getCityListNum() > 0) {
-//                	//µ±ÊäÈë¹Ø¼ü×ÖÔÚ±¾ÊĞÃ»ÓĞÕÒµ½£¬µ«ÔÚÆäËû³ÇÊĞÕÒµ½Ê±£¬·µ»Ø°üº¬¸Ã¹Ø¼ü×ÖĞÅÏ¢µÄ³ÇÊĞÁĞ±í
-//                    String strInfo = "ÔÚ";
-//                    for (int i = 0; i < res.getCityListNum(); i++) {
-//                        strInfo += res.getCityListInfo(i).city;
-//                        strInfo += ",";
-//                    }
-//                    strInfo += "ÕÒµ½½á¹û";
-//                    ForumToast.show(strInfo);
-//                }
-//            }
-//            public void onGetDrivingRouteResult(MKDrivingRouteResult res,
-//                    int error) {
-//            }
-//            public void onGetTransitRouteResult(MKTransitRouteResult res,
-//                    int error) {
-//            }
-//            public void onGetWalkingRouteResult(MKWalkingRouteResult res,
-//                    int error) {
-//            }
-//            public void onGetAddrResult(MKAddrInfo res, int error) {
-//            }
-//            public void onGetBusDetailResult(MKBusLineResult result, int iError) {
-//            }
-//            /**
-//             * ¸üĞÂ½¨ÒéÁĞ±í
-//             */
-//            @Override
-//            public void onGetSuggestionResult(MKSuggestionResult res, int arg1) {
-//            	
-//            }
-//			@Override
-//			public void onGetShareUrlResult(MKShareUrlResult result, int type,
-//					int error) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//        });
+
+			/**
+			 * åœ¨æ­¤å¤„ç†poiæœç´¢ç»“æœ
+			 */
+			public void onGetPoiResult(MKPoiResult res, int type, int error) {
+				if (pdialog != null && pdialog.isShowing()) {
+					pdialog.dismiss();
+				}
+				// é”™è¯¯å·å¯å‚è€ƒMKEventä¸­çš„å®šä¹‰
+				if (error != 0 || res == null) {
+					ForumToast.show("æŠ±æ­‰ï¼Œæœªæ‰¾åˆ°ç»“æœ");
+					return;
+				}
+				// å°†åœ°å›¾ç§»åŠ¨åˆ°ç¬¬ä¸€ä¸ªPOIä¸­å¿ƒç‚¹
+				if (res.getCurrentNumPois() > 0) {
+					if (btn_food.isChecked()) {
+						for (MKPoiInfo info : res.getAllPoi()) {
+							if (info.pt != null) {
+								// isGetFood = true;
+								HandlinesBasicInfo handlinesBasicInfo = new HandlinesBasicInfo();
+								handlinesBasicInfo.setTitle(info.name);
+								handlinesBasicInfo.setDescrip(info.address);
+								handlinesBasicInfo.setUrl(info.phoneNum);
+								handlinesBasicInfo.setAuthorId("0");
+								handlinesBasicInfo.setFid(String.valueOf(info.pt.getLatitudeE6()));
+								handlinesBasicInfo.setTid(String.valueOf(info.pt.getLongitudeE6()));
+								double distance = DistanceUtil.getDistance(info.pt, localGeoPoint);
+								handlinesBasicInfo.setAuthor(String.valueOf((int) distance) + "ç±³");
+								getFoodList().add(handlinesBasicInfo);
+							}
+						}
+						if (foodAdapter == null) {
+							foodAdapter = new FoodAdapter(getFoodList(), imageLoader);
+						}
+						foodAdapter.notifyDataSetChanged();
+					} else if (btn_lodging.isChecked()) {
+						for (MKPoiInfo info : res.getAllPoi()) {
+							if (info.pt != null) {
+								// isGetFood = true;
+								HandlinesBasicInfo handlinesBasicInfo = new HandlinesBasicInfo();
+								handlinesBasicInfo.setTitle(info.name);
+								handlinesBasicInfo.setDescrip(info.address);
+								handlinesBasicInfo.setUrl(info.phoneNum);
+								handlinesBasicInfo.setAuthorId("0");
+								handlinesBasicInfo.setFid(String.valueOf(info.pt.getLatitudeE6()));
+								handlinesBasicInfo.setTid(String.valueOf(info.pt.getLongitudeE6()));
+								double distance = DistanceUtil.getDistance(info.pt, localGeoPoint);
+								handlinesBasicInfo.setAuthor(String.valueOf((int) distance) + "ç±³");
+								getLodgingList().add(handlinesBasicInfo);
+							}
+						}
+						if (lodgingAdapter == null) {
+							lodgingAdapter = new FoodAdapter(getLodgingList(), imageLoader);
+						}
+						lodgingAdapter.notifyDataSetChanged();
+					}
+				} else if (res.getCityListNum() > 0) {
+					// å½“è¾“å…¥å…³é”®å­—åœ¨æœ¬å¸‚æ²¡æœ‰æ‰¾åˆ°ï¼Œä½†åœ¨å…¶ä»–åŸå¸‚æ‰¾åˆ°æ—¶ï¼Œè¿”å›åŒ…å«è¯¥å…³é”®å­—ä¿¡æ¯çš„åŸå¸‚åˆ—è¡¨
+					String strInfo = "åœ¨";
+					for (int i = 0; i < res.getCityListNum(); i++) {
+						strInfo += res.getCityListInfo(i).city;
+						strInfo += ",";
+					}
+					strInfo += "æ‰¾åˆ°ç»“æœ";
+					ForumToast.show(strInfo);
+				}
+			}
+
+			public void onGetDrivingRouteResult(MKDrivingRouteResult res, int error) {
+			}
+
+			public void onGetTransitRouteResult(MKTransitRouteResult res, int error) {
+			}
+
+			public void onGetWalkingRouteResult(MKWalkingRouteResult res, int error) {
+			}
+
+			public void onGetAddrResult(MKAddrInfo res, int error) {
+			}
+
+			public void onGetBusDetailResult(MKBusLineResult result, int iError) {
+			}
+
+			/**
+			 * æ›´æ–°å»ºè®®åˆ—è¡¨
+			 */
+			@Override
+			public void onGetSuggestionResult(MKSuggestionResult res, int arg1) {
+			}
+
+			@Override
+			public void onGetShareUrlResult(MKShareUrlResult result, int type, int error) {
+			}
+		});
+
+		// lodgingSearch = new MKSearch();
+		// lodgingSearch.init(BaseApplication.getInstance().mBMapManager, new
+		// MKSearchListener(){
+		// //åœ¨æ­¤å¤„ç†è¯¦æƒ…é¡µç»“æœ
+		// @Override
+		// public void onGetPoiDetailSearchResult(int type, int error) {
+		// if (error != 0) {
+		// ForumToast.show("æŠ±æ­‰ï¼Œæœªæ‰¾åˆ°ç»“æœ");
+		// }
+		// else {
+		// ForumToast.show("æˆåŠŸï¼ŒæŸ¥çœ‹è¯¦æƒ…é¡µé¢");
+		// }
+		// }
+		// /**
+		// * åœ¨æ­¤å¤„ç†poiæœç´¢ç»“æœ
+		// */
+		// public void onGetPoiResult(MKPoiResult res, int type, int error) {
+		// // é”™è¯¯å·å¯å‚è€ƒMKEventä¸­çš„å®šä¹‰
+		// if (error != 0 || res == null) {
+		// ForumToast.show("æŠ±æ­‰ï¼Œæœªæ‰¾åˆ°ç»“æœ");
+		// return;
+		// }
+		// // å°†åœ°å›¾ç§»åŠ¨åˆ°ç¬¬ä¸€ä¸ªPOIä¸­å¿ƒç‚¹
+		// if (res.getCurrentNumPois() > 0) {
+		// for( MKPoiInfo info : res.getAllPoi() ){
+		// if ( info.pt != null ){
+		//// isGetlodging = true;
+		// HandlinesBasicInfo handlinesBasicInfo = new HandlinesBasicInfo();
+		// handlinesBasicInfo.setTitle(info.name);
+		// handlinesBasicInfo.setDescrip(info.address);
+		// getLodgingList().add(handlinesBasicInfo);
+		// }
+		// }
+		// lodgingAdapter.notifyDataSetChanged();
+		// } else if (res.getCityListNum() > 0) {
+		// //å½“è¾“å…¥å…³é”®å­—åœ¨æœ¬å¸‚æ²¡æœ‰æ‰¾åˆ°ï¼Œä½†åœ¨å…¶ä»–åŸå¸‚æ‰¾åˆ°æ—¶ï¼Œè¿”å›åŒ…å«è¯¥å…³é”®å­—ä¿¡æ¯çš„åŸå¸‚åˆ—è¡¨
+		// String strInfo = "åœ¨";
+		// for (int i = 0; i < res.getCityListNum(); i++) {
+		// strInfo += res.getCityListInfo(i).city;
+		// strInfo += ",";
+		// }
+		// strInfo += "æ‰¾åˆ°ç»“æœ";
+		// ForumToast.show(strInfo);
+		// }
+		// }
+		// public void onGetDrivingRouteResult(MKDrivingRouteResult res,
+		// int error) {
+		// }
+		// public void onGetTransitRouteResult(MKTransitRouteResult res,
+		// int error) {
+		// }
+		// public void onGetWalkingRouteResult(MKWalkingRouteResult res,
+		// int error) {
+		// }
+		// public void onGetAddrResult(MKAddrInfo res, int error) {
+		// }
+		// public void onGetBusDetailResult(MKBusLineResult result, int iError)
+		// {
+		// }
+		// /**
+		// * æ›´æ–°å»ºè®®åˆ—è¡¨
+		// */
+		// @Override
+		// public void onGetSuggestionResult(MKSuggestionResult res, int arg1) {
+		//
+		// }
+		// @Override
+		// public void onGetShareUrlResult(MKShareUrlResult result, int type,
+		// int error) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		// });
 	}
 
-	private void setListener(){
-    	titlebar_menu.setOnClickListener(onClickListener);
-    	titlebar_left.setOnClickListener(onClickListener);
+	private void setListener() {
+		titlebar_menu.setOnClickListener(onClickListener);
+		titlebar_left.setOnClickListener(onClickListener);
 		titlebar_name.setOnClickListener(onClickListener);
 		btn_food.setOnClickListener(onClickListener);
-	 	btn_lodging.setOnClickListener(onClickListener);
-	 	btn_tourist.setOnClickListener(onClickListener);
+		btn_lodging.setOnClickListener(onClickListener);
+		btn_tourist.setOnClickListener(onClickListener);
 	}
-	
+
 	private OnClickListener onClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.titlebar_menu:
-				if(mMain.getSlidingMenu().isSecondaryMenuShowing()){
+				if (mMain.getSlidingMenu().isSecondaryMenuShowing()) {
 					mMain.getSlidingMenu().toggle();
-				}else{
+				} else {
 					mMain.getSlidingMenu().showSecondaryMenu();
 				}
 				break;
@@ -414,76 +417,78 @@ public class FoodLodgingTouristFragment extends BaseFragment{
 				break;
 			case R.id.btn_food:
 				changBtnBg(btn_food);
-				if(localGeoPoint != null){
-	             	foodSearch.poiSearchNearBy("²ÍÌü", localGeoPoint, 5000);	
-//	             	if(btn_food.isChecked()){
-//	             		foodSearch.poiSearchNearBy("²ÍÌü", localGeoPoint, 5000);	
-//	             	}else if(btn_lodging.isChecked()){
-//	             		lodgingSearch.poiSearchNearBy("¾Æµê", localGeoPoint, 5000);	
-//	             	}
-	     		}
-				if(foodAdapter != null){
+				if (localGeoPoint != null) {
+					foodSearch.poiSearchNearBy("é¤å…", localGeoPoint, 5000);
+					// if(btn_food.isChecked()){
+					// foodSearch.poiSearchNearBy("é¤å…", localGeoPoint, 5000);
+					// }else if(btn_lodging.isChecked()){
+					// lodgingSearch.poiSearchNearBy("é…’åº—", localGeoPoint, 5000);
+					// }
+				}
+				if (foodAdapter != null) {
 					actualListView.setAdapter(foodAdapter);
-				}else{
+				} else {
 					new FoodRequestTask().execute();
 				}
 				break;
 			case R.id.btn_lodging:
 				changBtnBg(btn_lodging);
-				if(localGeoPoint != null){
-	             	foodSearch.poiSearchNearBy("¾Æµê", localGeoPoint, 5000);	
-//	             	if(btn_food.isChecked()){
-//	             		foodSearch.poiSearchNearBy("²ÍÌü", localGeoPoint, 5000);	
-//	             	}else if(btn_lodging.isChecked()){
-//	             		lodgingSearch.poiSearchNearBy("¾Æµê", localGeoPoint, 5000);	
-//	             	}
-	     		}
-				if(lodgingAdapter != null){
+				if (localGeoPoint != null) {
+					foodSearch.poiSearchNearBy("é…’åº—", localGeoPoint, 5000);
+					// if(btn_food.isChecked()){
+					// foodSearch.poiSearchNearBy("é¤å…", localGeoPoint, 5000);
+					// }else if(btn_lodging.isChecked()){
+					// lodgingSearch.poiSearchNearBy("é…’åº—", localGeoPoint, 5000);
+					// }
+				}
+				if (lodgingAdapter != null) {
 					actualListView.setAdapter(lodgingAdapter);
-				}else{
+				} else {
 					new LodgingRequestTask().execute();
 				}
 				break;
 			case R.id.btn_tourist:
 				changBtnBg(btn_tourist);
-				if(touristAdapter != null){
+				if (touristAdapter != null) {
 					actualListView.setAdapter(touristAdapter);
-				}else{
+				} else {
 					new TouristRequestTask().execute();
 				}
 				break;
 			default:
 				break;
 			}
-		}		
+		}
 
 	};
-	
-//	private OnCheckedChangeListener onCheckedChangeListener = new OnCheckedChangeListener() {
-//		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//			if(buttonView.getId() == btn_food.getId()){
-//				if(foodAdapter != null){
-//					actualListView.setAdapter(foodAdapter);
-//				}else{
-//					new FoodRequestTask().execute();
-//				}
-//			}else if(buttonView.getId() == btn_lodging.getId()){
-//				if(lodgingAdapter != null){
-//					actualListView.setAdapter(lodgingAdapter);
-//				}else{
-//					new LodgingRequestTask().execute();
-//				}
-//			}else if(buttonView.getId() == btn_tourist.getId()){
-//				if(touristAdapter != null){
-//					actualListView.setAdapter(touristAdapter);
-//				}else{
-//					//TODO
-////					new LodgingRequestTask().execute();
-//				}
-//			}
-//		}
-//	};
-	
+
+	// private OnCheckedChangeListener onCheckedChangeListener = new
+	// OnCheckedChangeListener() {
+	// public void onCheckedChanged(CompoundButton buttonView, boolean
+	// isChecked) {
+	// if(buttonView.getId() == btn_food.getId()){
+	// if(foodAdapter != null){
+	// actualListView.setAdapter(foodAdapter);
+	// }else{
+	// new FoodRequestTask().execute();
+	// }
+	// }else if(buttonView.getId() == btn_lodging.getId()){
+	// if(lodgingAdapter != null){
+	// actualListView.setAdapter(lodgingAdapter);
+	// }else{
+	// new LodgingRequestTask().execute();
+	// }
+	// }else if(buttonView.getId() == btn_tourist.getId()){
+	// if(touristAdapter != null){
+	// actualListView.setAdapter(touristAdapter);
+	// }else{
+	// //TODO
+	//// new LodgingRequestTask().execute();
+	// }
+	// }
+	// }
+	// };
+
 	protected void changBtnBg(RadioButton radioButton) {
 		switch (radioButton.getId()) {
 		case R.id.btn_food:
@@ -504,337 +509,339 @@ public class FoodLodgingTouristFragment extends BaseFragment{
 		default:
 			break;
 		}
-		
+
 	}
-	
+
 	protected List<ParseObject> getFoodListParseObject() {
-		if(foodlistParseObject == null){
+		if (foodlistParseObject == null) {
 			foodlistParseObject = new ArrayList<ParseObject>(1);
 		}
 		return foodlistParseObject;
 	}
-	
+
 	protected List<HandlinesBasicInfo> getFoodList() {
-		if(foodlists == null){
+		if (foodlists == null) {
 			foodlists = new ArrayList<HandlinesBasicInfo>(1);
 		}
 		return foodlists;
 	}
-	
+
 	protected List<ParseObject> getLodgingListParseObject() {
-		if(lodginglistParseObject == null){
+		if (lodginglistParseObject == null) {
 			lodginglistParseObject = new ArrayList<ParseObject>(1);
 		}
 		return lodginglistParseObject;
 	}
-	
+
 	protected List<HandlinesBasicInfo> getLodgingList() {
-		if(lodginglists == null){
+		if (lodginglists == null) {
 			lodginglists = new ArrayList<HandlinesBasicInfo>(1);
 		}
 		return lodginglists;
 	}
-	
+
 	protected ArrayList<HandlinesBasicInfo> getTouristList() {
-		if(touristlists == null){
+		if (touristlists == null) {
 			touristlists = new ArrayList<HandlinesBasicInfo>(1);
 		}
 		return touristlists;
 	}
-	
-    /*
-	 * ¼ÓÔØ¸ü¶àÊı¾İ
+
+	/*
+	 * åŠ è½½æ›´å¤šæ•°æ®
 	 */
 	@SuppressWarnings("static-access")
 	protected void goToLoadingData() {
-		if(pdialog == null){
+		if (pdialog == null) {
 			pdialog = new ProgressDialog(mMain);
 			pdialog.setMessage(getString(R.string.msg_loading));
 			pdialog.setCancelable(BaseConstants.isCancelable);
-		}	
-		if(btn_food.isChecked()){
-			if(! pdialog.isShowing()){
-				pdialog.show();	
-	    	}
+		}
+		if (btn_food.isChecked()) {
+			if (!pdialog.isShowing()) {
+				pdialog.show();
+			}
 			foodSearch.goToPoiPage(++load_Index_food);
-		}else if(btn_lodging.isChecked()){
-			if(! pdialog.isShowing()){
-				pdialog.show();	
-	    	}
+		} else if (btn_lodging.isChecked()) {
+			if (!pdialog.isShowing()) {
+				pdialog.show();
+			}
 			foodSearch.goToPoiPage(++load_Index_lodging);
 		}
 	}
-	
+
 	/*
-	 *ÁĞ±íµã»÷ÊÂ¼ş
+	 * åˆ—è¡¨ç‚¹å‡»äº‹ä»¶
 	 */
 	protected void setItemClickOfList(int position) {
 		Intent intent = new Intent();
-		if(btn_food.isChecked()){
-			if(getFoodList().get(position).getAuthorId() != null 
-					&& getFoodList().get(position).getAuthorId().equals("1")){
+		if (btn_food.isChecked()) {
+			if (getFoodList().get(position).getAuthorId() != null
+					&& getFoodList().get(position).getAuthorId().equals("1")) {
 				return;
 			}
 			intent.setClass(mMain, Activity_FoodLodgingDetail.class);
-			intent.putExtra("title",getFoodList().get(position).getTitle());
-			intent.putExtra("adr",getFoodList().get(position).getDescrip());
-			intent.putExtra("phonenum",getFoodList().get(position).getUrl());
-			intent.putExtra("distance",getFoodList().get(position).getAuthor());
-			intent.putExtra("latitude",getFoodList().get(position).getFid());
-			intent.putExtra("longitude",getFoodList().get(position).getTid());
-			startActivity(intent);	
-		}else if(btn_lodging.isChecked()){
-			if(getLodgingList().get(position).getAuthorId() != null 
-					&& getLodgingList().get(position).getAuthorId().equals("1")){
+			intent.putExtra("title", getFoodList().get(position).getTitle());
+			intent.putExtra("adr", getFoodList().get(position).getDescrip());
+			intent.putExtra("phonenum", getFoodList().get(position).getUrl());
+			intent.putExtra("distance", getFoodList().get(position).getAuthor());
+			intent.putExtra("latitude", getFoodList().get(position).getFid());
+			intent.putExtra("longitude", getFoodList().get(position).getTid());
+			startActivity(intent);
+		} else if (btn_lodging.isChecked()) {
+			if (getLodgingList().get(position).getAuthorId() != null
+					&& getLodgingList().get(position).getAuthorId().equals("1")) {
 				return;
 			}
 			intent.setClass(mMain, Activity_FoodLodgingDetail.class);
-			intent.putExtra("title",getLodgingList().get(position).getTitle());
-			intent.putExtra("adr",getLodgingList().get(position).getDescrip());
-			intent.putExtra("phonenum",getLodgingList().get(position).getUrl());
-			intent.putExtra("distance",getLodgingList().get(position).getAuthor());
-			intent.putExtra("latitude",getLodgingList().get(position).getFid());
-			intent.putExtra("longitude",getLodgingList().get(position).getTid());
-			startActivity(intent);	
-		}else if(btn_tourist.isChecked()){
-		    
+			intent.putExtra("title", getLodgingList().get(position).getTitle());
+			intent.putExtra("adr", getLodgingList().get(position).getDescrip());
+			intent.putExtra("phonenum", getLodgingList().get(position).getUrl());
+			intent.putExtra("distance", getLodgingList().get(position).getAuthor());
+			intent.putExtra("latitude", getLodgingList().get(position).getFid());
+			intent.putExtra("longitude", getLodgingList().get(position).getTid());
+			startActivity(intent);
+		} else if (btn_tourist.isChecked()) {
+
 			intent.setClass(mMain, Activity_Detail.class);
-			intent.putExtra("text",getTouristList().get(position).getTitle());
-			intent.putExtra("title","100");
-			intent.putExtra("description",getTouristList().get(position).getDescrip());
-			intent.putExtra("imageUrl",getTouristList().get(position).getImg());
-			intent.putExtra("date","");
-			intent.putExtra("type","");
-			startActivity(intent);	
+			intent.putExtra("text", getTouristList().get(position).getTitle());
+			intent.putExtra("title", "100");
+			intent.putExtra("description", getTouristList().get(position).getDescrip());
+			intent.putExtra("imageUrl", getTouristList().get(position).getImg());
+			intent.putExtra("date", "");
+			intent.putExtra("type", "");
+			startActivity(intent);
 		}
 	}
-	
-    public void onPause() {  
-        super.onPause(); 
-        //±£´ælistviewÎ»ÖÃ
-//		Plist.getInstance().getTabData().get(text).setFirstpos(actualListView.getFirstVisiblePosition());
-    }  
-    
-    public void onResume() {  
-        super.onResume();  
-    }  
-    
-    public void onDestroy() { 
-    	mLocClient.stop();
-        super.onDestroy();  
-    } 
-    
-	public void setListView(){
-    	if(btn_food.isChecked()){
-    		foodAdapter = new FoodAdapter(getFoodList(), imageLoader);
-    		actualListView.setAdapter(foodAdapter);
-    	}else if(btn_lodging.isChecked()){
-    		lodgingAdapter = new FoodAdapter(getLodgingList(), imageLoader);
-    		actualListView.setAdapter(lodgingAdapter);
-    	}else if(btn_tourist.isChecked()){
-    		touristAdapter = new HandlineListsAdapter(getTouristList(), imageLoader);
-    		actualListView.setAdapter(touristAdapter);
-    	}
-    }
-    
-    public void goToRefresh() {  
-    	isRefresh = true;
-		if(btn_food.isChecked()){
+
+	public void onPause() {
+		super.onPause();
+		// ä¿å­˜listviewä½ç½®
+		// Plist.getInstance().getTabData().get(text).setFirstpos(actualListView.getFirstVisiblePosition());
+	}
+
+	public void onResume() {
+		super.onResume();
+	}
+
+	public void onDestroy() {
+		mLocClient.stop();
+		super.onDestroy();
+	}
+
+	public void setListView() {
+		if (btn_food.isChecked()) {
+			foodAdapter = new FoodAdapter(getFoodList(), imageLoader);
+			actualListView.setAdapter(foodAdapter);
+		} else if (btn_lodging.isChecked()) {
+			lodgingAdapter = new FoodAdapter(getLodgingList(), imageLoader);
+			actualListView.setAdapter(lodgingAdapter);
+		} else if (btn_tourist.isChecked()) {
+			touristAdapter = new HandlineListsAdapter(getTouristList(), imageLoader);
+			actualListView.setAdapter(touristAdapter);
+		}
+	}
+
+	public void goToRefresh() {
+		isRefresh = true;
+		if (btn_food.isChecked()) {
 			load_Index_food = 1;
 			foodAdapter = null;
 			getFoodList().clear();
 			new FoodRequestTask().execute();
-		}else if(btn_lodging.isChecked()){
+		} else if (btn_lodging.isChecked()) {
 			load_Index_lodging = 1;
 			lodgingAdapter = null;
 			getLodgingList().clear();
 			new LodgingRequestTask().execute();
 		}
-    }  
-    
-    class FoodRequestTask extends AsyncTask<String, Void,List<ParseObject>> { 
-    	List<ParseObject>  list;
-  	  	protected void onPostExecute(List<ParseObject> result) {
-  	  		listview.onRefreshComplete();
-			if(Methods.disposeDataException(result)){
+	}
+
+	class FoodRequestTask extends AsyncTask<String, Void, List<ParseObject>> {
+		List<ParseObject> list;
+
+		protected void onPostExecute(List<ParseObject> result) {
+			listview.onRefreshComplete();
+			if (Methods.disposeDataException(result)) {
 				return;
 			}
-			
-			if(result.size() == 0 ){
-				 ForumToast.show(getString(R.string.hint_NoData));
-				 actualListView.setAdapter(null);
-				 return;
+
+			if (result.size() == 0) {
+				ForumToast.show(getString(R.string.hint_NoData));
+				actualListView.setAdapter(null);
+				return;
 			}
-			//ÉèÖÃÁĞ±íÊÓÍ¼
+			// è®¾ç½®åˆ—è¡¨è§†å›¾
 			setListView();
 			pdialog.cancel();
 			return;
 		}
-	  
-  	  protected void onPreExecute() {
+
+		protected void onPreExecute() {
 			super.onPreExecute();
-			if(pdialog == null){
+			if (pdialog == null) {
 				pdialog = new ProgressDialog(mMain);
 				pdialog.setMessage(getString(R.string.msg_loading));
 				pdialog.setCancelable(BaseConstants.isCancelable);
 			}
-			pdialog.show();			
+			pdialog.show();
 		}
-		
+
 		protected List<ParseObject> doInBackground(String... params) {
-			ParseQuery foodlistsQuery = new ParseQuery("RecommendRuralDish");//News
-	  		foodlistsQuery.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
-	  		foodlistsQuery.setMaxCacheAge(10*1024);
-	  		foodlistsQuery.orderByDescending("date");
-	  		foodlistsQuery.setLimit(20);
-    		
-    		try {
-    			foodlistParseObject = foodlistsQuery.find();
-    			for(int i = getFoodListParseObject().size()-1; i >= 0; i--){
+			ParseQuery foodlistsQuery = new ParseQuery("RecommendRuralDish");// News
+			foodlistsQuery.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
+			foodlistsQuery.setMaxCacheAge(10 * 1024);
+			foodlistsQuery.orderByDescending("date");
+			foodlistsQuery.setLimit(20);
+
+			try {
+				foodlistParseObject = foodlistsQuery.find();
+				for (int i = getFoodListParseObject().size() - 1; i >= 0; i--) {
 					ParseObject parseObject = getFoodListParseObject().get(i);
 					HandlinesBasicInfo handlinesInfo = new HandlinesBasicInfo();
 					handlinesInfo.setTitle(parseObject.getString("title"));
 					handlinesInfo.setDescrip(parseObject.getString("subtitle"));
 					handlinesInfo.setUrl(parseObject.getString("phoneNumber"));
 					handlinesInfo.setAuthorId("1");
-					//getFoodList().add(0,handlinesInfo);
+					// getFoodList().add(0,handlinesInfo);
 				}
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-    		
-    		if(localGeoPoint != null && isFirstSearch){
-    			isFirstSearch = false;
-             	foodSearch.poiSearchNearBy("²ÍÌü", localGeoPoint, 5000);	
-//             	if(btn_food.isChecked()){
-//             		foodSearch.poiSearchNearBy("²ÍÌü", localGeoPoint, 5000);	
-//             	}else if(btn_lodging.isChecked()){
-//             		lodgingSearch.poiSearchNearBy("¾Æµê", localGeoPoint, 5000);	
-//             	}
-     		}
-	  		return foodlistParseObject;
-	  	}
-    }
-    
-    class LodgingRequestTask extends AsyncTask<String, Void,List<ParseObject>> { 
-    	List<ParseObject>  list;
-  	  	protected void onPostExecute(List<ParseObject> result) {
-  	  		listview.onRefreshComplete();
-			if(Methods.disposeDataException(result)){
+
+			if (localGeoPoint != null && isFirstSearch) {
+				isFirstSearch = false;
+				foodSearch.poiSearchNearBy("é¤å…", localGeoPoint, 5000);
+				// if(btn_food.isChecked()){
+				// foodSearch.poiSearchNearBy("é¤å…", localGeoPoint, 5000);
+				// }else if(btn_lodging.isChecked()){
+				// lodgingSearch.poiSearchNearBy("é…’åº—", localGeoPoint, 5000);
+				// }
+			}
+			return foodlistParseObject;
+		}
+	}
+
+	class LodgingRequestTask extends AsyncTask<String, Void, List<ParseObject>> {
+		List<ParseObject> list;
+
+		protected void onPostExecute(List<ParseObject> result) {
+			listview.onRefreshComplete();
+			if (Methods.disposeDataException(result)) {
 				return;
 			}
-			//ÉèÖÃÁĞ±íÊÓÍ¼
+			// è®¾ç½®åˆ—è¡¨è§†å›¾
 			setListView();
 			pdialog.cancel();
 			return;
 		}
-	  
-  	  protected void onPreExecute() {
+
+		protected void onPreExecute() {
 			super.onPreExecute();
-			if(pdialog == null){
+			if (pdialog == null) {
 				pdialog = new ProgressDialog(mMain);
 				pdialog.setMessage(getString(R.string.msg_loading));
 				pdialog.setCancelable(BaseConstants.isCancelable);
 			}
-			pdialog.show();			
+			pdialog.show();
 		}
-		
+
 		protected List<ParseObject> doInBackground(String... params) {
-			ParseQuery hotellistsQuery = new ParseQuery("RecommendHotel");//News
+			ParseQuery hotellistsQuery = new ParseQuery("RecommendHotel");// News
 			hotellistsQuery.setCachePolicy(CachePolicy.CACHE_ELSE_NETWORK);
-			hotellistsQuery.setMaxCacheAge(10*1024);
+			hotellistsQuery.setMaxCacheAge(10 * 1024);
 			hotellistsQuery.orderByDescending("date");
 			hotellistsQuery.setLimit(20);
-    		
-    		try {
-    			lodginglistParseObject = hotellistsQuery.find();
-    			for(int i = getLodgingListParseObject().size()-1; i >= 0; i--){
+
+			try {
+				lodginglistParseObject = hotellistsQuery.find();
+				for (int i = getLodgingListParseObject().size() - 1; i >= 0; i--) {
 					ParseObject parseObject = getLodgingListParseObject().get(i);
 					HandlinesBasicInfo handlinesInfo = new HandlinesBasicInfo();
 					handlinesInfo.setTitle(parseObject.getString("title"));
 					handlinesInfo.setDescrip(parseObject.getString("subtitle"));
 					handlinesInfo.setUrl(parseObject.getString("phoneNumber"));
 					handlinesInfo.setAuthorId("1");
-//					handlinesInfo.setImg(parseObject.getParseFile("imageFile").getUrl());
-//					handlinesInfo.setAuthor(parseObject.getString("subtitle"));
-				//	getLodgingList().add(handlinesInfo);
+					// handlinesInfo.setImg(parseObject.getParseFile("imageFile").getUrl());
+					// handlinesInfo.setAuthor(parseObject.getString("subtitle"));
+					// getLodgingList().add(handlinesInfo);
 				}
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-    		if(localGeoPoint != null){
-             	foodSearch.poiSearchNearBy("¾Æµê", localGeoPoint, 5000);	
-//             	if(btn_food.isChecked()){
-//             		foodSearch.poiSearchNearBy("²ÍÌü", localGeoPoint, 5000);	
-//             	}else if(btn_lodging.isChecked()){
-//             		lodgingSearch.poiSearchNearBy("¾Æµê", localGeoPoint, 5000);	
-//             	}
-     		}
-		
-	  		return lodginglistParseObject;
-	  	}
-    }
-    
-    class TouristRequestTask extends AsyncTask<String, Void,ArrayList<HandlinesBasicInfo>> { 
-  	  	protected void onPostExecute(ArrayList<HandlinesBasicInfo> result) {
-  	  		pdialog.cancel();
-  	  		listview.onRefreshComplete();
-			if(Methods.disposeDataException(result)){
+			if (localGeoPoint != null) {
+				foodSearch.poiSearchNearBy("é…’åº—", localGeoPoint, 5000);
+				// if(btn_food.isChecked()){
+				// foodSearch.poiSearchNearBy("é¤å…", localGeoPoint, 5000);
+				// }else if(btn_lodging.isChecked()){
+				// lodgingSearch.poiSearchNearBy("é…’åº—", localGeoPoint, 5000);
+				// }
+			}
+
+			return lodginglistParseObject;
+		}
+	}
+
+	class TouristRequestTask extends AsyncTask<String, Void, ArrayList<HandlinesBasicInfo>> {
+		protected void onPostExecute(ArrayList<HandlinesBasicInfo> result) {
+			pdialog.cancel();
+			listview.onRefreshComplete();
+			if (Methods.disposeDataException(result)) {
 				return;
 			}
-			//ÉèÖÃÁĞ±íÊÓÍ¼
+			// è®¾ç½®åˆ—è¡¨è§†å›¾
 			setListView();
 			return;
 		}
-	  
-  	  protected void onPreExecute() {
+
+		protected void onPreExecute() {
 			super.onPreExecute();
-			if(pdialog == null){
+			if (pdialog == null) {
 				pdialog = new ProgressDialog(mMain);
 				pdialog.setMessage(getString(R.string.msg_loading));
 				pdialog.setCancelable(BaseConstants.isCancelable);
 			}
-			pdialog.show();			
+			pdialog.show();
 		}
-		
+
 		protected ArrayList<HandlinesBasicInfo> doInBackground(String... params) {
 			touristlists = RecommondSightspots.getInstance().getList();
-	  		return touristlists;
-	  	}
-    }
-    
-    /**
-     * ¶¨Î»SDK¼àÌıº¯Êı
-     */
-    public class MyLocationListenner implements BDLocationListener {
-    	
-        @Override
-        public void onReceiveLocation(BDLocation location) {
-            if (location == null)
-                return ;
-            
-            locData.latitude = location.getLatitude();
-            locData.longitude = location.getLongitude();
-            //Èç¹û²»ÏÔÊ¾¶¨Î»¾«¶ÈÈ¦£¬½«accuracy¸³ÖµÎª0¼´¿É
-            locData.accuracy = location.getRadius();
-            locData.direction = location.getDerect();
-            localGeoPoint = new GeoPoint((int)(locData.latitude* 1e6), (int)(locData.longitude *  1e6));
-            if(localGeoPoint != null && isFirstSearch){
-            	foodSearch.poiSearchNearBy("²ÍÌü", localGeoPoint, 5000);	
-            	isFirstSearch = false;
-//            	if(btn_food.isChecked()){
-//            		foodSearch.poiSearchNearBy("²ÍÌü", localGeoPoint, 5000);	
-//            	}else if(btn_lodging.isChecked()){
-//            		lodgingSearch.poiSearchNearBy("¾Æµê", localGeoPoint, 5000);	
-//            	}
-    			mLocClient.stop();
-    		}
-        }
-        
-        public void onReceivePoi(BDLocation poiLocation) {
-            if (poiLocation == null){
-                return ;
-            }
-        }
-    }
+			return touristlists;
+		}
+	}
+
+	/**
+	 * å®šä½SDKç›‘å¬å‡½æ•°
+	 */
+	public class MyLocationListenner implements BDLocationListener {
+
+		@Override
+		public void onReceiveLocation(BDLocation location) {
+			if (location == null)
+				return;
+
+			locData.latitude = location.getLatitude();
+			locData.longitude = location.getLongitude();
+			// å¦‚æœä¸æ˜¾ç¤ºå®šä½ç²¾åº¦åœˆï¼Œå°†accuracyèµ‹å€¼ä¸º0å³å¯
+			locData.accuracy = location.getRadius();
+			locData.direction = location.getDerect();
+			localGeoPoint = new GeoPoint((int) (locData.latitude * 1e6), (int) (locData.longitude * 1e6));
+			if (localGeoPoint != null && isFirstSearch) {
+				foodSearch.poiSearchNearBy("é¤å…", localGeoPoint, 5000);
+				isFirstSearch = false;
+				// if(btn_food.isChecked()){
+				// foodSearch.poiSearchNearBy("é¤å…", localGeoPoint, 5000);
+				// }else if(btn_lodging.isChecked()){
+				// lodgingSearch.poiSearchNearBy("é…’åº—", localGeoPoint, 5000);
+				// }
+				mLocClient.stop();
+			}
+		}
+
+		public void onReceivePoi(BDLocation poiLocation) {
+			if (poiLocation == null) {
+				return;
+			}
+		}
+	}
 }

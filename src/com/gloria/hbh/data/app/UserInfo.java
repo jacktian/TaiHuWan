@@ -7,30 +7,31 @@ import com.gloria.hbh.data.forum.BaseData;
 import com.google.gson.JsonObject;
 
 /*
- * ÎÒµÄĞÅÏ¢  µÄÊı¾İ½á¹¹
+ * æˆ‘çš„ä¿¡æ¯  çš„æ•°æ®ç»“æ„
  * 2012-09-13
  */
-public class UserInfo extends BaseData{
-	
-//	public class UserInfoTypeConstants {
-//		public static final int Type_Common = 0; //ÆÕÍ¨ÓÃ»§
-//		public static final int Type_Business = 1; //ÉÌ¼Ò
-//	}
-	
-//	private int type = UserInfoTypeConstants.Type_Common;
-	
+public class UserInfo extends BaseData {
+
+	// public class UserInfoTypeConstants {
+	// public static final int Type_Common = 0; //æ™®é€šç”¨æˆ·
+	// public static final int Type_Business = 1; //å•†å®¶
+	// }
+
+	// private int type = UserInfoTypeConstants.Type_Common;
+
 	public class UserLoginTypeConstants {
-		public static final int UserLoginType_COMMENT= 0; //ÆÕÍ¨µÇÂ¼
-		public static final int UserLoginType_REGISTE = 1; //×¢²áµÇÂ¼
-		public static final int UserLoginType_SINA = 2; //ĞÂÀËµÇÂ¼
-		public static final int UserLoginType_TENCENT = 3; //ÌÚÑ¶µÇÂ¼
-		
-		public static final int Friend_delete= 4; //É¾³ıºÃÓÑ
-		public static final int Friend_add = 5; //Ìí¼ÓºÃÓÑ
-		public static final int Friend_guanzu = 6; //ºÃÓÑ¹Ø×¢
-		public static final int Friend_quxiao = 7; //È¡Ïû¹Ø×¢
+		public static final int UserLoginType_COMMENT = 0; // æ™®é€šç™»å½•
+		public static final int UserLoginType_REGISTE = 1; // æ³¨å†Œç™»å½•
+		public static final int UserLoginType_SINA = 2; // æ–°æµªç™»å½•
+		public static final int UserLoginType_TENCENT = 3; // è…¾è®¯ç™»å½•
+
+		public static final int Friend_delete = 4; // åˆ é™¤å¥½å‹
+		public static final int Friend_add = 5; // æ·»åŠ å¥½å‹
+		public static final int Friend_guanzu = 6; // å¥½å‹å…³æ³¨
+		public static final int Friend_quxiao = 7; // å–æ¶ˆå…³æ³¨
 	}
-	private boolean isLogin = false; //ÊÇ·ñµÇÂ¼
+
+	private boolean isLogin = false; // æ˜¯å¦ç™»å½•
 	private int log_type = UserLoginTypeConstants.UserLoginType_COMMENT;
 	private int uid = 0;
 	private String username = "";
@@ -42,22 +43,22 @@ public class UserInfo extends BaseData{
 	private String avatar = "";
 	private String mailAdr = "";
 	private String qq = "";
-	
-	private String IP="";
-	private String log_lasttime="";
+
+	private String IP = "";
+	private String log_lasttime = "";
 	private int postnum;
 	private int money;
 	private String todaypost;
 	private String weiwang;
 	private String user_type;
 	private String icon;
-	
-	private String follows;//¹Ø×¢Êı
-	private String fans;//·ÛË¿Êı
-	private String friends;//ºÃÓÑÊı
-	
+
+	private String follows;// å…³æ³¨æ•°
+	private String fans;// ç²‰ä¸æ•°
+	private String friends;// å¥½å‹æ•°
+
 	private String introduce;
-	
+
 	public String getNickname() {
 		return nickname;
 	}
@@ -65,7 +66,7 @@ public class UserInfo extends BaseData{
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	
+
 	public String getUserHash() {
 		return userhash;
 	}
@@ -73,7 +74,7 @@ public class UserInfo extends BaseData{
 	public void setUserHash(String userHash) {
 		this.userhash = userHash;
 	}
-	
+
 	public String getAvatar() {
 		return avatar;
 	}
@@ -97,7 +98,7 @@ public class UserInfo extends BaseData{
 	public void setLogin(boolean isLogin) {
 		this.isLogin = isLogin;
 	}
-	
+
 	public int getLog_type() {
 		return log_type;
 	}
@@ -114,38 +115,38 @@ public class UserInfo extends BaseData{
 		this.mailAdr = mailAdr;
 	}
 
-	public String getUserName(){
+	public String getUserName() {
 		return username;
 	}
-	
-	public void setUserName(String username){
+
+	public void setUserName(String username) {
 		this.username = username;
 	}
-	
-	public String getPassword(){
+
+	public String getPassword() {
 		return password;
 	}
-	
-	public void setPassword(String password){
+
+	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public boolean getRemeberPwd(){
+
+	public boolean getRemeberPwd() {
 		return remeberPwd;
 	}
-	
-	public void setRemeberPwd(boolean remeberPwd){
+
+	public void setRemeberPwd(boolean remeberPwd) {
 		this.remeberPwd = remeberPwd;
 	}
-	
-	public boolean getAutologin(){
+
+	public boolean getAutologin() {
 		return autologin;
 	}
-	
-	public void setAutologin(boolean autologin){
+
+	public void setAutologin(boolean autologin) {
 		this.autologin = autologin;
 	}
-	
+
 	public String getIP() {
 		return IP;
 	}
@@ -242,42 +243,44 @@ public class UserInfo extends BaseData{
 		this.introduce = introduce;
 	}
 
-	public int getUid(){
+	public int getUid() {
 		return uid;
 	}
-	
-	public void setUid(int uid){
+
+	public void setUid(int uid) {
 		this.uid = uid;
 	}
-	
-	public static UserInfo getFromJsonObject(JsonObject jsonObject){
+
+	public static UserInfo getFromJsonObject(JsonObject jsonObject) {
 		UserInfo userInfo = new UserInfo();
 		try {
-			userInfo.setUserName(jsonObject.get("username").getAsString() );
+			userInfo.setUserName(jsonObject.get("username").getAsString());
 			userInfo.setPassword(jsonObject.get("password").getAsString());
 			userInfo.setUserHash(jsonObject.get("userhash").getAsString());
 			userInfo.setRemeberPwd(jsonObject.get("remeberPwd").getAsBoolean());
 			userInfo.setAutologin(jsonObject.get("autologin").getAsBoolean());
-//			userInfo.setLogin(jsonObject.get("isLogin").getAsBoolean());
+			// userInfo.setLogin(jsonObject.get("isLogin").getAsBoolean());
 			userInfo.setUid(jsonObject.get("uid").getAsInt());
-			
-//			userInfo.setIcon(jsonObject.get("micon").getAsString());
-//			userInfo.setIP(jsonObject.get("onlineip").getAsString());
-//			userInfo.setMailAdr(jsonObject.get("email").getAsString() );
-//			userInfo.setLog_lasttime(jsonObject.get("thisvisit ").getAsString());
-//			userInfo.setPostnum(jsonObject.get("postnum ").getAsInt());
-//			userInfo.setMoney(jsonObject.get("money ").getAsInt());
-//			userInfo.setTodaypost(jsonObject.get("todaypost ").getAsString());
-//			userInfo.setWeiwang(jsonObject.get("rvrc ").getAsString());			
-//			userInfo.setUser_type(jsonObject.get("grouptitle ").getAsString());
-			
-		}catch (Exception e) {
+
+			// userInfo.setIcon(jsonObject.get("micon").getAsString());
+			// userInfo.setIP(jsonObject.get("onlineip").getAsString());
+			// userInfo.setMailAdr(jsonObject.get("email").getAsString() );
+			// userInfo.setLog_lasttime(jsonObject.get("thisvisit
+			// ").getAsString());
+			// userInfo.setPostnum(jsonObject.get("postnum ").getAsInt());
+			// userInfo.setMoney(jsonObject.get("money ").getAsInt());
+			// userInfo.setTodaypost(jsonObject.get("todaypost
+			// ").getAsString());
+			// userInfo.setWeiwang(jsonObject.get("rvrc ").getAsString());
+			// userInfo.setUser_type(jsonObject.get("grouptitle
+			// ").getAsString());
+
+		} catch (Exception e) {
 		}
 		return userInfo;
 	}
-	
-	public static UserInfo getFromJsonString(String jsonstring)
-	{
+
+	public static UserInfo getFromJsonString(String jsonstring) {
 		UserInfo userInfo = new UserInfo();
 		JSONObject jsonObject;
 		try {
@@ -285,12 +288,12 @@ public class UserInfo extends BaseData{
 			userInfo.setUserName(jsonObject.getString("username"));
 			userInfo.setIcon(jsonObject.getString("icon"));
 			userInfo.setIP(jsonObject.getString("onlineip"));
-			userInfo.setMailAdr(jsonObject.getString("email") );
+			userInfo.setMailAdr(jsonObject.getString("email"));
 			userInfo.setLog_lasttime(jsonObject.getString("thisvisit"));
 			userInfo.setPostnum(jsonObject.getInt("postnum"));
 			userInfo.setMoney(jsonObject.getInt("money"));
 			userInfo.setTodaypost(jsonObject.getString("todaypost"));
-			userInfo.setWeiwang(jsonObject.getString("rvrc"));			
+			userInfo.setWeiwang(jsonObject.getString("rvrc"));
 			userInfo.setUser_type(jsonObject.getString("grouptitle"));
 			userInfo.setUid(jsonObject.getInt("uid"));
 			userInfo.setFans(jsonObject.getString("fans"));
@@ -301,7 +304,7 @@ public class UserInfo extends BaseData{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return userInfo;
 	}
 }

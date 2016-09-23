@@ -7,36 +7,36 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 /**
-* ÎÄ ¼ş Ãû : PreferencesUtils
-* ´´ ½¨ ÈË£º gejian
-* ÈÕ     ÆÚ£º2012-8-7
-* ĞŞ ¸Ä ÈË£ºgejian
-* ÈÕ    ÆÚ£º2012-8-7
-* Ãè    Êö£º±£´æÔÚÄÚ´æµÄ´æ´¢·½·¨Àà
-*/
+ * æ–‡ ä»¶ å : PreferencesUtils åˆ› å»º äººï¼š gejian æ—¥ æœŸï¼š2012-8-7 ä¿® æ”¹ äººï¼šgejian æ—¥ æœŸï¼š2012-8-7
+ * æ è¿°ï¼šä¿å­˜åœ¨å†…å­˜çš„å­˜å‚¨æ–¹æ³•ç±»
+ */
 public class PreferencesUtils {
 
-    public static void setStringPreferences(String preference, String key, String value){
-        SharedPreferences sharedPreferences = BaseApplication.getInstance().getApplicationContext().getSharedPreferences(preference, Context.MODE_PRIVATE);
-        Editor editor = sharedPreferences.edit();
-        editor.putString(key, value);
-        editor.commit();
-    }
-    
-    public static String getStringPreferences(String preference, String key, String defaultValue){
-        SharedPreferences sharedPreferences = BaseApplication.getInstance().getApplicationContext().getSharedPreferences(preference, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(key, defaultValue);
-    }
-    
-    public static void setBooleanPreferences(String preference, String key, boolean value){
-        SharedPreferences sharedPreferences = BaseApplication.getInstance().getApplicationContext().getSharedPreferences(preference, Context.MODE_PRIVATE);
-        Editor editor = sharedPreferences.edit();
-        editor.putBoolean(key, value);
-        editor.commit();
-    }
-    
-    public static boolean getBooleanPreferences(String preference, String key, boolean defaultValue){
-        SharedPreferences sharedPreferences = BaseApplication.getInstance().getApplicationContext().getSharedPreferences(preference, Context.MODE_PRIVATE);
-        return sharedPreferences.getBoolean(key, defaultValue);
-    }
+	public static void setStringPreferences(String preference, String key, String value) {
+		SharedPreferences sharedPreferences = BaseApplication.getInstance().getApplicationContext()
+				.getSharedPreferences(preference, Context.MODE_PRIVATE);
+		Editor editor = sharedPreferences.edit();
+		editor.putString(key, value);
+		editor.commit();
+	}
+
+	public static String getStringPreferences(String preference, String key, String defaultValue) {
+		SharedPreferences sharedPreferences = BaseApplication.getInstance().getApplicationContext()
+				.getSharedPreferences(preference, Context.MODE_PRIVATE);
+		return sharedPreferences.getString(key, defaultValue);
+	}
+
+	public static void setBooleanPreferences(String preference, String key, boolean value) {
+		SharedPreferences sharedPreferences = BaseApplication.getInstance().getApplicationContext()
+				.getSharedPreferences(preference, Context.MODE_PRIVATE);
+		Editor editor = sharedPreferences.edit();
+		editor.putBoolean(key, value);
+		editor.commit();
+	}
+
+	public static boolean getBooleanPreferences(String preference, String key, boolean defaultValue) {
+		SharedPreferences sharedPreferences = BaseApplication.getInstance().getApplicationContext()
+				.getSharedPreferences(preference, Context.MODE_PRIVATE);
+		return sharedPreferences.getBoolean(key, defaultValue);
+	}
 }

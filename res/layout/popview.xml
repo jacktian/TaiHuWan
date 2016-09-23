@@ -9,9 +9,10 @@
     android:paddingRight="10dip"
     android:paddingTop="5dip" >
 
-    <TextView android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:id = "@+id/popview_text"
+    <TextView
+        android:id="@+id/popview_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textColor="@android:color/black" />
 
 </LinearLayout>

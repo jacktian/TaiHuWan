@@ -1,28 +1,28 @@
 package com.gloria.slidingmenu.lib.fragment;
 
+import com.baidu.mobstat.StatService;
+import com.gloria.hbh.myview.LoadingDialog;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import android.support.v4.app.Fragment;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.baidu.mobstat.StatService;
-import com.gloria.hbh.myview.LoadingDialog;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-public class BaseFragment extends Fragment{
+public class BaseFragment extends Fragment {
 
 	protected LinearLayout titlebar;
-	protected Button titlebar_left,titlebar_right,titlebar_menu;
+	protected Button titlebar_left, titlebar_right, titlebar_menu;
 	protected TextView titlebar_name;
-	
+
 	LoadingDialog pdialog;
-	
+
 	protected ImageLoader imageLoader = ImageLoader.getInstance();
-	
+
 	public void onResume() {
 		super.onResume();
 		/**
-		 * FragmentÒ³ÃæÆğÊ¼ (×¢Òâ£º Èç¹ûÓĞ¼Ì³ĞµÄ¸¸FragmentÖĞÒÑ¾­Ìí¼ÓÁË¸Ãµ÷ÓÃ£¬ÄÇÃ´×ÓFragmentÖĞÎñ±Ø²»ÄÜÌí¼Ó£©
+		 * Fragmenté¡µé¢èµ·å§‹ (æ³¨æ„ï¼š å¦‚æœæœ‰ç»§æ‰¿çš„çˆ¶Fragmentä¸­å·²ç»æ·»åŠ äº†è¯¥è°ƒç”¨ï¼Œé‚£ä¹ˆå­Fragmentä¸­åŠ¡å¿…ä¸èƒ½æ·»åŠ ï¼‰
 		 */
 		StatService.onResume(this);
 	}
@@ -30,9 +30,9 @@ public class BaseFragment extends Fragment{
 	public void onPause() {
 		super.onPause();
 		/**
-		 *Fragment Ò³Ãæ½áÊø£¨×¢Òâ£ºÈç¹ûÓĞ¼Ì³ĞµÄ¸¸FragmentÖĞÒÑ¾­Ìí¼ÓÁË¸Ãµ÷ÓÃ£¬ÄÇÃ´×ÓFragmentÖĞÎñ±Ø²»ÄÜÌí¼Ó£©
+		 * Fragment é¡µé¢ç»“æŸï¼ˆæ³¨æ„ï¼šå¦‚æœæœ‰ç»§æ‰¿çš„çˆ¶Fragmentä¸­å·²ç»æ·»åŠ äº†è¯¥è°ƒç”¨ï¼Œé‚£ä¹ˆå­Fragmentä¸­åŠ¡å¿…ä¸èƒ½æ·»åŠ ï¼‰
 		 */
 		StatService.onPause(this);
 	}
-	
+
 }

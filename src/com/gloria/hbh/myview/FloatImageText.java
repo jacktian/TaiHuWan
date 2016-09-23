@@ -13,200 +13,198 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.View;
 
-/** 
-* Ä£ÄâCSSÖĞµÄfloat¸¡¶¯Ğ§¹û 
-*/ 
-public class FloatImageText extends View { 
-    private Bitmap mBitmap;
-    private final Rect bitmapFrame = new Rect( );
-    private final Rect tmp = new Rect( );
-    private int mTargetDentity = DisplayMetrics.DENSITY_DEFAULT;
-    
-    private final Paint mPaint = new Paint(Paint. ANTI_ALIAS_FLAG);
-    private String mText;
-    private ArrayList<TextLine> mTextLines;
-    private final int[ ] textSize = new int[2];
- 
-    public FloatImageText (Context context, AttributeSet attrs, int defStyle ) { 
-        super(context, attrs, defStyle );
-        init ( );
-    } 
- 
-    public FloatImageText(Context context, AttributeSet attrs) { 
-        super(context, attrs );
-        init( );
-    } 
- 
-    public FloatImageText(Context context) { 
-        super(context) ;
-        init( );
-    } 
-    
-    private void init(){ 
-        mTargetDentity = getResources( ).getDisplayMetrics( ).densityDpi;
-        mTextLines = new ArrayList<TextLine >( );
-        
-        mPaint.setTextSize(25);
-        mPaint.setColor(Color.BLACK);
-    } 
-    
-    protected void onMeasure (int widthMeasureSpec, int heightMeasureSpec) { 
-        int w = 0, h = 0;
-        //Í¼Æ¬´óĞ¡ 
-        w += bitmapFrame.width( );
-        h += bitmapFrame.height( );
-        
-        //ÎÄ±¾¿í¶È 
-        if ( null != mText && mText.length()> 0) { 
-            mTextLines.clear( );
-            int size = resolveSize(Integer.MAX_VALUE, widthMeasureSpec);
-            measureAndSplitText(mPaint, mText, size);
-            final int textWidth = textSize [0], textHeight = textSize [1];
-            w += textWidth;//ÄÚÈİ¿í¶È 
-            if (h < textHeight) { //ÄÚÈİ¸ß¶È 
-                h = (int) textHeight;
-            } 
-        } 
-        
-        w = Math.max(w, getSuggestedMinimumWidth());
-        h = Math.max(h, getSuggestedMinimumHeight());
-        
-        setMeasuredDimension( 
-                resolveSize(w, widthMeasureSpec), 
-                resolveSize(h, heightMeasureSpec));
-    } 
-    
-    protected void onDraw (Canvas canvas ) { 
-        //»æÖÆÍ¼Æ¬ 
-        if ( null != mBitmap ) { 
-            canvas.drawBitmap(mBitmap, null, bitmapFrame, null );
-        } 
-        
-        //»æÖÆÎÄ±¾ 
-        TextLine line;
-        final int size = mTextLines. size ( );
-        for ( int i = 0;i < size;i ++ ) { 
-            line = mTextLines.get(i);
-            canvas. drawText (line.text, line.x, line.y, mPaint );
-        } 
-//        System.out.println(mTextLines );
-    } 
-    
-    
-    public void setImageBitmap (Bitmap bm ) { 
-        setImageBitmap (bm, null);
-    } 
-    
-    public void setImageBitmap (Bitmap bm, int left, int top ) { 
-        setImageBitmap (bm, new Rect(left, top, 0, 0 ) );
-    } 
-    
-    public void setImageBitmap (Bitmap bm, Rect bitmapFrame ) { 
-        mBitmap = bm;
-        computeBitmapSize (bitmapFrame);
-        requestLayout( );
-        invalidate( );
-    } 
-    
-    public void setText ( String text ) { 
-        mText = text;
-        requestLayout( );
-        invalidate( );
-    } 
-    
-    private void computeBitmapSize (Rect rect ) { 
-        if (null != rect ) { 
-            bitmapFrame.set (rect);
-        } 
-        if (null != mBitmap ) { 
-            if (rect.right == 0 && rect.bottom == 0 ) { 
-                final Rect r = bitmapFrame;
-                r. set (r.left, r.top, 
-                        r.left + mBitmap.getScaledHeight (mTargetDentity ), 
-                        r.top + mBitmap.getScaledHeight (mTargetDentity ) );
-            } 
-        } else { 
-             bitmapFrame.setEmpty( );
-        } 
-    } 
-    
-    private void measureAndSplitText ( Paint p, String content, int maxWidth ) { 
-        FontMetrics fm = mPaint. getFontMetrics ( );
-        final int lineHeight = ( int ) (fm. bottom - fm. top );
-        
-        final Rect r = new Rect (bitmapFrame );
-//        r.inset(-5, -5); 
-        
-        final int length = content. length ( );
-        int start = 0, end = 0, offsetX = 0, offsetY = 0;
-        int availWidth = maxWidth;
-        TextLine line;
-        boolean onFirst = true;
-        boolean newLine = true;
-        while (start < length ) { 
-            end ++; 
-            if (end == length) { //Ê£ÓàµÄ²»×ãÒ»ĞĞµÄÎÄ±¾ 
-                if (start <= length - 1) { 
-                    if (newLine) offsetY += lineHeight;
-                    line = new TextLine( );
-                    line.text = content.substring(start, end - 1 );
-                    line.x = offsetX;
-                    line.y = offsetY;
-                    mTextLines.add(line);
-                } 
-                break;
-            } 
-            p.getTextBounds(content, start, end, tmp );
-            if (onFirst ) { //È·¶¨Ã¿¸ö×Ö·û´®µÄ×ø±ê 
-                onFirst = false;
-                final int height = lineHeight + offsetY;
-                if (r.top >= height ) { //¶¥²¿¿ÉÒÔ·ÅÏÂÒ»ĞĞÎÄ×Ö 
-                    offsetX = 0;
-                    availWidth = maxWidth;
-                    newLine = true;
-                } else if (newLine && (r.bottom >= height && r.left >= tmp.width()) ) { //ÖĞ²¿×ó±ß¿ÉÒÔ·ÅÎÄ×Ö 
-                    offsetX = 0;
-                    availWidth = r.left;
-                    newLine = false;
-                } else if (r.bottom >= height && maxWidth - r.right >= tmp.width()) { //ÖĞ²¿ÓÒ±ß 
-                    offsetX = r.right;
-                    availWidth = maxWidth - r.right;
-                    newLine = true;
-                } else { //µ×²¿ 
-                    offsetX = 0;
-                    availWidth = maxWidth;
-                    if (offsetY < r. bottom ) offsetY = r.bottom;
-                    newLine = true;
-                } 
-            } 
-            
-            if (tmp.width() > availWidth ) { //±£´æÒ»ĞĞÄÜ·ÅÖÃµÄ×î´ó×Ö·û´® 
-                onFirst = true;
-                line = new TextLine( );
-                line.text = content.substring(start, end - 1 );
-                line.x = offsetX;
-                mTextLines.add(line);
-                if (newLine) { 
-                    offsetY += lineHeight;
-                    line.y = offsetY;
-                } else { 
-                    line.y = offsetY + lineHeight;
-                } 
-                
-                start = end - 1;
-            } 
-        } 
-        textSize[1] = offsetY;
-    } 
-    
-    class TextLine { 
-        String text;
-        int x;
-        int y;
-        
-        @Override 
-        public String toString(){ 
-            return "TextLine [text=" + text + ", x=" + x + ", y=" + y + "]";
-        } 
-    } 
-}  
+/**
+ * æ¨¡æ‹ŸCSSä¸­çš„floatæµ®åŠ¨æ•ˆæœ
+ */
+public class FloatImageText extends View {
+	private Bitmap mBitmap;
+	private final Rect bitmapFrame = new Rect();
+	private final Rect tmp = new Rect();
+	private int mTargetDentity = DisplayMetrics.DENSITY_DEFAULT;
+
+	private final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	private String mText;
+	private ArrayList<TextLine> mTextLines;
+	private final int[] textSize = new int[2];
+
+	public FloatImageText(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		init();
+	}
+
+	public FloatImageText(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		init();
+	}
+
+	public FloatImageText(Context context) {
+		super(context);
+		init();
+	}
+
+	private void init() {
+		mTargetDentity = getResources().getDisplayMetrics().densityDpi;
+		mTextLines = new ArrayList<TextLine>();
+
+		mPaint.setTextSize(25);
+		mPaint.setColor(Color.BLACK);
+	}
+
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		int w = 0, h = 0;
+		// å›¾ç‰‡å¤§å°
+		w += bitmapFrame.width();
+		h += bitmapFrame.height();
+
+		// æ–‡æœ¬å®½åº¦
+		if (null != mText && mText.length() > 0) {
+			mTextLines.clear();
+			int size = resolveSize(Integer.MAX_VALUE, widthMeasureSpec);
+			measureAndSplitText(mPaint, mText, size);
+			final int textWidth = textSize[0], textHeight = textSize[1];
+			w += textWidth;// å†…å®¹å®½åº¦
+			if (h < textHeight) { // å†…å®¹é«˜åº¦
+				h = (int) textHeight;
+			}
+		}
+
+		w = Math.max(w, getSuggestedMinimumWidth());
+		h = Math.max(h, getSuggestedMinimumHeight());
+
+		setMeasuredDimension(resolveSize(w, widthMeasureSpec), resolveSize(h, heightMeasureSpec));
+	}
+
+	protected void onDraw(Canvas canvas) {
+		// ç»˜åˆ¶å›¾ç‰‡
+		if (null != mBitmap) {
+			canvas.drawBitmap(mBitmap, null, bitmapFrame, null);
+		}
+
+		// ç»˜åˆ¶æ–‡æœ¬
+		TextLine line;
+		final int size = mTextLines.size();
+		for (int i = 0; i < size; i++) {
+			line = mTextLines.get(i);
+			canvas.drawText(line.text, line.x, line.y, mPaint);
+		}
+		// System.out.println(mTextLines );
+	}
+
+	public void setImageBitmap(Bitmap bm) {
+		setImageBitmap(bm, null);
+	}
+
+	public void setImageBitmap(Bitmap bm, int left, int top) {
+		setImageBitmap(bm, new Rect(left, top, 0, 0));
+	}
+
+	public void setImageBitmap(Bitmap bm, Rect bitmapFrame) {
+		mBitmap = bm;
+		computeBitmapSize(bitmapFrame);
+		requestLayout();
+		invalidate();
+	}
+
+	public void setText(String text) {
+		mText = text;
+		requestLayout();
+		invalidate();
+	}
+
+	private void computeBitmapSize(Rect rect) {
+		if (null != rect) {
+			bitmapFrame.set(rect);
+		}
+		if (null != mBitmap) {
+			if (rect.right == 0 && rect.bottom == 0) {
+				final Rect r = bitmapFrame;
+				r.set(r.left, r.top, r.left + mBitmap.getScaledHeight(mTargetDentity),
+						r.top + mBitmap.getScaledHeight(mTargetDentity));
+			}
+		} else {
+			bitmapFrame.setEmpty();
+		}
+	}
+
+	private void measureAndSplitText(Paint p, String content, int maxWidth) {
+		FontMetrics fm = mPaint.getFontMetrics();
+		final int lineHeight = (int) (fm.bottom - fm.top);
+
+		final Rect r = new Rect(bitmapFrame);
+		// r.inset(-5, -5);
+
+		final int length = content.length();
+		int start = 0, end = 0, offsetX = 0, offsetY = 0;
+		int availWidth = maxWidth;
+		TextLine line;
+		boolean onFirst = true;
+		boolean newLine = true;
+		while (start < length) {
+			end++;
+			if (end == length) { // å‰©ä½™çš„ä¸è¶³ä¸€è¡Œçš„æ–‡æœ¬
+				if (start <= length - 1) {
+					if (newLine)
+						offsetY += lineHeight;
+					line = new TextLine();
+					line.text = content.substring(start, end - 1);
+					line.x = offsetX;
+					line.y = offsetY;
+					mTextLines.add(line);
+				}
+				break;
+			}
+			p.getTextBounds(content, start, end, tmp);
+			if (onFirst) { // ç¡®å®šæ¯ä¸ªå­—ç¬¦ä¸²çš„åæ ‡
+				onFirst = false;
+				final int height = lineHeight + offsetY;
+				if (r.top >= height) { // é¡¶éƒ¨å¯ä»¥æ”¾ä¸‹ä¸€è¡Œæ–‡å­—
+					offsetX = 0;
+					availWidth = maxWidth;
+					newLine = true;
+				} else if (newLine && (r.bottom >= height && r.left >= tmp.width())) { // ä¸­éƒ¨å·¦è¾¹å¯ä»¥æ”¾æ–‡å­—
+					offsetX = 0;
+					availWidth = r.left;
+					newLine = false;
+				} else if (r.bottom >= height && maxWidth - r.right >= tmp.width()) { // ä¸­éƒ¨å³è¾¹
+					offsetX = r.right;
+					availWidth = maxWidth - r.right;
+					newLine = true;
+				} else { // åº•éƒ¨
+					offsetX = 0;
+					availWidth = maxWidth;
+					if (offsetY < r.bottom)
+						offsetY = r.bottom;
+					newLine = true;
+				}
+			}
+
+			if (tmp.width() > availWidth) { // ä¿å­˜ä¸€è¡Œèƒ½æ”¾ç½®çš„æœ€å¤§å­—ç¬¦ä¸²
+				onFirst = true;
+				line = new TextLine();
+				line.text = content.substring(start, end - 1);
+				line.x = offsetX;
+				mTextLines.add(line);
+				if (newLine) {
+					offsetY += lineHeight;
+					line.y = offsetY;
+				} else {
+					line.y = offsetY + lineHeight;
+				}
+
+				start = end - 1;
+			}
+		}
+		textSize[1] = offsetY;
+	}
+
+	class TextLine {
+		String text;
+		int x;
+		int y;
+
+		@Override
+		public String toString() {
+			return "TextLine [text=" + text + ", x=" + x + ", y=" + y + "]";
+		}
+	}
+}

@@ -1,167 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:orientation="vertical"
-  android:background="@drawable/bg_main">
-  <include android:id="@+id/titlebar" layout="@layout/titlebar" />
-  <ScrollView android:layout_height="fill_parent" 
-	android:layout_width="fill_parent"
-	android:layout_margin="10dip"
-	android:background="@drawable/bg_transparent">
-	<LinearLayout
-  	android:layout_width="fill_parent"
-  	android:layout_height="wrap_content"
-  	android:orientation="vertical">
-  		<LinearLayout
-  		android:layout_width="fill_parent"
-  		android:layout_height="wrap_content"
-  		android:padding="10dip"
-  		android:orientation="vertical"
-  		android:background="@drawable/bg_lightgray">
-			<ImageView 
-			android:layout_height="fill_parent" 
-			android:layout_width="fill_parent"
-			android:src="@drawable/traffic"
-			android:scaleType="fitCenter"/>
-			<TextView 
-			android:layout_height="wrap_content" 
-			android:layout_width="wrap_content"
-			android:paddingTop="10dip"
-			android:textSize="18sp"
-			android:text="  太湖湾周边交通图"
-			android:textColor="@color/black"
-			android:textStyle="bold"/>
-		</LinearLayout>
-	    
-		<LinearLayout
-  		android:layout_width="fill_parent"
-  		android:layout_height="wrap_content"
-  		android:layout_marginTop="10dip"
-  		android:orientation="vertical"
-  		android:background="@drawable/bg_lightgray">
-			<TextView 
-			android:layout_height="fill_parent" 
-			android:layout_width="wrap_content"
-			android:gravity="center_vertical"
-			android:text="                 自驾游线路"
-			android:textColor="@color/red"
-			android:textStyle="bold"
-			android:textSize="18sp"
-			android:background="@drawable/section_bg"/>
-			<TextView android:id="@+id/content"
-			android:layout_height="fill_parent" 
-			android:layout_width="wrap_content"
-			android:layout_margin="10dip"
-			android:textColor="@color/text_gray"
-			android:lineSpacingExtra="3dip"
-			android:textSize="17sp"
-			android:text="常州：青洋路-武进大道洛阳方向(或者武南路）-232省道-武进潘家嬉戏谷连接线-嬉戏谷
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_main"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/titlebar"
+        layout="@layout/titlebar" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_margin="10dip"
+        android:background="@drawable/bg_transparent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_lightgray"
+                android:orientation="vertical"
+                android:padding="10dip" >
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/traffic" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dip"
+                    android:text="  太湖湾周边交通图"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:background="@drawable/bg_lightgray"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/section_bg"
+                    android:gravity="center_vertical"
+                    android:text="                 自驾游线路"
+                    android:textColor="@color/red"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10dip"
+                    android:lineSpacingExtra="3dip"
+                    android:text="常州：青洋路-武进大道洛阳方向(或者武南路）-232省道-武进潘家嬉戏谷连接线-嬉戏谷
                                                                                           上海：沪宁高速-锡宜高速阳山出口-342省道宜兴方向-武进潘家太北路-嬉戏谷
                                                                                          南京：宁杭高速-沿江高速常州南出口-武南路向东-232省道-武进片潘家嬉戏谷连接线-嬉戏谷
                                                                                         苏州：锡宜高速阳山出口-342省道宜兴方向-武进潘家太北路-嬉戏谷
                                                                                        无锡：锡宜高速阳山出口-342省道宜兴方向-武进潘家太北路-嬉戏谷
                                                                                       杭州：宁杭高速丁山出口-230省道-武进潘家嬉戏谷连接线-嬉戏谷
-                                                                                     湖州：宁杭高速丁山出口-230省道-武进潘家嬉戏谷连接线-嬉戏谷" />
-			
-			<TextView 
-			android:layout_height="fill_parent" 
-			android:layout_width="wrap_content"
-			android:gravity="center_vertical"
-			android:text="                 公共交通"
-			android:textColor="@color/black"
-			android:textStyle="bold"
-			android:textSize="18sp"
-			android:background="@drawable/section_bg"/>
-			<TextView 
-			android:layout_height="fill_parent" 
-			android:layout_width="wrap_content"
-			android:gravity="center_vertical"
-			android:text="                 一、免费接送："
-			android:textColor="@color/black"
-			android:textStyle="bold"
-			android:textSize="18sp"
-			android:background="@drawable/section_bg"/>
-			<TextView 
-			android:layout_height="fill_parent" 
-			android:layout_width="wrap_content"
-			android:layout_margin="10dip"
-			android:textColor="@color/text_gray"
-			android:lineSpacingExtra="3dip"
-			android:textSize="17sp"
-			android:text="常州武进乐购停车场-嬉戏谷来回（嬉戏谷免费车停放处：大门右侧73路公交乘坐点）
-                                                                                          武进湖塘乐购直达嬉戏谷，发车时间：15：00、15:30、16:30、17：30、18:30
-                                                                                          嬉戏谷发往武进湖塘乐购，途径站点：嬉戏谷-潘家太湖湾广场-武进客运中心（21：00之后可不去此站，直达下一站）—武进乐购，发车时间：18：30、19:30、20:30、21:30、22:30。"/>
-    	
-			<TextView 
-			android:layout_height="fill_parent" 
-			android:layout_width="wrap_content"
-			android:gravity="center_vertical"
-			android:text="                 二、公交路线【3元可直达嬉戏 "
-			android:textColor="@color/black"
-			android:textStyle="bold"
-			android:textSize="18sp"
-			android:background="@drawable/section_bg"/>
-			<TextView 
-			android:layout_height="fill_parent" 
-			android:layout_width="wrap_content"
-			android:gravity="center_vertical"
-			android:text="                      谷】 "
-			android:textColor="@color/black"
-			android:textStyle="bold"
-			android:textSize="18sp"
-			android:background="@drawable/section_bg"/>
-			<TextView 
-			android:layout_height="fill_parent" 
-			android:layout_width="wrap_content"
-			android:layout_margin="10dip"
-			android:textColor="@color/text_gray"
-			android:lineSpacingExtra="3dip"
-			android:textSize="17sp"
-			android:text="1、火车站坐68路或70路在潘家桥东（旷达集团）即太湖湾旅游度假区下换乘73路到底站嬉戏谷，或步行约3公里。
-			              2、乘坐快速公交B1、B11、B16到武进客运中心下（底站），换乘73路、72路、72B路直达嬉戏谷。夏季（4月26日—10月25日）：72路，首班5:50，末班18:10；73路，首 班为8:50，末班18：15。冬季（10月26日—次年4月25日）：72路，首班5:50，末班17:40；73路，首班8:50，末班17:45" />
-    	
-			<TextView 
-			android:layout_height="fill_parent" 
-			android:layout_width="wrap_content"
-			android:gravity="center_vertical"
-			android:text="                 三、嬉戏谷旅游专线车"
-			android:textColor="@color/black"
-			android:textStyle="bold"
-			android:textSize="18sp"
-			android:background="@drawable/section_bg"/>
-			<TextView 
-			android:layout_height="fill_parent" 
-			android:layout_width="wrap_content"
-			android:layout_margin="10dip"
-			android:textColor="@color/text_gray"
-			android:lineSpacingExtra="3dip"
-			android:textSize="17sp"
-			android:text="线路1：常州火车站北广场/长途客运站交通枢纽点 直达 嬉戏谷。注意，不是常州火车站北站，那个站仅停京沪高铁。
-                                                                                          线路2：无锡客运站（旅游集散中心）直达 嬉戏谷"
-                         />
-			<TextView 
-			android:layout_height="fill_parent" 
-			android:layout_width="wrap_content"
-			android:gravity="center_vertical"
-			android:text="                 武进太湖湾旅游度假区"
-			android:textColor="@color/black"
-			android:textStyle="bold"
-			android:textSize="18sp"
-			android:background="@drawable/section_bg"/>
-			<TextView 
-			android:layout_height="fill_parent" 
-			android:layout_width="wrap_content"
-			android:layout_margin="10dip"
-			android:textColor="@color/text_gray"
-			android:lineSpacingExtra="3dip"
-			android:textSize="17sp"
-			android:text="太湖湾旅游度假区位于常州市武进区雪堰镇，地处长三角经济圈中心，距上海、南京、杭州2小时行程。周边有锡宜高速、宁杭高速、沪蓉高速(沪宁)、常合高速(沿江)、常州西绕城高速等，交通十分便利。"
-                         />
-    	</LinearLayout> 
-    </LinearLayout> 
-    
-  </ScrollView>
-</LinearLayout>
+                                                                                     湖州：宁杭高速丁山出口-230省道-武进潘家嬉戏谷连接线-嬉戏谷"
+                    android:textColor="@color/text_gray"
+                    android:textSize="17sp" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/section_bg"
+                    android:gravity="center_vertical"
+                    android:text="                 公共交通"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/section_bg"
+                    android:gravity="center_vertical"
+                    android:text="                 一、免费接送："
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10dip"
+                    android:lineSpacingExtra="3dip"
+                    android:text="常州武进乐购停车场-嬉戏谷来回（嬉戏谷免费车停放处：大门右侧73路公交乘坐点）
+                                                                                          武进湖塘乐购直达嬉戏谷，发车时间：15：00、15:30、16:30、17：30、18:30
+                                                                                          嬉戏谷发往武进湖塘乐购，途径站点：嬉戏谷-潘家太湖湾广场-武进客运中心（21：00之后可不去此站，直达下一站）—武进乐购，发车时间：18：30、19:30、20:30、21:30、22:30。"
+                    android:textColor="@color/text_gray"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/section_bg"
+                    android:gravity="center_vertical"
+                    android:text="                 二、公交路线【3元可直达嬉戏 "
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/section_bg"
+                    android:gravity="center_vertical"
+                    android:text="                      谷】 "
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10dip"
+                    android:lineSpacingExtra="3dip"
+                    android:text="1、火车站坐68路或70路在潘家桥东（旷达集团）即太湖湾旅游度假区下换乘73路到底站嬉戏谷，或步行约3公里。
+			              2、乘坐快速公交B1、B11、B16到武进客运中心下（底站），换乘73路、72路、72B路直达嬉戏谷。夏季（4月26日—10月25日）：72路，首班5:50，末班18:10；73路，首 班为8:50，末班18：15。冬季（10月26日—次年4月25日）：72路，首班5:50，末班17:40；73路，首班8:50，末班17:45"
+                    android:textColor="@color/text_gray"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/section_bg"
+                    android:gravity="center_vertical"
+                    android:text="                 三、嬉戏谷旅游专线车"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10dip"
+                    android:lineSpacingExtra="3dip"
+                    android:text="线路1：常州火车站北广场/长途客运站交通枢纽点 直达 嬉戏谷。注意，不是常州火车站北站，那个站仅停京沪高铁。
+                                                                                          线路2：无锡客运站（旅游集散中心）直达 嬉戏谷"
+                    android:textColor="@color/text_gray"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/section_bg"
+                    android:gravity="center_vertical"
+                    android:text="                 武进太湖湾旅游度假区"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10dip"
+                    android:lineSpacingExtra="3dip"
+                    android:text="太湖湾旅游度假区位于常州市武进区雪堰镇，地处长三角经济圈中心，距上海、南京、杭州2小时行程。周边有锡宜高速、宁杭高速、沪蓉高速(沪宁)、常合高速(沿江)、常州西绕城高速等，交通十分便利。"
+                    android:textColor="@color/text_gray"
+                    android:textSize="17sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

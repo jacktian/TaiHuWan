@@ -13,19 +13,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.Intent.ShortcutIconResource;
-import android.database.Cursor;
-import android.media.ExifInterface;
-import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.text.format.Time;
-
 import com.gloria.hbh.application.BaseApplication;
 import com.gloria.hbh.constant.BaseConfig;
 import com.gloria.hbh.constant.BaseConstants;
@@ -40,438 +27,495 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.Intent.ShortcutIconResource;
+import android.database.Cursor;
+import android.media.ExifInterface;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.text.format.Time;
+
 /**
-* ÎÄ ¼ş Ãû : Methods
-* ´´ ½¨ ÈË£º gejian
-* ÈÕ     ÆÚ£º2012-8-7
-* ĞŞ ¸Ä ÈË£ºgejian
-* ÈÕ    ÆÚ£º2012-8-7
-* Ãè    Êö£º³ÌĞòµÄ·½·¨Àà
-*/
+ * æ–‡ ä»¶ å : Methods åˆ› å»º äººï¼š gejian æ—¥ æœŸï¼š2012-8-7 ä¿® æ”¹ äººï¼šgejian æ—¥ æœŸï¼š2012-8-7 æ
+ * è¿°ï¼šç¨‹åºçš„æ–¹æ³•ç±»
+ */
 @TargetApi(5)
 public class Methods {
-	
+
 	/*
-	 * ÅĞ¶ÏÊÇ·ñÒÑÌí¼Ó×ÀÃæÍ¼±ê
+	 * åˆ¤æ–­æ˜¯å¦å·²æ·»åŠ æ¡Œé¢å›¾æ ‡
 	 */
-	public static  void checkShortCut() {
-		boolean isInstallShortCut =  PreferencesUtils.getBooleanPreferences(BaseConstants.Settings_NAME, 
+	public static void checkShortCut() {
+		boolean isInstallShortCut = PreferencesUtils.getBooleanPreferences(BaseConstants.Settings_NAME,
 				BaseConstants.SharedPreferences_isInstallShortCut, false);
-		// ´æÔÚ¿ì½İ·½Ê½»òÕß²»ÔÊĞíÌí¼Ó£¬return
+		// å­˜åœ¨å¿«æ·æ–¹å¼æˆ–è€…ä¸å…è®¸æ·»åŠ ï¼Œreturn
 		if (isInstallShortCut)
-		  return;
+			return;
 		addShortcut();
-		//±£´æÅäÖÃ
-		PreferencesUtils.setBooleanPreferences(BaseConstants.Settings_NAME, 
+		// ä¿å­˜é…ç½®
+		PreferencesUtils.setBooleanPreferences(BaseConstants.Settings_NAME,
 				BaseConstants.SharedPreferences_isInstallShortCut, true);
 	}
-	
-	/*
-	 * Ìí¼Ó×ÀÃæÍ¼±ê
-	 */
-	public static void addShortcut(){ 
-		Context c = BaseApplication.getInstance().getApplicationContext();
-		Intent shortcut = new Intent("com.android.launcher.action.INSTALL_SHORTCUT"); 
-		// ¿ì½İ·½Ê½µÄÃû³Æ 
-		shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME,c. getResources().getString(R.string.app_name)); 
-		// ²»ÔÊĞíÖØ¸´´´½¨ 
-		shortcut.putExtra("duplicate", false); 
-		String action = "com.android.action.install"; 
-		Intent respondIntent = new Intent(c, c.getClass()); 
-		respondIntent.setAction(action); 
-		shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, respondIntent); 
-		// ¿ì½İ·½Ê½µÄÍ¼±ê 
-		ShortcutIconResource iconRes = Intent.ShortcutIconResource.fromContext(c, R.drawable.ic_launcher); 
-		shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, iconRes); 
 
-		c.sendBroadcast(shortcut); 
-	}
-	
-	 //»ñÈ¡±¾µØIp
-    public static String getLocalIpAddress() {  
-    	try {  
-    		for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {  
-    			NetworkInterface intf = en.nextElement();  
-    			for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {  
-    				InetAddress inetAddress = enumIpAddr.nextElement();  
-                    if (!inetAddress.isLoopbackAddress()) {  
-    	                   return inetAddress.getHostAddress().toString();  
-    	               }  
-    	            }  
-    	        }  
-    	    } catch (SocketException ex) {  
-       }  
-    return null;  
-    }  
-    
-//    //Í¨¹ıServiceµÄÀàÃûÀ´ÅĞ¶ÏÊÇ·ñÆô¶¯Ä³¸ö·şÎñ  
-//    public static boolean IsStartPushService(Context context,String className){  
-//    	ActivityManager myManager=(ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
-//    	ArrayList<RunningServiceInfo> runningService = (ArrayList<RunningServiceInfo>) myManager.getRunningServices(30);
-//    	for(int i = 0 ; i<runningService.size();i++){
-//    		if(runningService.get(i).service.getClassName().toString().equals(className)){
-//    			return true;
-//    		}
-//    	}
-//    	return false;
-//    }
-    
-    //·µ»Ø11--30 10£º20ÕâÑùµÄÈÕÆÚ¸ñÊ½
-    public static String getDate(){  
-    	Time t=new Time(); // or Time t=new Time("GMT+8"); ¼ÓÉÏTime Zone×ÊÁÏ¡£
-    	t.setToNow(); // È¡µÃÏµÍ³Ê±¼ä¡£
-    	int month = t.month;
-    	int day = t.monthDay;
-    	int hour = t.hour;    // 0-23
-    	int minute = t.minute;
-    	DecimalFormat   df   =   new   DecimalFormat( "00");
-    	return "¸üĞÂÓÚ:  "+df.format(month)+"-"+df.format(day)+" "+df.format(hour)+":"+df.format(minute);
-    }
-    
 	/*
-	 * »ñÈ¡StringÀïÃæµÄ<img> µÄurlÁĞ±í
+	 * æ·»åŠ æ¡Œé¢å›¾æ ‡
 	 */
-	public static  ArrayList<String> getContentPicUrlList(String contentstring){
-		String tmpString=contentstring;
-		ArrayList<String> picurl_list = new  ArrayList<String>(1);
-				
-		Pattern pattern1 = Pattern.compile("(onclick+=\".*?\")|(onload+=\".*?\")|(style+=\".*?\")|(border+=\".*?\")",Pattern.CASE_INSENSITIVE);   
-		Matcher matcher1=pattern1.matcher(contentstring);   //ÕÒµ½<img> ±êÇ©ÖĞµÄ·ÇsrcµÄÊôĞÔÖÃ¿Õ
-		while (matcher1.find()){
-			String imgTmpString=matcher1.group();
-			tmpString=tmpString.replace(imgTmpString, "");
+	public static void addShortcut() {
+		Context c = BaseApplication.getInstance().getApplicationContext();
+		Intent shortcut = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+		// å¿«æ·æ–¹å¼çš„åç§°
+		shortcut.putExtra(Intent.EXTRA_SHORTCUT_NAME, c.getResources().getString(R.string.app_name));
+		// ä¸å…è®¸é‡å¤åˆ›å»º
+		shortcut.putExtra("duplicate", false);
+		String action = "com.android.action.install";
+		Intent respondIntent = new Intent(c, c.getClass());
+		respondIntent.setAction(action);
+		shortcut.putExtra(Intent.EXTRA_SHORTCUT_INTENT, respondIntent);
+		// å¿«æ·æ–¹å¼çš„å›¾æ ‡
+		ShortcutIconResource iconRes = Intent.ShortcutIconResource.fromContext(c, R.drawable.ic_launcher);
+		shortcut.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, iconRes);
+
+		c.sendBroadcast(shortcut);
+	}
+
+	// è·å–æœ¬åœ°Ip
+	public static String getLocalIpAddress() {
+		try {
+			for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+				NetworkInterface intf = en.nextElement();
+				for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+					InetAddress inetAddress = enumIpAddr.nextElement();
+					if (!inetAddress.isLoopbackAddress()) {
+						return inetAddress.getHostAddress().toString();
+					}
+				}
+			}
+		} catch (SocketException ex) {
 		}
-			
-		Pattern p=Pattern.compile("(?<=src=['\"])http://((?!/post/smile/).)*?(?=['\"])",Pattern.CASE_INSENSITIVE);
-		Matcher m=p.matcher(tmpString);  //ÕÒµ½·Ç±íÇé<img>±êÇ©ÖĞµÄurl·Åµ½listÖĞ
+		return null;
+	}
+
+	// //é€šè¿‡Serviceçš„ç±»åæ¥åˆ¤æ–­æ˜¯å¦å¯åŠ¨æŸä¸ªæœåŠ¡
+	// public static boolean IsStartPushService(Context context,String
+	// className){
+	// ActivityManager
+	// myManager=(ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+	// ArrayList<RunningServiceInfo> runningService =
+	// (ArrayList<RunningServiceInfo>) myManager.getRunningServices(30);
+	// for(int i = 0 ; i<runningService.size();i++){
+	// if(runningService.get(i).service.getClassName().toString().equals(className)){
+	// return true;
+	// }
+	// }
+	// return false;
+	// }
+
+	// è¿”å›11--30 10ï¼š20è¿™æ ·çš„æ—¥æœŸæ ¼å¼
+	public static String getDate() {
+		Time t = new Time(); // or Time t=new Time("GMT+8"); åŠ ä¸ŠTime Zoneèµ„æ–™ã€‚
+		t.setToNow(); // å–å¾—ç³»ç»Ÿæ—¶é—´ã€‚
+		int month = t.month;
+		int day = t.monthDay;
+		int hour = t.hour; // 0-23
+		int minute = t.minute;
+		DecimalFormat df = new DecimalFormat("00");
+		return "æ›´æ–°äº:  " + df.format(month) + "-" + df.format(day) + " " + df.format(hour) + ":" + df.format(minute);
+	}
+
+	/*
+	 * è·å–Stringé‡Œé¢çš„<img> çš„urlåˆ—è¡¨
+	 */
+	public static ArrayList<String> getContentPicUrlList(String contentstring) {
+		String tmpString = contentstring;
+		ArrayList<String> picurl_list = new ArrayList<String>(1);
+
+		Pattern pattern1 = Pattern.compile("(onclick+=\".*?\")|(onload+=\".*?\")|(style+=\".*?\")|(border+=\".*?\")",
+				Pattern.CASE_INSENSITIVE);
+		Matcher matcher1 = pattern1.matcher(contentstring); // æ‰¾åˆ°<img>
+															// æ ‡ç­¾ä¸­çš„ésrcçš„å±æ€§ç½®ç©º
+		while (matcher1.find()) {
+			String imgTmpString = matcher1.group();
+			tmpString = tmpString.replace(imgTmpString, "");
+		}
+
+		Pattern p = Pattern.compile("(?<=src=['\"])http://((?!/post/smile/).)*?(?=['\"])", Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(tmpString); // æ‰¾åˆ°éè¡¨æƒ…<img>æ ‡ç­¾ä¸­çš„urlæ”¾åˆ°listä¸­
 		while (m.find()) {
-			String imgTmpString=m.group();
-			if(!picurl_list.contains(imgTmpString)){
-				if(imgTmpString.contains("commonapi/images/back.gif")){
+			String imgTmpString = m.group();
+			if (!picurl_list.contains(imgTmpString)) {
+				if (imgTmpString.contains("commonapi/images/back.gif")) {
 					continue;
 				}
 				picurl_list.add(imgTmpString);
 			}
 		}
-		
+
 		return picurl_list;
-	}   
-	
+	}
+
 	/*
-	 * ÉèÖÃĞÂµÄString
-	 * ´ı½â¾ö ±íÇéÌæ»»
+	 * è®¾ç½®æ–°çš„String å¾…è§£å†³ è¡¨æƒ…æ›¿æ¢
 	 */
-	public static String  setNewContent(String contentstring){         //Ìæ»»img±êÇ©   
-		String tmpString=contentstring;
-		Pattern pattern1 = Pattern.compile("(onclick+=\".*?\")|(onload+=\".*?\")|(style+=\".*?\")|(border+=\".*?\")|(smilieid+=\".*?\")|(alt+=\".*?\")",Pattern.CASE_INSENSITIVE);   
-		Matcher matcher1=pattern1.matcher(contentstring);   //ÕÒµ½<img> ±êÇ©ÖĞµÄ·ÇsrcµÄÊôĞÔÖÃ¿Õ
-		while (matcher1.find()){
-			String imgTmpString=matcher1.group();
-			tmpString=tmpString.replace(imgTmpString, "");
+	public static String setNewContent(String contentstring) { // æ›¿æ¢imgæ ‡ç­¾
+		String tmpString = contentstring;
+		Pattern pattern1 = Pattern.compile(
+				"(onclick+=\".*?\")|(onload+=\".*?\")|(style+=\".*?\")|(border+=\".*?\")|(smilieid+=\".*?\")|(alt+=\".*?\")",
+				Pattern.CASE_INSENSITIVE);
+		Matcher matcher1 = pattern1.matcher(contentstring); // æ‰¾åˆ°<img>
+															// æ ‡ç­¾ä¸­çš„ésrcçš„å±æ€§ç½®ç©º
+		while (matcher1.find()) {
+			String imgTmpString = matcher1.group();
+			tmpString = tmpString.replace(imgTmpString, "");
 		}
-				
-		Pattern pattern2 = Pattern.compile("<img[^<>]+src=['\"]http://[^<>]+>",Pattern.CASE_INSENSITIVE);    //Æ¥Åä´øÓĞ<img src="http://     >
-		Matcher matcher2=pattern2.matcher(tmpString);   //ÕÒµ½·Ç±íÇé<img>±êÇ©ÖÃ¿Õ
-		while (matcher2.find()){
-			String imgTmpString=matcher2.group();
-			tmpString=tmpString.replace(imgTmpString, "");
+
+		Pattern pattern2 = Pattern.compile("<img[^<>]+src=['\"]http://[^<>]+>", Pattern.CASE_INSENSITIVE); // åŒ¹é…å¸¦æœ‰<img
+																											// src="http://
+																											// >
+		Matcher matcher2 = pattern2.matcher(tmpString); // æ‰¾åˆ°éè¡¨æƒ…<img>æ ‡ç­¾ç½®ç©º
+		while (matcher2.find()) {
+			String imgTmpString = matcher2.group();
+			tmpString = tmpString.replace(imgTmpString, "");
 		}
-				
-		//¹ıÂË<p dir=ltr>
+
+		// è¿‡æ»¤<p dir=ltr>
 		tmpString = tmpString.replaceAll("<p dir=ltr>", "");
-				
-		//Ìæ»»±íÇé  £¨¶ÔÓÚ±íÇéµÄ±í´ï·½Ê½£©
-		tmpString = tmpString.replace(BaseConstants.FACE_IMG_CONTAIN_PATH,BaseConfig.url+BaseConstants.FACE_IMG_CONTAIN_PATH);  //Ìæ»»±íÇéµÄimg±êÇ©   
-		
-//		tmpString = tmpString.replace("<img src=\"","<img src='");  
-//		tmpString = tmpString.replace("\"    />","'    />");  
+
+		// æ›¿æ¢è¡¨æƒ… ï¼ˆå¯¹äºè¡¨æƒ…çš„è¡¨è¾¾æ–¹å¼ï¼‰
+		tmpString = tmpString.replace(BaseConstants.FACE_IMG_CONTAIN_PATH,
+				BaseConfig.url + BaseConstants.FACE_IMG_CONTAIN_PATH); // æ›¿æ¢è¡¨æƒ…çš„imgæ ‡ç­¾
+
+		// tmpString = tmpString.replace("<img src=\"","<img src='");
+		// tmpString = tmpString.replace("\" />","' />");
 		return tmpString;
-	}  
-	
-//	//Ìæ»»@±êÇ©   
-//	public static String  setNewContentOfWeiBo(String contentstring){         
-//		String tmpString=contentstring;
-//		//Ìæ»»//@±êÇ©   
-//		Pattern pattern1 = Pattern.compile("(//\\u005Bat\\u005D@(.+?)\\u005B/at\\u005D)",Pattern.CASE_INSENSITIVE);
-//		Matcher matcher1=pattern1.matcher(contentstring);   //ÕÒµ½<img> ±êÇ©ÖĞµÄ·ÇsrcµÄÊôĞÔÖÃ¿Õ
-//		while (matcher1.find()){
-//			String imgTmpString_old = matcher1.group();
-//			String imgTmpString_new ="";
-//			imgTmpString_new = imgTmpString_old.replace("[at]", "").replace("[/at]", "");
-//			imgTmpString_new = "<font color=#4878AC>"+imgTmpString_new+"</font>";
-//			tmpString= tmpString.replace(imgTmpString_old, imgTmpString_new);
-//		}
-//			
-//		//Ìæ»»[wurl][/wurl]±êÇ©   
-//		Pattern pattern2 = Pattern.compile("(\\u005Bwurl\\u005D(.+?)\\u005B/wurl\\u005D)",Pattern.CASE_INSENSITIVE);
-//		Matcher matcher2=pattern2.matcher(tmpString);   //ÕÒµ½·Ç±íÇé<img>±êÇ©ÖÃ¿Õ
-//		while (matcher2.find()){
-//			String imgTmpString_old = matcher2.group();
-//			String imgTmpString_new ="";
-//			imgTmpString_new = imgTmpString_old.replace("[wurl]", "").replace("[/wurl]", "");
-//			imgTmpString_new = "<font color=#4878AC>"+imgTmpString_new+"</font>";
-//			tmpString= tmpString.replace(imgTmpString_old, imgTmpString_new);
-//		}
-//			
-//		//Ìæ»»##±êÇ©   
-//		Pattern pattern4 = Pattern.compile("(#(.+?)#)",Pattern.CASE_INSENSITIVE);
-//		Matcher matcher4=pattern4.matcher(tmpString);   //ÕÒµ½·Ç±íÇé<img>±êÇ©ÖÃ¿Õ
-//		while (matcher4.find()){
-//			String imgTmpString_old = matcher4.group();
-//			String imgTmpString_new ="";
-//			imgTmpString_new = "<font color=#4878AC>"+imgTmpString_old+"</font>";
-//			tmpString= tmpString.replace(imgTmpString_old, imgTmpString_new);
-//		}
-//			
-//		ArrayList<ImageInfo> faceInfos = null;
-//		faceInfos = DataDispose.getWeiBoFaceTable(ExitApplication.getInstance().getApplicationContext());
-//		//Ìæ»»±íÇéµÄÍ¼±ê£º
-//		Pattern pattern3 = Pattern.compile("(:em(\\d{1,4}):)",Pattern.CASE_INSENSITIVE);    //Æ¥Åä´øÓĞ<img src="http://     >
-//		Matcher matcher3 = pattern3.matcher(tmpString);   //ÕÒµ½·Ç±íÇé<img>±êÇ©ÖÃ¿Õ
-//		while (matcher3.find()){
-//			String imgTmpString=matcher3.group();
-//			tmpString=tmpString.replace(imgTmpString, "<img src='"+getFacePath(imgTmpString,faceInfos)+"'/>");
-//		}
-//			
-//		//Ìæ»»@±êÇ©   
-//		Pattern pattern5 = Pattern.compile("(\\u005Bat\\u005D@(.+?)\\u005B/at\\u005D)",Pattern.CASE_INSENSITIVE);
-//		Matcher matcher5=pattern5.matcher(contentstring);   //ÕÒµ½<img> ±êÇ©ÖĞµÄ·ÇsrcµÄÊôĞÔÖÃ¿Õ
-//		while (matcher5.find()){
-//			String imgTmpString_old = matcher5.group();
-//			String imgTmpString_new ="";
-//			imgTmpString_new = imgTmpString_old.replace("[at]", "").replace("[/at]", "");
-//			imgTmpString_new = "<font color=#4878AC>"+imgTmpString_new+"</font>";
-//			tmpString= tmpString.replace(imgTmpString_old, imgTmpString_new);
-//		}
-//			
-//		//¹ıÂË<p dir=ltr>
-//		tmpString = tmpString.replaceAll("<p dir=ltr>", "");
-//			
-////		tmpString = tmpString.replace("static/image/smiley/", GlobalSource.url+"static/image/smiley/");  //Ìæ»»±íÇéµÄimg±êÇ©   
-//		return tmpString;
-//	}  
-	
-//	/*
-//	 * ÓÉ±íÇéÍ¼Æ¬µÄCode»ñÈ¡Í¼Æ¬Â·¾¶
-//	 */
-//	public static String  getFacePath(String code,ArrayList<ImageInfo> faceInfos){  
-//		 String path = "";
-//		 for(ImageInfo faceInfo :faceInfos){
-//			 if(faceInfo.getCode().equals(code)){
-//				 path = faceInfo.getPath();
-//				 return path;
-//			 }
-//		 }
-//		 return  path;
-//	  }
-		    
-//	//·ÖÏí
-//	public static void sharePost(String text,Context context){
-//		Intent it = new Intent(Intent.ACTION_SEND);
-//		it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//		it.putExtra(Intent.EXTRA_TEXT, text);
-//		it.setType("text/plain");
-//	    Intent newIntent = Intent.createChooser(it, "ÇëÑ¡Ôñ");
-//		newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//		context.startActivity(newIntent);
-//	}
-		    
-//	//Ê×Ò³tab×ÖÌå»»ĞĞ´óĞ¡
-//	public static SpannableString changeFontSize(int screenWidth,String tmpString){
-//		SpannableString ss=new SpannableString(tmpString); 
-//		if(screenWidth == 480){
-//			ss.setSpan(new AbsoluteSizeSpan(22), 0, tmpString.indexOf("\n"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//		    ss.setSpan(new AbsoluteSizeSpan(11), tmpString.indexOf("\n"), tmpString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//		}else if(screenWidth == 320){
-//		    ss.setSpan(new AbsoluteSizeSpan(21), 0, tmpString.indexOf("\n"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//		    ss.setSpan(new AbsoluteSizeSpan(10), tmpString.indexOf("\n"), tmpString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//		}else if(screenWidth ==240){
-//		    ss.setSpan(new AbsoluteSizeSpan(14), 0, tmpString.indexOf("\n"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//		    ss.setSpan(new AbsoluteSizeSpan(8), tmpString.indexOf("\n"), tmpString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//		}else{
-//		    ss.setSpan(new AbsoluteSizeSpan(21), 0, tmpString.indexOf("\n"), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//		    ss.setSpan(new AbsoluteSizeSpan(10), tmpString.indexOf("\n"), tmpString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//		}
-//		return ss;
-//	}
-		    
-		    
-	//Ô¤´¦ÀíÒì³£Êı¾İ
-	public static boolean disposeDataException(Object result){
+	}
+
+	// //æ›¿æ¢@æ ‡ç­¾
+	// public static String setNewContentOfWeiBo(String contentstring){
+	// String tmpString=contentstring;
+	// //æ›¿æ¢//@æ ‡ç­¾
+	// Pattern pattern1 =
+	// Pattern.compile("(//\\u005Bat\\u005D@(.+?)\\u005B/at\\u005D)",Pattern.CASE_INSENSITIVE);
+	// Matcher matcher1=pattern1.matcher(contentstring); //æ‰¾åˆ°<img> æ ‡ç­¾ä¸­çš„ésrcçš„å±æ€§ç½®ç©º
+	// while (matcher1.find()){
+	// String imgTmpString_old = matcher1.group();
+	// String imgTmpString_new ="";
+	// imgTmpString_new = imgTmpString_old.replace("[at]", "").replace("[/at]",
+	// "");
+	// imgTmpString_new = "<font color=#4878AC>"+imgTmpString_new+"</font>";
+	// tmpString= tmpString.replace(imgTmpString_old, imgTmpString_new);
+	// }
+	//
+	// //æ›¿æ¢[wurl][/wurl]æ ‡ç­¾
+	// Pattern pattern2 =
+	// Pattern.compile("(\\u005Bwurl\\u005D(.+?)\\u005B/wurl\\u005D)",Pattern.CASE_INSENSITIVE);
+	// Matcher matcher2=pattern2.matcher(tmpString); //æ‰¾åˆ°éè¡¨æƒ…<img>æ ‡ç­¾ç½®ç©º
+	// while (matcher2.find()){
+	// String imgTmpString_old = matcher2.group();
+	// String imgTmpString_new ="";
+	// imgTmpString_new = imgTmpString_old.replace("[wurl]",
+	// "").replace("[/wurl]", "");
+	// imgTmpString_new = "<font color=#4878AC>"+imgTmpString_new+"</font>";
+	// tmpString= tmpString.replace(imgTmpString_old, imgTmpString_new);
+	// }
+	//
+	// //æ›¿æ¢##æ ‡ç­¾
+	// Pattern pattern4 = Pattern.compile("(#(.+?)#)",Pattern.CASE_INSENSITIVE);
+	// Matcher matcher4=pattern4.matcher(tmpString); //æ‰¾åˆ°éè¡¨æƒ…<img>æ ‡ç­¾ç½®ç©º
+	// while (matcher4.find()){
+	// String imgTmpString_old = matcher4.group();
+	// String imgTmpString_new ="";
+	// imgTmpString_new = "<font color=#4878AC>"+imgTmpString_old+"</font>";
+	// tmpString= tmpString.replace(imgTmpString_old, imgTmpString_new);
+	// }
+	//
+	// ArrayList<ImageInfo> faceInfos = null;
+	// faceInfos =
+	// DataDispose.getWeiBoFaceTable(ExitApplication.getInstance().getApplicationContext());
+	// //æ›¿æ¢è¡¨æƒ…çš„å›¾æ ‡ï¼š
+	// Pattern pattern3 =
+	// Pattern.compile("(:em(\\d{1,4}):)",Pattern.CASE_INSENSITIVE); //åŒ¹é…å¸¦æœ‰<img
+	// src="http:// >
+	// Matcher matcher3 = pattern3.matcher(tmpString); //æ‰¾åˆ°éè¡¨æƒ…<img>æ ‡ç­¾ç½®ç©º
+	// while (matcher3.find()){
+	// String imgTmpString=matcher3.group();
+	// tmpString=tmpString.replace(imgTmpString, "<img
+	// src='"+getFacePath(imgTmpString,faceInfos)+"'/>");
+	// }
+	//
+	// //æ›¿æ¢@æ ‡ç­¾
+	// Pattern pattern5 =
+	// Pattern.compile("(\\u005Bat\\u005D@(.+?)\\u005B/at\\u005D)",Pattern.CASE_INSENSITIVE);
+	// Matcher matcher5=pattern5.matcher(contentstring); //æ‰¾åˆ°<img> æ ‡ç­¾ä¸­çš„ésrcçš„å±æ€§ç½®ç©º
+	// while (matcher5.find()){
+	// String imgTmpString_old = matcher5.group();
+	// String imgTmpString_new ="";
+	// imgTmpString_new = imgTmpString_old.replace("[at]", "").replace("[/at]",
+	// "");
+	// imgTmpString_new = "<font color=#4878AC>"+imgTmpString_new+"</font>";
+	// tmpString= tmpString.replace(imgTmpString_old, imgTmpString_new);
+	// }
+	//
+	// //è¿‡æ»¤<p dir=ltr>
+	// tmpString = tmpString.replaceAll("<p dir=ltr>", "");
+	//
+	//// tmpString = tmpString.replace("static/image/smiley/",
+	// GlobalSource.url+"static/image/smiley/"); //æ›¿æ¢è¡¨æƒ…çš„imgæ ‡ç­¾
+	// return tmpString;
+	// }
+
+	// /*
+	// * ç”±è¡¨æƒ…å›¾ç‰‡çš„Codeè·å–å›¾ç‰‡è·¯å¾„
+	// */
+	// public static String getFacePath(String code,ArrayList<ImageInfo>
+	// faceInfos){
+	// String path = "";
+	// for(ImageInfo faceInfo :faceInfos){
+	// if(faceInfo.getCode().equals(code)){
+	// path = faceInfo.getPath();
+	// return path;
+	// }
+	// }
+	// return path;
+	// }
+
+	// //åˆ†äº«
+	// public static void sharePost(String text,Context context){
+	// Intent it = new Intent(Intent.ACTION_SEND);
+	// it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	// it.putExtra(Intent.EXTRA_TEXT, text);
+	// it.setType("text/plain");
+	// Intent newIntent = Intent.createChooser(it, "è¯·é€‰æ‹©");
+	// newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	// context.startActivity(newIntent);
+	// }
+
+	// //é¦–é¡µtabå­—ä½“æ¢è¡Œå¤§å°
+	// public static SpannableString changeFontSize(int screenWidth,String
+	// tmpString){
+	// SpannableString ss=new SpannableString(tmpString);
+	// if(screenWidth == 480){
+	// ss.setSpan(new AbsoluteSizeSpan(22), 0, tmpString.indexOf("\n"),
+	// Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+	// ss.setSpan(new AbsoluteSizeSpan(11), tmpString.indexOf("\n"),
+	// tmpString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+	// }else if(screenWidth == 320){
+	// ss.setSpan(new AbsoluteSizeSpan(21), 0, tmpString.indexOf("\n"),
+	// Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+	// ss.setSpan(new AbsoluteSizeSpan(10), tmpString.indexOf("\n"),
+	// tmpString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+	// }else if(screenWidth ==240){
+	// ss.setSpan(new AbsoluteSizeSpan(14), 0, tmpString.indexOf("\n"),
+	// Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+	// ss.setSpan(new AbsoluteSizeSpan(8), tmpString.indexOf("\n"),
+	// tmpString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+	// }else{
+	// ss.setSpan(new AbsoluteSizeSpan(21), 0, tmpString.indexOf("\n"),
+	// Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+	// ss.setSpan(new AbsoluteSizeSpan(10), tmpString.indexOf("\n"),
+	// tmpString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+	// }
+	// return ss;
+	// }
+
+	// é¢„å¤„ç†å¼‚å¸¸æ•°æ®
+	public static boolean disposeDataException(Object result) {
 		boolean isReturn = false;
-		if(!NetworkUtils.isNetworkAvailable()){
-			ForumToast.show(BaseApplication.getInstance().getApplicationContext().getResources().getString(R.string.hint_NoNetwork));
-		    isReturn = true;
-		}else if(NetworkUtils.isNetworkAvailable() && result == null){
-			ForumToast.show(BaseApplication.getInstance().getApplicationContext().getResources().getString(R.string.hint_NetworkException));
-		    isReturn = true;
+		if (!NetworkUtils.isNetworkAvailable()) {
+			ForumToast.show(BaseApplication.getInstance().getApplicationContext().getResources()
+					.getString(R.string.hint_NoNetwork));
+			isReturn = true;
+		} else if (NetworkUtils.isNetworkAvailable() && result == null) {
+			ForumToast.show(BaseApplication.getInstance().getApplicationContext().getResources()
+					.getString(R.string.hint_NetworkException));
+			isReturn = true;
 		}
 		return isReturn;
 	}
-	
-//	//»ñÈ¡Í¼Æ¬ÀàĞÍ
-//	public static int getTypeOfImage(String result){
-//		int type = 1; //0:±íÇé   1£ºÒ»°ãÍ¼Æ¬
-//		//......................
-//		return type;
-//	}
-	
-    
-	
+
+	// //è·å–å›¾ç‰‡ç±»å‹
+	// public static int getTypeOfImage(String result){
+	// int type = 1; //0:è¡¨æƒ… 1ï¼šä¸€èˆ¬å›¾ç‰‡
+	// //......................
+	// return type;
+	// }
+
 	/*
-	 * // ÑéÖ¤ÓÊÏäµÄÕıÔò±í´ïÊ½
+	 * // éªŒè¯é‚®ç®±çš„æ­£åˆ™è¡¨è¾¾å¼
 	 */
 	public static boolean checkEmail(String email) {
-    	// ÑéÖ¤ÓÊÏäµÄÕıÔò±í´ïÊ½     //µç×ÓÓÊ¼ş  
-        String check = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";  
-        Pattern regex = Pattern.compile(check);  
-        Matcher matcher = regex.matcher(email);  
-        boolean isMatched = matcher.matches();  
-        return isMatched;
-    }
-	
-	/*
-	 * ¼ìÑéÊÖ»úºÅÂëµÄºÏ·¨ĞÔ
-	 */
-	public static boolean checkPhoneNo(String phoneNo) {
-    	Pattern p = Pattern.compile("^([0-9]{3}-?[0-9]{8})|([0-9]{4}-?[0-9]{8})$");        
-        Matcher m = p.matcher(phoneNo);  
-        boolean isMatched = m.matches();  
-        return isMatched;    
+		// éªŒè¯é‚®ç®±çš„æ­£åˆ™è¡¨è¾¾å¼ //ç”µå­é‚®ä»¶
+		String check = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+		Pattern regex = Pattern.compile(check);
+		Matcher matcher = regex.matcher(email);
+		boolean isMatched = matcher.matches();
+		return isMatched;
 	}
 
-	  /*
-     *QQ ÊÚÈ¨ÊÇ·ñÂú×ãÌõ¼ş ,ÊÇ·ñ¹ıÆÚ
-     */
-    public static boolean satisfyConditions() {
-    	boolean isValid = false;
-//    	if (BaseConfig.TOKEN_QQ != null) {
-//    		isValid =  (!TextUtils.isEmpty(BaseConfig.TOKEN_QQ) && (BaseConfig.EXPIRES_IN_QQ != null 
-//            		 && !BaseConfig.EXPIRES_IN_QQ.equals("0")
-//            		 &&(System.currentTimeMillis() < Long.valueOf(BaseConfig.EXPIRES_IN_QQ))));
-//        }
-//    	if(!isValid){
-//    		PreferencesUtils.setStringPreferences(BaseApplication.getInstance().getApplicationContext(), BaseConstants.Settings_Auther, 
-// 				BaseConstants.SharedPreferences_TOKEN+"_"+BaseConstants.Log_QQ, "");
-//    		PreferencesUtils.setStringPreferences(BaseApplication.getInstance().getApplicationContext(), BaseConstants.Settings_Auther, 
-// 				BaseConstants.SharedPreferences_EXPIRES_IN+"_"+BaseConstants.Log_QQ, "0");
-//    		PreferencesUtils.setStringPreferences(BaseApplication.getInstance().getApplicationContext(), BaseConstants.Settings_Auther, 
-// 				BaseConstants.SharedPreferences_UID+"_"+BaseConstants.Log_QQ, "");
-//    	}
-    	return isValid;
+	/*
+	 * æ£€éªŒæ‰‹æœºå·ç çš„åˆæ³•æ€§
+	 */
+	public static boolean checkPhoneNo(String phoneNo) {
+		Pattern p = Pattern.compile("^([0-9]{3}-?[0-9]{8})|([0-9]{4}-?[0-9]{8})$");
+		Matcher m = p.matcher(phoneNo);
+		boolean isMatched = m.matches();
+		return isMatched;
 	}
-    
-    /*
-     * sinaÊÚÈ¨ÊÇ·ñ¹ıÆÚ
-     */
-    public static boolean isSessionValid() {
-    	boolean isValid = false;
-//    	Weibo weibo = null;
-//    	AccessToken accessToken = new AccessToken(BaseConfig.TOKEN_SINA, BaseConfig.CONSUMER_SECRET_SINA);
-//    	accessToken.setExpiresIn(BaseConfig.EXPIRES_IN_SINA);
-//        weibo = Weibo.getInstance();
-//        weibo.setAccessToken(accessToken);
-//        if (weibo != null && weibo.getAccessToken() != null) {
-//        	isValid = (!TextUtils.isEmpty( weibo.getAccessToken() .getToken()) && ( weibo.getAccessToken() .getExpiresIn() == 0
-//            		|| (System.currentTimeMillis() <  weibo.getAccessToken() .getExpiresIn())));
-//        }
-//        if(!isValid){
-//        	PreferencesUtils.setStringPreferences(BaseApplication.getInstance().getApplicationContext(), BaseConstants.Settings_Auther, 
-//    			BaseConstants.SharedPreferences_TOKEN+"_"+BaseConstants.Log_Sina, "");
-//    		PreferencesUtils.setStringPreferences(BaseApplication.getInstance().getApplicationContext(), BaseConstants.Settings_Auther, 
-//    			BaseConstants.SharedPreferences_EXPIRES_IN+"_"+BaseConstants.Log_Sina, "0");
-//    		PreferencesUtils.setStringPreferences(BaseApplication.getInstance().getApplicationContext(), BaseConstants.Settings_Auther, 
-//    			BaseConstants.SharedPreferences_UID+"_"+BaseConstants.Log_Sina, "");
-//        }
-        return isValid;
-    }
-    
-    /*
-     * Î¢²©·ÖÏíÕıÎÄÏŞÖÆ140¸ö×Ö
-     */
+
+	/*
+	 * QQ æˆæƒæ˜¯å¦æ»¡è¶³æ¡ä»¶ ,æ˜¯å¦è¿‡æœŸ
+	 */
+	public static boolean satisfyConditions() {
+		boolean isValid = false;
+		// if (BaseConfig.TOKEN_QQ != null) {
+		// isValid = (!TextUtils.isEmpty(BaseConfig.TOKEN_QQ) &&
+		// (BaseConfig.EXPIRES_IN_QQ != null
+		// && !BaseConfig.EXPIRES_IN_QQ.equals("0")
+		// &&(System.currentTimeMillis() <
+		// Long.valueOf(BaseConfig.EXPIRES_IN_QQ))));
+		// }
+		// if(!isValid){
+		// PreferencesUtils.setStringPreferences(BaseApplication.getInstance().getApplicationContext(),
+		// BaseConstants.Settings_Auther,
+		// BaseConstants.SharedPreferences_TOKEN+"_"+BaseConstants.Log_QQ, "");
+		// PreferencesUtils.setStringPreferences(BaseApplication.getInstance().getApplicationContext(),
+		// BaseConstants.Settings_Auther,
+		// BaseConstants.SharedPreferences_EXPIRES_IN+"_"+BaseConstants.Log_QQ,
+		// "0");
+		// PreferencesUtils.setStringPreferences(BaseApplication.getInstance().getApplicationContext(),
+		// BaseConstants.Settings_Auther,
+		// BaseConstants.SharedPreferences_UID+"_"+BaseConstants.Log_QQ, "");
+		// }
+		return isValid;
+	}
+
+	/*
+	 * sinaæˆæƒæ˜¯å¦è¿‡æœŸ
+	 */
+	public static boolean isSessionValid() {
+		boolean isValid = false;
+		// Weibo weibo = null;
+		// AccessToken accessToken = new AccessToken(BaseConfig.TOKEN_SINA,
+		// BaseConfig.CONSUMER_SECRET_SINA);
+		// accessToken.setExpiresIn(BaseConfig.EXPIRES_IN_SINA);
+		// weibo = Weibo.getInstance();
+		// weibo.setAccessToken(accessToken);
+		// if (weibo != null && weibo.getAccessToken() != null) {
+		// isValid = (!TextUtils.isEmpty( weibo.getAccessToken() .getToken()) &&
+		// ( weibo.getAccessToken() .getExpiresIn() == 0
+		// || (System.currentTimeMillis() < weibo.getAccessToken()
+		// .getExpiresIn())));
+		// }
+		// if(!isValid){
+		// PreferencesUtils.setStringPreferences(BaseApplication.getInstance().getApplicationContext(),
+		// BaseConstants.Settings_Auther,
+		// BaseConstants.SharedPreferences_TOKEN+"_"+BaseConstants.Log_Sina,
+		// "");
+		// PreferencesUtils.setStringPreferences(BaseApplication.getInstance().getApplicationContext(),
+		// BaseConstants.Settings_Auther,
+		// BaseConstants.SharedPreferences_EXPIRES_IN+"_"+BaseConstants.Log_Sina,
+		// "0");
+		// PreferencesUtils.setStringPreferences(BaseApplication.getInstance().getApplicationContext(),
+		// BaseConstants.Settings_Auther,
+		// BaseConstants.SharedPreferences_UID+"_"+BaseConstants.Log_Sina, "");
+		// }
+		return isValid;
+	}
+
+	/*
+	 * å¾®åšåˆ†äº«æ­£æ–‡é™åˆ¶140ä¸ªå­—
+	 */
 	public static String getWeiBoContent(String content_tmp) {
 		// TODO Auto-generated method stub
-//		int num_share = BaseConfig.SHARE_TITLE_1_SINA.length();
-//		int num = content_tmp.length();
-//		if (num > (140-num_share)) {
-//			String content =  content_tmp.substring(0, (137-num_share));
-//			content = content+"...";
-//			return content;
-//		}else{
-//			return content_tmp;
-//		}
+		// int num_share = BaseConfig.SHARE_TITLE_1_SINA.length();
+		// int num = content_tmp.length();
+		// if (num > (140-num_share)) {
+		// String content = content_tmp.substring(0, (137-num_share));
+		// content = content+"...";
+		// return content;
+		// }else{
+		// return content_tmp;
+		// }
 		return "";
-	} 
-	
+	}
+
 	/*
-	 * ×î½üä¯ÀÀÁĞ±í
+	 * æœ€è¿‘æµè§ˆåˆ—è¡¨
 	 */
 	public static ArrayList<PostInfo> getLastViewsList() {
 		ArrayList<PostInfo> postInfos = new ArrayList<PostInfo>(1);
-		String lastviews =  PreferencesUtils.getStringPreferences(BaseConstants.LastViews_NAME, BaseConstants.SharedPreferences_LastViews, "");
-		if(lastviews!=null && !lastviews.equals("")){
-			//¼¯ºÏstring×ª¶ÔÏólist  
-			JsonArray jsonArray=null;
-			try{
+		String lastviews = PreferencesUtils.getStringPreferences(BaseConstants.LastViews_NAME,
+				BaseConstants.SharedPreferences_LastViews, "");
+		if (lastviews != null && !lastviews.equals("")) {
+			// é›†åˆstringè½¬å¯¹è±¡list
+			JsonArray jsonArray = null;
+			try {
 				jsonArray = JsonMethed.getJsonArray(JsonMethed.getJsonElement(lastviews));
-			}catch (JsonParseException e) {
-			}	
-			if(jsonArray != null && jsonArray.size() != 0){
-				for(int i =0;i<jsonArray.size();i++){
+			} catch (JsonParseException e) {
+			}
+			if (jsonArray != null && jsonArray.size() != 0) {
+				for (int i = 0; i < jsonArray.size(); i++) {
 					JsonObject jsonObject = JsonMethed.getJsonObject(jsonArray.get(i));
-					if(jsonObject != null){
+					if (jsonObject != null) {
 						PostInfo postInfo = new PostInfo();
-						postInfo = PostInfo.getPostBasicFromJsonObject(SubTabInfoTypeConstants.SUBCATE_RECENT_VIEWED_TOPICS,JsonMethed.getJsonObject(jsonObject.get("postBasic")));
+						postInfo = PostInfo.getPostBasicFromJsonObject(
+								SubTabInfoTypeConstants.SUBCATE_RECENT_VIEWED_TOPICS,
+								JsonMethed.getJsonObject(jsonObject.get("postBasic")));
 						postInfos.add(postInfo);
 					}
 				}
 			}
 		}
 		return postInfos;
-	} 
-	
+	}
+
 	/*
-	 * ×î½üä¯ÀÀTidÁĞ±í
+	 * æœ€è¿‘æµè§ˆTidåˆ—è¡¨
 	 */
 	public static ArrayList<String> getLastViewsTidList(ArrayList<PostInfo> postInfos) {
 		ArrayList<String> tidlist = new ArrayList<String>(1);
-		for(PostInfo postInfo:postInfos){
+		for (PostInfo postInfo : postInfos) {
 			tidlist.add(postInfo.getPostBasic().getTid());
 		}
 		return tidlist;
 	}
-	
+
 	/*
-	 * ±£´æ×î½üä¯ÀÀÁĞ±í
+	 * ä¿å­˜æœ€è¿‘æµè§ˆåˆ—è¡¨
 	 */
-	public static void recordLastViewsPost(PostInfo info){
+	public static void recordLastViewsPost(PostInfo info) {
 		List<PostInfo> lastviewsList = null;
-		Gson gson=new Gson();
-		String jsonString_LastViews =  PreferencesUtils.getStringPreferences(BaseConstants.LastViews_NAME, BaseConstants.SharedPreferences_LastViews, "");
-		if(jsonString_LastViews == null){
+		Gson gson = new Gson();
+		String jsonString_LastViews = PreferencesUtils.getStringPreferences(BaseConstants.LastViews_NAME,
+				BaseConstants.SharedPreferences_LastViews, "");
+		if (jsonString_LastViews == null) {
 			lastviewsList = new ArrayList<PostInfo>();
 			lastviewsList.add(0, info);
-			String gsonString=gson.toJson(lastviewsList);
-			PreferencesUtils.setStringPreferences(
-  					BaseConstants.LastViews_NAME, BaseConstants.SharedPreferences_LastViews,gsonString);
-		}else{
-	        //¼¯ºÏstring×ª¶ÔÏólist
+			String gsonString = gson.toJson(lastviewsList);
+			PreferencesUtils.setStringPreferences(BaseConstants.LastViews_NAME,
+					BaseConstants.SharedPreferences_LastViews, gsonString);
+		} else {
+			// é›†åˆstringè½¬å¯¹è±¡list
 			ArrayList<String> lastviewsTidList = new ArrayList<String>(1);
 			lastviewsTidList = getLastViewsTidList(getLastViewsList());
 			lastviewsList = getLastViewsList();
-	        if(!lastviewsTidList.contains(info.getPostBasic().getTid())){
-	        	lastviewsList.add(0, info);
-	        }
-			String gsonString=gson.toJson(lastviewsList);
-			PreferencesUtils.setStringPreferences(
-  					BaseConstants.LastViews_NAME, BaseConstants.SharedPreferences_LastViews,gsonString);
-		 }
-    }
-	
+			if (!lastviewsTidList.contains(info.getPostBasic().getTid())) {
+				lastviewsList.add(0, info);
+			}
+			String gsonString = gson.toJson(lastviewsList);
+			PreferencesUtils.setStringPreferences(BaseConstants.LastViews_NAME,
+					BaseConstants.SharedPreferences_LastViews, gsonString);
+		}
+	}
+
 	/*
-	 * ±£´æ×î½üä¯ÀÀÁĞ±í
+	 * ä¿å­˜æœ€è¿‘æµè§ˆåˆ—è¡¨
 	 */
-	public static void recordLastViewsPost(HandlinesBasicInfo info){
+	public static void recordLastViewsPost(HandlinesBasicInfo info) {
 		PostInfo postInfo = new PostInfo();
 		postInfo.getPostBasic().setAuthor(info.getAuthor());
 		postInfo.getPostBasic().setTid(info.getTid());
@@ -481,80 +525,80 @@ public class Methods {
 		postInfo.getPostBasic().setUrl(info.getUrl());
 		postInfo.getPostBasic().setAuthor(info.getAuthor());
 		recordLastViewsPost(postInfo);
-    }
+	}
 
 	/*
-	 * »ñÈ¡Ïà»úÅÄÕÕµÄÍ¼Æ¬µØÖ·
+	 * è·å–ç›¸æœºæ‹ç…§çš„å›¾ç‰‡åœ°å€
 	 */
-	public static String getCameraFileName() { 
-    	String picPathString = "";
-    	Calendar c = Calendar.getInstance();
+	public static String getCameraFileName() {
+		String picPathString = "";
+		Calendar c = Calendar.getInstance();
 		String year = String.valueOf(c.get(Calendar.YEAR));
-        String month = String.valueOf(c.get(Calendar.MONTH)+1);
-        String day = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
-        String hour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));
-        String minute = String.valueOf(c.get(Calendar.MINUTE));
-        String second= String.valueOf(c.get(Calendar.SECOND));
-        String name = "IMG_"+year+"_"+month+"_"+day+"_"+hour+"_"+minute+"_"+second;
-        picPathString = Environment.getExternalStorageDirectory()+ File.separator+BaseConstants.Save_RootFile+File.separator+"cache/pic/";
-        if(FileUtils.isHasSDCard()){
-        	File destDir = new File(picPathString);
-        	if (!destDir.exists())  {
-             	destDir.mkdirs();
-            }
-        }
-        picPathString = picPathString+name+".jpg";		
-        return picPathString;
-    }
+		String month = String.valueOf(c.get(Calendar.MONTH) + 1);
+		String day = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
+		String hour = String.valueOf(c.get(Calendar.HOUR_OF_DAY));
+		String minute = String.valueOf(c.get(Calendar.MINUTE));
+		String second = String.valueOf(c.get(Calendar.SECOND));
+		String name = "IMG_" + year + "_" + month + "_" + day + "_" + hour + "_" + minute + "_" + second;
+		picPathString = Environment.getExternalStorageDirectory() + File.separator + BaseConstants.Save_RootFile
+				+ File.separator + "cache/pic/";
+		if (FileUtils.isHasSDCard()) {
+			File destDir = new File(picPathString);
+			if (!destDir.exists()) {
+				destDir.mkdirs();
+			}
+		}
+		picPathString = picPathString + name + ".jpg";
+		return picPathString;
+	}
 
 	/*
-     * »ñÈ¡Í¼Æ¬µÄĞı×ª
-     */
-    public static String getOrientation(Uri mImageCaptureUri) {  
-    	String orientation = "";
-        ContentResolver cr = BaseApplication.getInstance().getContentResolver();  
-        Cursor cursor = cr.query(mImageCaptureUri, null, null, null, null);// ¸ù¾İUri´ÓÊı¾İ¿âÖĞÕÒ  
-        if (cursor != null) {  
-            cursor.moveToFirst();// °ÑÓÎ±êÒÆ¶¯µ½Ê×Î»£¬ÒòÎªÕâÀïµÄUriÊÇ°üº¬IDµÄËùÒÔÊÇÎ¨Ò»µÄ²»ĞèÒªÑ­»·ÕÒÖ¸ÏòµÚÒ»¸ö¾ÍÊÇÁË  
-            orientation = cursor.getString(cursor  
-                    .getColumnIndex("orientation"));// »ñÈ¡Ğı×ªµÄ½Ç¶È  
-            cursor.close();  
-        } 
-        return orientation;
-    } 
-    
-    /*
-     * »ñÈ¡Í¼Æ¬µÄĞı×ª
-     */
-    public static String getOrientation(String imgPath) {  
-    	ExifInterface exifInterface;
+	 * è·å–å›¾ç‰‡çš„æ—‹è½¬
+	 */
+	public static String getOrientation(Uri mImageCaptureUri) {
+		String orientation = "";
+		ContentResolver cr = BaseApplication.getInstance().getContentResolver();
+		Cursor cursor = cr.query(mImageCaptureUri, null, null, null, null);// æ ¹æ®Uriä»æ•°æ®åº“ä¸­æ‰¾
+		if (cursor != null) {
+			cursor.moveToFirst();// æŠŠæ¸¸æ ‡ç§»åŠ¨åˆ°é¦–ä½ï¼Œå› ä¸ºè¿™é‡Œçš„Uriæ˜¯åŒ…å«IDçš„æ‰€ä»¥æ˜¯å”¯ä¸€çš„ä¸éœ€è¦å¾ªç¯æ‰¾æŒ‡å‘ç¬¬ä¸€ä¸ªå°±æ˜¯äº†
+			orientation = cursor.getString(cursor.getColumnIndex("orientation"));// è·å–æ—‹è½¬çš„è§’åº¦
+			cursor.close();
+		}
+		return orientation;
+	}
+
+	/*
+	 * è·å–å›¾ç‰‡çš„æ—‹è½¬
+	 */
+	public static String getOrientation(String imgPath) {
+		ExifInterface exifInterface;
 		try {
 			exifInterface = new ExifInterface(imgPath);
 			int tag = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, -1);
-	    	if (tag == ExifInterface.ORIENTATION_ROTATE_90) {//Èç¹ûÊÇĞı×ªµØÍ¼Æ¬ÔòÏÈĞı×ª
-	    		return "90";
-	    	}
+			if (tag == ExifInterface.ORIENTATION_ROTATE_90) {// å¦‚æœæ˜¯æ—‹è½¬åœ°å›¾ç‰‡åˆ™å…ˆæ—‹è½¬
+				return "90";
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        return "0";
-    }
-    
-    /*
-     * ÓÉURIµÄµ½¾ø¶ÔÂ·¾¶
-     */
-	public static String getAbsoluteImagePath(Activity activity,Uri uri){
-        // can post image
-        String [] proj={MediaStore.Images.Media.DATA};
-        Cursor cursor = activity.managedQuery( uri,
-                        proj,                 // Which columns to return
-                        null,       // WHERE clause; which rows to return (all rows)
-                        null,       // WHERE clause selection arguments (none)
-                        null);                 // Order-by clause (ascending by name)
-        
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();         
-        return cursor.getString(column_index);
-    }
+		return "0";
+	}
+
+	/*
+	 * ç”±URIçš„åˆ°ç»å¯¹è·¯å¾„
+	 */
+	public static String getAbsoluteImagePath(Activity activity, Uri uri) {
+		// can post image
+		String[] proj = { MediaStore.Images.Media.DATA };
+		Cursor cursor = activity.managedQuery(uri, proj, // Which columns to
+															// return
+				null, // WHERE clause; which rows to return (all rows)
+				null, // WHERE clause selection arguments (none)
+				null); // Order-by clause (ascending by name)
+
+		int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+		cursor.moveToFirst();
+		return cursor.getString(column_index);
+	}
 
 }

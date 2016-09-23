@@ -1,5 +1,8 @@
 package com.gloria.hbh.myview;
 
+import com.gloria.hbh.main.R;
+import com.gloria.hbh.util.ScreenUtils;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,9 +12,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
-
-import com.gloria.hbh.main.R;
-import com.gloria.hbh.util.ScreenUtils;
 
 public class PageIndicatorView extends View {
 	private int mCurrentPage = -1;
@@ -58,14 +58,13 @@ public class PageIndicatorView extends View {
 
 		int iconWidth = 12;
 		int iconHeight = 12;
-		int space =8;
-		
-		if(ScreenUtils.getInstance().getWidth() <= 320){
+		int space = 8;
+
+		if (ScreenUtils.getInstance().getWidth() <= 320) {
 			iconWidth = 8;
-		    iconHeight = 8;
+			iconHeight = 8;
 			space = 5;
 		}
-		
 
 		int x = (r.width() - (iconWidth * mTotalPage + space * (mTotalPage - 1))) / 2;
 		int y = (r.height() - iconHeight) / 2;

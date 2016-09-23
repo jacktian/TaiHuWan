@@ -3,8 +3,6 @@ package com.gloria.hbh.data.app;
 import java.io.InputStream;
 import java.util.HashMap;
 
-import android.content.res.AssetManager;
-
 import com.gloria.hbh.application.BaseApplication;
 import com.gloria.hbh.constant.BaseConstants;
 import com.gloria.hbh.datadispose.JsonMethed;
@@ -13,70 +11,72 @@ import com.gloria.hbh.util.PreferencesUtils;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+import android.content.res.AssetManager;
+
 /*
- * ÂÛÌ³ĞÅÏ¢  
+ * è®ºå›ä¿¡æ¯  
  */
 public class Plist {
-	
-	private static Plist instance;   
-	
+
+	private static Plist instance;
+
 	public static final String TAB_NAME = "tab_name";
-    public static final String TAB_FID = "tab_fid";
-    
-	String config_version = ""; //ÅäÖÃÎÄ¼şÄ¿Ç°µÄ°æ±¾ºÅ
-	
+	public static final String TAB_FID = "tab_fid";
+
+	String config_version = ""; // é…ç½®æ–‡ä»¶ç›®å‰çš„ç‰ˆæœ¬å·
+
 	UserInfo userInfo = null;
-	
-	AppInfo appInfo = null; //app»ù±¾ĞÅÏ¢
-	
-	Forum forum = null; //ÂÛÌ³ĞÅÏ¢
-	
-    @SuppressWarnings("unchecked")
-	public static Plist getInstance()   { 
-    	if(null == instance){   
-    		instance = new Plist(); 
-    		//¶ÁÈ¡(±¾µØ)ÎÄ¼ş£¬Í¬Ê±CheckÅäÖÃÎÄ¼ş£¬ÏÂÔØ±£´æ¡££¨±£´æÍ¼Æ¬£©
-    		InputStream is = null;
-    		try{
-    			AssetManager assetManager = BaseApplication.getInstance().getApplicationContext().getAssets();
-    			is = assetManager.open("appconfig.plist");
-    			PListParser parser = new PListParser(is);
-    			getForumInfo((HashMap<String, Object>) parser.root);
-    		}catch (JsonParseException e) {
-    		}catch (Exception e) {
-    		}
-    	}   
-    	return instance;    
-    }  
-    
-    public AppInfo getAppInfo() {
-    	if(appInfo == null){
-    		appInfo = new AppInfo();
-    	}
+
+	AppInfo appInfo = null; // appåŸºæœ¬ä¿¡æ¯
+
+	Forum forum = null; // è®ºå›ä¿¡æ¯
+
+	@SuppressWarnings("unchecked")
+	public static Plist getInstance() {
+		if (null == instance) {
+			instance = new Plist();
+			// è¯»å–(æœ¬åœ°)æ–‡ä»¶ï¼ŒåŒæ—¶Checké…ç½®æ–‡ä»¶ï¼Œä¸‹è½½ä¿å­˜ã€‚ï¼ˆä¿å­˜å›¾ç‰‡ï¼‰
+			InputStream is = null;
+			try {
+				AssetManager assetManager = BaseApplication.getInstance().getApplicationContext().getAssets();
+				is = assetManager.open("appconfig.plist");
+				PListParser parser = new PListParser(is);
+				getForumInfo((HashMap<String, Object>) parser.root);
+			} catch (JsonParseException e) {
+			} catch (Exception e) {
+			}
+		}
+		return instance;
+	}
+
+	public AppInfo getAppInfo() {
+		if (appInfo == null) {
+			appInfo = new AppInfo();
+		}
 		return appInfo;
 	}
 
 	public Forum getForum() {
-		if(forum == null){
+		if (forum == null) {
 			forum = new Forum();
 		}
 		return forum;
 	}
 
-    public UserInfo getUserInfo() {
-    	if(userInfo == null){
-    		//¶ÁÈ¡±¾µØ
-    		String jsonString_lastLogin =  PreferencesUtils.getStringPreferences(
-		  			BaseConstants.AccountManager_NAME, BaseConstants.SharedPreferences_LastLogin, null);
-			if(jsonString_lastLogin!=null&&!jsonString_lastLogin.equals("")){
-				JsonObject jsonObject= JsonMethed.getJsonObject(JsonMethed.getJsonElement(jsonString_lastLogin));
+	public UserInfo getUserInfo() {
+		if (userInfo == null) {
+			// è¯»å–æœ¬åœ°
+			String jsonString_lastLogin = PreferencesUtils.getStringPreferences(BaseConstants.AccountManager_NAME,
+					BaseConstants.SharedPreferences_LastLogin, null);
+			if (jsonString_lastLogin != null && !jsonString_lastLogin.equals("")) {
+				JsonObject jsonObject = JsonMethed.getJsonObject(JsonMethed.getJsonElement(jsonString_lastLogin));
 				userInfo = UserInfo.getFromJsonObject(jsonObject);
 				userInfo.setLogin(false);
 			}
-    	}
+		}
 		return userInfo;
 	}
-    
+
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
 	}
@@ -84,19 +84,19 @@ public class Plist {
 	public String getConfig_version() {
 		return config_version;
 	}
-    
+
 	public void setConfig_version(String config_version) {
-		if(config_version == null){
+		if (config_version == null) {
 			return;
 		}
 		this.config_version = config_version;
 	}
-    
-    @SuppressWarnings("unchecked")
-	public static void getForumInfo(HashMap<String, Object> root){
-    	getInstance().setConfig_version((String)root.get("config_version"));
-    	getInstance().setAppInfo(AppInfo.getAppInfo((HashMap<String, Object>)root.get("app_info")));
-    	getInstance().setForum(Forum.getForum((HashMap<String, Object>)root.get("forum")));
+
+	@SuppressWarnings("unchecked")
+	public static void getForumInfo(HashMap<String, Object> root) {
+		getInstance().setConfig_version((String) root.get("config_version"));
+		getInstance().setAppInfo(AppInfo.getAppInfo((HashMap<String, Object>) root.get("app_info")));
+		getInstance().setForum(Forum.getForum((HashMap<String, Object>) root.get("forum")));
 	}
 
 	public void setAppInfo(AppInfo appInfo) {

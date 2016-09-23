@@ -1,59 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:orientation="vertical"
-  android:background="@drawable/bg_main">
-  <include android:id="@+id/titlebar" layout="@layout/titlebar" />
-  <ScrollView android:layout_height="fill_parent" 
-	android:layout_width="fill_parent"
-	android:scrollbars="none">
-	<LinearLayout
-  	android:layout_width="fill_parent"
-  	android:layout_height="wrap_content"
-  	android:orientation="vertical"
-  	android:layout_gravity="center_horizontal"
-  	android:gravity="center_horizontal">
-  	
-	    <LinearLayout 
-  		android:layout_width="fill_parent"
-  		android:layout_height="wrap_content"
-  		android:layout_margin="10dip"
-  		android:orientation="vertical"
-  		android:background="@drawable/bg_lightgray">
-			<ImageView 
-			android:layout_height="fill_parent" 
-			android:layout_width="fill_parent"
-			android:paddingTop="5dip"
-			android:src="@drawable/ticket_logo"
-			android:scaleType="fitCenter"/>
-			<TextView 
-			android:layout_height="wrap_content" 
-			android:layout_width="wrap_content"
-			android:paddingTop="5dip"
-			android:paddingBottom="5dip"
-			android:textSize="18sp"
-			android:text="  嬉戏谷门票"
-			android:textColor="@color/black"
-			android:textStyle="bold"/>
-		</LinearLayout>
-	    
-	    <LinearLayout 
-  		android:layout_width="fill_parent"
-  		android:layout_height="wrap_content"
-  		android:layout_margin="10dip"
-  		android:paddingLeft="5dip"
-  		android:paddingRight="5dip"
-  		android:orientation="vertical"
-  		android:background="@drawable/bg_lightgray">
-			<ImageView 
-			android:layout_height="fill_parent" 
-			android:layout_width="fill_parent"
-			android:src="@drawable/ticket_price"
-			android:scaleType="fitCenter"/>
-		</LinearLayout>
-<!-- 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_main"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/titlebar"
+        layout="@layout/titlebar" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                android:background="@drawable/bg_lightgray"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:paddingTop="5dip"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ticket_logo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dip"
+                    android:paddingTop="5dip"
+                    android:text="  嬉戏谷门票"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                android:background="@drawable/bg_lightgray"
+                android:orientation="vertical"
+                android:paddingLeft="5dip"
+                android:paddingRight="5dip" >
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ticket_price" />
+            </LinearLayout>
+            <!--
 	   	<TextView 
 		android:layout_height="fill_parent" 
 		android:layout_width="wrap_content"
@@ -658,9 +666,8 @@
 			android:contentDescription="@drawable/icon_dialog_new"
 			android:layout_gravity="center_horizontal" 
 			android:gravity="center_horizontal" />
-  	   </LinearLayout>
-  	    -->
-    </LinearLayout> 
-    
-  </ScrollView>
+  	   </LinearLayout>-->
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

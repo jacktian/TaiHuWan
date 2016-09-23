@@ -2,111 +2,118 @@ package com.gloria.hbh.constant;
 
 import java.io.File;
 
-import android.os.Environment;
-
 import com.gloria.hbh.application.BaseApplication;
 import com.gloria.hbh.main.R;
 
+import android.os.Environment;
+
 public class BaseConstants {
-	
-	public static final String PUSH_TITLE = "Í¨Öª";
-	
-	public static String Save_RootFile = BaseApplication.getInstance()
-			.getString(R.string.app_name);   //Ó¦ÓÃµÄ´æ·ÅµÄÎÄ¼ş¼Ğ
-	
-	public static String Settings_NAME = "com.gloria."+Save_RootFile+".settings";  //¸ü¶àÖĞµÄÅäÖÃ
-	public static String Function_NAME = "com.gloria."+Save_RootFile+".function";  //ÍÆËÍµÈ¹¦ÄÜÅäÖÃ
-	public static String WeiBoShare_NAME = "com.gloria."+Save_RootFile+".weiboshare";  //Î¢²©·ÖÏí¹¦ÄÜÅäÖÃ
-	
-	public static String AccountManager_NAME = "com.gloria."+Save_RootFile+".accountmanager";
-	public static String UPDATE_NAME = "com.gloria."+Save_RootFile+".update"; //listViewµÄË¢ĞÂÊ±¼ä
-	public static String LastViews_NAME = "com.gloria."+Save_RootFile+".lastviews";  
-	public static String PushInfoServiceName = "com.gloria."+Save_RootFile+".pushinfo.Push_Service"; 
-	public static String Settings_Auther = "com.gloria."+Save_RootFile+".auther";
-	
-	//SharedPreferencesµÄkey
-	public static final String SharedPreferences_isInstallShortCut = "isInstallShortCut";    //ÊÇ·ñÌí¼Ó×ÀÃæÍ¼±êµÄkeyË÷Òı
-	public static final String SharedPreferences_isRegisterPhone = "isRegisterPhone";    //ÊÇ·ñ×¢²áÍÆËÍµÄkeyË÷Òı
-	public static final String SharedPreferences_isFirstOpenSoft = "isFirstOpenSoft";//ÊÇ·ñµÚÒ»´Î´ò¿ªÈí¼şµÄkeyË÷Òı
-	public static final String SharedPreferences_LastViews = "LastViews";    //×î½üä¯ÀÀµÄkeyË÷Òı
-	public static final String SharedPreferences_LastLogin = "LastLogin";    //×Ô¶¯µÇÂ¼µÄkeyË÷Òı
-	public static final String SharedPreferences_LoginInfo= "LoginInfo";  //µÇÂ¼µÄÓÃ»§Ãû£¬ÃÜÂëµÈÕÊºÅÁĞ±íµÄ keyË÷Òı 
-	public static final String SharedPreferences_WeiBoShareInfo = "WeiBoShareInfo";  //·ÖÏíµÄ keyË÷Òı 
-	public static final String SharedPreferences_Settings = "Settings";    //Ó¦ÓÃ¸ü¶àµÄÅäÖÃµÄkeyË÷Òı
-	public static final String SharedPreferences_Settings_Default = "Settings_default";    //Ó¦ÓÃ¸ü¶àµÄÄ¬ÈÏÅäÖÃµÄkeyË÷Òı
-	public static final String SharedPreferences_StartPic = "StartPic";    //Æô¶¯Ò³µÄÅäÖÃµÄkeyË÷Òı
-	
-	//Ó¦ÓÃµÄ´æ´¢SD¿¨µÄÎÄ¼ş¼ĞµØÖ·
-	public static String CACHE_FILE_PATH =  Environment.getExternalStorageDirectory()+File.separator+Save_RootFile+File.separator+"cache/filecache/";
-	public static String CACHE_IMG_PATH =  Environment.getExternalStorageDirectory() + File.separator+Save_RootFile+File.separator+"cache/imgcache/";		
-	public static String CACHE_IMG_TEMP_PATH =  Environment.getExternalStorageDirectory()+ File.separator+Save_RootFile+File.separator+"cache/uploadimg/";
-	public static String CACHE_SAVE_IMG_PATH = Environment.getExternalStorageDirectory() + File.separator+Save_RootFile+File.separator+"Imgs/";  //±£´æÏà²áµÄÂ·¾¶
-	public static String CACHE_FACE_IMG_PATH = Environment.getExternalStorageDirectory() + File.separator+Save_RootFile+File.separator+"cache/face/";
-	public static String NOMEDIA_PATH =Environment.getExternalStorageDirectory().getPath()+File.separator+Save_RootFile+File.separator+"cache/.nomedia/";
+
+	public static final String PUSH_TITLE = "é€šçŸ¥";
+
+	public static String Save_RootFile = BaseApplication.getInstance().getString(R.string.app_name); // åº”ç”¨çš„å­˜æ”¾çš„æ–‡ä»¶å¤¹
+
+	public static String Settings_NAME = "com.gloria." + Save_RootFile + ".settings"; // æ›´å¤šä¸­çš„é…ç½®
+	public static String Function_NAME = "com.gloria." + Save_RootFile + ".function"; // æ¨é€ç­‰åŠŸèƒ½é…ç½®
+	public static String WeiBoShare_NAME = "com.gloria." + Save_RootFile + ".weiboshare"; // å¾®åšåˆ†äº«åŠŸèƒ½é…ç½®
+
+	public static String AccountManager_NAME = "com.gloria." + Save_RootFile + ".accountmanager";
+	public static String UPDATE_NAME = "com.gloria." + Save_RootFile + ".update"; // listViewçš„åˆ·æ–°æ—¶é—´
+	public static String LastViews_NAME = "com.gloria." + Save_RootFile + ".lastviews";
+	public static String PushInfoServiceName = "com.gloria." + Save_RootFile + ".pushinfo.Push_Service";
+	public static String Settings_Auther = "com.gloria." + Save_RootFile + ".auther";
+
+	// SharedPreferencesçš„key
+	public static final String SharedPreferences_isInstallShortCut = "isInstallShortCut"; // æ˜¯å¦æ·»åŠ æ¡Œé¢å›¾æ ‡çš„keyç´¢å¼•
+	public static final String SharedPreferences_isRegisterPhone = "isRegisterPhone"; // æ˜¯å¦æ³¨å†Œæ¨é€çš„keyç´¢å¼•
+	public static final String SharedPreferences_isFirstOpenSoft = "isFirstOpenSoft";// æ˜¯å¦ç¬¬ä¸€æ¬¡æ‰“å¼€è½¯ä»¶çš„keyç´¢å¼•
+	public static final String SharedPreferences_LastViews = "LastViews"; // æœ€è¿‘æµè§ˆçš„keyç´¢å¼•
+	public static final String SharedPreferences_LastLogin = "LastLogin"; // è‡ªåŠ¨ç™»å½•çš„keyç´¢å¼•
+	public static final String SharedPreferences_LoginInfo = "LoginInfo"; // ç™»å½•çš„ç”¨æˆ·åï¼Œå¯†ç ç­‰å¸å·åˆ—è¡¨çš„
+																			// keyç´¢å¼•
+	public static final String SharedPreferences_WeiBoShareInfo = "WeiBoShareInfo"; // åˆ†äº«çš„
+																					// keyç´¢å¼•
+	public static final String SharedPreferences_Settings = "Settings"; // åº”ç”¨æ›´å¤šçš„é…ç½®çš„keyç´¢å¼•
+	public static final String SharedPreferences_Settings_Default = "Settings_default"; // åº”ç”¨æ›´å¤šçš„é»˜è®¤é…ç½®çš„keyç´¢å¼•
+	public static final String SharedPreferences_StartPic = "StartPic"; // å¯åŠ¨é¡µçš„é…ç½®çš„keyç´¢å¼•
+
+	// åº”ç”¨çš„å­˜å‚¨SDå¡çš„æ–‡ä»¶å¤¹åœ°å€
+	public static String CACHE_FILE_PATH = Environment.getExternalStorageDirectory() + File.separator + Save_RootFile
+			+ File.separator + "cache/filecache/";
+	public static String CACHE_IMG_PATH = Environment.getExternalStorageDirectory() + File.separator + Save_RootFile
+			+ File.separator + "cache/imgcache/";
+	public static String CACHE_IMG_TEMP_PATH = Environment.getExternalStorageDirectory() + File.separator
+			+ Save_RootFile + File.separator + "cache/uploadimg/";
+	public static String CACHE_SAVE_IMG_PATH = Environment.getExternalStorageDirectory() + File.separator
+			+ Save_RootFile + File.separator + "Imgs/"; // ä¿å­˜ç›¸å†Œçš„è·¯å¾„
+	public static String CACHE_FACE_IMG_PATH = Environment.getExternalStorageDirectory() + File.separator
+			+ Save_RootFile + File.separator + "cache/face/";
+	public static String NOMEDIA_PATH = Environment.getExternalStorageDirectory().getPath() + File.separator
+			+ Save_RootFile + File.separator + "cache/.nomedia/";
 
 	public static String FACE_IMG_CONTAIN_PATH = "images/post/smile/";
 	public static int DEFAULT_FACE_WIDTH = 80;
 	public static int DEFAULT_AVATER_WIDTH = 80;
 	public static int DEFAULT_LOG_AVATER_WIDTH = 150;
 
-	//ÎÄ¼ş´æ´¢ÀàĞÍ
-	public static final int CACHE_FILETYPE_FILE = 0;        //ÎÄ¼ş
-	public static final int CACHE_FILETYPE_FACE_IMG = 1;    //±íÇé
-	public static final int CACHE_FILETYPE_SAVE_IMG = 2;    //±£´æÏà²áÍ¼Æ¬
-	public static final int CACHE_FILETYPE_IMG = 3;         //Ò»°ãÍ¼Æ¬
-	public static final int CACHE_FILETYPE_IMG_SCALESMALL = 4;         //ËõĞ¡Í¼Æ¬
-	public static final int CACHE_FILETYPE_IMG_SCALEBIG = 5;         //·Å´óÍ¼Æ¬
-	
-	//ÍøÂçÁ¬½Ó
-	public static final int TimeoutConnection = 10*1000;    //Á¬½Ó³¬Ê±Ê±¼ä
-	public static final int TimeoutSocket = 10*1000;    //Socket³¬Ê±Ê±¼ä
-	
-	public static final int Time_DELAY = 30*1000;    //ÍÆ³Ù¿ªÊ¼Ê±¼ä
-	public static final int Time_PERIOD = 30*1000;    //Ñ­»·Á¬½ÓÊ±¼ä
-	
-	public static final int StatusCode_OK = 200;    //StatusCode 200Õı³£
+	// æ–‡ä»¶å­˜å‚¨ç±»å‹
+	public static final int CACHE_FILETYPE_FILE = 0; // æ–‡ä»¶
+	public static final int CACHE_FILETYPE_FACE_IMG = 1; // è¡¨æƒ…
+	public static final int CACHE_FILETYPE_SAVE_IMG = 2; // ä¿å­˜ç›¸å†Œå›¾ç‰‡
+	public static final int CACHE_FILETYPE_IMG = 3; // ä¸€èˆ¬å›¾ç‰‡
+	public static final int CACHE_FILETYPE_IMG_SCALESMALL = 4; // ç¼©å°å›¾ç‰‡
+	public static final int CACHE_FILETYPE_IMG_SCALEBIG = 5; // æ”¾å¤§å›¾ç‰‡
 
-	//Ìû×ÓÁĞ±íÀàĞÍ
-	public static final int PostList_All = 0; //Ä¬ÈÏÈ«²¿
-	public static final int PostList_Top = 1;  //ÖÃ¶¥
-	public static final int PostList_Digest = 2; //¾«»ª
-	public static final int ColumnList = 3; //À¸Ä¿ÁĞ±í  ÈÈ°æÀàËÆ
-	
-	public static final String TabType_More_ID = "-100";  //¸ü¶àtabµÄFID
-	
-	public static final String TAG_NAVLIST = "navList"; //µ¼º½ÁĞ±í
-	public static final String TAG_MORELIST = "moreList"; //¸ü¶àÁĞ±í
-	public static final String TAG_PostListType = "PostListType"; //Ä¬ÈÏÈ«²¿
-	
-	public static final int TAG_ADAPTER_COLUMNLIST = 0; //À¸Ä¿ÁĞ±í 
+	// ç½‘ç»œè¿æ¥
+	public static final int TimeoutConnection = 10 * 1000; // è¿æ¥è¶…æ—¶æ—¶é—´
+	public static final int TimeoutSocket = 10 * 1000; // Socketè¶…æ—¶æ—¶é—´
 
-	public static final int Count_SubTabType = 6; //¶ş¼¶Ä¿Â¼µÄtab¸öÊı
-	public static final int COUNT_HeadLine = 5; //Í·Ìõ´óÍ¼µÄ¸öÊı
-	
-//	public static final long FILE_IMAGE_MAXSIZE = 500*1024; //Í¼Æ¬ÉÏ´«ÎÄ¼şµÄ×î´ó´óĞ¡
-	public static final long FILE_IMAGE_MAXSIZE = 200*1024; //Í¼Æ¬ÉÏ´«ÎÄ¼şµÄ×î´ó´óĞ¡
-	
-	//ActivityµÄResultCode
-	public static int RESULT_TEXTSIZE = 10; //×ÖºÅÉèÖÃµÄ·µ»ØCode
-	public static int RESULT_PAGECOUNT = 40; //Ã¿Ò³¼ÓÔØÌõÊıÉèÖÃµÄ·µ»ØCode
-	public static int RESULT_THEMESHIN = 50; //Æ¤·ôÉèÖÃµÄ·µ»ØCode
-	public static int RESULT_COMMENT_DEFAULT = 20; //·µ»Ø  ÆÀÂÛÄ¬ÈÏ
-	public static int RESULT_COMMENT_PARENT = 30; //·µ»Ø  ÆÀÂÛ@Ä³ÈË
-	//QQÊÚÈ¨µÄ·µ»Ø
-	public static int RESULT_QQ = 40; //·µ»Ø QQÊÚÈ¨ĞÅÏ¢
-	
-	//Í¼Æ¬Ñ¹Ëõ·½Ê½
-	public static int IMGTYPE_INYERCEPT = 0;  //Ëõ·Å
-	public static int IMGTYPE_SCALE = 1;  //½ØÈ¡
-	public static int IMGTYPE_HOME = 2;  //Ê×Ò³·Å´ó
-	public static int IMGTYPE_NORMAL = 3;  //Ô­Í¼
+	public static final int Time_DELAY = 30 * 1000; // æ¨è¿Ÿå¼€å§‹æ—¶é—´
+	public static final int Time_PERIOD = 30 * 1000; // å¾ªç¯è¿æ¥æ—¶é—´
 
-	//Ô²½Ç´úÏú
+	public static final int StatusCode_OK = 200; // StatusCode 200æ­£å¸¸
+
+	// å¸–å­åˆ—è¡¨ç±»å‹
+	public static final int PostList_All = 0; // é»˜è®¤å…¨éƒ¨
+	public static final int PostList_Top = 1; // ç½®é¡¶
+	public static final int PostList_Digest = 2; // ç²¾å
+	public static final int ColumnList = 3; // æ ç›®åˆ—è¡¨ çƒ­ç‰ˆç±»ä¼¼
+
+	public static final String TabType_More_ID = "-100"; // æ›´å¤štabçš„FID
+
+	public static final String TAG_NAVLIST = "navList"; // å¯¼èˆªåˆ—è¡¨
+	public static final String TAG_MORELIST = "moreList"; // æ›´å¤šåˆ—è¡¨
+	public static final String TAG_PostListType = "PostListType"; // é»˜è®¤å…¨éƒ¨
+
+	public static final int TAG_ADAPTER_COLUMNLIST = 0; // æ ç›®åˆ—è¡¨
+
+	public static final int Count_SubTabType = 6; // äºŒçº§ç›®å½•çš„tabä¸ªæ•°
+	public static final int COUNT_HeadLine = 5; // å¤´æ¡å¤§å›¾çš„ä¸ªæ•°
+
+	// public static final long FILE_IMAGE_MAXSIZE = 500*1024; //å›¾ç‰‡ä¸Šä¼ æ–‡ä»¶çš„æœ€å¤§å¤§å°
+	public static final long FILE_IMAGE_MAXSIZE = 200 * 1024; // å›¾ç‰‡ä¸Šä¼ æ–‡ä»¶çš„æœ€å¤§å¤§å°
+
+	// Activityçš„ResultCode
+	public static int RESULT_TEXTSIZE = 10; // å­—å·è®¾ç½®çš„è¿”å›Code
+	public static int RESULT_PAGECOUNT = 40; // æ¯é¡µåŠ è½½æ¡æ•°è®¾ç½®çš„è¿”å›Code
+	public static int RESULT_THEMESHIN = 50; // çš®è‚¤è®¾ç½®çš„è¿”å›Code
+	public static int RESULT_COMMENT_DEFAULT = 20; // è¿”å› è¯„è®ºé»˜è®¤
+	public static int RESULT_COMMENT_PARENT = 30; // è¿”å› è¯„è®º@æŸäºº
+	// QQæˆæƒçš„è¿”å›
+	public static int RESULT_QQ = 40; // è¿”å› QQæˆæƒä¿¡æ¯
+
+	// å›¾ç‰‡å‹ç¼©æ–¹å¼
+	public static int IMGTYPE_INYERCEPT = 0; // ç¼©æ”¾
+	public static int IMGTYPE_SCALE = 1; // æˆªå–
+	public static int IMGTYPE_HOME = 2; // é¦–é¡µæ”¾å¤§
+	public static int IMGTYPE_NORMAL = 3; // åŸå›¾
+
+	// åœ†è§’ä»£é”€
 	public static final float DEFAULT_ROUNDED = (float) 10.0;
 	public static final float DEFAULT_AVATER = (float) 30.0;
 
 	public static final boolean isCancelable = true;
 
-	//¹¦ÄÜÒıµ¼Í¼
+	// åŠŸèƒ½å¼•å¯¼å›¾
 	public static int[] newFunctionHintPics = {};
 }

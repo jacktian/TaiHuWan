@@ -16,6 +16,11 @@
  *******************************************************************************/
 package com.gloria.pulltorefresh.library.internal;
 
+import com.gloria.hbh.main.R;
+import com.gloria.pulltorefresh.library.ILoadingLayout;
+import com.gloria.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.gloria.pulltorefresh.library.PullToRefreshBase.Orientation;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -35,11 +40,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.gloria.hbh.main.R;
-import com.gloria.pulltorefresh.library.ILoadingLayout;
-import com.gloria.pulltorefresh.library.PullToRefreshBase.Mode;
-import com.gloria.pulltorefresh.library.PullToRefreshBase.Orientation;
 
 @SuppressLint("ViewConstructor")
 public abstract class LoadingLayout extends FrameLayout implements ILoadingLayout {
@@ -71,13 +71,13 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 		mScrollDirection = scrollDirection;
 
 		switch (scrollDirection) {
-			case HORIZONTAL:
-				LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_horizontal, this);
-				break;
-			case VERTICAL:
-			default:
-				LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_vertical, this);
-				break;
+		case HORIZONTAL:
+			LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_horizontal, this);
+			break;
+		case VERTICAL:
+		default:
+			LayoutInflater.from(context).inflate(R.layout.pull_to_refresh_header_vertical, this);
+			break;
 		}
 
 		mInnerLayout = (FrameLayout) findViewById(R.id.fl_inner);
@@ -89,24 +89,24 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 		FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mInnerLayout.getLayoutParams();
 
 		switch (mode) {
-			case PULL_FROM_END:
-				lp.gravity = scrollDirection == Orientation.VERTICAL ? Gravity.TOP : Gravity.LEFT;
+		case PULL_FROM_END:
+			lp.gravity = scrollDirection == Orientation.VERTICAL ? Gravity.TOP : Gravity.LEFT;
 
-				// Load in labels
-				mPullLabel = context.getString(R.string.pull_to_refresh_from_bottom_pull_label);
-				mRefreshingLabel = context.getString(R.string.pull_to_refresh_from_bottom_refreshing_label);
-				mReleaseLabel = context.getString(R.string.pull_to_refresh_from_bottom_release_label);
-				break;
+			// Load in labels
+			mPullLabel = context.getString(R.string.pull_to_refresh_from_bottom_pull_label);
+			mRefreshingLabel = context.getString(R.string.pull_to_refresh_from_bottom_refreshing_label);
+			mReleaseLabel = context.getString(R.string.pull_to_refresh_from_bottom_release_label);
+			break;
 
-			case PULL_FROM_START:
-			default:
-				lp.gravity = scrollDirection == Orientation.VERTICAL ? Gravity.BOTTOM : Gravity.RIGHT;
+		case PULL_FROM_START:
+		default:
+			lp.gravity = scrollDirection == Orientation.VERTICAL ? Gravity.BOTTOM : Gravity.RIGHT;
 
-				// Load in labels
-				mPullLabel = context.getString(R.string.pull_to_refresh_pull_label);
-				mRefreshingLabel = context.getString(R.string.pull_to_refresh_refreshing_label);
-				mReleaseLabel = context.getString(R.string.pull_to_refresh_release_label);
-				break;
+			// Load in labels
+			mPullLabel = context.getString(R.string.pull_to_refresh_pull_label);
+			mRefreshingLabel = context.getString(R.string.pull_to_refresh_refreshing_label);
+			mReleaseLabel = context.getString(R.string.pull_to_refresh_release_label);
+			break;
 		}
 
 		if (attrs.hasValue(R.styleable.PullToRefresh_ptrHeaderBackground)) {
@@ -150,24 +150,24 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 		// Check Specific Drawable from Attrs, these overrite the generic
 		// drawable attr above
 		switch (mode) {
-			case PULL_FROM_START:
-			default:
-				if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableStart)) {
-					imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableStart);
-				} else if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableTop)) {
-					Utils.warnDeprecation("ptrDrawableTop", "ptrDrawableStart");
-					imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableTop);
-				}
-				break;
+		case PULL_FROM_START:
+		default:
+			if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableStart)) {
+				imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableStart);
+			} else if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableTop)) {
+				Utils.warnDeprecation("ptrDrawableTop", "ptrDrawableStart");
+				imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableTop);
+			}
+			break;
 
-			case PULL_FROM_END:
-				if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableEnd)) {
-					imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableEnd);
-				} else if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableBottom)) {
-					Utils.warnDeprecation("ptrDrawableBottom", "ptrDrawableEnd");
-					imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableBottom);
-				}
-				break;
+		case PULL_FROM_END:
+			if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableEnd)) {
+				imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableEnd);
+			} else if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableBottom)) {
+				Utils.warnDeprecation("ptrDrawableBottom", "ptrDrawableEnd");
+				imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableBottom);
+			}
+			break;
 		}
 
 		// If we don't have a user defined drawable, load the default
@@ -195,11 +195,11 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 
 	public final int getContentSize() {
 		switch (mScrollDirection) {
-			case HORIZONTAL:
-				return mInnerLayout.getWidth();
-			case VERTICAL:
-			default:
-				return mInnerLayout.getHeight();
+		case HORIZONTAL:
+			return mInnerLayout.getWidth();
+		case VERTICAL:
+		default:
+			return mInnerLayout.getHeight();
 		}
 	}
 

@@ -1,5 +1,9 @@
 package com.gloria.slidingmenu.lib.fragment;
 
+import com.gloria.hbh.main.Activity_Main;
+import com.gloria.hbh.main.R;
+import com.gloria.hbh.util.ScreenUtils;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Html;
@@ -13,211 +17,208 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.gloria.hbh.main.Activity_Main;
-import com.gloria.hbh.main.R;
-import com.gloria.hbh.util.ScreenUtils;
-
 /*
- * »¨²©°Ù¿ÆÒ³Ãæ
+ * èŠ±åšç™¾ç§‘é¡µé¢
  */
 @SuppressLint("ValidFragment")
 @SuppressWarnings("static-access")
-public class EncyclopediaFragment extends BaseFragment{
-	
-	String text = "×ÉÑ¶";
-	
-    Activity_Main mMain = null;
-    private FrameLayout mFrameLayout = null;
-    
-    TextView text_overview,text_logo_1,text_logo_2,text_emblem_1,text_emblem_2,
-    			text_zhnr_1,text_zhnr_2,text_zhxs_1,text_zhxs_2,
-    			text_zzx_1,text_zzx_2,text_fzx_1,text_fzx_2;
-    
-    WebView webview;
-    private String  url = "";    //webview¼ÓÔØµÄÍøÖ·
-    
-    LinearLayout layout;
-    
-    public EncyclopediaFragment() {
-    }
+public class EncyclopediaFragment extends BaseFragment {
 
-    public EncyclopediaFragment(String text) {
-        this.text = text;
-    }
+	String text = "å’¨è®¯";
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-        
-        mMain = (Activity_Main) getActivity();
-        mFrameLayout = (FrameLayout) mMain.findViewById(R.id.content_main);
-    }
-    
+	Activity_Main mMain = null;
+	private FrameLayout mFrameLayout = null;
+
+	TextView text_overview, text_logo_1, text_logo_2, text_emblem_1, text_emblem_2, text_zhnr_1, text_zhnr_2,
+			text_zhxs_1, text_zhxs_2, text_zzx_1, text_zzx_2, text_fzx_1, text_fzx_2;
+
+	WebView webview;
+	private String url = ""; // webviewåŠ è½½çš„ç½‘å€
+
+	LinearLayout layout;
+
+	public EncyclopediaFragment() {
+	}
+
+	public EncyclopediaFragment(String text) {
+		this.text = text;
+	}
+
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
+
+		mMain = (Activity_Main) getActivity();
+		mFrameLayout = (FrameLayout) mMain.findViewById(R.id.content_main);
+	}
+
 	@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_encyclopedia, null);
-        
-        setView(view);
-	 	setListener();
-    	
-        return view;
-    }
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.activity_encyclopedia, null);
+
+		setView(view);
+		setListener();
+
+		return view;
+	}
 
 	private void setView(View view) {
-		titlebar = (LinearLayout)view.findViewById(R.id.titlebar);
-        titlebar.setVisibility(View.VISIBLE);
-		titlebar_name = (TextView)view.findViewById(R.id.titlebar_name);
-		titlebar_menu = (Button)view.findViewById(R.id.titlebar_menu);
-		titlebar_left = (Button)view.findViewById(R.id.titlebar_left);
-	 	titlebar_menu.setVisibility(View.VISIBLE);
-	 	titlebar_left.setVisibility(View.INVISIBLE);
-	 	titlebar_name.setVisibility(View.VISIBLE);
-	 	//titlebar_name.setText("»¨²©°Ù¿Æ");
-	 	titlebar.setBackgroundResource(R.drawable.top_img);
-	 	
-	 	text_overview = (TextView)view.findViewById(R.id.text_overview);
-	 	text_logo_1 = (TextView)view.findViewById(R.id.text_logo_1);
-	 	text_logo_2 = (TextView)view.findViewById(R.id.text_logo_2);
-	 	text_emblem_1 = (TextView)view.findViewById(R.id.text_emblem_1);
-	 	text_emblem_2 = (TextView)view.findViewById(R.id.text_emblem_2);
-	 	text_zhnr_1 = (TextView)view.findViewById(R.id.text_zhnr_1);
-	 	text_zhnr_2 = (TextView)view.findViewById(R.id.text_zhnr_2);
-	 	text_zhxs_1 = (TextView)view.findViewById(R.id.text_zhxs_1);
-	 	text_zhxs_2 = (TextView)view.findViewById(R.id.text_zhxs_2);
-	 	text_zzx_1 = (TextView)view.findViewById(R.id.text_zzx_1);
-	 	text_zzx_2 = (TextView)view.findViewById(R.id.text_zzx_2);
-	 	text_fzx_1 = (TextView)view.findViewById(R.id.text_fzx_1);
-	 	text_fzx_2 = (TextView)view.findViewById(R.id.text_fzx_2);
-	 	
-	 	String overview = "ÖĞ¹ú»¨»Ü²©ÀÀ»á£¨¼ò³Æ¡°»¨²©»á¡±£©´´Ê¼ÓÚ1987Äê£¬Ã¿ËÄÄê¾Ù°ìÒ»´Î£¬" +
-	 						"ÊÇÎÒ¹ú¹æÄ£×î´ó¡¢Ó°Ïì×î¹ãµÄ¹ú¼Ò¼¶ »¨ÊÂÊ¢»á£¬±»ÓşÎªÖĞ¹ú»¨»Ü½çµÄ¡°°ÂÁÖÆ¥¿Ë¡±£¬" +
-	 						"ÖÁ½ñÒÑÔÚ±±¾©¡¢ÉÏº£¡¢¹ãÖİ¡¢³É¶¼µÈµØ³É¹¦¾Ù°ìÆß½ì£¬¹æÄ£ ¡¢Ó°Ïì²»¶Ï¼ÓÉî£¬Õı³¯×Å¹ú¼Ê»¯µÄ·½Ïò·¢Õ¹¡£" +
-	 						"µÚ°Ë½ìÖĞ¹ú»¨»Ü²©ÀÀ»á½«ÓÚ2013Äê9ÔÂ£¬ÔÚËØÓĞ¡°¹ú¼Ê»¨Ô°³ÇÊĞ¡±¡¢¡°»¨¶¼Ë®³Ç¡±ÃÀÓşµÄ½­ËÕÊ¡³£ÖİÊĞÎä½øÇø¾«²ÊÕÀ·Å¡£" +
-	 						"<br>Ê± ¼ä£º2013Äê9ÔÂ28ÈÕ¡ª10ÔÂ27ÈÕ<br>Ö÷ Ìâ£ºĞÒ¸£Ïñ»¨¶ùÒ»Ñù <br>»á »¨£ºÔÂ¼¾»¨<br>" +
-	 						"Ö÷°ìµ¥Î»£ºÖĞ¹ú»¨»ÜĞ­»á£¬½­ËÕÊ¡ÈËÃñÕş¸®<br>³Ğ°ìµ¥Î»£º½­ËÕÊ¡»¨Ä¾Ğ­»á£¬½­ËÕÊ¡³£ÖİÊĞÈËÃñÕş¸®<br>ÊµÊ©µ¥Î»£º½­ËÕÊ¡³£ÖİÊĞÎä½øÇøÈËÃñÕş¸®";
-	 	text_overview.setText(Html.fromHtml(overview));
-	 	
-	 	switch (ScreenUtils.getInstance().getWidth()) {
+		titlebar = (LinearLayout) view.findViewById(R.id.titlebar);
+		titlebar.setVisibility(View.VISIBLE);
+		titlebar_name = (TextView) view.findViewById(R.id.titlebar_name);
+		titlebar_menu = (Button) view.findViewById(R.id.titlebar_menu);
+		titlebar_left = (Button) view.findViewById(R.id.titlebar_left);
+		titlebar_menu.setVisibility(View.VISIBLE);
+		titlebar_left.setVisibility(View.INVISIBLE);
+		titlebar_name.setVisibility(View.VISIBLE);
+		// titlebar_name.setText("èŠ±åšç™¾ç§‘");
+		titlebar.setBackgroundResource(R.drawable.top_img);
+
+		text_overview = (TextView) view.findViewById(R.id.text_overview);
+		text_logo_1 = (TextView) view.findViewById(R.id.text_logo_1);
+		text_logo_2 = (TextView) view.findViewById(R.id.text_logo_2);
+		text_emblem_1 = (TextView) view.findViewById(R.id.text_emblem_1);
+		text_emblem_2 = (TextView) view.findViewById(R.id.text_emblem_2);
+		text_zhnr_1 = (TextView) view.findViewById(R.id.text_zhnr_1);
+		text_zhnr_2 = (TextView) view.findViewById(R.id.text_zhnr_2);
+		text_zhxs_1 = (TextView) view.findViewById(R.id.text_zhxs_1);
+		text_zhxs_2 = (TextView) view.findViewById(R.id.text_zhxs_2);
+		text_zzx_1 = (TextView) view.findViewById(R.id.text_zzx_1);
+		text_zzx_2 = (TextView) view.findViewById(R.id.text_zzx_2);
+		text_fzx_1 = (TextView) view.findViewById(R.id.text_fzx_1);
+		text_fzx_2 = (TextView) view.findViewById(R.id.text_fzx_2);
+
+		String overview = "ä¸­å›½èŠ±å‰åšè§ˆä¼šï¼ˆç®€ç§°â€œèŠ±åšä¼šâ€ï¼‰åˆ›å§‹äº1987å¹´ï¼Œæ¯å››å¹´ä¸¾åŠä¸€æ¬¡ï¼Œ" + "æ˜¯æˆ‘å›½è§„æ¨¡æœ€å¤§ã€å½±å“æœ€å¹¿çš„å›½å®¶çº§ èŠ±äº‹ç››ä¼šï¼Œè¢«èª‰ä¸ºä¸­å›½èŠ±å‰ç•Œçš„â€œå¥¥æ—åŒ¹å…‹â€ï¼Œ"
+				+ "è‡³ä»Šå·²åœ¨åŒ—äº¬ã€ä¸Šæµ·ã€å¹¿å·ã€æˆéƒ½ç­‰åœ°æˆåŠŸä¸¾åŠä¸ƒå±Šï¼Œè§„æ¨¡ ã€å½±å“ä¸æ–­åŠ æ·±ï¼Œæ­£æœç€å›½é™…åŒ–çš„æ–¹å‘å‘å±•ã€‚"
+				+ "ç¬¬å…«å±Šä¸­å›½èŠ±å‰åšè§ˆä¼šå°†äº2013å¹´9æœˆï¼Œåœ¨ç´ æœ‰â€œå›½é™…èŠ±å›­åŸå¸‚â€ã€â€œèŠ±éƒ½æ°´åŸâ€ç¾èª‰çš„æ±Ÿè‹çœå¸¸å·å¸‚æ­¦è¿›åŒºç²¾å½©ç»½æ”¾ã€‚"
+				+ "<br>æ—¶ é—´ï¼š2013å¹´9æœˆ28æ—¥â€”10æœˆ27æ—¥<br>ä¸» é¢˜ï¼šå¹¸ç¦åƒèŠ±å„¿ä¸€æ · <br>ä¼š èŠ±ï¼šæœˆå­£èŠ±<br>"
+				+ "ä¸»åŠå•ä½ï¼šä¸­å›½èŠ±å‰åä¼šï¼Œæ±Ÿè‹çœäººæ°‘æ”¿åºœ<br>æ‰¿åŠå•ä½ï¼šæ±Ÿè‹çœèŠ±æœ¨åä¼šï¼Œæ±Ÿè‹çœå¸¸å·å¸‚äººæ°‘æ”¿åºœ<br>å®æ–½å•ä½ï¼šæ±Ÿè‹çœå¸¸å·å¸‚æ­¦è¿›åŒºäººæ°‘æ”¿åºœ";
+		text_overview.setText(Html.fromHtml(overview));
+
+		switch (ScreenUtils.getInstance().getWidth()) {
 		case 480:
 			text_overview.setTextSize(17);
 			text_logo_1.setTextSize(17);
-		 	text_logo_2.setTextSize(17);
-		 	text_emblem_1.setTextSize(17);
-		 	text_emblem_2.setTextSize(17);
-		 	text_zhnr_1.setTextSize(17);
-		 	text_zhnr_2.setTextSize(17);
-		 	text_zhxs_1.setTextSize(17);
-		 	text_zhxs_2.setTextSize(17);
-		 	text_zzx_1.setTextSize(17);
-		 	text_zzx_2.setTextSize(17);
-		 	text_fzx_1.setTextSize(17);
-		 	text_fzx_2.setTextSize(17);
-		 	
-			text_logo_1.setText("»á»ÕÔìĞÍÖĞ£¬»¨Èï²¿·ÖÊÇÊı×Ö¡°8¡±µÄ±äĞÎ£¬ÕûÌåÔªËØÈÚºÏÁË³£ÖİÊĞ»¨¡ª¡ªÔÂ¼¾¡¢Îä½ø´º");
-			text_logo_2.setText("ÇïÑÍ³Ç¡°Èı³ÇÈıºÓ¡±¡¢»¨²©»áµûĞÎÖ÷Õ¹¹İµÈµØ·½ÔªËØ£¬ÓĞÇ¿ÁÒµÄ³£ÖİµØÓòÌØÉ«¡£");
-			
-			text_emblem_1.setText("¼ªÏéÎïÈ¡Ãû¡°ºÍºÍ¡±¡¢¡°ÃÀÃÀ¡±¡£¡°ºÍºÍ¡±´ú±íºÍĞ³Éç»á¡¢ºÍÄÀ¹ØÏµ£¬¡°ÃÀÃÀ¡±´ú±íÃÀºÃÉú");
-			text_emblem_2.setText("»î¡¢ÃÀÂúÈËÉú¡£½ô¿ÛÖ÷ÌâÀíÄî¡£");
-			
-			text_zhnr_1.setText("¼¯ÖĞÕ¹Ê¾ÏÊÇĞ»¨¡¢ÇĞÒ¶¡¢Åè»¨µÈ¸÷Àà»¨»Ü£»¹ÛÒ¶Ö²Îï¡¢Åè¾°£»ÖÖ×Ó¡¢ÃçÄ¾");
-			text_zhnr_2.setText("¡¢ÖÖÇò£»¸É»¨¡¢·ÂÉú»¨¡¢×°ÊÎÖ²Îï£»»¨·Ê¡¢»ùÖÊ£»Åè²§¡¢¼¸¼Ü¡¢Æ÷Ãó£»Ô°ÒÕ¹¤¾ß¡¢ÉèÊ©µÈÏà¹Ø²úÆ·£»¹ÛÉÍÊ¯²Ä£»¹ÛÉÍÄñ¡¢Óã¡¢³æ£»Ô°ÁÖ¾°¹ÛÉè¼ÆµÈ¡£");
-			
-			text_zhxs_1.setText("Õ¹»áÓÉÊÒÄÚÕ¹Çø¡¢ÊÒÍâÕ¹Çø¡¢Ïà¹Ø»î¶¯Èı²¿·Ö×é³É¡£ÆäÖĞÊÒÄÚÕ¹Çø·Ö×ÛºÏ¹İ");
-			text_zhxs_2.setText("ºÍ×¨Ìâ¹İ£¬ÊÒÍâÕ¹ÇøÒÔÖ²ÎïÔì¾°ÎªÖ÷£¬Ïà¹Ø»î¶¯°üÀ¨¿ªÄ»Ê½¡¢±ÕÄ»Ê½¡¢°ä½±ÒÇÊ½µÈ¡£Ö÷Õ¹Çø¹æ»®½¨Éè×ÜÕ¼µØÃæ»ı3000Ä¶£¬·ÖÊÒÄÚÕ¹ÇøºÍÊÒÍâÕ¹ÇøÁ½´ó²¿·Ö¡£");
-			
-			text_zzx_1.setText("¹æ»®½¨Éè×ÜÕ¼µØÃæ»ı3000Ä¶£¬×Ü·ÖÎªÊÒÄÚÕ¹ÇøºÍÊÒÍâÕ¹ÇøÁ½´ó²¿·Ö¡£");
-			text_zzx_2.setText("¡¾ÊÒÄÚÕ¹Çø¡¿×ÛºÏ¹İ£º½¨ÖşÃæ»ıÔ¼7ÍòÆ½·½Ã×£¬ÊÇµÚ°Ë½ìÖĞ¹ú»¨»Ü²©ÀÀ»á¸÷Õ¹ÍÅÊÒÄÚ²¼Õ¹µÄÖ÷Õ¹¹İ£¬·ÖÎªÊ¡ÇøÊĞÕ¹Çø¡¢¸Û°ÄÌ¨Õ¹Çø¡¢ÆóÒµÕ¹Çø¡¢×¨Ìâ»¨»ÜÓë¿Æ¼¼Õ¹Çø¡£Ê¡ÇøÊĞÕ¹ÇøÔ­ÔòÉÏÒÔÊ¡¡¢×ÔÖÎÇø¡¢Ö±Ï½ÊĞºÍÉîÛÚÊĞ»¨»ÜĞ­»áÎªµ¥Î»Í³Ò»×éÖ¯²ÎÕ¹£¬¸Û°ÄÌ¨Õ¹ÇøºÍÆóÒµÕ¹ÇøÓÉ²ÎÕ¹µ¥Î»Éè¼ÆÊ¦²¼Õ¹¡£ Ö÷Ìâ¹İ£ºÓÉ×ÔÈ»¹İ¡¢¿Æ¼¼¹İ¡¢ÒÕÊõ¹İ×é³É¡£¡¾ÊÒÍâÕ¹Çø¡¿Ô­ÔòÉÏÒÔÖ²ÎïÔì¾°ÎªÖ÷£¬ÓÉ¸÷Ê¡ÊĞÊÒÍâÕ¹Çø¡¢¹ú¼ÊÕ¹Çø¡¢×¨Ìâ»¨»ÜÕ¹ÇøºÍÆóÒµÕ¹Çø×é³É¡£");
-			
-			text_fzx_1.setText("Ö÷ÒªÎª¡°Ò»³¡ÎåÔ°¡±£¬¡°Ò»³¡¡±¼´µÚÁù½ìÖĞ¹ú»¨»Ü½»Ò×»á³¡¡ª¡ªÏÄÏª»¨Ä¾ÊĞ³¡£¬ÊĞ");
-			text_fzx_2.setText("³¡¹æ»®À©½¨ÖÁ800Ä¶¹æÄ££¬½«½¨³ÉÈ«¹ú×î´óµÄ»¨»Ü¼°Ïà¹Ø×Ê²ÄÓªÏúÎïÁ÷ÖĞĞÄ£»¡°ÎåÔ°¡±Ö¸½­ÄÏ»¨¶¼²úÒµÔ°¡¢×ÏŞ±Ô°¡¢Ãµ¹åÔ°¡¢ÒÕÁÖÔ°¡¢Åè¾°Ô°¡£");
-			
+			text_logo_2.setTextSize(17);
+			text_emblem_1.setTextSize(17);
+			text_emblem_2.setTextSize(17);
+			text_zhnr_1.setTextSize(17);
+			text_zhnr_2.setTextSize(17);
+			text_zhxs_1.setTextSize(17);
+			text_zhxs_2.setTextSize(17);
+			text_zzx_1.setTextSize(17);
+			text_zzx_2.setTextSize(17);
+			text_fzx_1.setTextSize(17);
+			text_fzx_2.setTextSize(17);
+
+			text_logo_1.setText("ä¼šå¾½é€ å‹ä¸­ï¼ŒèŠ±è•Šéƒ¨åˆ†æ˜¯æ•°å­—â€œ8â€çš„å˜å½¢ï¼Œæ•´ä½“å…ƒç´ èåˆäº†å¸¸å·å¸‚èŠ±â€”â€”æœˆå­£ã€æ­¦è¿›æ˜¥");
+			text_logo_2.setText("ç§‹æ·¹åŸâ€œä¸‰åŸä¸‰æ²³â€ã€èŠ±åšä¼šè¶å½¢ä¸»å±•é¦†ç­‰åœ°æ–¹å…ƒç´ ï¼Œæœ‰å¼ºçƒˆçš„å¸¸å·åœ°åŸŸç‰¹è‰²ã€‚");
+
+			text_emblem_1.setText("å‰ç¥¥ç‰©å–åâ€œå’Œå’Œâ€ã€â€œç¾ç¾â€ã€‚â€œå’Œå’Œâ€ä»£è¡¨å’Œè°ç¤¾ä¼šã€å’Œç¦å…³ç³»ï¼Œâ€œç¾ç¾â€ä»£è¡¨ç¾å¥½ç”Ÿ");
+			text_emblem_2.setText("æ´»ã€ç¾æ»¡äººç”Ÿã€‚ç´§æ‰£ä¸»é¢˜ç†å¿µã€‚");
+
+			text_zhnr_1.setText("é›†ä¸­å±•ç¤ºé²œåˆ‡èŠ±ã€åˆ‡å¶ã€ç›†èŠ±ç­‰å„ç±»èŠ±å‰ï¼›è§‚å¶æ¤ç‰©ã€ç›†æ™¯ï¼›ç§å­ã€è‹—æœ¨");
+			text_zhnr_2.setText("ã€ç§çƒï¼›å¹²èŠ±ã€ä»¿ç”ŸèŠ±ã€è£…é¥°æ¤ç‰©ï¼›èŠ±è‚¥ã€åŸºè´¨ï¼›ç›†é’µã€å‡ æ¶ã€å™¨çš¿ï¼›å›­è‰ºå·¥å…·ã€è®¾æ–½ç­‰ç›¸å…³äº§å“ï¼›è§‚èµçŸ³æï¼›è§‚èµé¸Ÿã€é±¼ã€è™«ï¼›å›­æ—æ™¯è§‚è®¾è®¡ç­‰ã€‚");
+
+			text_zhxs_1.setText("å±•ä¼šç”±å®¤å†…å±•åŒºã€å®¤å¤–å±•åŒºã€ç›¸å…³æ´»åŠ¨ä¸‰éƒ¨åˆ†ç»„æˆã€‚å…¶ä¸­å®¤å†…å±•åŒºåˆ†ç»¼åˆé¦†");
+			text_zhxs_2.setText("å’Œä¸“é¢˜é¦†ï¼Œå®¤å¤–å±•åŒºä»¥æ¤ç‰©é€ æ™¯ä¸ºä¸»ï¼Œç›¸å…³æ´»åŠ¨åŒ…æ‹¬å¼€å¹•å¼ã€é—­å¹•å¼ã€é¢å¥–ä»ªå¼ç­‰ã€‚ä¸»å±•åŒºè§„åˆ’å»ºè®¾æ€»å åœ°é¢ç§¯3000äº©ï¼Œåˆ†å®¤å†…å±•åŒºå’Œå®¤å¤–å±•åŒºä¸¤å¤§éƒ¨åˆ†ã€‚");
+
+			text_zzx_1.setText("è§„åˆ’å»ºè®¾æ€»å åœ°é¢ç§¯3000äº©ï¼Œæ€»åˆ†ä¸ºå®¤å†…å±•åŒºå’Œå®¤å¤–å±•åŒºä¸¤å¤§éƒ¨åˆ†ã€‚");
+			text_zzx_2.setText(
+					"ã€å®¤å†…å±•åŒºã€‘ç»¼åˆé¦†ï¼šå»ºç­‘é¢ç§¯çº¦7ä¸‡å¹³æ–¹ç±³ï¼Œæ˜¯ç¬¬å…«å±Šä¸­å›½èŠ±å‰åšè§ˆä¼šå„å±•å›¢å®¤å†…å¸ƒå±•çš„ä¸»å±•é¦†ï¼Œåˆ†ä¸ºçœåŒºå¸‚å±•åŒºã€æ¸¯æ¾³å°å±•åŒºã€ä¼ä¸šå±•åŒºã€ä¸“é¢˜èŠ±å‰ä¸ç§‘æŠ€å±•åŒºã€‚çœåŒºå¸‚å±•åŒºåŸåˆ™ä¸Šä»¥çœã€è‡ªæ²»åŒºã€ç›´è¾–å¸‚å’Œæ·±åœ³å¸‚èŠ±å‰åä¼šä¸ºå•ä½ç»Ÿä¸€ç»„ç»‡å‚å±•ï¼Œæ¸¯æ¾³å°å±•åŒºå’Œä¼ä¸šå±•åŒºç”±å‚å±•å•ä½è®¾è®¡å¸ˆå¸ƒå±•ã€‚ ä¸»é¢˜é¦†ï¼šç”±è‡ªç„¶é¦†ã€ç§‘æŠ€é¦†ã€è‰ºæœ¯é¦†ç»„æˆã€‚ã€å®¤å¤–å±•åŒºã€‘åŸåˆ™ä¸Šä»¥æ¤ç‰©é€ æ™¯ä¸ºä¸»ï¼Œç”±å„çœå¸‚å®¤å¤–å±•åŒºã€å›½é™…å±•åŒºã€ä¸“é¢˜èŠ±å‰å±•åŒºå’Œä¼ä¸šå±•åŒºç»„æˆã€‚");
+
+			text_fzx_1.setText("ä¸»è¦ä¸ºâ€œä¸€åœºäº”å›­â€ï¼Œâ€œä¸€åœºâ€å³ç¬¬å…­å±Šä¸­å›½èŠ±å‰äº¤æ˜“ä¼šåœºâ€”â€”å¤æºªèŠ±æœ¨å¸‚åœºï¼Œå¸‚");
+			text_fzx_2.setText("åœºè§„åˆ’æ‰©å»ºè‡³800äº©è§„æ¨¡ï¼Œå°†å»ºæˆå…¨å›½æœ€å¤§çš„èŠ±å‰åŠç›¸å…³èµ„æè¥é”€ç‰©æµä¸­å¿ƒï¼›â€œäº”å›­â€æŒ‡æ±Ÿå—èŠ±éƒ½äº§ä¸šå›­ã€ç´«è–‡å›­ã€ç«ç‘°å›­ã€è‰ºæ—å›­ã€ç›†æ™¯å›­ã€‚");
+
 			break;
 		case 720:
 			text_overview.setTextSize(18);
 			text_logo_1.setTextSize(18);
-		 	text_logo_2.setTextSize(18);
-		 	text_emblem_1.setTextSize(18);
-		 	text_emblem_2.setTextSize(18);
-		 	text_zhnr_1.setTextSize(18);
-		 	text_zhnr_2.setTextSize(18);
-		 	text_zhxs_1.setTextSize(18);
-		 	text_zhxs_2.setTextSize(18);
-		 	text_zzx_1.setTextSize(18);
-		 	text_zzx_2.setTextSize(18);
-		 	text_fzx_1.setTextSize(18);
-		 	text_fzx_2.setTextSize(18);
-		 	
-		 	text_logo_1.setText("»á»ÕÔìĞÍÖĞ£¬»¨Èï²¿·ÖÊÇÊı×Ö¡°8¡±µÄ±äĞÎ£¬ÕûÌåÔªËØÈÚºÏÁË³£ÖİÊĞ»¨¡ª¡ªÔÂ¼¾¡¢Îä½ø´ºÇïÑÍ³Ç¡°Èı³Ç");
-			text_logo_2.setText("ÈıºÓ¡±¡¢»¨²©»áµûĞÎÖ÷Õ¹¹İµÈµØ·½ÔªËØ£¬ÓĞÇ¿ÁÒµÄ³£ÖİµØÓòÌØÉ«¡£");
-			
-			text_emblem_1.setText("¼ªÏéÎïÈ¡Ãû¡°ºÍºÍ¡±¡¢¡°ÃÀÃÀ¡±¡£¡°ºÍºÍ¡±´ú±íºÍĞ³Éç»á¡¢ºÍÄÀ¹ØÏµ£¬¡°ÃÀÃÀ¡±´ú±íÃÀºÃÉú»î¡¢ÃÀÂúÈËÉú");
-			text_emblem_2.setText("¡£½ô¿ÛÖ÷ÌâÀíÄî¡£");
-			
-			text_zhnr_1.setText("¼¯ÖĞÕ¹Ê¾ÏÊÇĞ»¨¡¢ÇĞÒ¶¡¢Åè»¨µÈ¸÷Àà»¨»Ü£»¹ÛÒ¶Ö²Îï¡¢Åè¾°£»ÖÖ×Ó¡¢ÃçÄ¾¡¢ÖÖÇò£»¸É");
-			text_zhnr_2.setText("»¨¡¢·ÂÉú»¨¡¢×°ÊÎÖ²Îï£»»¨·Ê¡¢»ùÖÊ£»Åè²§¡¢¼¸¼Ü¡¢Æ÷Ãó£»Ô°ÒÕ¹¤¾ß¡¢ÉèÊ©µÈÏà¹Ø²úÆ·£»¹ÛÉÍÊ¯²Ä£»¹ÛÉÍÄñ¡¢Óã¡¢³æ£»Ô°ÁÖ¾°¹ÛÉè¼ÆµÈ¡£");
-			
-			text_zhxs_1.setText("Õ¹»áÓÉÊÒÄÚÕ¹Çø¡¢ÊÒÍâÕ¹Çø¡¢Ïà¹Ø»î¶¯Èı²¿·Ö×é³É¡£ÆäÖĞÊÒÄÚÕ¹Çø·Ö×ÛºÏ¹İºÍ×¨Ìâ¹İ¡£");
-			text_zhxs_2.setText("ÊÒÍâÕ¹ÇøÒÔÖ²ÎïÔì¾°ÎªÖ÷£¬Ïà¹Ø»î¶¯°üÀ¨¿ªÄ»Ê½¡¢±ÕÄ»Ê½¡¢°ä½±ÒÇÊ½µÈ¡£Ö÷Õ¹Çø¹æ»®½¨Éè×ÜÕ¼µØÃæ»ı3000Ä¶£¬·ÖÊÒÄÚÕ¹ÇøºÍÊÒÍâÕ¹ÇøÁ½´ó²¿·Ö¡£");
-			
-			text_zzx_1.setText("¹æ»®½¨Éè×ÜÕ¼µØÃæ»ı3000Ä¶£¬·ÖÊÒÄÚÕ¹ÇøºÍÊÒÍâÕ¹ÇøÁ½´ó²¿·Ö¡£");
-			text_zzx_2.setText("¡¾ÊÒÄÚÕ¹Çø¡¿×ÛºÏ¹İ£º½¨ÖşÃæ»ıÔ¼7ÍòÆ½·½Ã×£¬ÊÇµÚ°Ë½ìÖĞ¹ú»¨»Ü²©ÀÀ»á¸÷Õ¹ÍÅÊÒÄÚ²¼Õ¹µÄÖ÷Õ¹¹İ£¬·ÖÎªÊ¡ÇøÊĞÕ¹Çø¡¢¸Û°ÄÌ¨Õ¹Çø¡¢ÆóÒµÕ¹Çø¡¢×¨Ìâ»¨»ÜÓë¿Æ¼¼Õ¹Çø¡£Ê¡ÇøÊĞÕ¹ÇøÔ­ÔòÉÏÒÔÊ¡¡¢×ÔÖÎÇø¡¢Ö±Ï½ÊĞºÍÉîÛÚÊĞ»¨»ÜĞ­»áÎªµ¥Î»Í³Ò»×éÖ¯²ÎÕ¹£¬¸Û°ÄÌ¨Õ¹ÇøºÍÆóÒµÕ¹ÇøÓÉ²ÎÕ¹µ¥Î»Éè¼ÆÊ¦²¼Õ¹¡£ Ö÷Ìâ¹İ£ºÓÉ×ÔÈ»¹İ¡¢¿Æ¼¼¹İ¡¢ÒÕÊõ¹İ×é³É¡£¡¾ÊÒÍâÕ¹Çø¡¿Ô­ÔòÉÏÒÔÖ²ÎïÔì¾°ÎªÖ÷£¬ÓÉ¸÷Ê¡ÊĞÊÒÍâÕ¹Çø¡¢¹ú¼ÊÕ¹Çø¡¢×¨Ìâ»¨»ÜÕ¹ÇøºÍÆóÒµÕ¹Çø×é³É¡£");
-			
-			text_fzx_1.setText("Ö÷ÒªÎª¡°Ò»³¡ÎåÔ°¡±£¬¡°Ò»³¡¡±¼´µÚÁù½ìÖĞ¹ú»¨»Ü½»Ò×»á³¡¡ª¡ªÏÄÏª»¨Ä¾ÊĞ³¡£¬ÊĞ³¡¹æ»®À©½¨");
-			text_fzx_2.setText("ÖÁ800Ä¶¹æÄ££¬½«½¨³ÉÈ«¹ú×î´óµÄ»¨»Ü¼°Ïà¹Ø×Ê²ÄÓªÏúÎïÁ÷ÖĞĞÄ£»¡°ÎåÔ°¡±Ö¸½­ÄÏ»¨¶¼²úÒµÔ°¡¢×ÏŞ±Ô°¡¢Ãµ¹åÔ°¡¢ÒÕÁÖÔ°¡¢Åè¾°Ô°¡£");
-			
+			text_logo_2.setTextSize(18);
+			text_emblem_1.setTextSize(18);
+			text_emblem_2.setTextSize(18);
+			text_zhnr_1.setTextSize(18);
+			text_zhnr_2.setTextSize(18);
+			text_zhxs_1.setTextSize(18);
+			text_zhxs_2.setTextSize(18);
+			text_zzx_1.setTextSize(18);
+			text_zzx_2.setTextSize(18);
+			text_fzx_1.setTextSize(18);
+			text_fzx_2.setTextSize(18);
+
+			text_logo_1.setText("ä¼šå¾½é€ å‹ä¸­ï¼ŒèŠ±è•Šéƒ¨åˆ†æ˜¯æ•°å­—â€œ8â€çš„å˜å½¢ï¼Œæ•´ä½“å…ƒç´ èåˆäº†å¸¸å·å¸‚èŠ±â€”â€”æœˆå­£ã€æ­¦è¿›æ˜¥ç§‹æ·¹åŸâ€œä¸‰åŸ");
+			text_logo_2.setText("ä¸‰æ²³â€ã€èŠ±åšä¼šè¶å½¢ä¸»å±•é¦†ç­‰åœ°æ–¹å…ƒç´ ï¼Œæœ‰å¼ºçƒˆçš„å¸¸å·åœ°åŸŸç‰¹è‰²ã€‚");
+
+			text_emblem_1.setText("å‰ç¥¥ç‰©å–åâ€œå’Œå’Œâ€ã€â€œç¾ç¾â€ã€‚â€œå’Œå’Œâ€ä»£è¡¨å’Œè°ç¤¾ä¼šã€å’Œç¦å…³ç³»ï¼Œâ€œç¾ç¾â€ä»£è¡¨ç¾å¥½ç”Ÿæ´»ã€ç¾æ»¡äººç”Ÿ");
+			text_emblem_2.setText("ã€‚ç´§æ‰£ä¸»é¢˜ç†å¿µã€‚");
+
+			text_zhnr_1.setText("é›†ä¸­å±•ç¤ºé²œåˆ‡èŠ±ã€åˆ‡å¶ã€ç›†èŠ±ç­‰å„ç±»èŠ±å‰ï¼›è§‚å¶æ¤ç‰©ã€ç›†æ™¯ï¼›ç§å­ã€è‹—æœ¨ã€ç§çƒï¼›å¹²");
+			text_zhnr_2.setText("èŠ±ã€ä»¿ç”ŸèŠ±ã€è£…é¥°æ¤ç‰©ï¼›èŠ±è‚¥ã€åŸºè´¨ï¼›ç›†é’µã€å‡ æ¶ã€å™¨çš¿ï¼›å›­è‰ºå·¥å…·ã€è®¾æ–½ç­‰ç›¸å…³äº§å“ï¼›è§‚èµçŸ³æï¼›è§‚èµé¸Ÿã€é±¼ã€è™«ï¼›å›­æ—æ™¯è§‚è®¾è®¡ç­‰ã€‚");
+
+			text_zhxs_1.setText("å±•ä¼šç”±å®¤å†…å±•åŒºã€å®¤å¤–å±•åŒºã€ç›¸å…³æ´»åŠ¨ä¸‰éƒ¨åˆ†ç»„æˆã€‚å…¶ä¸­å®¤å†…å±•åŒºåˆ†ç»¼åˆé¦†å’Œä¸“é¢˜é¦†ã€‚");
+			text_zhxs_2.setText("å®¤å¤–å±•åŒºä»¥æ¤ç‰©é€ æ™¯ä¸ºä¸»ï¼Œç›¸å…³æ´»åŠ¨åŒ…æ‹¬å¼€å¹•å¼ã€é—­å¹•å¼ã€é¢å¥–ä»ªå¼ç­‰ã€‚ä¸»å±•åŒºè§„åˆ’å»ºè®¾æ€»å åœ°é¢ç§¯3000äº©ï¼Œåˆ†å®¤å†…å±•åŒºå’Œå®¤å¤–å±•åŒºä¸¤å¤§éƒ¨åˆ†ã€‚");
+
+			text_zzx_1.setText("è§„åˆ’å»ºè®¾æ€»å åœ°é¢ç§¯3000äº©ï¼Œåˆ†å®¤å†…å±•åŒºå’Œå®¤å¤–å±•åŒºä¸¤å¤§éƒ¨åˆ†ã€‚");
+			text_zzx_2.setText(
+					"ã€å®¤å†…å±•åŒºã€‘ç»¼åˆé¦†ï¼šå»ºç­‘é¢ç§¯çº¦7ä¸‡å¹³æ–¹ç±³ï¼Œæ˜¯ç¬¬å…«å±Šä¸­å›½èŠ±å‰åšè§ˆä¼šå„å±•å›¢å®¤å†…å¸ƒå±•çš„ä¸»å±•é¦†ï¼Œåˆ†ä¸ºçœåŒºå¸‚å±•åŒºã€æ¸¯æ¾³å°å±•åŒºã€ä¼ä¸šå±•åŒºã€ä¸“é¢˜èŠ±å‰ä¸ç§‘æŠ€å±•åŒºã€‚çœåŒºå¸‚å±•åŒºåŸåˆ™ä¸Šä»¥çœã€è‡ªæ²»åŒºã€ç›´è¾–å¸‚å’Œæ·±åœ³å¸‚èŠ±å‰åä¼šä¸ºå•ä½ç»Ÿä¸€ç»„ç»‡å‚å±•ï¼Œæ¸¯æ¾³å°å±•åŒºå’Œä¼ä¸šå±•åŒºç”±å‚å±•å•ä½è®¾è®¡å¸ˆå¸ƒå±•ã€‚ ä¸»é¢˜é¦†ï¼šç”±è‡ªç„¶é¦†ã€ç§‘æŠ€é¦†ã€è‰ºæœ¯é¦†ç»„æˆã€‚ã€å®¤å¤–å±•åŒºã€‘åŸåˆ™ä¸Šä»¥æ¤ç‰©é€ æ™¯ä¸ºä¸»ï¼Œç”±å„çœå¸‚å®¤å¤–å±•åŒºã€å›½é™…å±•åŒºã€ä¸“é¢˜èŠ±å‰å±•åŒºå’Œä¼ä¸šå±•åŒºç»„æˆã€‚");
+
+			text_fzx_1.setText("ä¸»è¦ä¸ºâ€œä¸€åœºäº”å›­â€ï¼Œâ€œä¸€åœºâ€å³ç¬¬å…­å±Šä¸­å›½èŠ±å‰äº¤æ˜“ä¼šåœºâ€”â€”å¤æºªèŠ±æœ¨å¸‚åœºï¼Œå¸‚åœºè§„åˆ’æ‰©å»º");
+			text_fzx_2.setText("è‡³800äº©è§„æ¨¡ï¼Œå°†å»ºæˆå…¨å›½æœ€å¤§çš„èŠ±å‰åŠç›¸å…³èµ„æè¥é”€ç‰©æµä¸­å¿ƒï¼›â€œäº”å›­â€æŒ‡æ±Ÿå—èŠ±éƒ½äº§ä¸šå›­ã€ç´«è–‡å›­ã€ç«ç‘°å›­ã€è‰ºæ—å›­ã€ç›†æ™¯å›­ã€‚");
+
 			break;
 		case 768:
 			text_overview.setTextSize(18);
 			text_logo_1.setTextSize(18);
-		 	text_logo_2.setTextSize(18);
-		 	text_emblem_1.setTextSize(18);
-		 	text_emblem_2.setTextSize(18);
-		 	text_zhnr_1.setTextSize(18);
-		 	text_zhnr_2.setTextSize(18);
-		 	text_zhxs_1.setTextSize(18);
-		 	text_zhxs_2.setTextSize(18);
-		 	text_zzx_1.setTextSize(18);
-		 	text_zzx_2.setTextSize(18);
-		 	text_fzx_1.setTextSize(18);
-		 	text_fzx_2.setTextSize(18);
-		 	
-		 	text_logo_1.setText("»á»ÕÔìĞÍÖĞ£¬»¨Èï²¿·ÖÊÇÊı×Ö¡°8¡±µÄ±äĞÎ£¬ÕûÌåÔªËØÈÚºÏÁË³£ÖİÊĞ»¨¡ª¡ªÔÂ¼¾¡¢Îä½ø´ºÇïÑÍ³Ç¡°Èı³ÇÈı");
-			text_logo_2.setText("ºÓ¡±¡¢»¨²©»áµûĞÎÖ÷Õ¹¹İµÈµØ·½ÔªËØ£¬ÓĞÇ¿ÁÒµÄ³£ÖİµØÓòÌØÉ«¡£");
-			
-			text_emblem_1.setText("¼ªÏéÎïÈ¡Ãû¡°ºÍºÍ¡±¡¢¡°ÃÀÃÀ¡±¡£¡°ºÍºÍ¡±´ú±íºÍĞ³Éç»á¡¢ºÍÄÀ¹ØÏµ£¬¡°ÃÀÃÀ¡±´ú±íÃÀºÃÉú»î¡¢ÃÀÂúÈËÉú¡£½ô¿Û");
-			text_emblem_2.setText("Ö÷ÌâÀíÄî¡£");
-			
-			text_zhnr_1.setText("¼¯ÖĞÕ¹Ê¾ÏÊÇĞ»¨¡¢ÇĞÒ¶¡¢Åè»¨µÈ¸÷Àà»¨»Ü£»¹ÛÒ¶Ö²Îï¡¢Åè¾°£»ÖÖ×Ó¡¢ÃçÄ¾¡¢ÖÖÇò£»¸É»¨¡¢·ÂÉú");
-			text_zhnr_2.setText("»¨¡¢×°ÊÎÖ²Îï£»»¨·Ê¡¢»ùÖÊ£»Åè²§¡¢¼¸¼Ü¡¢Æ÷Ãó£»Ô°ÒÕ¹¤¾ß¡¢ÉèÊ©µÈÏà¹Ø²úÆ·£»¹ÛÉÍÊ¯²Ä£»¹ÛÉÍÄñ¡¢Óã¡¢³æ£»Ô°ÁÖ¾°¹ÛÉè¼ÆµÈ¡£");
-			
-			text_zhxs_1.setText("Õ¹»áÓÉÊÒÄÚÕ¹Çø¡¢ÊÒÍâÕ¹Çø¡¢Ïà¹Ø»î¶¯Èı²¿·Ö×é³É¡£ÆäÖĞÊÒÄÚÕ¹Çø·Ö×ÛºÏ¹İºÍ×¨Ìâ¹İ¡£");
-			text_zhxs_2.setText("ÊÒÍâÕ¹ÇøÒÔÖ²ÎïÔì¾°ÎªÖ÷£¬Ïà¹Ø»î¶¯°üÀ¨¿ªÄ»Ê½¡¢±ÕÄ»Ê½¡¢°ä½±ÒÇÊ½µÈ¡£Ö÷Õ¹Çø¹æ»®½¨Éè×ÜÕ¼µØÃæ»ı3000Ä¶£¬·ÖÊÒÄÚÕ¹ÇøºÍÊÒÍâÕ¹ÇøÁ½´ó²¿·Ö¡£");
-			
-			text_zzx_1.setText("¹æ»®½¨Éè×ÜÕ¼µØÃæ»ı3000Ä¶£¬×Ü·ÖÎªÊÒÄÚÕ¹ÇøºÍÊÒÍâÕ¹ÇøÁ½´ó²¿·Ö¡£");
-			text_zzx_2.setText("¡¾ÊÒÄÚÕ¹Çø¡¿×ÛºÏ¹İ£º½¨ÖşÃæ»ıÔ¼7ÍòÆ½·½Ã×£¬ÊÇµÚ°Ë½ìÖĞ¹ú»¨»Ü²©ÀÀ»á¸÷Õ¹ÍÅÊÒÄÚ²¼Õ¹µÄÖ÷Õ¹¹İ£¬·ÖÎªÊ¡ÇøÊĞÕ¹Çø¡¢¸Û°ÄÌ¨Õ¹Çø¡¢ÆóÒµÕ¹Çø¡¢×¨Ìâ»¨»ÜÓë¿Æ¼¼Õ¹Çø¡£Ê¡ÇøÊĞÕ¹ÇøÔ­ÔòÉÏÒÔÊ¡¡¢×ÔÖÎÇø¡¢Ö±Ï½ÊĞºÍÉîÛÚÊĞ»¨»ÜĞ­»áÎªµ¥Î»Í³Ò»×éÖ¯²ÎÕ¹£¬¸Û°ÄÌ¨Õ¹ÇøºÍÆóÒµÕ¹ÇøÓÉ²ÎÕ¹µ¥Î»Éè¼ÆÊ¦²¼Õ¹¡£ Ö÷Ìâ¹İ£ºÓÉ×ÔÈ»¹İ¡¢¿Æ¼¼¹İ¡¢ÒÕÊõ¹İ×é³É¡£¡¾ÊÒÍâÕ¹Çø¡¿Ô­ÔòÉÏÒÔÖ²ÎïÔì¾°ÎªÖ÷£¬ÓÉ¸÷Ê¡ÊĞÊÒÍâÕ¹Çø¡¢¹ú¼ÊÕ¹Çø¡¢×¨Ìâ»¨»ÜÕ¹ÇøºÍÆóÒµÕ¹Çø×é³É¡£");
-			
-			text_fzx_1.setText("Ö÷ÒªÎª¡°Ò»³¡ÎåÔ°¡±£¬¡°Ò»³¡¡±¼´µÚÁù½ìÖĞ¹ú»¨»Ü½»Ò×»á³¡¡ª¡ªÏÄÏª»¨Ä¾ÊĞ³¡£¬ÊĞ³¡¹æ»®À©½¨ÖÁ800Ä¶");
-			text_fzx_2.setText("¹æÄ££¬½«½¨³ÉÈ«¹ú×î´óµÄ»¨»Ü¼°Ïà¹Ø×Ê²ÄÓªÏúÎïÁ÷ÖĞĞÄ£»¡°ÎåÔ°¡±Ö¸½­ÄÏ»¨¶¼²úÒµÔ°¡¢×ÏŞ±Ô°¡¢Ãµ¹åÔ°¡¢ÒÕÁÖÔ°¡¢Åè¾°Ô°¡£");
+			text_logo_2.setTextSize(18);
+			text_emblem_1.setTextSize(18);
+			text_emblem_2.setTextSize(18);
+			text_zhnr_1.setTextSize(18);
+			text_zhnr_2.setTextSize(18);
+			text_zhxs_1.setTextSize(18);
+			text_zhxs_2.setTextSize(18);
+			text_zzx_1.setTextSize(18);
+			text_zzx_2.setTextSize(18);
+			text_fzx_1.setTextSize(18);
+			text_fzx_2.setTextSize(18);
+
+			text_logo_1.setText("ä¼šå¾½é€ å‹ä¸­ï¼ŒèŠ±è•Šéƒ¨åˆ†æ˜¯æ•°å­—â€œ8â€çš„å˜å½¢ï¼Œæ•´ä½“å…ƒç´ èåˆäº†å¸¸å·å¸‚èŠ±â€”â€”æœˆå­£ã€æ­¦è¿›æ˜¥ç§‹æ·¹åŸâ€œä¸‰åŸä¸‰");
+			text_logo_2.setText("æ²³â€ã€èŠ±åšä¼šè¶å½¢ä¸»å±•é¦†ç­‰åœ°æ–¹å…ƒç´ ï¼Œæœ‰å¼ºçƒˆçš„å¸¸å·åœ°åŸŸç‰¹è‰²ã€‚");
+
+			text_emblem_1.setText("å‰ç¥¥ç‰©å–åâ€œå’Œå’Œâ€ã€â€œç¾ç¾â€ã€‚â€œå’Œå’Œâ€ä»£è¡¨å’Œè°ç¤¾ä¼šã€å’Œç¦å…³ç³»ï¼Œâ€œç¾ç¾â€ä»£è¡¨ç¾å¥½ç”Ÿæ´»ã€ç¾æ»¡äººç”Ÿã€‚ç´§æ‰£");
+			text_emblem_2.setText("ä¸»é¢˜ç†å¿µã€‚");
+
+			text_zhnr_1.setText("é›†ä¸­å±•ç¤ºé²œåˆ‡èŠ±ã€åˆ‡å¶ã€ç›†èŠ±ç­‰å„ç±»èŠ±å‰ï¼›è§‚å¶æ¤ç‰©ã€ç›†æ™¯ï¼›ç§å­ã€è‹—æœ¨ã€ç§çƒï¼›å¹²èŠ±ã€ä»¿ç”Ÿ");
+			text_zhnr_2.setText("èŠ±ã€è£…é¥°æ¤ç‰©ï¼›èŠ±è‚¥ã€åŸºè´¨ï¼›ç›†é’µã€å‡ æ¶ã€å™¨çš¿ï¼›å›­è‰ºå·¥å…·ã€è®¾æ–½ç­‰ç›¸å…³äº§å“ï¼›è§‚èµçŸ³æï¼›è§‚èµé¸Ÿã€é±¼ã€è™«ï¼›å›­æ—æ™¯è§‚è®¾è®¡ç­‰ã€‚");
+
+			text_zhxs_1.setText("å±•ä¼šç”±å®¤å†…å±•åŒºã€å®¤å¤–å±•åŒºã€ç›¸å…³æ´»åŠ¨ä¸‰éƒ¨åˆ†ç»„æˆã€‚å…¶ä¸­å®¤å†…å±•åŒºåˆ†ç»¼åˆé¦†å’Œä¸“é¢˜é¦†ã€‚");
+			text_zhxs_2.setText("å®¤å¤–å±•åŒºä»¥æ¤ç‰©é€ æ™¯ä¸ºä¸»ï¼Œç›¸å…³æ´»åŠ¨åŒ…æ‹¬å¼€å¹•å¼ã€é—­å¹•å¼ã€é¢å¥–ä»ªå¼ç­‰ã€‚ä¸»å±•åŒºè§„åˆ’å»ºè®¾æ€»å åœ°é¢ç§¯3000äº©ï¼Œåˆ†å®¤å†…å±•åŒºå’Œå®¤å¤–å±•åŒºä¸¤å¤§éƒ¨åˆ†ã€‚");
+
+			text_zzx_1.setText("è§„åˆ’å»ºè®¾æ€»å åœ°é¢ç§¯3000äº©ï¼Œæ€»åˆ†ä¸ºå®¤å†…å±•åŒºå’Œå®¤å¤–å±•åŒºä¸¤å¤§éƒ¨åˆ†ã€‚");
+			text_zzx_2.setText(
+					"ã€å®¤å†…å±•åŒºã€‘ç»¼åˆé¦†ï¼šå»ºç­‘é¢ç§¯çº¦7ä¸‡å¹³æ–¹ç±³ï¼Œæ˜¯ç¬¬å…«å±Šä¸­å›½èŠ±å‰åšè§ˆä¼šå„å±•å›¢å®¤å†…å¸ƒå±•çš„ä¸»å±•é¦†ï¼Œåˆ†ä¸ºçœåŒºå¸‚å±•åŒºã€æ¸¯æ¾³å°å±•åŒºã€ä¼ä¸šå±•åŒºã€ä¸“é¢˜èŠ±å‰ä¸ç§‘æŠ€å±•åŒºã€‚çœåŒºå¸‚å±•åŒºåŸåˆ™ä¸Šä»¥çœã€è‡ªæ²»åŒºã€ç›´è¾–å¸‚å’Œæ·±åœ³å¸‚èŠ±å‰åä¼šä¸ºå•ä½ç»Ÿä¸€ç»„ç»‡å‚å±•ï¼Œæ¸¯æ¾³å°å±•åŒºå’Œä¼ä¸šå±•åŒºç”±å‚å±•å•ä½è®¾è®¡å¸ˆå¸ƒå±•ã€‚ ä¸»é¢˜é¦†ï¼šç”±è‡ªç„¶é¦†ã€ç§‘æŠ€é¦†ã€è‰ºæœ¯é¦†ç»„æˆã€‚ã€å®¤å¤–å±•åŒºã€‘åŸåˆ™ä¸Šä»¥æ¤ç‰©é€ æ™¯ä¸ºä¸»ï¼Œç”±å„çœå¸‚å®¤å¤–å±•åŒºã€å›½é™…å±•åŒºã€ä¸“é¢˜èŠ±å‰å±•åŒºå’Œä¼ä¸šå±•åŒºç»„æˆã€‚");
+
+			text_fzx_1.setText("ä¸»è¦ä¸ºâ€œä¸€åœºäº”å›­â€ï¼Œâ€œä¸€åœºâ€å³ç¬¬å…­å±Šä¸­å›½èŠ±å‰äº¤æ˜“ä¼šåœºâ€”â€”å¤æºªèŠ±æœ¨å¸‚åœºï¼Œå¸‚åœºè§„åˆ’æ‰©å»ºè‡³800äº©");
+			text_fzx_2.setText("è§„æ¨¡ï¼Œå°†å»ºæˆå…¨å›½æœ€å¤§çš„èŠ±å‰åŠç›¸å…³èµ„æè¥é”€ç‰©æµä¸­å¿ƒï¼›â€œäº”å›­â€æŒ‡æ±Ÿå—èŠ±éƒ½äº§ä¸šå›­ã€ç´«è–‡å›­ã€ç«ç‘°å›­ã€è‰ºæ—å›­ã€ç›†æ™¯å›­ã€‚");
 			break;
 		default:
 			break;
 		}
-	 	
+
 	}
 
-	private void setListener(){
-    	titlebar_menu.setOnClickListener(onClickListener);
-    	titlebar_left.setOnClickListener(onClickListener);
+	private void setListener() {
+		titlebar_menu.setOnClickListener(onClickListener);
+		titlebar_left.setOnClickListener(onClickListener);
 		titlebar_name.setOnClickListener(onClickListener);
 	}
-	
+
 	private OnClickListener onClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.titlebar_menu:
-				if(mMain.getSlidingMenu().isSecondaryMenuShowing()){
+				if (mMain.getSlidingMenu().isSecondaryMenuShowing()) {
 					mMain.getSlidingMenu().toggle();
-				}else{
+				} else {
 					mMain.getSlidingMenu().showSecondaryMenu();
 				}
 				break;
@@ -226,7 +227,7 @@ public class EncyclopediaFragment extends BaseFragment{
 			default:
 				break;
 			}
-		}		
+		}
 	};
-	
+
 }

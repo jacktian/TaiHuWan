@@ -7,36 +7,28 @@ import com.gloria.hbh.datadispose.JsonMethed;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-/**
-* Êñ?‰ª?Âê?: WeatherInfo
-* Âà?Âª?‰∫∫Ôºö gloria
-* Êó?    ÊúüÔºö2013-4-7
-* ‰ø?Êî?‰∫∫Ôºögloria
-* Êó?   ÊúüÔºö2013-4-7
-* Êè?   Ëø∞Ôºö Â§©Ê∞îÊï∞ÊçÆÁªìÊûÑ
-*/
 public class WeatherInfo {
 
-	String city;			
-	String cityid;	
+	String city;
+	String cityid;
 	String temp1;
 	String temp2;
 	String weather;
 	String img1;
 	String img2;
 	String ptime;
-	
+
 	public WeatherInfo() {
 	}
-	
-	public WeatherInfo(JsonObject jsonObject){
+
+	public WeatherInfo(JsonObject jsonObject) {
 		super();
-		if(jsonObject == null){
-			return ;
+		if (jsonObject == null) {
+			return;
 		}
 		try {
 			JsonObject jsonObject_weatherinfo = JsonMethed.getJsonObject(jsonObject.get("weatherinfo"));
-			if(jsonObject_weatherinfo != null){
+			if (jsonObject_weatherinfo != null) {
 				city = JsonMethed.getJsonString(jsonObject_weatherinfo.get("city"));
 				cityid = JsonMethed.getJsonString(jsonObject_weatherinfo.get("cityid"));
 				temp1 = JsonMethed.getJsonString(jsonObject_weatherinfo.get("temp1"));
@@ -46,19 +38,19 @@ public class WeatherInfo {
 				img2 = JsonMethed.getJsonString(jsonObject_weatherinfo.get("img2"));
 				ptime = JsonMethed.getJsonString(jsonObject_weatherinfo.get("ptime"));
 			}
-		}catch (JsonParseException e) {
-		}catch (Exception e) {
+		} catch (JsonParseException e) {
+		} catch (Exception e) {
 		}
 	}
 
 	public static WeatherInfo getWeatherInfoFromJson(JsonObject jsonObject) {
-		if(jsonObject == null){
+		if (jsonObject == null) {
 			return null;
 		}
 		WeatherInfo weatherInfo = new WeatherInfo();
 		try {
 			JsonObject jsonObject_weatherinfo = JsonMethed.getJsonObject(jsonObject.get("weatherinfo"));
-			if(jsonObject_weatherinfo != null){
+			if (jsonObject_weatherinfo != null) {
 				weatherInfo.setCity(JsonMethed.getJsonString(jsonObject_weatherinfo.get("city")));
 				weatherInfo.setCityId(JsonMethed.getJsonString(jsonObject_weatherinfo.get("cityid")));
 				weatherInfo.setTemp1(JsonMethed.getJsonString(jsonObject_weatherinfo.get("temp1")));
@@ -68,8 +60,8 @@ public class WeatherInfo {
 				weatherInfo.setImg2(JsonMethed.getJsonString(jsonObject_weatherinfo.get("img2")));
 				weatherInfo.setPtime(JsonMethed.getJsonString(jsonObject_weatherinfo.get("ptime")));
 			}
-		}catch (JsonParseException e) {
-		}catch (Exception e) {
+		} catch (JsonParseException e) {
+		} catch (Exception e) {
 		}
 		return weatherInfo;
 	}
@@ -139,10 +131,10 @@ public class WeatherInfo {
 	}
 
 	public String getDate() {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyyƒÍMM‘¬dd»’");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyÂπ¥MMÊúàddÊó•");
 		Date currentTime = new Date();
 		String dateString = formatter.format(currentTime);
 		return dateString;
 	}
-	
+
 }

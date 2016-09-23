@@ -1,44 +1,43 @@
 package com.gloria.hbh.util;
 
 /*
- * µØÀíÎ»ÖÃ´¦Àí·½·¨
+ * åœ°ç†ä½ç½®å¤„ç†æ–¹æ³•
  * 2013-9-13
  * gloria
  */
 public class GeographyUtil {
-	
+
 	static int ScreenWidth = 5976;
 	static int ScreenHeight = 2250;
-	
+
 	static float minLon = 119.207750f;
 	static float maxLon = 119.834400f;
 	static float minLat = 31.660050f;
 	static float maxLat = 31.867280f;
-	
-	static float scaleX = ((maxLon-minLon)*3600)/ScreenWidth; //-XÖáÉÏÃ¿ÏñËØ´ú±íµÄ¾­¶ÈÃëÊı£»
-	static float scaleY = ((maxLat-minLat)*3600)/ScreenHeight;//-YÖáÉÏÃ¿ÏñËØ´ú±íµÄÎ³¶ÈÃëÊı£»
-	
-	static int minX = (int) (minLon*3600/scaleX);	//ÇøÓò×ó±ßÖÃ×î×ó¶Ë
-	static int minY = (int) (minLat*3600/scaleY);	//ÇøÓòÉÏÃæÖÃ×îÉÏ¶Ë
-	
+
+	static float scaleX = ((maxLon - minLon) * 3600) / ScreenWidth; // -Xè½´ä¸Šæ¯åƒç´ ä»£è¡¨çš„ç»åº¦ç§’æ•°ï¼›
+	static float scaleY = ((maxLat - minLat) * 3600) / ScreenHeight;// -Yè½´ä¸Šæ¯åƒç´ ä»£è¡¨çš„çº¬åº¦ç§’æ•°ï¼›
+
+	static int minX = (int) (minLon * 3600 / scaleX); // åŒºåŸŸå·¦è¾¹ç½®æœ€å·¦ç«¯
+	static int minY = (int) (minLat * 3600 / scaleY); // åŒºåŸŸä¸Šé¢ç½®æœ€ä¸Šç«¯
+
 	/*
-	 * ¸ù¾İ¾­Î³¶È¸öµ½ÆÁÄ»XY
-	 * 0:lon  1:lat
+	 * æ ¹æ®ç»çº¬åº¦ä¸ªåˆ°å±å¹•XY 0:lon 1:lat
 	 */
-	public static float[] getGeographyByScreenXY(String X,String Y){
+	public static float[] getGeographyByScreenXY(String X, String Y) {
 		float[] geographyXY = new float[2];
-		geographyXY[0] = Integer.valueOf(X) * scaleX/3600 + minLon;
-		geographyXY[1] = maxLat - Integer.valueOf(Y) * scaleY/3600;
+		geographyXY[0] = Integer.valueOf(X) * scaleX / 3600 + minLon;
+		geographyXY[1] = maxLat - Integer.valueOf(Y) * scaleY / 3600;
 		return geographyXY;
 	}
-	
+
 	/*
-	 * ¸ù¾İ¾­Î³¶È¸öµ½ÆÁÄ»XY
+	 * æ ¹æ®ç»çº¬åº¦ä¸ªåˆ°å±å¹•XY
 	 */
-	public static int[] getScreenXYByGeography(float lat,float lon){
+	public static int[] getScreenXYByGeography(float lat, float lon) {
 		int[] screenXY = new int[2];
-		screenXY[0] = (int) ((lon - minLon)*3600/scaleX); 
-		screenXY[1] = (int) ((maxLat - lat)*3600/scaleY);
+		screenXY[0] = (int) ((lon - minLon) * 3600 / scaleX);
+		screenXY[1] = (int) ((maxLat - lat) * 3600 / scaleY);
 		return screenXY;
 	}
 

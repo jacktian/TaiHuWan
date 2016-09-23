@@ -4,20 +4,19 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.content.res.AssetManager;
-
 import com.gloria.hbh.application.BaseApplication;
 import com.gloria.hbh.data.forum.HandlinesBasicInfo;
-import com.gloria.hbh.data.forum.StoreInfo;
 import com.gloria.hbh.handle.PListParser;
 import com.google.gson.JsonParseException;
+
+import android.content.res.AssetManager;
 
 public class RecommondSightspots {
 	private static RecommondSightspots instance;
 	private ArrayList<HandlinesBasicInfo> list;
-	
+
 	public ArrayList<HandlinesBasicInfo> getList() {
-		if(list == null){
+		if (list == null) {
 			list = new ArrayList<HandlinesBasicInfo>(1);
 		}
 		return list;
@@ -25,36 +24,36 @@ public class RecommondSightspots {
 
 	public void setList(ArrayList<HandlinesBasicInfo> list) {
 		this.list = list;
-	} 
-	
+	}
+
 	@SuppressWarnings("unchecked")
-	public static RecommondSightspots getInstance()   { 
-    	if(null == instance){   
-    		instance = new RecommondSightspots(); 
-    		//¶ÁÈ¡(±¾µØ)ÎÄ¼ş£¬Í¬Ê±CheckÅäÖÃÎÄ¼ş£¬ÏÂÔØ±£´æ¡££¨±£´æÍ¼Æ¬£©
-    		InputStream is = null;
-    		try{
-    			AssetManager assetManager = BaseApplication.getInstance().getApplicationContext().getAssets();
-    			is = assetManager.open("RecommondSightspots.plist");
-    			PListParser parser = new PListParser(is);
-    			getInfo((ArrayList<Object>) parser.root);
-    		}catch (JsonParseException e) {
-    		}catch (Exception e) {
-    		}
-    	}   
-    	return instance;    
-    }
-	
+	public static RecommondSightspots getInstance() {
+		if (null == instance) {
+			instance = new RecommondSightspots();
+			// è¯»å–(æœ¬åœ°)æ–‡ä»¶ï¼ŒåŒæ—¶Checké…ç½®æ–‡ä»¶ï¼Œä¸‹è½½ä¿å­˜ã€‚ï¼ˆä¿å­˜å›¾ç‰‡ï¼‰
+			InputStream is = null;
+			try {
+				AssetManager assetManager = BaseApplication.getInstance().getApplicationContext().getAssets();
+				is = assetManager.open("RecommondSightspots.plist");
+				PListParser parser = new PListParser(is);
+				getInfo((ArrayList<Object>) parser.root);
+			} catch (JsonParseException e) {
+			} catch (Exception e) {
+			}
+		}
+		return instance;
+	}
+
 	private static void getInfo(ArrayList<Object> root) {
-		if(root == null){
+		if (root == null) {
 			return;
 		}
-		for(int i = 0; i < root.size(); i++){
+		for (int i = 0; i < root.size(); i++) {
 			HashMap<String, Object> info = (HashMap<String, Object>) root.get(i);
 			HandlinesBasicInfo handlinesBasicInfo = new HandlinesBasicInfo();
-			handlinesBasicInfo.setTitle((String)info.get("title"));
-			handlinesBasicInfo.setDescrip((String)info.get("subtitle"));
-			handlinesBasicInfo.setImg("assets://" + (String)info.get("image"));
+			handlinesBasicInfo.setTitle((String) info.get("title"));
+			handlinesBasicInfo.setDescrip((String) info.get("subtitle"));
+			handlinesBasicInfo.setImg("assets://" + (String) info.get("image"));
 			getInstance().getList().add(handlinesBasicInfo);
 		}
 	}

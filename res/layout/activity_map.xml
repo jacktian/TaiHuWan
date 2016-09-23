@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:orientation="vertical"
-  android:background="@drawable/bg_main">
-  <include android:id="@+id/titlebar" layout="@layout/titlebar" 
-      android:layout_alignParentTop="true"/>
-  <RelativeLayout android:id="@+id/rootLayout"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:layout_below="@+id/titlebar">
-  </RelativeLayout>
-  <com.gloria.hbh.staellitemenu.view.SatelliteMenu
+    android:background="@drawable/bg_main"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/titlebar"
+        layout="@layout/titlebar" />
+
+    <RelativeLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/titlebar"
+        android:orientation="vertical" >
+    </RelativeLayout>
+
+    <com.gloria.hbh.staellitemenu.view.SatelliteMenu
         android:id="@+id/menu"
-        android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left" 
-        android:layout_margin="8dp"/>
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="8dp" />
+
 </RelativeLayout>

@@ -1,8 +1,8 @@
 package com.gloria.hbh.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
-import net.tsz.afinal.FinalBitmap;
+
+import com.gloria.hbh.main.R;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -10,8 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.gloria.hbh.main.R; 
+import net.tsz.afinal.FinalBitmap; 
 
 
 
@@ -53,7 +52,7 @@ public class ImgGalleryAdapter extends Adapter_Base{
 	          view =(ViewClass) convertView.getTag();  
 		}
 		
-		//¼ÓÔØÍ¼Æ¬
+		//åŠ è½½å›¾ç‰‡
 		if(imgList.get(position)!= null && !imgList.get(position).equals("")){
 		    fb.display(view.item_img,imgList.get(position));
 		}
@@ -64,7 +63,7 @@ public class ImgGalleryAdapter extends Adapter_Base{
 	
 
 	
-	//¶¨Òå×é¼þµÄÀà£º  
+	//å®šä¹‰ç»„ä»¶çš„ç±»ï¼š  
 	private class ViewClass{  
 		TextView item_text;  
 //		EllipsizingTextView  item_text;

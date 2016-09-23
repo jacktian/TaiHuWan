@@ -2,10 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background="@color/white"  >
-	<include android:id="@+id/titlebar" layout="@layout/titlebar" android:visibility="gone"/>
-	<include android:id="@+id/head_foodlodgingtourist" layout="@layout/head_foodlodgingtourist"/>
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/titlebar"
+        layout="@layout/titlebar"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/head_foodlodgingtourist"
+        layout="@layout/head_foodlodgingtourist" />
+
     <com.gloria.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/listView"
         android:layout_width="fill_parent"
@@ -18,4 +26,5 @@
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"
         android:smoothScrollbar="true" />
+
 </LinearLayout>

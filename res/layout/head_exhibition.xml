@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_gravity="center_horizontal"  
-  android:orientation="horizontal" 
-  android:layout_height="wrap_content" 
-  android:layout_width="fill_parent">
-  <com.gloria.hbh.myview.MyGallery  
-    android:id="@+id/head_gallery" 
-	android:layout_width="fill_parent" android:layout_height="wrap_content"
-	android:gravity="center"  />
-    <RelativeLayout android:id="@+id/layout_bottom"
-        android:layout_width="fill_parent" android:layout_height="60dip"
-        android:layout_alignParentBottom="true"  
-        android:background="@drawable/exhibition_text_top">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:orientation="horizontal" >
+
+    <com.gloria.hbh.myview.MyGallery
+        android:id="@+id/head_gallery"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" />
+
+    <RelativeLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="60dip"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/exhibition_text_top" >
+
         <TextView
-    	android:id="@+id/text_title"   android:background="@color/transparent"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:textColor="@color/black" android:textSize="20sp" android:textStyle="bold"
-		android:layout_centerVertical="true" android:layout_alignParentLeft="true"/>
-    	<com.gloria.hbh.myview.PageIndicatorView
-    	android:id="@+id/view_page"   android:background="@color/transparent"
-		android:layout_width="100dip" android:layout_height="wrap_content"
-		android:gravity="center"  
-		android:layout_alignParentRight="true"/> 
-	</RelativeLayout>
+            android:id="@+id/text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@color/transparent"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <com.gloria.hbh.myview.PageIndicatorView
+            android:id="@+id/view_page"
+            android:layout_width="100dip"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:gravity="center" />
+    </RelativeLayout>
+
 </RelativeLayout>

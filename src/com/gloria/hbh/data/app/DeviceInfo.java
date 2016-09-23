@@ -1,42 +1,45 @@
 package com.gloria.hbh.data.app;
 
+import com.gloria.hbh.application.BaseApplication;
+
 import android.content.Context;
 import android.telephony.TelephonyManager;
 
-import com.gloria.hbh.application.BaseApplication;
-
 /*
- * ÊÖ»úÉè±¸µÄÓ¦ÓÃ³£Á¿
+ * æ‰‹æœºè®¾å¤‡çš„åº”ç”¨å¸¸é‡
  */
 public class DeviceInfo {
-	
-	private static DeviceInfo instance;   
-	
-	String mobilemodel = "";  //ÊÖ»úĞÍºÅ
-	String mobileversion = ""; //ÊÖ»úÏµÍ³°æ±¾ºÅ
-	String mobilenumber = "";  //ÊÖ»úºÅÂë
-	String crashinfo = "";  //ÊÖ»ú±ÀÀ£ĞÅÏ¢
-	
-	public static DeviceInfo getInstance()   { 
-    	if(null == instance){   
-    		instance = new DeviceInfo(); 
-    		TelephonyManager tm = (TelephonyManager) BaseApplication.getInstance().getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-    		getInstance().setMobilemodel((android.os.Build.MANUFACTURER +"_"+android.os.Build.MODEL).replaceAll(" ", ""));
-    		getInstance().setMobileversion("Android"+android.os.Build.VERSION.RELEASE);
-    		if(tm.getLine1Number() != null && !tm.getLine1Number().equals("null")){
-    			getInstance().setMobilenumber(tm.getLine1Number());
-    	  	}
-    	}   
-    	return instance;    
-    }  
-	
-	//»ñÈ¡ÊÖ»úµÄIMIEºÅÂë
-    public static  String  getImieNumber() {
-    	TelephonyManager tm = (TelephonyManager) BaseApplication.getInstance().getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-    	String deviceId = tm.getDeviceId();
-    	return deviceId;
-    }
-	
+
+	private static DeviceInfo instance;
+
+	String mobilemodel = ""; // æ‰‹æœºå‹å·
+	String mobileversion = ""; // æ‰‹æœºç³»ç»Ÿç‰ˆæœ¬å·
+	String mobilenumber = ""; // æ‰‹æœºå·ç 
+	String crashinfo = ""; // æ‰‹æœºå´©æºƒä¿¡æ¯
+
+	public static DeviceInfo getInstance() {
+		if (null == instance) {
+			instance = new DeviceInfo();
+			TelephonyManager tm = (TelephonyManager) BaseApplication.getInstance().getApplicationContext()
+					.getSystemService(Context.TELEPHONY_SERVICE);
+			getInstance()
+					.setMobilemodel((android.os.Build.MANUFACTURER + "_" + android.os.Build.MODEL).replaceAll(" ", ""));
+			getInstance().setMobileversion("Android" + android.os.Build.VERSION.RELEASE);
+			if (tm.getLine1Number() != null && !tm.getLine1Number().equals("null")) {
+				getInstance().setMobilenumber(tm.getLine1Number());
+			}
+		}
+		return instance;
+	}
+
+	// è·å–æ‰‹æœºçš„IMIEå·ç 
+	public static String getImieNumber() {
+		TelephonyManager tm = (TelephonyManager) BaseApplication.getInstance().getApplicationContext()
+				.getSystemService(Context.TELEPHONY_SERVICE);
+		String deviceId = tm.getDeviceId();
+		return deviceId;
+	}
+
 	public String getMobilemodel() {
 		return mobilemodel;
 	}

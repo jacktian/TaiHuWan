@@ -1,5 +1,8 @@
 package com.gloria.slidingmenu.lib.fragment;
 
+import com.gloria.hbh.main.Activity_Main;
+import com.gloria.hbh.main.R;
+
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,84 +15,76 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.gloria.hbh.main.Activity_Main;
-import com.gloria.hbh.main.R;
-
 /*
- * ¹ØÓÚÎÒÃÇÒ³Ãæ
+ * å…³äºæˆ‘ä»¬é¡µé¢
  */
 @SuppressLint("ValidFragment")
 @SuppressWarnings("static-access")
-public class AboutAsFragment extends BaseFragment{
-	
+public class AboutAsFragment extends BaseFragment {
+
 	TextView info;
-	String text = "×ÉÑ¶";
-	
-    Activity_Main mMain = null;
-    private FrameLayout mFrameLayout = null;
-    
-    public AboutAsFragment() {
-    }
+	String text = "å’¨è®¯";
 
-    public AboutAsFragment(String text) {
-        this.text = text;
-    }
+	Activity_Main mMain = null;
+	private FrameLayout mFrameLayout = null;
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(true);
-        
-        mMain = (Activity_Main) getActivity();
-        mFrameLayout = (FrameLayout) mMain.findViewById(R.id.content_main);
-    }
-    
-    
+	public AboutAsFragment() {
+	}
+
+	public AboutAsFragment(String text) {
+		this.text = text;
+	}
+
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
+
+		mMain = (Activity_Main) getActivity();
+		mFrameLayout = (FrameLayout) mMain.findViewById(R.id.content_main);
+	}
+
 	@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_aboutas, null);
-        
-        setView(view);
-	 	setListener();
-    	
-        return view;
-    }
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.activity_aboutas, null);
+
+		setView(view);
+		setListener();
+
+		return view;
+	}
 
 	private void setView(View view) {
-		titlebar = (LinearLayout)view.findViewById(R.id.titlebar);
-		titlebar_name = (TextView)view.findViewById(R.id.titlebar_name);
+		titlebar = (LinearLayout) view.findViewById(R.id.titlebar);
+		titlebar_name = (TextView) view.findViewById(R.id.titlebar_name);
 		titlebar_name.setText(getString(R.string.aboutas));
 		titlebar_name.setTextColor(Color.BLACK);
-		titlebar_left = (Button)view.findViewById(R.id.titlebar_left);
-		titlebar_menu = (Button)view.findViewById(R.id.titlebar_menu);
-	 	titlebar_left.setVisibility(View.INVISIBLE);
-	 	titlebar_menu.setVisibility(View.VISIBLE);
-	 	titlebar_name.setVisibility(View.VISIBLE);
-	 	
-	 	info = (TextView)view.findViewById(R.id.item_info);
-	 	info.setText("½­ËÕ¼××ÓÍøÂç¿Æ¼¼ÓĞÏŞ¹«Ë¾³ÉÁ¢ÓÚ2008Äê£¬»ñ½­ËÕÊ¡·¢Õ¹ºÍ¸Ä¸ïÎ¯Ô±»áµÄÅú×¼£¬" +
-	 			"ÔÚ³£ÖİÊĞÎä½øÌ«ºşÍå¶È¼ÙÇøÄÚ¹æ»®½¨Éè½­ËÕÊı×ÖÎÄ»¯²úÒµÕñĞË»ùµØ£¬" +
-	 			"ÏîÄ¿Ò»ÆÚ½«ÖØµã½¨ÉèÆäÖĞµÄ¡°Ò»Ô°¡±¼´»·ÇòÊı×ÖæÒÏ·¹È¶¯ÂşÓÎÏ·ÎÄ»¯Ö÷Ìâ¹«Ô°£»" +
-	 			"¡°Ò»Íø¡±CCJOYÖĞ¹úÊı×ÖÏßÉÏ»¥¶¯ÓéÀÖÃÅ»§Íø£¬ ÕæÕı´ï³ÉÁËÏßÉÏÏßÏÂÒ»ÌåµÄÓéÀÖĞÎÊ½¡£" +
-	 			"¹«Ë¾×÷ÎªÖĞ¹ú»¥¶¯ÓéÀÖÁìÓòµÄÉúÁ¦¾ü£¬Ê¼ÖÕÖÂÁ¦»¥ÁªÍøºÍÏßÏÂ×ÊÔ´¡°ĞéÊµ»¥¶¯¡±ÓéÀÖĞÂÌåÑé£¬" +
-	 			"Í¬Ê±Å¬Á¦´Ù½øÊı×ÖÎÄ»¯Éú»î£¬Í¨¹ı»¥ÁªÍøÎªÓÃ»§Ìá¹©¶àÔª»¯µÄÓéÀÖ·şÎñ£¬Îª´óÖÚ´´Ôì¸üÓäÔÃµÄÏßÉÏÏßÏÂ»¥¶¯ÌåÑé¡£" +
-	 			"¹«Ë¾ÆìÏÂ¹²ÓĞ4¸öÑĞ·¢ÍÅ¶Ó¹²120ÓàÈË£»ÓµÓĞ³É¹¦ÑĞ·¢¾­Ñé£»ÒÔ¡°æÒÏ·¡±ÎªÖ÷ÌâÇĞÈëµã£¬" +
-	 			"×ÔÖ÷ÑĞ·¢¶ËÓÎ²úÆ·¡¶ÖĞ»ªÁúËş¡·¡¶ÃÜ´«2¡·£»Ò³ÓÎ²úÆ·¡¶æÒÏ·»ÃÏë¡·¡¶æÒÏ··É³µ¡·¡¶ÉÏ¹Å´«Ææ¡·µÈ£»" +
-	 			"ÊÖ»úÓÎÏ·¡¶æÒÓÎ¼Ç¡·½«ÓÚ2013ÄêÇ¿ÊÆÍÆ³ö£¬²úÆ·³É¹¦ÏúÍù¸Û¡¢°Ä¡¢Ì¨¡¢¶«ÄÏÑÇµÈµØ£¬ÏÖ¾ùÒÑÉÏÏßÔËÓª¡£");
+		titlebar_left = (Button) view.findViewById(R.id.titlebar_left);
+		titlebar_menu = (Button) view.findViewById(R.id.titlebar_menu);
+		titlebar_left.setVisibility(View.INVISIBLE);
+		titlebar_menu.setVisibility(View.VISIBLE);
+		titlebar_name.setVisibility(View.VISIBLE);
+
+		info = (TextView) view.findViewById(R.id.item_info);
+		info.setText("æ±Ÿè‹ç”²å­ç½‘ç»œç§‘æŠ€æœ‰é™å…¬å¸æˆç«‹äº2008å¹´ï¼Œè·æ±Ÿè‹çœå‘å±•å’Œæ”¹é©å§”å‘˜ä¼šçš„æ‰¹å‡†ï¼Œ" + "åœ¨å¸¸å·å¸‚æ­¦è¿›å¤ªæ¹–æ¹¾åº¦å‡åŒºå†…è§„åˆ’å»ºè®¾æ±Ÿè‹æ•°å­—æ–‡åŒ–äº§ä¸šæŒ¯å…´åŸºåœ°ï¼Œ"
+				+ "é¡¹ç›®ä¸€æœŸå°†é‡ç‚¹å»ºè®¾å…¶ä¸­çš„â€œä¸€å›­â€å³ç¯çƒæ•°å­—å¬‰æˆè°·åŠ¨æ¼«æ¸¸æˆæ–‡åŒ–ä¸»é¢˜å…¬å›­ï¼›" + "â€œä¸€ç½‘â€CCJOYä¸­å›½æ•°å­—çº¿ä¸Šäº’åŠ¨å¨±ä¹é—¨æˆ·ç½‘ï¼Œ çœŸæ­£è¾¾æˆäº†çº¿ä¸Šçº¿ä¸‹ä¸€ä½“çš„å¨±ä¹å½¢å¼ã€‚"
+				+ "å…¬å¸ä½œä¸ºä¸­å›½äº’åŠ¨å¨±ä¹é¢†åŸŸçš„ç”ŸåŠ›å†›ï¼Œå§‹ç»ˆè‡´åŠ›äº’è”ç½‘å’Œçº¿ä¸‹èµ„æºâ€œè™šå®äº’åŠ¨â€å¨±ä¹æ–°ä½“éªŒï¼Œ" + "åŒæ—¶åŠªåŠ›ä¿ƒè¿›æ•°å­—æ–‡åŒ–ç”Ÿæ´»ï¼Œé€šè¿‡äº’è”ç½‘ä¸ºç”¨æˆ·æä¾›å¤šå…ƒåŒ–çš„å¨±ä¹æœåŠ¡ï¼Œä¸ºå¤§ä¼—åˆ›é€ æ›´æ„‰æ‚¦çš„çº¿ä¸Šçº¿ä¸‹äº’åŠ¨ä½“éªŒã€‚"
+				+ "å…¬å¸æ——ä¸‹å…±æœ‰4ä¸ªç ”å‘å›¢é˜Ÿå…±120ä½™äººï¼›æ‹¥æœ‰æˆåŠŸç ”å‘ç»éªŒï¼›ä»¥â€œå¬‰æˆâ€ä¸ºä¸»é¢˜åˆ‡å…¥ç‚¹ï¼Œ" + "è‡ªä¸»ç ”å‘ç«¯æ¸¸äº§å“ã€Šä¸­åé¾™å¡”ã€‹ã€Šå¯†ä¼ 2ã€‹ï¼›é¡µæ¸¸äº§å“ã€Šå¬‰æˆå¹»æƒ³ã€‹ã€Šå¬‰æˆé£è½¦ã€‹ã€Šä¸Šå¤ä¼ å¥‡ã€‹ç­‰ï¼›"
+				+ "æ‰‹æœºæ¸¸æˆã€Šå¬‰æ¸¸è®°ã€‹å°†äº2013å¹´å¼ºåŠ¿æ¨å‡ºï¼Œäº§å“æˆåŠŸé”€å¾€æ¸¯ã€æ¾³ã€å°ã€ä¸œå—äºšç­‰åœ°ï¼Œç°å‡å·²ä¸Šçº¿è¿è¥ã€‚");
 	}
 
-	private void setListener(){
-    	titlebar_menu.setOnClickListener(onClickListener);
-    	titlebar_left.setOnClickListener(onClickListener);
+	private void setListener() {
+		titlebar_menu.setOnClickListener(onClickListener);
+		titlebar_left.setOnClickListener(onClickListener);
 		titlebar_name.setOnClickListener(onClickListener);
 	}
-	
+
 	private OnClickListener onClickListener = new OnClickListener() {
 		public void onClick(View v) {
 			switch (v.getId()) {
 			case R.id.titlebar_menu:
-				if(mMain.getSlidingMenu().isSecondaryMenuShowing()){
+				if (mMain.getSlidingMenu().isSecondaryMenuShowing()) {
 					mMain.getSlidingMenu().toggle();
-				}else{
+				} else {
 					mMain.getSlidingMenu().showSecondaryMenu();
 				}
 				break;
@@ -98,7 +93,7 @@ public class AboutAsFragment extends BaseFragment{
 			default:
 				break;
 			}
-		}		
+		}
 	};
-	
+
 }
