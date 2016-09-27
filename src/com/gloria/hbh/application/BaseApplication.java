@@ -16,6 +16,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.rest.Request;
 
 import android.app.Activity;
 import android.app.Application;
@@ -73,6 +75,7 @@ public class BaseApplication extends Application {
 		// VMRuntime.getRuntime().setTargetHeapUtilization(floatTARGET_HEAP_UTILIZATION);
 		super.onCreate();
 		instance = this;
+		NoHttp.initialize(this);
 		JPushInterface.setDebugMode(true); // 设置开启日志,发布时请关闭日志
 		JPushInterface.init(this); // 初始化 JPush
 		initEngineManager(this);

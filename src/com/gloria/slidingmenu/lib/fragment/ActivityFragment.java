@@ -16,6 +16,12 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.OnResponseListener;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.RequestQueue;
+import com.yolanda.nohttp.rest.Response;
 
 import android.app.Activity;
 import android.content.Context;
@@ -44,6 +50,8 @@ public class ActivityFragment extends BaseFragment implements IXListViewListener
 	private activitybaseadapter newsadapter;
 	public static String str = "", wea = "";
 	private View messageLayout;
+	
+	private RequestQueue requestQueue = NoHttp.newRequestQueue();
 
 	public ActivityFragment() {
 	}
@@ -129,41 +137,47 @@ public class ActivityFragment extends BaseFragment implements IXListViewListener
 
 	public void onRefresh1() {
 		if (isOpenNetWork()) {
-			HttpUtils http1 = new HttpUtils();
-			http1.send(HttpRequest.HttpMethod.GET, "http://112.21.190.22/taihuwan/wapNewsList.action?id=9",
-					new RequestCallBack<String>() {
-						public void onLoading(long total, long current, boolean isUploading) {
-						}
+			Request<String> requestWeather=NoHttp.createStringRequest("http://112.21.190.22/taihuwan/wapNewsList.action?id=9", RequestMethod.GET);
+			requestQueue.add(0, requestWeather, new OnResponseListener<String>() {
 
-						public void onSuccess(ResponseInfo<String> responseInfo) {
-							stoplistview();
-							List<activitybean> testlist = new ArrayList<activitybean>();
+				@Override
+				public void onFailed(int arg0, Response<String> arg1) {
+					stoplistview();
+					Toast.makeText(instance, "获取列表失败", Toast.LENGTH_SHORT).show();
+				}
+
+				@Override
+				public void onFinish(int arg0) {
+				}
+
+				@Override
+				public void onStart(int arg0) {
+					
+				}
+
+				@Override
+				public void onSucceed(int arg0, Response<String> arg1) {
+					stoplistview();
+					List<activitybean> testlist = new ArrayList<activitybean>();
+					try {
+						testlist = GsonTools.newsinforad(arg1.get());
+						if (testlist.size() > 0) {
+							arrayList = testlist;
+							newsadapter = new activitybaseadapter(instance, arrayList);
+							pulllistview.setAdapter(newsadapter);
 							try {
-								testlist = GsonTools.newsinforad(responseInfo.result);
-								if (testlist.size() > 0) {
-									arrayList = testlist;
-									newsadapter = new activitybaseadapter(instance, arrayList);
-									pulllistview.setAdapter(newsadapter);
-									try {
-										datamanage.deleteAll(activitybean.class);
-										for (activitybean activitybean : testlist) {
-											datamanage.save(activitybean);
-										}
-									} catch (Exception e) {
-									}
+								datamanage.deleteAll(activitybean.class);
+								for (activitybean activitybean : testlist) {
+									datamanage.save(activitybean);
 								}
 							} catch (Exception e) {
 							}
 						}
-
-						public void onStart() {
-						}
-
-						public void onFailure(HttpException error, String msg) {
-							stoplistview();
-							Toast.makeText(instance, "获取列表失败", Toast.LENGTH_SHORT).show();
-						}
-					});
+					} catch (Exception e) {
+					}
+				}
+				
+			});
 		} else {
 			stoplistview();
 			Toast.makeText(instance, "网络异常", Toast.LENGTH_SHORT).show();

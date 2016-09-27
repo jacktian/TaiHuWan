@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.gloria.hbh.adapter.NewNewsAdapter;
@@ -15,11 +14,12 @@ import com.gloria.hbh.main.Activity_Main;
 import com.gloria.hbh.main.R;
 import com.gloria.hbh.myview.PullListView;
 import com.gloria.hbh.myview.PullListView.IXListViewListener;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
+import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.RequestMethod;
+import com.yolanda.nohttp.rest.OnResponseListener;
+import com.yolanda.nohttp.rest.Request;
+import com.yolanda.nohttp.rest.RequestQueue;
+import com.yolanda.nohttp.rest.Response;
 
 import android.app.Activity;
 import android.content.Context;
@@ -49,7 +49,8 @@ public class InformationFragment extends BaseFragment implements IXListViewListe
 	private NewNewsAdapter newsadapter;
 	public static String str = "", wea = "";
 	private View messageLayout;
-
+	private RequestQueue requestQueue = NoHttp.newRequestQueue();
+	
 	public InformationFragment() {
 	}
 
@@ -84,16 +85,31 @@ public class InformationFragment extends BaseFragment implements IXListViewListe
 				pulllistview.setAdapter(newsadapter);
 			} catch (Exception e) {
 			}
-			if (isOpenNetWork()) {
-				pulllistview.mHeaderView.setVisiableHeight(pxToDIP(70));
-				pulllistview.mHeaderView.setState(2);
-				onRefresh1();
-			}
+	
 		}
 		ViewGroup parent = (ViewGroup) messageLayout.getParent();
 		if (parent != null)
 			parent.removeView(messageLayout);
 		return messageLayout;
+	}
+	
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		requestQueue.cancelAll();
+		requestQueue.stop();
+		super.onDestroy();
+	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		if (isOpenNetWork()) {
+			pulllistview.mHeaderView.setVisiableHeight(pxToDIP(70));
+			pulllistview.mHeaderView.setState(2);
+			onRefresh1();
+		}
 	}
 
 	protected int pxToDIP(int px) {
@@ -154,67 +170,86 @@ public class InformationFragment extends BaseFragment implements IXListViewListe
 
 	public void onRefresh1() {
 		if (isOpenNetWork()) {
-			HttpUtils httpUtils = new HttpUtils();
-			httpUtils.send(HttpRequest.HttpMethod.GET,
-					"http://api.map.baidu.com/telematics/v3/weather?location=常州&output=json&ak=iiv9xSGkZ9D200VGGroh2r0thH5AeGYG&mcode=4F:12:1E:3E:64:B1:99:AB:9B:F1:87:53:0E:DC:6F:A5:7A:11:36:15;com.gloria.hbh.main",
-					new RequestCallBack<String>() {
-						public void onSuccess(ResponseInfo<String> responseInfo) {
-							try {
-								JSONObject jsonObject = new JSONObject(responseInfo.result);
-								if ("success".equals(jsonObject.getString("status"))) {
-									JSONArray jsonArray = jsonObject.getJSONArray("results").getJSONObject(0)
-											.getJSONArray("weather_data");
-									JSONObject weather = jsonArray.getJSONObject(0);
-									str = weather.getString("temperature");
-									wea = weather.getString("weather");
-									newsadapter = new NewNewsAdapter(instance, arrayList);
-									pulllistview.setAdapter(newsadapter);
-								} else {
-									Toast.makeText(instance, "获取天气失败", Toast.LENGTH_SHORT).show();
-								}
-							} catch (JSONException e) {
-								e.printStackTrace();
-							}
-						}
+			Request<String> requestWeather=NoHttp.createStringRequest("http://api.map.baidu.com/telematics/v3/weather?location=常州&output=json&ak=iiv9xSGkZ9D200VGGroh2r0thH5AeGYG&mcode=4F:12:1E:3E:64:B1:99:AB:9B:F1:87:53:0E:DC:6F:A5:7A:11:36:15;com.gloria.hbh.main", RequestMethod.GET);
+			requestQueue.add(0, requestWeather, new OnResponseListener<String>() {
 
-						public void onFailure(HttpException error, String msg) {
-						}
-					});
-			HttpUtils http1 = new HttpUtils();
-			http1.send(HttpRequest.HttpMethod.GET, "http://112.21.190.22/taihuwan/wapNewsList.action",
-					new RequestCallBack<String>() {
-						public void onLoading(long total, long current, boolean isUploading) {
-						}
+				@Override
+				public void onFailed(int arg0, Response<String> arg1) {
+					Toast.makeText(instance, "获取天气失败", Toast.LENGTH_SHORT).show();
+				}
 
-						public void onSuccess(ResponseInfo<String> responseInfo) {
-							stoplistview();
-							List<informationbean> testlist = new ArrayList<informationbean>();
-							try {
-								testlist = GsonTools.newsinfor(responseInfo.result);
-								if (testlist.size() > 0) {
-									arrayList = testlist;
-									newsadapter = new NewNewsAdapter(instance, arrayList);
-									pulllistview.setAdapter(newsadapter);
-									try {
-										datamanage.deleteAll(informationbean.class);
-										for (informationbean informationbean : testlist) {
-											datamanage.save(informationbean);
-										}
-									} catch (Exception e) {
-									}
-								}
-							} catch (Exception e) {
-							}
-						}
+				@Override
+				public void onFinish(int arg0) {
+					
+				}
 
-						public void onStart() {
-						}
+				@Override
+				public void onStart(int arg0) {
+					
+				}
 
-						public void onFailure(HttpException error, String msg) {
-							stoplistview();
-							Toast.makeText(instance, "获取列表失败", Toast.LENGTH_SHORT).show();
+				@Override
+				public void onSucceed(int arg0, Response<String> arg1) {
+					try {
+					JSONObject jsonObject = new JSONObject(arg1.get());
+					if ("success".equals(jsonObject.getString("status"))) {
+						JSONArray jsonArray = jsonObject.getJSONArray("results").getJSONObject(0)
+								.getJSONArray("weather_data");
+						JSONObject weather = jsonArray.getJSONObject(0);
+						str = weather.getString("temperature");
+						wea = weather.getString("weather");
+						newsadapter = new NewNewsAdapter(instance, arrayList);
+						pulllistview.setAdapter(newsadapter);
+					} else {
+						Toast.makeText(instance, "获取天气失败", Toast.LENGTH_SHORT).show();
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				}
+			});
+
+			Request<String> requestInfo=NoHttp.createStringRequest("http://112.21.190.22/taihuwan/wapNewsList.action",RequestMethod.GET);
+			requestQueue.add(1, requestInfo, new OnResponseListener<String>() {
+
+				@Override
+				public void onFailed(int arg0, Response<String> arg1) {
+					stoplistview();
+				}
+
+				@Override
+				public void onFinish(int arg0) {
+					
+				}
+
+				@Override
+				public void onStart(int arg0) {
+					
+				}
+
+				@Override
+				public void onSucceed(int arg0, Response<String> arg1) {
+					stoplistview();
+				try {
+				List<informationbean> testlist = new ArrayList<informationbean>();
+				testlist = GsonTools.newsinfor(arg1.get());
+				if (testlist.size() > 0) {
+					arrayList = testlist;
+					newsadapter = new NewNewsAdapter(instance, arrayList);
+					pulllistview.setAdapter(newsadapter);
+					try {
+						datamanage.deleteAll(informationbean.class);
+						for (informationbean informationbean : testlist) {
+							datamanage.save(informationbean);
 						}
-					});
+					} catch (Exception e) {
+					}
+				}
+			} catch (Exception e) {
+			}
+				}
+			});
 		} else {
 			stoplistview();
 			Toast.makeText(instance, "网络异常", Toast.LENGTH_SHORT).show();
