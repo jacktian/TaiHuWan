@@ -27,10 +27,6 @@ public class HBHReceiver extends BroadcastReceiver {
 			String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
 			Log.d(TAG, "接收Registration Id : " + regId);
 			// send the Registration Id to your server...
-		} else if (JPushInterface.ACTION_UNREGISTER.equals(intent.getAction())) {
-			String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
-			Log.d(TAG, "接收UnRegistration Id : " + regId);
-			// send the UnRegistration Id to your server...
 		} else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
 			Log.d(TAG, "接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
 			processCustomMessage(context, bundle);

@@ -3,13 +3,10 @@ package com.gloria.hbh.application;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.baidu.mapapi.BMapManager;
-import com.baidu.mapapi.MKGeneralListener;
-import com.baidu.mapapi.map.MKEvent;
+import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mobstat.SendStrategyEnum;
 import com.baidu.mobstat.StatService;
 import com.gloria.hbh.data.app.Plist;
-import com.gloria.hbh.myview.ForumToast;
 import com.gloria.hbh.sharecookies.ShareCookie;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -17,11 +14,9 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.yolanda.nohttp.NoHttp;
-import com.yolanda.nohttp.rest.Request;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import cn.jpush.android.api.JPushInterface;
 
 //@ReportsCrashes(formKey = "",
@@ -57,7 +52,6 @@ public class BaseApplication extends Application {
 	private static BaseApplication instance;
 
 	public boolean m_bKeyRight = true;
-	public BMapManager mBMapManager = null;
 	public static final String strKey = "Ppuv5aL6Ohv7NxATZlGLtUQI";
 	// public static final String strKey = "4481390def8086e7da9b1c778119a2e6";
 
@@ -76,9 +70,8 @@ public class BaseApplication extends Application {
 		super.onCreate();
 		instance = this;
 		NoHttp.initialize(this);
-		JPushInterface.setDebugMode(true); // 设置开启日志,发布时请关闭日志
 		JPushInterface.init(this); // 初始化 JPush
-		initEngineManager(this);
+	    SDKInitializer.initialize(this);  
 		// This configuration tuning is custom. You can tune every option, you
 		// may tune some of them,
 		// or you can create default configuration by
@@ -127,35 +120,6 @@ public class BaseApplication extends Application {
 		StatService.setSendLogStrategy(this, SendStrategyEnum.APP_START, 1, false);
 	}
 
-	public void initEngineManager(Context context) {
-		if (mBMapManager == null) {
-			mBMapManager = new BMapManager(context);
-		}
-
-		if (!mBMapManager.init(strKey, new MyGeneralListener())) {
-			ForumToast.show("BMapManager  初始化错误!");
-		}
-	}
-
-	// 常用事件监听，用来处理通常的网络错误，授权验证错误等
-	public static class MyGeneralListener implements MKGeneralListener {
-
-		public void onGetNetworkState(int iError) {
-			if (iError == MKEvent.ERROR_NETWORK_CONNECT) {
-				ForumToast.show("您的网络出错啦！");
-			} else if (iError == MKEvent.ERROR_NETWORK_DATA) {
-				ForumToast.show("输入正确的检索条件！");
-			}
-		}
-
-		public void onGetPermissionState(int iError) {
-			if (iError == MKEvent.ERROR_PERMISSION_DENIED) {
-				// 授权Key错误：
-				// ForumToast.show("请输入正确的授权Key！");
-				getInstance().m_bKeyRight = false;
-			}
-		}
-	}
 
 	/*
 	 * 单例模式中获取唯一的ExitApplication实例
