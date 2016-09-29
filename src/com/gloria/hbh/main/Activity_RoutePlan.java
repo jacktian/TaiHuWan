@@ -17,11 +17,13 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.RouteLine;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.route.BikingRouteResult;
+import com.baidu.mapapi.search.route.DrivingRouteLine;
 import com.baidu.mapapi.search.route.DrivingRoutePlanOption;
 import com.baidu.mapapi.search.route.DrivingRouteResult;
 import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
 import com.baidu.mapapi.search.route.PlanNode;
 import com.baidu.mapapi.search.route.RoutePlanSearch;
+import com.baidu.mapapi.search.route.TransitRouteLine;
 import com.baidu.mapapi.search.route.TransitRoutePlanOption;
 import com.baidu.mapapi.search.route.TransitRouteResult;
 import com.baidu.mapapi.search.route.WalkingRouteLine;
@@ -128,7 +130,7 @@ public class Activity_RoutePlan extends Activity_Base implements OnGetRoutePlanR
 				 mSearch.drivingSearch((new DrivingRoutePlanOption()).from(stNode).to(endNode));
 				break;
 			case R.id.titlebar_bus:
-				 mSearch.transitSearch((new TransitRoutePlanOption()).from(stNode).to(endNode));
+				 mSearch.transitSearch((new TransitRoutePlanOption()).from(stNode).city("常州").to(endNode));
 				break;
 			case R.id.titlebar_walk:
 			        //步行路线规划
@@ -236,11 +238,10 @@ public class Activity_RoutePlan extends Activity_Base implements OnGetRoutePlanR
 	        }
 	        if (SearchResult.ERRORNO.NO_ERROR == drivingRouteResult.error) {
 	            routeLine = drivingRouteResult.getRouteLines().get(0);
-	            System.out.println("onGetWalkingRouteResult---->步行行驶距离：" + routeLine.getDistance());
-	            walkingRouteOverlay = new MyWalkingRouteOverlay(mBaiduMap);
-	            walkingRouteOverlay.setData((WalkingRouteLine) routeLine);
-	            walkingRouteOverlay.addToMap();
-	            walkingRouteOverlay.zoomToSpan();
+	            drivingRouteOverlay = new MyDrivingingRouteOverlay(mBaiduMap);
+	            drivingRouteOverlay.setData((DrivingRouteLine) routeLine);
+	            drivingRouteOverlay.addToMap();
+	            drivingRouteOverlay.zoomToSpan();
 	        }
 	}
 
@@ -254,11 +255,10 @@ public class Activity_RoutePlan extends Activity_Base implements OnGetRoutePlanR
 	        }
 	        if (SearchResult.ERRORNO.NO_ERROR == transitRouteResult.error) {
 	            routeLine = transitRouteResult.getRouteLines().get(0);
-	            System.out.println("onGetWalkingRouteResult---->步行行驶距离：" + routeLine.getDistance());
-	            walkingRouteOverlay = new MyWalkingRouteOverlay(mBaiduMap);
-	            walkingRouteOverlay.setData((WalkingRouteLine) routeLine);
-	            walkingRouteOverlay.addToMap();
-	            walkingRouteOverlay.zoomToSpan();
+	            transitRouteOverlay = new MyTransitRouteOverlay(mBaiduMap);
+	            transitRouteOverlay.setData((TransitRouteLine) routeLine);
+	            transitRouteOverlay.addToMap();
+	            transitRouteOverlay.zoomToSpan();
 	        }
 	}
 
@@ -272,7 +272,6 @@ public class Activity_RoutePlan extends Activity_Base implements OnGetRoutePlanR
 	        }
 	        if (SearchResult.ERRORNO.NO_ERROR == walkingRouteResult.error) {
 	            routeLine = walkingRouteResult.getRouteLines().get(0);
-	            System.out.println("onGetWalkingRouteResult---->步行行驶距离：" + routeLine.getDistance());
 	            walkingRouteOverlay = new MyWalkingRouteOverlay(mBaiduMap);
 	            walkingRouteOverlay.setData((WalkingRouteLine) routeLine);
 	            walkingRouteOverlay.addToMap();
