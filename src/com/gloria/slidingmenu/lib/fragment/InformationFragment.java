@@ -170,7 +170,8 @@ public class InformationFragment extends BaseFragment implements IXListViewListe
 
 	public void onRefresh1() {
 		if (isOpenNetWork()) {
-			Request<String> requestWeather=NoHttp.createStringRequest("http://api.map.baidu.com/telematics/v3/weather?location=常州&output=json&ak=iiv9xSGkZ9D200VGGroh2r0thH5AeGYG&mcode=61:D6:A5:CD:0C:8E:65:89:33:DC:B9:4D:43:90:C1:B3:43:DE:AD:29;com.gloria.hbh.main", RequestMethod.GET);
+		Request<String> requestWeather=NoHttp.createStringRequest("http://api.map.baidu.com/telematics/v3/weather?location=%E5%B8%B8%E5%B7%9E&output=json&ak=FK9mkfdQsloEngodbFl4FeY3", RequestMethod.GET);
+		
 			requestQueue.add(0, requestWeather, new OnResponseListener<String>() {
 
 				@Override
